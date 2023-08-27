@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Be Vietnam Pro", sans-serif !important;
+  // transition: all ease 0.2s;
+  &::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 3px;
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: bisque;
+  }
+}
+
+body{
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// input,
+// textarea {
+//   border: none;
+//   outline: none;
+//   background-color: transparent;
+//   color: var(--color-text);
+//   &::placeholder {
+//     color: var(--color-subtext);
+//   }
+// }
+
+li {
+  list-style-type: none;
+}
+
+svg {
+  * {
+    color: unset;
+  }
+}
+
+.dialog-box-hide {
+  display: none;
+}
+
+.dialog-box {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #303a5260;
+    z-index: 2;
+  }
+
+  > div {
+    z-index: 3;
+  }
+}
+
+.btn {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+}
+
+
+img{
+  display: initial;
+}
+
+p.ql-align-center{
+  text-align: center;
+}
