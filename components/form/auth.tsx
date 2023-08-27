@@ -14,8 +14,8 @@ export const AuthFormAction = () => {
 
     axiosInstance
       .post("/owner-login", payload)
-      .then((res) => {
-        router.replace("/");
+      .then(() => {
+        router.replace("/owner/statistical");
       })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {
