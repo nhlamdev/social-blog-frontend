@@ -1,0 +1,41 @@
+.pagination {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+
+  // * {
+  //   color: var(--color-text);
+  //   stroke: var(--color-text);
+  // }
+
+  svg {
+    cursor: pointer;
+    font-size: 24px;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__item {
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.64) 0px 3px 8px;
+    cursor: pointer;
+
+    span {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    &-avtive {
+      span {
+      }
+    }
+  }
+}
+

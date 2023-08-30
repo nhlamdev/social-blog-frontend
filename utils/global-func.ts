@@ -52,3 +52,37 @@ export const checkIsNumber = (value: string | undefined) => {
     ? Number(value)
     : undefined;
 };
+
+export function generateURLWithQueryParams(
+  url: string,
+  queryParamsObject: { [key: string]: string }
+) {
+  const keys = Object.keys(queryParamsObject);
+  const query = keys.map((key) => `${key}=${queryParamsObject[key]}`).join("&");
+
+  return `/${url}?${query}`;
+}
+
+export const getCountPage = (lenngthIteam: number, numSplit: number) => {
+  const x = lenngthIteam / numSplit;
+  const y = Math.round(lenngthIteam / numSplit);
+
+  return y - x < 0 ? y + 1 : y;
+};
+
+export const formatNumber = (n: number | string) => {
+  return parseInt(n.toString()) > 9
+    ? `${parseInt(n.toString())}`
+    : `0${parseInt(n.toString())}`;
+};
+
+export const getDateTime = (a: string | null) => {
+  if (!a) return "";
+  const d = new Date(a);
+
+  return `${formatNumber(d.getHours())}:${formatNumber(
+    d.getMinutes()
+  )} ${formatNumber(d.getDate())}/${formatNumber(
+    d.getMonth() + 1
+  )}/${formatNumber(d.getFullYear())}`;
+};
