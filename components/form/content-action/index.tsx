@@ -5,6 +5,8 @@ import { ChangeEvent, useRef, useState } from "react";
 import Image from "next/image";
 import { ContentActionTagsBox } from "./tag-box";
 import { ContentCategoryBox } from "./categories-box";
+import { apiCaller } from "@/api";
+import { enqueueSnackbar } from "notistack";
 export const TextEditor = dynamic(
   () => import("@/components/custom/text-editor"),
   {
@@ -19,6 +21,7 @@ interface FormContentActionProps {
 
 export const FormContentAction = (props: FormContentActionProps) => {
   const { content } = props;
+
   const router = useRouter();
   const [title, setTitle] = useState(content ? content.title : "");
   const [body, setBody] = useState(content ? content.body : "");
@@ -95,6 +98,46 @@ export const FormContentAction = (props: FormContentActionProps) => {
           alt="image"
         />
       );
+    }
+  };
+
+  const action = async (isDraft: boolean) => {
+    if (content) {
+    } else {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("body", body);
+      formData.append("category", category);
+      formData.append("draft", isDraft.toString());
+      formData.append("complete", complete.toString());
+
+      if (image && typeof image !== "string") {
+        formData.append("files", image, image.name);
+      }
+
+      tags.forEach((tag, key) => {
+        formData.append(`tags[${key}]`, tag);
+      });
+
+      try {
+        await apiCaller.contentApi.create(formData);
+      } catch (error: any) {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error?.response?.data?.message.forEach((item: any) => {
+            enqueueSnackbar(item, {
+              variant: "error",
+            });
+          });
+        } else {
+          enqueueSnackbar(
+            error?.response ? error.response.data?.message : error.message,
+            {
+              variant: "error",
+            }
+          );
+        }
+      } finally {
+      }
     }
   };
 
@@ -177,8 +220,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
       <div className="flex flex-row w-full px-2 justify-end">
         <button
           onClick={() => {
-            // console.log(body);
-            // submitMutation.mutate();
+            action(true);
           }}
           className="text-teal-500 bg-transparent border border-solid border-teal-500 hover:bg-teal-500 hover:text-white active:bg-teal-600 
         font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -188,8 +230,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
         </button>
         <button
           onClick={() => {
-            // console.log(body);
-            // submitMutation.mutate();
+            action(false);
           }}
           className="text-teal-500 bg-transparent border border-solid border-teal-500 hover:bg-teal-500 hover:text-white active:bg-teal-600 
         font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

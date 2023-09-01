@@ -2,13 +2,36 @@ import { OwnerProviderComponent } from "@/provider";
 import { navigation_mock } from "./nav.mock";
 import Link from "next/link";
 import { LogoutBtn, ThemeToggleButton } from "@/components/custom";
+import axios from "axios";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
+
+const backend = process.env.SERVICE_PORT;
 
 interface OwnerLayoutProps {
   children: React.ReactNode;
 }
 
-export default function OwnerLayout(props: OwnerLayoutProps) {
+export default async function OwnerLayout(props: OwnerLayoutProps) {
   const { children } = props;
+
+  let profile;
+  try {
+    const { data } = await axios.get(`http://localhost:${backend}/profile`, {
+      headers: {
+        Cookie: cookies().toString(),
+      },
+    });
+
+    profile = data;
+  } catch (error: any) {
+    redirect("/auth");
+  }
+
+  if (profile.role !== "owner") {
+    redirect("/");
+  }
 
   return (
     <OwnerProviderComponent>

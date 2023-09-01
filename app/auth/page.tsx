@@ -2,16 +2,6 @@ import { AuthFormAction } from "@/components/form";
 import { axiosInstance } from "@/helper";
 import { cookies } from "next/headers";
 export default async function AuthPage() {
-  // await axiosInstance
-  // .get("profile", {
-  //   headers: {
-  //     Cookie: cookies().toString(),
-  //   },
-  // })
-  // .then((res) => {
-  //   console.log(res.data);
-  // });
-
   return (
     <main
       style={{
