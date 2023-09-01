@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: `/service/`,
+  baseURL: `http://localhost:3000/service/`,
   timeout: 5000,
   responseType: "json",
   responseEncoding: "utf8",
