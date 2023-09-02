@@ -16,21 +16,7 @@ export const contentApi = {
       headers: { "content-type": "multipart/form-data" },
     });
   },
-  updateBody(
-    id: string,
-    payload: {
-      title: string;
-      body: string;
-      tags: string[];
-      category: string | null;
-      complete: boolean;
-    }
-  ) {
-    return axiosInstance.put(`/content/update-body/${id}`, payload);
-  },
-  async updateImage(id: string, form: FormData) {
-    return axiosInstance.patch(`/content/update-image/${id}`, form, {
-      headers: { "content-type": "multipart/form-data" },
-    });
+  remove(id: string) {
+    return axiosInstance.delete(`/content/${id}`);
   },
 };

@@ -55,12 +55,12 @@ export const checkIsNumber = (value: string | undefined) => {
 
 export function generateURLWithQueryParams(
   url: string,
-  queryParamsObject: { [key: string]: string }
+  queryParamsObject: { [key: string]: string | undefined }
 ) {
   const keys = Object.keys(queryParamsObject);
   const query = keys.map((key) => `${key}=${queryParamsObject[key]}`).join("&");
 
-  return `/${url}?${query}`;
+  return `${url}?${query}`;
 }
 
 export const getCountPage = (lenngthIteam: number, numSplit: number) => {

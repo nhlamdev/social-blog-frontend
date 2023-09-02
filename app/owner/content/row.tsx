@@ -1,7 +1,10 @@
+"use client";
 import { getDateTime } from "@/utils/global-func";
 import Link from "next/link";
 import { FaEdit } from "react-icons/fa";
 import { MdOutlineRemoveCircle } from "react-icons/md";
+import { apiCaller } from "@/api";
+import { useRouter } from "next/navigation";
 
 interface OwnerContentRowProps {
   item: any;
@@ -9,6 +12,7 @@ interface OwnerContentRowProps {
 
 export const OwnerContentRow = (props: OwnerContentRowProps) => {
   const { item } = props;
+  const route = useRouter();
 
   return (
     <tr
@@ -42,7 +46,10 @@ export const OwnerContentRow = (props: OwnerContentRowProps) => {
           <MdOutlineRemoveCircle
             className="text-red-500"
             style={{ fontSize: "24px", cursor: "pointer" }}
-            // onClick={() => deleteMutaion.mutate(c._id)}
+            onClick={async () => {
+              await apiCaller.contentApi.remove(item._id);
+              route.refresh();
+            }}
           />
         </div>
       </td>
