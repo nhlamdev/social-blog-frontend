@@ -23,17 +23,18 @@ export const FormContentAction = (props: FormContentActionProps) => {
   const { content } = props;
 
   const router = useRouter();
+
   const [title, setTitle] = useState(content ? content.title : "");
   const [body, setBody] = useState(content ? content.body : "");
   const [image, setImage] = useState<File | null | string>(
-    content && content.image ? content.image : null
+    content && content.images && content.images.length !== 0
+      ? content.images[0].fileName
+      : null
   );
   const [category, setCategory] = useState(
     content && content.category ? content.category._id : ""
   );
-  const [tags, setTags] = useState<string[]>(
-    content ? content.tags.map((tag: any) => tag.title) : []
-  );
+  const [tags, setTags] = useState<string[]>(content.tags);
   const [complete, setComplete] = useState(true);
 
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -102,23 +103,40 @@ export const FormContentAction = (props: FormContentActionProps) => {
   };
 
   const action = async (isDraft: boolean) => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("body", body);
+    formData.append("category", category);
+    formData.append("draft", isDraft.toString());
+    formData.append("complete", complete.toString());
+    tags.forEach((tag, key) => {
+      formData.append(`tags[${key}]`, tag);
+    });
+
+    if (image && typeof image !== "string") {
+      formData.append("files", image, image.name);
+    }
+
     if (content) {
-    } else {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("body", body);
-      formData.append("category", category);
-      formData.append("draft", isDraft.toString());
-      formData.append("complete", complete.toString());
-
-      if (image && typeof image !== "string") {
-        formData.append("files", image, image.name);
+      try {
+        await apiCaller.contentApi.update(content._id, formData);
+      } catch (error: any) {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error?.response?.data?.message.forEach((item: any) => {
+            enqueueSnackbar(item, {
+              variant: "error",
+            });
+          });
+        } else {
+          enqueueSnackbar(
+            error?.response ? error.response.data?.message : error.message,
+            {
+              variant: "error",
+            }
+          );
+        }
       }
-
-      tags.forEach((tag, key) => {
-        formData.append(`tags[${key}]`, tag);
-      });
-
+    } else {
       try {
         await apiCaller.contentApi.create(formData);
       } catch (error: any) {
@@ -136,9 +154,10 @@ export const FormContentAction = (props: FormContentActionProps) => {
             }
           );
         }
-      } finally {
       }
     }
+
+    router.refresh();
   };
 
   return (
