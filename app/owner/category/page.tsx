@@ -38,7 +38,7 @@ export default async function DashboardCategoryPage(props: PageProps) {
       <PaginationDirectComponent
         current={current + 1}
         total={getCountPage(categories.max, 5)}
-        urlDirect={(p) => `/dashboard/category?page=${p}`}
+        urlDirect={(p) => `/owner/category?page=${p}`}
       />
       <CategoryControlDialog />
     </div>

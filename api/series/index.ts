@@ -7,12 +7,12 @@ export const seriesApi = {
     return axiosInstance.get(url);
   },
   async create(data: { title: string; summary: string }) {
-    return axiosInstance.post("/series", data);
+    return axiosInstance.post("series", data);
   },
   async update(id: string, payload: { title: string; summary: string }) {
-    return axiosInstance.put(`/series/${id}`, payload);
+    return axiosInstance.put(`series/${id}`, payload);
   },
   async remove(id: string) {
-    return axiosInstance.delete(`/series/${id}`);
+    return axiosInstance.delete(`series/${id}`);
   },
 };

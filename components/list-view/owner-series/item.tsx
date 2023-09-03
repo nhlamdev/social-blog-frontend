@@ -1,8 +1,8 @@
 "use client";
 import { apiCaller } from "@/api";
 import {
-  CategoryControlDialog,
-  ListContentInCategoryDialog,
+  ListContentInSeriesDialog,
+  SeriesControlDialog,
 } from "@/components/dialog";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -58,15 +58,15 @@ export const ListViewItem = (props: SeriesItemProps) => {
         />
 
         {openContentsDialog ? (
-          <ListContentInCategoryDialog
+          <ListContentInSeriesDialog
             close={() => setOpenContentsDialog(false)}
-            categoryId={item._id}
+            seriesId={item._id}
           />
         ) : (
           <></>
         )}
 
-        <CategoryControlDialog value={item} />
+        <SeriesControlDialog value={item} />
 
         <MdOutlineRemoveCircle
           className="text-rose-700"
@@ -75,7 +75,7 @@ export const ListViewItem = (props: SeriesItemProps) => {
             cursor: "pointer",
           }}
           onClick={async () => {
-            await apiCaller.categoryApi.remove(item._id);
+            await apiCaller.seriesApi.remove(item._id);
             route.refresh();
           }}
         />

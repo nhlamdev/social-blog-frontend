@@ -1,11 +1,10 @@
 "use client";
-import ImageResize from "quill-image-resize-module-react";
+import dynamic from "next/dynamic";
 
-import ReactQuill, { Quill } from "react-quill";
-
-import QuillNoSSRWrapper from "react-quill";
-
-Quill.register("modules/imageResize", ImageResize);
+export const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
+  loading: () => <p>Loading...</p>,
+  ssr: false,
+});
 
 const modules = {
   toolbar: [
@@ -30,16 +29,7 @@ const modules = {
     ["link", "image", "video"],
     ["clean"],
   ],
-  imageResize: {
-    parchment: Quill.import("parchment"),
-    modules: ["Resize", "DisplaySize", "Toolbar"],
-    displayStyles: {
-      backgroundColor: "black",
-      border: "none",
-      color: "#fff",
-      // other camelCase styles for size display
-    },
-  },
+
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
@@ -91,5 +81,3 @@ export default function TextEditor(props: MyTextEditorProps): JSX.Element {
     />
   );
 }
-
-// export default TextEditor;

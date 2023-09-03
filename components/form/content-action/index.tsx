@@ -34,7 +34,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
   const [category, setCategory] = useState(
     content && content.category ? content.category._id : ""
   );
-  const [tags, setTags] = useState<string[]>(content.tags);
+  const [tags, setTags] = useState<string[]>(content ? content.tags : []);
   const [complete, setComplete] = useState(true);
 
   const fileRef = useRef<HTMLInputElement | null>(null);

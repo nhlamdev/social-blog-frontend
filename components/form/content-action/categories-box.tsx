@@ -1,5 +1,4 @@
 import { apiCaller } from "@/api";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 interface ContentCategoryBoxProps {
@@ -12,16 +11,6 @@ export const ContentCategoryBox = (props: ContentCategoryBoxProps) => {
 
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState<any[]>([]);
-  // const {
-  //   isError,
-  //   error,
-  //   data: categories,
-  //   isLoading,
-  // } = useQuery(
-  //   ["getCategories"],
-  //   () => callerInstance.content.getCategories({}),
-  //   { cacheTime: 3000 }
-  // );
 
   useEffect(() => {
     apiCaller.categoryApi.get({}).then((res) => {
