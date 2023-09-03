@@ -24,39 +24,6 @@ export const ListContentInCategoryDialog = (
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
 
-  // const {
-  //   isError,
-  //   error,
-  //   data: category,
-  //   isLoading,
-  // } = useQuery(
-  //   ["ContentsByCategory", page, isOustSide, categoryId, deferredSearch],
-  //   () => {
-  //     const params = {
-  //       skip: ((page - 1) * 5).toString(),
-  //       take: "5",
-  //       search: deferredSearch,
-  //       outside: isOustSide.toString(),
-  //     };
-  //     return apiCaller.contentApi.getContentsByCategory(categoryId, params);
-  //   },
-  //   { cacheTime: 0 }
-  // );
-
-  // const controlMutantion = useMutation({
-  //   mutationFn: async (contentId: string) => {
-  //     return await callerInstance.content.updateContentCategory(
-  //       contentId,
-  //       categoryId
-  //     );
-  //   },
-
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(["ContentsByCategory"]);
-  //     queryClient.refetchQueries(["ContentsByCategory"]);
-  //   },
-  // });
-
   const params = useMemo(
     () => ({
       skip: ((page - 1) * 5).toString(),
@@ -66,6 +33,18 @@ export const ListContentInCategoryDialog = (
     }),
     [deferredSearch, isOustSide, page]
   );
+
+  const submit = async (contentId: string) => {
+    await apiCaller.contentApi.updateContentCategory(contentId, categoryId);
+
+    apiCaller.contentApi
+      .getContentsByCategory(categoryId, params)
+      .then((res) => {
+        const { data } = res;
+        setContents(data.data);
+        setTotal(data.max);
+      });
+  };
 
   useEffect(() => {
     apiCaller.contentApi
@@ -182,7 +161,7 @@ export const ListContentInCategoryDialog = (
                   <BiSolidBookAdd
                     className="text-green-500"
                     onClick={() => {
-                      // controlMutantion.mutate(content._id);
+                      submit(content._id);
                     }}
                     style={{
                       fontSize: "24px",
@@ -193,7 +172,7 @@ export const ListContentInCategoryDialog = (
                   <IoIosRemoveCircle
                     className="text-red-500"
                     onClick={() => {
-                      // controlMutantion.mutate(content._id);
+                      submit(content._id);
                     }}
                     style={{
                       fontSize: "24px",

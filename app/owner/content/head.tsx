@@ -16,24 +16,33 @@ export const OwnerContentsHead = (props: OwnerContentsHeadProps) => {
 
   const [search, setSearch] = useDebouncedState(
     searchParams?.search ? searchParams.search : "",
-    400
+    200
   );
   const router = useRouter();
 
   useEffect(() => {
     if (search) {
-      const newSearchParams = {
-        ...searchParams,
-        page: "1",
-        search: search,
-      };
-      const url = generateURLWithQueryParams(pathname, newSearchParams);
+      if (searchParams && searchParams.search !== search) {
+        const newSearchParams = {
+          ...searchParams,
+          page: "1",
+          search: search,
+        };
+        const url = generateURLWithQueryParams(pathname, newSearchParams);
 
-      router.replace(url);
+        router.replace(url);
+      }
     } else {
       if (searchParams.search) {
         delete searchParams.search;
 
+        const url = generateURLWithQueryParams(pathname, {
+          ...searchParams,
+          page: "1",
+        });
+
+        router.replace(url);
+      } else {
         const url = generateURLWithQueryParams(pathname, {
           ...searchParams,
           page: "1",

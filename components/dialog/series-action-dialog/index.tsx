@@ -2,7 +2,7 @@
 import { apiCaller } from "@/api";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
 import { IoIosCreate } from "react-icons/io";
@@ -51,6 +51,15 @@ export const SeriesControlDialog = (props: SeriesControlDialogProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    if (open) {
+      setData({
+        title: value ? value.title : "",
+        summary: value ? value.summary : "",
+      });
+    }
+  }, [open, value]);
 
   return (
     <>

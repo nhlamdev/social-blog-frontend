@@ -40,6 +40,7 @@ export default async function DashboardCategoryPage(props: PageProps) {
         total={getCountPage(categories.max, 5)}
         urlDirect={(p) => `/owner/category?page=${p}`}
       />
+
       <CategoryControlDialog />
     </div>
   );

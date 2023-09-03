@@ -24,39 +24,6 @@ export const ListContentInSeriesDialog = (
   const [contents, setContents] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
 
-  // const {
-  //   isError,
-  //   error,
-  //   data: series,
-  //   isLoading,
-  // } = useQuery(
-  //   ["ContentsBySeries", page, isOustSide, seriesId, deferredSearch],
-  //   () => {
-  //     const params = {
-  //       skip: ((page - 1) * 5).toString(),
-  //       take: "5",
-  //       search: deferredSearch,
-  //       outside: isOustSide.toString(),
-  //     };
-  //     return callerInstance.content.getContentsBySeries(seriesId, params);
-  //   },
-  //   { cacheTime: 0 }
-  // );
-
-  // const controlMutantion = useMutation({
-  //   mutationFn: async (contentId: string) => {
-  //     return await callerInstance.content.updateContentSeries(
-  //       contentId,
-  //       seriesId
-  //     );
-  //   },
-
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(["ContentsBySeries"]);
-  //     queryClient.refetchQueries(["ContentsBySeries"]);
-  //   },
-  // });
-
   const params = useMemo(
     () => ({
       skip: ((page - 1) * 5).toString(),
@@ -66,6 +33,16 @@ export const ListContentInSeriesDialog = (
     }),
     [deferredSearch, isOustSide, page]
   );
+
+  const submit = async (contentId: string) => {
+    await apiCaller.contentApi.updateContentSeries(contentId, seriesId);
+
+    apiCaller.contentApi.getContentsBySeries(seriesId, params).then((res) => {
+      const { data } = res;
+      setContents(data.data);
+      setTotal(data.max);
+    });
+  };
 
   useEffect(() => {
     apiCaller.contentApi.getContentsBySeries(seriesId, params).then((res) => {
@@ -180,7 +157,7 @@ export const ListContentInSeriesDialog = (
                   <BiSolidBookAdd
                     className="text-green-500"
                     onClick={() => {
-                      // controlMutantion.mutate(content._id);
+                      submit(content._id);
                     }}
                     style={{
                       fontSize: "24px",
@@ -191,7 +168,7 @@ export const ListContentInSeriesDialog = (
                   <IoIosRemoveCircle
                     className="text-red-500"
                     onClick={() => {
-                      // controlMutantion.mutate(content._id);
+                      submit(content._id);
                     }}
                     style={{
                       fontSize: "24px",

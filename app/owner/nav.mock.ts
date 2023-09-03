@@ -33,12 +33,12 @@ export const navigation_mock: INav[] = [
     icon: SiSteelseries,
   },
   {
-    url: "/owner/series",
+    url: "/owner/member",
     name: "Thành viên",
     icon: FaUserFriends,
   },
   {
-    url: "/owner/series",
+    url: "/owner/setting",
     name: "Thiết lập",
     icon: AiFillSetting,
   },

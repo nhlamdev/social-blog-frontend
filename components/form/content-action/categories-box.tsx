@@ -59,30 +59,32 @@ export const ContentCategoryBox = (props: ContentCategoryBoxProps) => {
         style={{ display: open ? "block" : "none" }}
         className="top-full absolute shadow bg-white top-100 z-40 w-full left-0 rounded max-h-select overflow-y-auto "
       >
-        {categories ? (
-          categories.map((c: any) => {
-            return (
-              <div
-                key={c._id}
-                className="flex flex-col w-full"
-                onClick={() => {
-                  change(c._id);
-                  setOpen(false);
-                }}
-              >
-                <div className="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100">
-                  <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                    <div className="w-full items-center flex">
-                      <div className="mx-2   ">{c.title}</div>
+        <div className="max-h-72 overflow-auto">
+          {categories ? (
+            categories.map((c: any) => {
+              return (
+                <div
+                  key={c._id}
+                  className="flex flex-col w-full"
+                  onClick={() => {
+                    change(c._id);
+                    setOpen(false);
+                  }}
+                >
+                  <div className="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100">
+                    <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+                      <div className="w-full items-center flex">
+                        <div className="mx-2   ">{c.title}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })
-        ) : (
-          <></>
-        )}
+              );
+            })
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );

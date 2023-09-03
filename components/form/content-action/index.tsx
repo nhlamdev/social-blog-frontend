@@ -216,16 +216,8 @@ export const FormContentAction = (props: FormContentActionProps) => {
             onChange={(e) => {
               if (e.target.files) {
                 const f = e.target.files[0];
-                if (content) {
-                  const formdata = new FormData();
-                  formdata.append("files", f, f.name);
-                  // updateImageMutation.mutate({
-                  //   id: content._id,
-                  //   formdata: formdata,
-                  // });
-                } else {
-                  setImage(f);
-                }
+
+                setImage(f);
               }
             }}
           />
