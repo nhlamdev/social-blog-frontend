@@ -60,9 +60,9 @@ export const ClientHomeListContentItem = (
           className="flex flex-row"
           style={{ flexWrap: "wrap", gap: "10px" }}
         >
-          {content.tags.map((t: any) => (
+          {content.tags.map((t: string, key: number) => (
             <div
-              key={`tags-${t._id}`}
+              key={`tags-${content._id}-${key}-${t}`}
               className="flex flex-row items-center justify-center"
               style={{
                 padding: "5px",
@@ -71,7 +71,7 @@ export const ClientHomeListContentItem = (
               }}
             >
               <span className="font-semibold text-[10px] sm:text-[12px] md:text-[14px] text-slate-900">
-                {t.title}
+                {t}
               </span>
             </div>
           ))}

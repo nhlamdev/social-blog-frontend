@@ -7,7 +7,7 @@ export const SeriesItem = (props: SeriesItemProps) => {
   const { item } = props;
   return (
     <Link
-      href={`/?series=${item._id}`}
+      href={`/content?series=${item._id}`}
       className="w-full md:w-4/5 lg:w-3/5 bg-slate-100 bg-opacity-40 shadow-lg"
       style={{
         borderRadius: "10px",

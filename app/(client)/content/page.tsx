@@ -29,7 +29,9 @@ export default async function ContentPage(props: PageProps) {
 
   if (series) {
     try {
-      const { data } = await axios.get(`${backend}/content-series/${series}`);
+      const { data } = await axios.get(
+        `http://localhost:${backend}/series/${series}`
+      );
       seriesData = data;
     } catch {
       notFound();
