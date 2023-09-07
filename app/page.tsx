@@ -1,4 +1,3 @@
-import { HomeClientSlider } from "@/components/page/home-page";
 import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
@@ -13,63 +12,181 @@ export default async function ClientContentsPage() {
 
   return (
     <main className="min-h-screen flex flex-col w-full tems-center gap-4 ">
-      <header className="px-14 py-4">
-        <HomeClientSlider />
+      <header
+        className="bg-slate-100"
+        style={{
+          backgroundImage: 'url("/background/OIG (2).jfif")',
+          backgroundBlendMode: "multiply",
+          height: "100vh",
+          width: "100vw",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          position: "relative",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            alignItems: "center",
+          }}
+        >
+          <div
+            className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] "
+            style={{ position: "relative" }}
+          >
+            <Image
+              src="/logo/logo.png"
+              fill
+              alt="logo"
+              style={{ filter: "drop-shadow(5px 5px 5px #222)" }}
+            />
+          </div>
+          {/* -------- */}
+          <div
+            className="gap-1 sm:gap-2 "
+            style={{ display: "flex", flexDirection: "row" }}
+          >
+            <Link
+              href="/content"
+              className="text-[14px] sm:text-[18px] px-2 py-1 sm:px-3  sm:py-2 bg-slate-50 text-slate-900 "
+              style={{
+                cursor: "pointer",
+                borderRadius: "10px",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                fontWeight: 700,
+              }}
+            >
+              Bài viết
+            </Link>
+            <Link
+              href="/series"
+              className="text-[14px] sm:text-[18px] px-2 py-1 sm:px-3  sm:py-2  bg-slate-50 text-slate-900"
+              style={{
+                cursor: "pointer",
+                borderRadius: "10px",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                fontWeight: 700,
+              }}
+            >
+              Chuỗi bài viết
+            </Link>
+          </div>
+          {/* -------------- */}
+        </div>
+        {/* ------------------- */}
+        <div
+          className="bottom-5 w-[400px] sm:w-[500px] md:w-[580px]"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            background:
+              "linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%)",
+            left: "10px",
+            backgroundColor: "#00000040",
+            boxShadow: "5px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+            backdropFilter: "blur(2.5px)",
+            height: "fit-content",
+            padding: "40px 20px",
+            borderRadius: "10px",
+          }}
+        >
+          <span
+            className="text-lg sm:text-2xl md:text-3xl"
+            style={{
+              fontStyle: "italic",
+              background:
+                "linear-gradient(149deg, rgba(39, 174, 96, 0.80) 0%, rgba(236, 180, 182, 0.80) 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Code your way to the future
+            <br />
+            with passion and perseverance !
+          </span>
+        </div>
+        {/* ------------- */}
+        <Image
+          src="/svg/code-think.svg"
+          className="hidden md:block"
+          style={{
+            position: "absolute",
+            bottom: "10px",
+            right: "10px",
+            filter: "drop-shadow(5px 5px 5px #222)",
+          }}
+          width={200}
+          height={100}
+          alt="code-think"
+        />
       </header>
 
-      <div
-        className="flex flex-col
-        md:grid md:grid-flow-row grid-cols-1  md:grid-cols-2 lg:grid-cols-3 sm:grid-rows-2 
-        gap-6 py-10 px-5 md:px-10 w-full md:w-4/5 mx-auto h-full "
-        style={{ flex: 8 }}
-      >
-        {/* {renderContent()} */}
-        {contents.data.map((v: any) => (
-          <div
-            key={v}
-            className="flex flex-row md:flex-col gap-2 
+      <div className="flex flex-col gap-2">
+        <p className="text-2xl font-semibold text-center">Bài viết mới nhất</p>
+        <div
+          className="flex flex-col
+          md:grid md:grid-flow-row grid-cols-1  md:grid-cols-2 lg:grid-cols-3 sm:grid-rows-2 
+          gap-6 p-4 md:px-10 w-full md:w-4/5 mx-auto h-full"
+          style={{ flex: 8 }}
+        >
+          {/* {renderContent()} */}
+          {contents.data.map((v: any) => (
+            <div
+              key={v}
+              className="flex flex-row md:flex-col gap-2 
           hover:shadow-slate-600 hover:shadow-md h-fit 
           rounded-md overflow-hidden ease-in-out duration-500
           cursor-pointer bg-slate-400"
-          >
-            <div
-              className="shadow-lg bg-center aspect-[3/2] 
-                     h-24 md:h-full bg-slate-400"
-              style={{
-                cursor: "pointer",
-                backgroundImage: `url(/service/${v.images[0].fileName})`,
-                backgroundSize: "cover",
-                position: "relative",
-              }}
-            />
-
-            <div
-              className="p-2 gap-2 flex flex-col justify-around "
-              style={{ transition: "all ease .3s" }}
             >
-              {v.category ? (
-                <div className="bg-slate-100  top-4 left-0 px-4  rounded-md w-fit">
-                  <span className="text-[10px] sm:text-xs md:text-sm text-slate-800   font-semibold">
-                    {v.category.title}
-                  </span>
-                </div>
-              ) : (
-                <></>
-              )}
+              <div
+                className="shadow-lg bg-center aspect-[3/2] 
+                     h-24 md:h-full bg-slate-400"
+                style={{
+                  cursor: "pointer",
+                  backgroundImage: `url(/service/${v.images[0].fileName})`,
+                  backgroundSize: "cover",
+                  position: "relative",
+                }}
+              />
 
-              <span
-                className="text-slate-100 line-clamp-2 md:line-clamp-3 text-clip 
-            text-xs sm:text-sm md:text-md tracking-tight"
+              <div
+                className="p-2 gap-2 flex flex-col justify-around "
+                style={{ transition: "all ease .3s" }}
               >
-                {v.title}
-              </span>
+                {v.category ? (
+                  <div className="bg-slate-100  top-4 left-0 px-4  rounded-md w-fit">
+                    <span className="text-[10px] sm:text-xs md:text-sm text-slate-800   font-semibold">
+                      {v.category.title}
+                    </span>
+                  </div>
+                ) : (
+                  <></>
+                )}
 
-              <span className="text-slate-100 text-[10px] sm:text-xs md:text-sm  font-light">
-                {getDateTime(v.created_at)}
-              </span>
+                <span
+                  className="text-slate-100 line-clamp-2 md:line-clamp-3 text-clip 
+            text-xs sm:text-sm md:text-md tracking-tight"
+                >
+                  {v.title}
+                </span>
+
+                <span className="text-slate-100 text-[10px] sm:text-xs md:text-sm  font-light">
+                  {getDateTime(v.created_at)}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <Link
@@ -81,7 +198,7 @@ export default async function ClientContentsPage() {
       </Link>
 
       <section>
-        <span>Tiêu biểu</span>
+        <span className="text-2xl font-semibold text-center">Tiêu biểu</span>
 
         <div className="flex flex-row gap-2 px-2 py-4">
           <div style={{ flex: 2 }} className="flex flex-col gap-2">
@@ -140,41 +257,6 @@ export default async function ClientContentsPage() {
               })}
             </ol>
           </div>
-        </div>
-      </section>
-
-      <section className="flex p-2 bg-slate-200 justify-center">
-        <div className="flex flex-row gap-6 p-4 bg-slate-400 w-fit rounded-md">
-          <Image
-            src="/logo/next-js.png"
-            className="hover:scale-110 transition-transform cursor-pointer"
-            width={50}
-            height={50}
-            style={{
-              objectFit: "cover",
-            }}
-            alt="react-icon"
-          />
-          <Image
-            src="/logo/nestjs-icon.png"
-            className="hover:scale-110 transition-transform cursor-pointer"
-            width={50}
-            height={50}
-            style={{
-              objectFit: "cover",
-            }}
-            alt="react-icon"
-          />
-          <Image
-            src="/logo/postgress-icon.png"
-            className="hover:scale-110 transition-transform cursor-pointer"
-            width={50}
-            height={50}
-            style={{
-              objectFit: "cover",
-            }}
-            alt="react-icon"
-          />
         </div>
       </section>
     </main>

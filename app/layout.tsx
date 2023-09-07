@@ -1,7 +1,7 @@
+import { ProviderComponent } from "@/provider";
 import "@/styles/global.scss";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { ProviderComponent } from "@/provider";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,12 +18,50 @@ export default function RootLayout(props: RootLayoutProps) {
     <html lang="en">
       <body>
         <ProviderComponent>{children}</ProviderComponent>
+
+        <section className="flex flex-row p-2 bg-slate-200 justify-center">
+          <Image
+            src="/logo/next-js.png"
+            className="hover:scale-110 transition-transform cursor-pointer"
+            width={40}
+            height={40}
+            style={{
+              objectFit: "cover",
+            }}
+            alt="react-icon"
+          />
+          <Image
+            src="/logo/nestjs-icon.png"
+            className="hover:scale-110 transition-transform cursor-pointer"
+            width={40}
+            height={40}
+            style={{
+              objectFit: "cover",
+            }}
+            alt="react-icon"
+          />
+          <Image
+            src="/logo/postgress-icon.png"
+            className="hover:scale-110 transition-transform cursor-pointer"
+            width={40}
+            height={40}
+            style={{
+              objectFit: "cover",
+            }}
+            alt="react-icon"
+          />
+        </section>
+
+        <p className="text-center text-sm font-semibold p-4">
+          Copyright ©2023 by Nguyen Hoang Lam
+        </p>
+
         <script
-          async
+          defer
           src="https://cdn.jsdelivr.net/npm/@preline/preline@1.0.0/dist/hs-ui.bundle.min.js"
         />
         <script
-          async
+          defer
           src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.js"
         />
       </body>
