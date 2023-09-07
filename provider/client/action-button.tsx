@@ -10,7 +10,7 @@ export const ActionButtonComponent = () => {
 
   return (
     <div
-      className={`relative flex flex-col space-y-2  items-center 
+      className={`relative flex flex-col space-y-2  items-center  z-10
       ${open ? "before:block" : "before:hidden"}
       before:fixed before:top-0 before:right-0 before:left-0 before:bottom-0 `}
       onClick={() => setOpen(!open)}
@@ -46,23 +46,6 @@ export const ActionButtonComponent = () => {
           />
           <span className="text-xs font-semibold whitespace-nowrap">
             Google login
-          </span>
-        </Link>
-
-        <Link
-          href="/service/facebook"
-          className="flex flex-row gap-2 items-center px-4 py-2 hover:bg-slate-300 w-full"
-          style={{
-            transition: "all ease .3s",
-          }}
-        >
-          <BsFacebook
-            className="text-xl text-blue-600 drop-shadow-xl cursor-pointer 
-          hover:drop-shadow-2xl transition-transform duration-300 ease-in-out hover:scale-110"
-          />
-
-          <span className="text-xs font-semibold whitespace-nowrap">
-            Facebook login
           </span>
         </Link>
 
