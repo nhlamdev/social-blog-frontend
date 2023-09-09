@@ -36,8 +36,8 @@ export const ClientContentListView = (props: ClientContentListViewProps) => {
         <PaginationDirectComponent
           current={current + 1}
           total={getCountPage(contents.max, 6)}
-          urlDirect={(page: number) => {
-            const clone = { ...searchParams, page: page.toString() };
+          urlDirect={(p: number) => {
+            const clone = { ...searchParams, page: p.toString() };
 
             return generateURLWithQueryParams("/content", clone);
           }}

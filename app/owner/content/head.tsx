@@ -51,7 +51,7 @@ export const OwnerContentsHead = (props: OwnerContentsHeadProps) => {
         router.replace(url);
       }
     }
-  }, [pathname, router, search, searchParams]);
+  }, [pathname, router, search]);
 
   return (
     <div className="flex flex-row w-full items-center justify-between">

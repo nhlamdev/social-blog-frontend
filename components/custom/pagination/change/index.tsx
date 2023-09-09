@@ -1,6 +1,5 @@
+"use client";
 import "./index.scss";
-import { GrFormNext } from "react-icons/gr";
-
 interface PaginationChangeComponentProps {
   current: number;
   total: number;

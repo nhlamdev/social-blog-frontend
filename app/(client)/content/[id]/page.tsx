@@ -3,6 +3,9 @@ import axios from "axios";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { RandomContentComponent } from "./random-content";
+import dynamic from "next/dynamic";
+import { CommentsComponent } from "@/components/custom/comments";
+
 const backend = process.env.SERVICE_PORT;
 
 export default async function ClientDetailContentPage(props: PageProps) {
@@ -76,14 +79,18 @@ export default async function ClientDetailContentPage(props: PageProps) {
           dangerouslySetInnerHTML={{ __html: content.body }}
         />
       </div>
+      {/* ---------------- */}
 
       {/* ----------------- */}
-      <div>
-        <span className="text-slate-800 dark:text-slate-200 font-semibold text-lg">
+      <div className="flex flex-col w-full gap-2">
+        <p className="text-slate-800 dark:text-slate-200 font-semibold text-lg text-center">
           Bài viết ngẫu nhiên
-        </span>
+        </p>
+
+        <RandomContentComponent contents={randomContens} />
       </div>
-      <RandomContentComponent contents={randomContens} />
+
+      <CommentsComponent />
     </div>
   );
 }
