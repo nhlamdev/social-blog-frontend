@@ -142,7 +142,8 @@ export default async function ClientContentsPage() {
         >
           {/* {renderContent()} */}
           {contents.data.map((v: any) => (
-            <div
+            <Link
+              href={`/content/${v._id}`}
               key={v}
               className="flex flex-row md:flex-col gap-2 
           hover:shadow-slate-600 hover:shadow-md h-fit 
@@ -185,7 +186,7 @@ export default async function ClientContentsPage() {
                   {getDateTime(v.created_at)}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,10 +1,9 @@
+import { CommentsComponent } from "@/components/custom/comments";
 import { PageProps } from "@/interface";
 import axios from "axios";
-import { notFound } from "next/navigation";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { RandomContentComponent } from "./random-content";
-import dynamic from "next/dynamic";
-import { CommentsComponent } from "@/components/custom/comments";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -90,7 +89,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
         <RandomContentComponent contents={randomContens} />
       </div>
 
-      <CommentsComponent />
+      {id ? <CommentsComponent contentId={id} /> : <></>}
     </div>
   );
 }

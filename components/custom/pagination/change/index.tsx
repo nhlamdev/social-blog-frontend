@@ -53,7 +53,7 @@ export const PaginationChangeComponent = (
       {current !== 1 ? paginationItem("1") : <></>}
       {current > 2 ? paginationItem(current - 1) : <></>}
       {paginationItem(current)}
-      {current < total - 1 ? paginationItem(total - 1) : <></>}
+      {current < total - 1 ? paginationItem(current + 1) : <></>}
       {current < total ? paginationItem(total) : <></>}
     </div>
   );

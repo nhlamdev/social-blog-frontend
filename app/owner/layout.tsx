@@ -5,7 +5,6 @@ import { LogoutBtn, ThemeToggleButton } from "@/components/custom";
 import axios from "axios";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { enqueueSnackbar } from "notistack";
 
 const backend = process.env.SERVICE_PORT;
 
