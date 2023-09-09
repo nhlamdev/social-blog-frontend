@@ -4,6 +4,7 @@ import { ThemeToggleButton } from "@/components/custom/color-mode";
 import axios from "axios";
 import { cookies } from "next/headers";
 import { NavInfoBox } from "./infor-box";
+import Link from "next/link";
 
 const backend = process.env.SERVICE_PORT;
 export const ClientNavigator = async () => {
@@ -24,8 +25,18 @@ export const ClientNavigator = async () => {
       className="w-screen flex flex-row items-center justify-between px-2
     bg-slate-200 bg-opacity-40"
     >
-      <div>
+      <div className="flex flex-row items-center">
         <Image src="/logo/logo.png" width={60} height={60} alt="logo" />
+
+        <div className="flex flex-row items-center gap-2">
+          <Link href="/" className="font-semibold text-sm">
+            <span>Trang chủ</span>
+          </Link>
+
+          <Link href="/series" className="font-semibold text-sm">
+            <span>Chuỗi bài viết</span>
+          </Link>
+        </div>
       </div>
 
       <div className="flex flex-row items-center gap-4">

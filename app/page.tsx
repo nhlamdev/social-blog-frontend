@@ -2,6 +2,7 @@ import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { PopularItemsComponent } from "./popular";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -197,68 +198,7 @@ export default async function ClientContentsPage() {
         <span className=" text-slate-900 text:md font-semibold">Xem tiếp</span>
       </Link>
 
-      <section>
-        <span className="text-2xl font-semibold text-center">Tiêu biểu</span>
-
-        <div className="flex flex-row gap-2 px-2 py-4">
-          <div style={{ flex: 2 }} className="flex flex-col gap-2">
-            {[6, 7, 8].map((v) => {
-              return (
-                <div key={v} className="flex flex-row gap-2">
-                  <div className="relative w-72 h-40">
-                    <Image
-                      src="/test.jpg"
-                      className="object-cover"
-                      fill
-                      alt="photo"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <div className="flex flex-row items-center gap-2">
-                      <div className="bg-orange-400 px-2 py-1 rounded-md">
-                        <span className="text-sm text-slate-50 font-semibold">
-                          JAVASCRIPT
-                        </span>
-                      </div>
-
-                      <span className="text-xs">March 27, 2018</span>
-                    </div>
-
-                    <div>
-                      <span className="text-md">
-                        Chrome Extension Protects Against JavaScript-Based CPU
-                        Side-Channel Attacks
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          {/* ----------- */}
-          <div style={{ flex: 1 }} className="flex flex-col gap-4">
-            <span className="text-2xl font-semibold ">Thể loại</span>
-            <ol className="flex flex-col gap-2">
-              {[1, 2, 3, 4, 5].map((v) => {
-                return (
-                  <li
-                    key={v}
-                    className="flex flex-row items-center p-2 gap-2 rounded-md bg-slate-200 justify-between w-3/4"
-                  >
-                    <span className="text-md">thể loại 1</span>
-                    <div className="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-red-100 bg-red-700 border border-red-700 ">
-                      <span className="text-xs font-normal leading-none max-w-full flex-initial">
-                        24
-                      </span>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
-        </div>
-      </section>
+      <PopularItemsComponent />
     </main>
   );
 }
