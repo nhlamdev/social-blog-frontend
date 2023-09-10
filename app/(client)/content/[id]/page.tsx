@@ -89,7 +89,11 @@ export default async function ClientDetailContentPage(props: PageProps) {
         <RandomContentComponent contents={randomContens} />
       </div>
 
-      {id ? <CommentsComponent contentId={id} /> : <></>}
+      {id ? (
+        <CommentsComponent contentId={id} countComment={content.countComment} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

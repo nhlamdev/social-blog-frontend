@@ -8,11 +8,12 @@ import { getCountPage } from "@/utils/global-func";
 
 interface CommentsComponentProps {
   contentId: string;
+  countComment: number;
 }
 
 export const CommentsComponent = (props: CommentsComponentProps) => {
   const [text, setText] = useState("");
-  const { contentId } = props;
+  const { contentId, countComment } = props;
 
   const [comments, setComments] = useState([]);
   const [total, setTotal] = useState(0);
@@ -22,8 +23,15 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
     apiCaller.commentApi
       .createComment(text, contentId)
       .then(() => {
-        enqueueSnackbar("Tạo mới bình luận thành công", { variant: "success" });
         setText("");
+        apiCaller.commentApi.comments(contentId, params).then((res) => {
+          const { data, max } = res.data;
+          setComments(data);
+          setTotal(max);
+          enqueueSnackbar("Tạo mới bình luận thành công", {
+            variant: "success",
+          });
+        });
       })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {
@@ -52,8 +60,6 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
       const { data, max } = res.data;
       setComments(data);
       setTotal(max);
-
-      console.log(data);
     });
   }, [contentId, params]);
 
@@ -61,7 +67,7 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
     <div className="w-full flex flex-col gap-2">
       <div className="flex flex-row gap-2">
         <p className="font-semibold text-lg">Bình luận</p>
-        <span className="flex-xs">(20) bình luận</span>
+        <span className="flex-xs">{`(${countComment}) bình luận`}</span>
       </div>
 
       <div className="flex flex-col gap-4">
