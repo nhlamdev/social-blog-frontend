@@ -1,4 +1,5 @@
 "use client";
+import { apiCaller } from "@/api";
 import { axiosInstance } from "@/helper";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -12,8 +13,8 @@ export const AuthFormAction = () => {
   const submit = () => {
     const payload = { account, password };
 
-    axiosInstance
-      .post("/owner-login", payload)
+    apiCaller.authApi
+      .ownerLogin(payload)
       .then(() => {
         router.replace("/owner/statistical");
       })
