@@ -18,18 +18,18 @@ export const ClientHomeListContentItem = (
       className="w-full flex flex-row gap-2 bg-slate-100 bg-opacity-40 cursor-pointer 
       shadow-md rounded-md"
     >
-      <div className="h-28 sm:h-32 md:h-40 aspect-square relative">
-        <Image
+      <picture>
+        <img
           src={`/service/${content.images[0].fileName}`}
-          quality={75}
-          fill
+          className="h-28 sm:h-32 md:h-40 aspect-square "
           style={{
             objectFit: "cover",
             borderRadius: "5px",
           }}
           alt="photo"
         />
-      </div>
+      </picture>
+
       {/* --------------- */}
       <div className="flex flex-col justify-between py-2 sm:py-4 px-4">
         <div className="flex flex-col" style={{ gap: "5px" }}>

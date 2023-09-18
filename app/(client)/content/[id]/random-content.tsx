@@ -30,7 +30,7 @@ export const RandomContentComponent = (props: RandomContentComponentProps) => {
                 "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
             }}
           >
-            <div className="relative lg:w-full h-28 lg:h-full aspect-square">
+            {/* <div className="relative lg:w-full h-28 lg:h-full aspect-square">
               <Image
                 src={`/service/${c.images[0].fileName}`}
                 fill
@@ -38,7 +38,16 @@ export const RandomContentComponent = (props: RandomContentComponentProps) => {
                 style={{ objectFit: "cover" }}
                 alt="photo"
               />
-            </div>
+            </div> */}
+
+            <picture>
+              <img
+                src={`/service/${c.images[0].fileName}`}
+                style={{ objectFit: "cover" }}
+                className="relative lg:w-full h-28 lg:h-full"
+                alt="Landscape picture"
+              />
+            </picture>
 
             <div
               className="w-full lg:bottom-0 lg:bg-slate-600 lg:bg-opacity-80 

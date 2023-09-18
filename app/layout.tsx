@@ -2,6 +2,7 @@ import { ProviderComponent } from "@/provider";
 import "@/styles/global.scss";
 import type { Metadata } from "next";
 import Image from "next/image";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,8 +15,19 @@ interface RootLayoutProps {
 
 export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
+
   return (
     <html lang="en">
+      <head>
+        <script
+          async
+          src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+          integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+          crossOrigin="anonymous"
+        ></script>
+
+        <Script src="/script/socket.js" />
+      </head>
       <body>
         <ProviderComponent>{children}</ProviderComponent>
 

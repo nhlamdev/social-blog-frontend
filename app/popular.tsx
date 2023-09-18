@@ -32,14 +32,13 @@ export const PopularItemsComponent = async () => {
                 key={content._id}
                 className="flex flex-row gap-2"
               >
-                <div className="relative w-72 h-40">
-                  <Image
+                <picture>
+                  <img
                     src={`/service/${content.images[0].fileName}`}
-                    className="object-cover"
-                    fill
-                    alt="photo"
+                    className="object-cover relative w-72 h-40"
+                    alt="Landscape picture"
                   />
-                </div>
+                </picture>
 
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-row items-center gap-2">

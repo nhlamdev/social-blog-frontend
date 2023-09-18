@@ -44,6 +44,7 @@ export default async function ClientContentsPage() {
             <Image
               src="/logo/logo.png"
               fill
+              sizes="100vw"
               alt="logo"
               style={{ filter: "drop-shadow(5px 5px 5px #222)" }}
             />
@@ -128,6 +129,7 @@ export default async function ClientContentsPage() {
           }}
           width={200}
           height={100}
+          sizes="100vw"
           alt="code-think"
         />
       </header>
@@ -140,11 +142,10 @@ export default async function ClientContentsPage() {
           gap-6 p-4 md:px-10 w-full md:w-4/5 mx-auto h-full"
           style={{ flex: 8 }}
         >
-          {/* {renderContent()} */}
           {contents.data.map((v: any) => (
             <Link
               href={`/content/${v._id}`}
-              key={v}
+              key={v._id}
               className="flex flex-row md:flex-col gap-2 
           hover:shadow-slate-600 hover:shadow-md h-fit 
           rounded-md overflow-hidden ease-in-out duration-500

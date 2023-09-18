@@ -37,6 +37,7 @@ export default function AboutMePage() {
             <Image
               src="/logo/logo.png"
               fill
+              sizes="100vw"
               alt="logo"
               style={{ filter: "drop-shadow(5px 5px 5px #222)" }}
             />
