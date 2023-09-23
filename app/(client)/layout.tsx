@@ -7,5 +7,9 @@ interface ClientLayoutProps {
 export default function ClientLayout(props: ClientLayoutProps) {
   const { children } = props;
 
-  return <ClientProviderComponent>{children}</ClientProviderComponent>;
+  return (
+    <ClientProviderComponent>
+      <div></div>
+    </ClientProviderComponent>
+  );
 }

@@ -112,7 +112,7 @@ if (document.getElementById("editor")) {
       ],
     },
     // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-    placeholder: "Welcome to CKEditor 5!",
+    placeholder: "Welcome to CKEditor&nbsp;5!",
     // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
     fontFamily: {
       options: [
@@ -243,14 +243,9 @@ if (document.getElementById("editor")) {
       "DocumentOutline",
       "FormatPainter",
       "TableOfContents",
+      "PasteFromOfficeEnhanced",
     ],
-  })
-    .then((newEditor) => {
-      window.editor = newEditor;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  });
 }
 
 console.log("test test");

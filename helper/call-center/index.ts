@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: `http://localhost:80/service/`,
+  baseURL: `http://localhost:3000/service/`,
   timeout: 5000,
   responseType: "json",
   responseEncoding: "utf8",
@@ -25,6 +25,24 @@ axiosInstance.interceptors.response.use(
   },
 
   async (err) => {
-    return Promise.reject(err);
+    if (err.response && err.response?.data) {
+    } else {
+      return Promise.reject(err);
+    }
+    const { statusCode, message } = err.response?.data as any;
+
+    if (statusCode === 401) {
+      try {
+        await axios.get("/service/renew-token");
+
+        return await axiosInstance(err.config);
+      } catch (error) {
+        return Promise.reject(err);
+      }
+    } else {
+      return Promise.reject(err);
+    }
+
+    // return Promise.reject(err);
   }
 );

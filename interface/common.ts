@@ -13,3 +13,11 @@ export interface LayoutProps {
     [key: string]: string | undefined;
   };
 }
+
+export interface IProfile {
+  _id: string;
+  role: "member" | "writer" | "developer" | "owner";
+  name: string;
+  email: string;
+  image: string;
+}

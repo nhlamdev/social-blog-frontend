@@ -1,17 +1,18 @@
 "use client";
 import { apiCaller } from "@/api";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { IProfile } from "@/interface";
 
 interface NavInfoBoxProps {
-  profile: any;
+  profile: IProfile;
 }
 
 export const NavInfoBox = (props: NavInfoBoxProps) => {
   const { profile } = props;
   const [open, setOpen] = useState(false);
-
+  const ref = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
   return (
@@ -19,22 +20,19 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
       className={`relative flex flex-col space-y-2  items-center  z-10
       ${open ? "before:block" : "before:hidden"}
       before:fixed before:top-0 before:right-0 before:left-0 before:bottom-0 `}
+      ref={ref}
       onClick={() => setOpen(!open)}
     >
       <div
         className="flex flex-row gap-2 items-center cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        <span className="text-sm font-semibold">
-          {profile.role === "owner" ? "Quản trị viên" : profile.name}
+        <span className="text-sm font-semibold select-none">
+          {profile.name}
         </span>
 
         <Image
-          src={
-            profile.role === "owner" && profile?.image
-              ? profile.image
-              : "/avatar/test.jpg"
-          }
+          src={profile?.image}
           width={40}
           height={30}
           className="w-10 h-10 rounded-full object-cover"
@@ -50,8 +48,26 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
           visibility: open ? "visible" : "hidden",
           transform: `translateY(${open ? 0 : "20px"})`,
           transition: "all ease .3s",
+          width: `${ref.current?.clientWidth}px`,
+          left: 0,
         }}
       >
+        {profile.role !== "member" ? (
+          <div
+            className="flex flex-row gap-2 items-center px-6 py-2 hover:bg-slate-300 w-full whitespace-nowrap"
+            style={{
+              transition: "all ease .3s",
+              cursor: "pointer",
+            }}
+          >
+            <span className="text-xs font-semibold whitespace-nowrap">
+              Quản trị nội dung
+            </span>
+          </div>
+        ) : (
+          <></>
+        )}
+
         <div
           className="flex flex-row gap-2 items-center px-6 py-2 hover:bg-slate-300 w-full whitespace-nowrap"
           style={{

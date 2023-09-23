@@ -15,7 +15,7 @@ export const LogoutBtn = () => {
       }}
       onClick={() => {
         apiCaller.authApi.logout().then((res) => {
-          router.replace("/");
+          router.replace("/content");
         });
       }}
     >
