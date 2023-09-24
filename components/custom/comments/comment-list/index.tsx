@@ -28,8 +28,8 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
                   <div className="relative">
                     <Image
                       src={
-                        comment.create_by
-                          ? comment.create_by.image
+                        comment.created_by
+                          ? comment.created_by.image
                           : "/avatar/test.jpg"
                       }
                       className="rounded-full aspect-square"
@@ -42,12 +42,14 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
 
                   <div className="flex flex-col">
                     <span className="text-sm font-semibold">
-                      {comment.create_by
-                        ? comment.create_by.name
+                      {comment.created_by
+                        ? comment.created_by.name
                         : "Nguyễn Hoàng Lâm"}
                     </span>
                     <span className="text-xs">
-                      {comment.create_by ? comment.create_by.email : "Tác giả"}
+                      {comment.created_by
+                        ? comment.created_by.email
+                        : "Tác giả"}
                     </span>
                   </div>
                 </div>

@@ -1,30 +1,21 @@
-import { OwnerProviderComponent } from "@/provider";
-import { navigation_mock } from "./nav.mock";
-import Link from "next/link";
+"use client";
 import { LogoutBtn, ThemeToggleButton } from "@/components/custom";
-import axios from "axios";
-import { cookies } from "next/headers";
+import { useAuth } from "@/hook/auth-hook";
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import { navigation_mock } from "./nav.mock";
 
-const backend = process.env.SERVICE_PORT;
+export const OwnerNavigation = () => {
+  const { firstLoading, profile } = useAuth();
 
-export const OwnerNavigation = async () => {
-  let profile;
-  try {
-    const { data } = await axios.get(`http://localhost:${backend}/profile`, {
-      headers: {
-        Cookie: cookies().toString(),
-      },
-    });
+  if (firstLoading) {
+    return <div>loading</div>;
+  }
 
-    profile = data;
-  } catch (error: any) {
+  if (!profile || profile.role === "member") {
     redirect("/");
   }
 
-  if (profile.role === "client") {
-    redirect("/");
-  }
   return (
     <nav
       className="h-fit m-1 rounded-md gap-2 bg-slate-200 shadow-md
@@ -59,6 +50,14 @@ export const OwnerNavigation = async () => {
             </Link>
           );
         })}
+      </div>
+
+      <div className="flex flex-row">
+        <picture>
+          <img src={`/service/${profile.image}`} alt="" />
+        </picture>
+
+        <span>{profile.name}</span>
       </div>
 
       <div

@@ -1,24 +1,32 @@
-import Image from "next/image";
-import { ActionButtonComponent } from "./action-button";
+"use client";
 import { ThemeToggleButton } from "@/components/custom/color-mode";
-import axios from "axios";
+import { apiCaller } from "@/api";
 import { cookies } from "next/headers";
-import { NavInfoBox } from "./infor-box";
+import Image from "next/image";
 import Link from "next/link";
+import { ActionButtonComponent } from "./action-button";
+import { NavInfoBox } from "./infor-box";
+import { useEffect } from "react";
+import { useAuth } from "@/hook/auth-hook";
 
-const backend = process.env.SERVICE_PORT;
-export const ClientNavigator = async () => {
-  let profile;
+export const ClientNavigator = () => {
+  const { profile, firstLoading } = useAuth();
 
-  try {
-    const { data } = await axios.get(`http://localhost:${backend}/profile`, {
-      headers: {
-        Cookie: cookies().toString(),
-      },
-    });
-
-    profile = data;
-  } catch (e) {}
+  const generatorComponentBox = () => {
+    if (firstLoading) {
+      return (
+        <div>
+          <span>loading</span>
+        </div>
+      );
+    } else {
+      if (profile) {
+        return <NavInfoBox profile={profile} />;
+      } else {
+        return <ActionButtonComponent />;
+      }
+    }
+  };
 
   return (
     <nav
@@ -42,7 +50,7 @@ export const ClientNavigator = async () => {
       <div className="flex flex-row items-center gap-4">
         <ThemeToggleButton />
 
-        {profile ? <NavInfoBox profile={profile} /> : <ActionButtonComponent />}
+        {generatorComponentBox()}
       </div>
     </nav>
   );

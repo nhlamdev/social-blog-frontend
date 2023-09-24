@@ -1,9 +1,9 @@
 "use client";
-import { apiCaller } from "@/api";
-import Image from "next/image";
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/hook/auth-hook";
 import { IProfile } from "@/interface";
+import Image from "next/image";
+import Link from "next/link";
+import { useRef, useState } from "react";
 
 interface NavInfoBoxProps {
   profile: IProfile;
@@ -13,7 +13,8 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
   const { profile } = props;
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
-  const router = useRouter();
+
+  const { firstLoading, logout } = useAuth();
 
   return (
     <div
@@ -53,7 +54,8 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
         }}
       >
         {profile.role !== "member" ? (
-          <div
+          <Link
+            href={"/owner/content"}
             className="flex flex-row gap-2 items-center px-6 py-2 hover:bg-slate-300 w-full whitespace-nowrap"
             style={{
               transition: "all ease .3s",
@@ -63,7 +65,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
             <span className="text-xs font-semibold whitespace-nowrap">
               Quản trị nội dung
             </span>
-          </div>
+          </Link>
         ) : (
           <></>
         )}
@@ -75,9 +77,9 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
             cursor: "pointer",
           }}
           onClick={() => {
-            apiCaller.authApi.logout().then((res) => {
-              router.refresh();
-            });
+            if (!firstLoading) {
+              logout();
+            }
           }}
         >
           <span className="text-xs font-semibold whitespace-nowrap">

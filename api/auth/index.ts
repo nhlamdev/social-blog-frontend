@@ -2,9 +2,9 @@ import { axiosInstance } from "@/helper";
 
 export const authApi = {
   profile() {
-    return axiosInstance.get("/service/profile");
+    return axiosInstance.get("profile");
   },
   logout() {
-    return axiosInstance.delete("/logout");
+    return axiosInstance.delete("logout");
   },
 };

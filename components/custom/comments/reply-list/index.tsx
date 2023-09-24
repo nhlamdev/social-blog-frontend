@@ -84,8 +84,8 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
                   <div className="flex flex-row gap-2 items-center">
                     <Image
                       src={
-                        reply?.create_by?.image
-                          ? reply.create_by.image
+                        reply?.created_by?.image
+                          ? reply.created_by.image
                           : "/avatar/test.jpg"
                       }
                       className="rounded-full aspect-square"
@@ -97,12 +97,12 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
 
                     <div className="flex flex-col">
                       <span className="text-sm font-semibold">
-                        {reply.create_by
-                          ? reply.create_by.name
+                        {reply.created_by
+                          ? reply.created_by.name
                           : "Nguyễn Hoàng Lâm"}
                       </span>
                       <span className="text-xs">
-                        {reply.create_by ? reply.create_by.email : "Tác giả"}
+                        {reply.created_by ? reply.created_by.email : "Tác giả"}
                       </span>
                     </div>
                   </div>
