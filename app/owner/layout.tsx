@@ -14,7 +14,7 @@ export default async function OwnerLayout(props: OwnerLayoutProps) {
       className="min-h-screen bg-gradient-light dark:bg-gradient-dark"
       style={{ display: "flex", flexDirection: "row" }}
     >
-      <OwnerProviderComponent>{children}</OwnerProviderComponent>{" "}
+      <OwnerProviderComponent>{children}</OwnerProviderComponent>
     </main>
   );
 }

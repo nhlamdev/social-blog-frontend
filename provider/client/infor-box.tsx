@@ -28,7 +28,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
         className="flex flex-row gap-2 items-center cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        <span className="text-sm font-semibold select-none">
+        <span className="text-xs font-semibold select-none">
           {profile.name}
         </span>
 
@@ -36,7 +36,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
           src={profile?.image}
           width={40}
           height={30}
-          className="w-10 h-10 rounded-full object-cover"
+          className="w-8 h-8 rounded-full object-cover"
           style={{ border: "1px solid #fff" }}
           alt="photo"
         />

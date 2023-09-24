@@ -1,30 +1,33 @@
-"use client";
 import { LogoutBtn, ThemeToggleButton } from "@/components/custom";
-import { useAuth } from "@/hook/auth-hook";
+import { IProfile } from "@/interface";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { navigation_mock } from "./nav.mock";
 
-export const OwnerNavigation = () => {
-  const { firstLoading, profile } = useAuth();
+interface OwnerNavigationProps {
+  profile: IProfile;
+}
 
-  if (firstLoading) {
-    return <div>loading</div>;
-  }
-
-  if (!profile || profile.role === "member") {
-    redirect("/");
-  }
+export const OwnerNavigation = (props: OwnerNavigationProps) => {
+  const { profile } = props;
 
   return (
     <nav
       className="h-fit m-1 rounded-md gap-2 bg-slate-200 shadow-md
   bg-opacity-40 p-4 min-w-fit shadow-slate-600 dark:shadow-slate-800"
     >
-      <div className="px-2 py-1 flex flex-col justify-center">
+      <div className="px-2 py-1 flex flex-row items-center justify-between">
         <span className="dark:text-slate-100 text-slate-800 font-semibold">
           Trang quản lý
         </span>
+
+        <picture>
+          <img
+            src={`${profile.image}`}
+            className="rounded-full w-8 h-8  shadow-lg"
+            style={{ border: "2px solid black" }}
+            alt="photo"
+          />
+        </picture>
       </div>
 
       <div className="p-2 g-2">
@@ -50,14 +53,6 @@ export const OwnerNavigation = () => {
             </Link>
           );
         })}
-      </div>
-
-      <div className="flex flex-row">
-        <picture>
-          <img src={`/service/${profile.image}`} alt="" />
-        </picture>
-
-        <span>{profile.name}</span>
       </div>
 
       <div
