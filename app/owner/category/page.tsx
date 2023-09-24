@@ -1,15 +1,22 @@
 import { apiCaller } from "@/api";
-import { PaginationDirectComponent } from "@/components/custom";
+import {
+  EmptyDataComponent,
+  PaginationDirectComponent,
+} from "@/components/custom";
 import { CategoryControlDialog } from "@/components/dialog";
 import { OwnerCategoryListView } from "@/components/list-view";
 import { PageProps } from "@/interface";
-import { getCountPage } from "@/utils/global-func";
+import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
+import axios from "axios";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Danh sách thể loại",
   authors: { name: "Nguyễn Hoàng Lâm" },
 };
+
+const backend = process.env.SERVICE_PORT;
 
 export default async function DashboardCategoryPage(props: PageProps) {
   const { page, search } = props.searchParams;
@@ -25,7 +32,16 @@ export default async function DashboardCategoryPage(props: PageProps) {
     search: search ? search : "",
   };
 
-  const { data: categories } = await apiCaller.categoryApi.get(params);
+  const url = generateURLWithQueryParams(
+    `http://localhost:${backend}/category`,
+    params
+  );
+
+  const { data: categories } = await axios.get(url, {
+    headers: {
+      Cookie: cookies().toString(),
+    },
+  });
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
@@ -33,13 +49,21 @@ export default async function DashboardCategoryPage(props: PageProps) {
         Danh sách thể loại
       </span>
 
-      <OwnerCategoryListView categories={categories.data} />
+      {categories.data.length !== 0 ? (
+        <OwnerCategoryListView categories={categories.data} />
+      ) : (
+        <EmptyDataComponent />
+      )}
 
-      <PaginationDirectComponent
-        current={current + 1}
-        total={getCountPage(categories.max, 5)}
-        urlDirect={(p) => `/owner/category?page=${p}`}
-      />
+      {categories.max !== 0 ? (
+        <PaginationDirectComponent
+          current={current + 1}
+          total={getCountPage(categories.max, 5)}
+          urlDirect={(p) => `/owner/category?page=${p}`}
+        />
+      ) : (
+        <></>
+      )}
 
       <CategoryControlDialog />
     </div>
