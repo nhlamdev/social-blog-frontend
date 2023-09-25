@@ -10,6 +10,8 @@ import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 import axios from "axios";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
+import Link from "next/link";
+import { IoIosCreate } from "react-icons/io";
 
 export const metadata: Metadata = {
   title: "Danh sách thể loại",
@@ -65,7 +67,19 @@ export default async function DashboardCategoryPage(props: PageProps) {
         <></>
       )}
 
-      <CategoryControlDialog />
+      <Link
+        href="/owner/category/create"
+        className="block fixed right-8 bottom-8 cursor-pointer"
+      >
+        <IoIosCreate
+          className="text-slate-800 dark:text-slate-100"
+          style={{
+            fontSize: "36px",
+          }}
+        />
+      </Link>
+
+      {/* <CategoryControlDialog /> */}
     </div>
   );
 }
