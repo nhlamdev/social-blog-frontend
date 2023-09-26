@@ -1,5 +1,8 @@
 import { apiCaller } from "@/api";
-import { PaginationDirectComponent } from "@/components/custom";
+import {
+  EmptyDataComponent,
+  PaginationDirectComponent,
+} from "@/components/custom";
 import {
   CategoryControlDialog,
   SeriesControlDialog,
@@ -9,13 +12,17 @@ import {
   OwnerSeriesListView,
 } from "@/components/list-view";
 import { PageProps } from "@/interface";
-import { getCountPage } from "@/utils/global-func";
+import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
+import axios from "axios";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Danh sách chuỗi bài viết",
   authors: { name: "Nguyễn Hoàng Lâm" },
 };
+
+const backend = process.env.SERVICE_PORT;
 
 export default async function OwnerSeriesPage(props: PageProps) {
   const { page, search } = props.searchParams;
@@ -31,7 +38,16 @@ export default async function OwnerSeriesPage(props: PageProps) {
     search: search ? search : "",
   };
 
-  const { data: series } = await apiCaller.seriesApi.get(params);
+  const url = generateURLWithQueryParams(
+    `http://localhost:${backend}/series`,
+    params
+  );
+
+  const { data: series } = await axios.get(url, {
+    headers: {
+      Cookie: cookies().toString(),
+    },
+  });
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
@@ -39,13 +55,21 @@ export default async function OwnerSeriesPage(props: PageProps) {
         Danh sách chuỗi bài viết
       </span>
 
-      <OwnerSeriesListView series={series.data} />
+      {series.data.length !== 0 ? (
+        <OwnerSeriesListView series={series.data} />
+      ) : (
+        <EmptyDataComponent />
+      )}
 
-      <PaginationDirectComponent
-        current={current + 1}
-        total={getCountPage(series.max, 5)}
-        urlDirect={(p) => `/owner/series?page=${p}`}
-      />
+      {series.max !== 0 ? (
+        <PaginationDirectComponent
+          current={current + 1}
+          total={getCountPage(series.max, 5)}
+          urlDirect={(p) => `/owner/series?page=${p}`}
+        />
+      ) : (
+        <></>
+      )}
 
       <SeriesControlDialog />
     </div>
