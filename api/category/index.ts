@@ -6,8 +6,10 @@ export const categoryApi = {
     const url = generateURLWithQueryParams("category", params);
     return axiosInstance.get(url);
   },
-  async create(data: { title: string; summary: string }) {
-    return axiosInstance.post("category", data);
+  async create(formData: FormData) {
+    return axiosInstance.post("category", formData, {
+      headers: { "content-type": "multipart/form-data" },
+    });
   },
   async update(id: string, payload: { title: string; summary: string }) {
     return axiosInstance.put(`category/${id}`, payload);

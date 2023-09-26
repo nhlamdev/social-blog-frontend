@@ -28,6 +28,13 @@ export const ListViewItem = (props: SeriesItemProps) => {
         alignItems: "center",
       }}
     >
+      <picture>
+        <img
+          src={`/service/${item.image.fileName}`}
+          className="h-20 rounded-md "
+          alt="photo"
+        />
+      </picture>
       <div
         style={{
           display: "flex",
