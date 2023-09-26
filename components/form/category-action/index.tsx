@@ -4,37 +4,84 @@ import Image from "next/image";
 import { enqueueSnackbar } from "notistack";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { IImage } from "@/interface";
 
-export const OwnerCreateCategoryAction = () => {
+interface ICategory {
+  delete_at: string | null;
+  created_at: string;
+  updated_at: string;
+  index: number;
+  _id: string;
+  title: string;
+  summary: string;
+  image: IImage;
+}
+
+interface OwnerCategoryActionProps {
+  category?: ICategory;
+}
+
+export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
   const router = useRouter();
 
-  const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
+  const { category } = props;
+
+  const [title, setTitle] = useState(category?.title ? category.title : "");
+  const [summary, setSummary] = useState(
+    category?.summary ? category.summary : ""
+  );
   const [loading, setLoading] = useState(false);
 
-  const [image, setImage] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null | string>(
+    category?.image ? `/service/${category.image.fileName}` : null
+  );
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   const generatorImage = () => {
     if (image) {
-      return (
-        <Image
-          onClick={() => {
-            if (fileRef && fileRef.current) {
-              fileRef.current.click();
-            }
-          }}
-          src={URL.createObjectURL(image)}
-          width={300}
-          height={200}
-          style={{
-            cursor: "pointer",
-            objectFit: "cover",
-            borderRadius: "5px",
-          }}
-          alt="photo"
-        />
-      );
+      if (typeof image === "string") {
+        return (
+          <picture>
+            <img
+              onClick={() => {
+                if (fileRef && fileRef.current) {
+                  fileRef.current.click();
+                }
+              }}
+              src={image}
+              style={{
+                width: "300px",
+                aspectRatio: "16/9",
+                cursor: "pointer",
+                objectFit: "cover",
+                borderRadius: "5px",
+              }}
+              alt="photo"
+            />
+          </picture>
+        );
+      } else {
+        return (
+          <picture>
+            <img
+              onClick={() => {
+                if (fileRef && fileRef.current) {
+                  fileRef.current.click();
+                }
+              }}
+              src={URL.createObjectURL(image)}
+              style={{
+                width: "300px",
+                aspectRatio: "16/9",
+                cursor: "pointer",
+                objectFit: "cover",
+                borderRadius: "5px",
+              }}
+              alt="photo"
+            />
+          </picture>
+        );
+      }
     } else {
       return (
         <Image
@@ -64,41 +111,80 @@ export const OwnerCreateCategoryAction = () => {
 
         const formData = new FormData();
 
-        if (!image) {
-          enqueueSnackbar("Bạn chưa chọn hình ảnh", {
-            variant: "error",
-          });
-          return;
+        if (!category) {
+          if (!image) {
+            enqueueSnackbar("Bạn chưa chọn hình ảnh", {
+              variant: "error",
+            });
+            return;
+          }
+
+          if (typeof image === "string") {
+            enqueueSnackbar("Bạn chưa chọn hình ảnh", {
+              variant: "error",
+            });
+            return;
+          }
         }
 
         formData.append("title", title);
         formData.append("summary", summary);
-        formData.append("files", image, image.name);
+
+        if (image && typeof image !== "string") {
+          formData.append("files", image, image.name);
+        }
 
         setLoading(true);
 
-        apiCaller.categoryApi
-          .create(formData)
-          .then(() => {
-            router.replace("/owner/category");
-          })
-          .catch((error) => {
-            if (Array.isArray(error?.response?.data?.message)) {
-              error?.response?.data?.message.forEach((item: any) => {
-                enqueueSnackbar(item, { variant: "error" });
-              });
-            } else {
-              enqueueSnackbar(
-                error?.response ? error.response.data?.message : error.message,
-                { variant: "error" }
-              );
-            }
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-
-        event.preventDefault();
+        if (category) {
+          apiCaller.categoryApi
+            .update(category._id, formData)
+            .then(() => {
+              router.replace("/owner/category");
+              router.refresh();
+            })
+            .catch((error) => {
+              if (Array.isArray(error?.response?.data?.message)) {
+                error?.response?.data?.message.forEach((item: any) => {
+                  enqueueSnackbar(item, { variant: "error" });
+                });
+              } else {
+                enqueueSnackbar(
+                  error?.response
+                    ? error.response.data?.message
+                    : error.message,
+                  { variant: "error" }
+                );
+              }
+            })
+            .finally(() => {
+              setLoading(false);
+            });
+        } else {
+          apiCaller.categoryApi
+            .create(formData)
+            .then(() => {
+              router.replace("/owner/category");
+              router.refresh();
+            })
+            .catch((error) => {
+              if (Array.isArray(error?.response?.data?.message)) {
+                error?.response?.data?.message.forEach((item: any) => {
+                  enqueueSnackbar(item, { variant: "error" });
+                });
+              } else {
+                enqueueSnackbar(
+                  error?.response
+                    ? error.response.data?.message
+                    : error.message,
+                  { variant: "error" }
+                );
+              }
+            })
+            .finally(() => {
+              setLoading(false);
+            });
+        }
       }}
       className="flex flex-col gap-5 w-full justify-center items-center"
     >

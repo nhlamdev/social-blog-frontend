@@ -1,9 +1,7 @@
-import { apiCaller } from "@/api";
 import {
   EmptyDataComponent,
   PaginationDirectComponent,
 } from "@/components/custom";
-import { CategoryControlDialog } from "@/components/dialog";
 import { OwnerCategoryListView } from "@/components/list-view";
 import { PageProps } from "@/interface";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";

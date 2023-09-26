@@ -21,3 +21,15 @@ export interface IProfile {
   email: string;
   image: string;
 }
+
+export interface IImage {
+  delete_at: string | null;
+  created_at: string;
+  updated_at: string;
+  index: number;
+  _id: string;
+  originalName: string;
+  fileName: string;
+  mimeType: string;
+  size: number;
+}

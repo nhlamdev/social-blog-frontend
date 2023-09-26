@@ -11,8 +11,10 @@ export const categoryApi = {
       headers: { "content-type": "multipart/form-data" },
     });
   },
-  async update(id: string, payload: { title: string; summary: string }) {
-    return axiosInstance.put(`category/${id}`, payload);
+  async update(id: string, formData: FormData) {
+    return axiosInstance.put(`category/${id}`, formData, {
+      headers: { "content-type": "multipart/form-data" },
+    });
   },
   async remove(id: string) {
     return axiosInstance.delete(`category/${id}`);

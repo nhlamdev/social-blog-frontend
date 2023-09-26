@@ -1,4 +1,4 @@
-import { OwnerCreateCategoryAction } from "./action";
+import { OwnerCategoryAction } from "@/components/form";
 
 export default function CreateCategoryPage() {
   return (
@@ -7,7 +7,7 @@ export default function CreateCategoryPage() {
         Tạo mới thể loại
       </span>
 
-      <OwnerCreateCategoryAction />
+      <OwnerCategoryAction />
     </div>
   );
 }

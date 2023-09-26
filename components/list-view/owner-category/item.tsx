@@ -1,11 +1,8 @@
 "use client";
 import { apiCaller } from "@/api";
-import {
-  CategoryControlDialog,
-  ListContentInCategoryDialog,
-} from "@/components/dialog";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { FaEdit } from "react-icons/fa";
 import { MdOutlineContentCopy, MdOutlineRemoveCircle } from "react-icons/md";
 interface SeriesItemProps {
   item: any;
@@ -14,8 +11,7 @@ interface SeriesItemProps {
 export const ListViewItem = (props: SeriesItemProps) => {
   const { item } = props;
 
-  const [openContentsDialog, setOpenContentsDialog] = useState(false);
-  const route = useRouter();
+  const router = useRouter();
   return (
     <div
       className="shadow-md w-3/4 bg-slate-100 bg-opacity-60"
@@ -61,20 +57,26 @@ export const ListViewItem = (props: SeriesItemProps) => {
             fontSize: "24px",
             cursor: "pointer",
           }}
-          onClick={() => setOpenContentsDialog(true)}
+          // onClick={() => setOpenContentsDialog(true)}
         />
-
-        {openContentsDialog ? (
+        {/* {openContentsDialog ? (
           <ListContentInCategoryDialog
             close={() => setOpenContentsDialog(false)}
             categoryId={item._id}
           />
         ) : (
           <></>
-        )}
-
-        <CategoryControlDialog value={item} />
-
+        )} */}
+        <Link href={`/owner/category/${item._id}`}>
+          <FaEdit
+            className="text-amber-500"
+            style={{
+              fontSize: "24px",
+              cursor: "pointer",
+            }}
+          />
+        </Link>
+        {/* <CategoryControlDialog value={item} /> */}
         <MdOutlineRemoveCircle
           className="text-rose-700"
           style={{
@@ -83,7 +85,7 @@ export const ListViewItem = (props: SeriesItemProps) => {
           }}
           onClick={async () => {
             await apiCaller.categoryApi.remove(item._id);
-            route.refresh();
+            router.refresh();
           }}
         />
       </div>
