@@ -27,9 +27,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
   const [title, setTitle] = useState(content ? content.title : "");
   const [body, setBody] = useState(content ? content.body : "");
   const [image, setImage] = useState<File | null | string>(
-    content && content.images && content.images.length !== 0
-      ? content.images[0].fileName
-      : null
+    content?.image ? `/service/${content.image.fileName}` : null
   );
   const [category, setCategory] = useState(
     content && content.category ? content.category._id : ""
@@ -43,41 +41,45 @@ export const FormContentAction = (props: FormContentActionProps) => {
     if (image) {
       if (typeof image === "string") {
         return (
-          <Image
-            onClick={() => {
-              if (fileRef && fileRef.current) {
-                fileRef.current.click();
-              }
-            }}
-            src={`/service/${image}`}
-            width={300}
-            height={200}
-            style={{
-              cursor: "pointer",
-              objectFit: "cover",
-              borderRadius: "5px",
-            }}
-            alt="photo"
-          />
+          <picture>
+            <img
+              onClick={() => {
+                if (fileRef && fileRef.current) {
+                  fileRef.current.click();
+                }
+              }}
+              src={image}
+              style={{
+                width: "300px",
+                aspectRatio: "16/9",
+                cursor: "pointer",
+                objectFit: "cover",
+                borderRadius: "5px",
+              }}
+              alt="photo"
+            />
+          </picture>
         );
       } else {
         return (
-          <Image
-            onClick={() => {
-              if (fileRef && fileRef.current) {
-                fileRef.current.click();
-              }
-            }}
-            src={URL.createObjectURL(image)}
-            width={300}
-            height={200}
-            style={{
-              cursor: "pointer",
-              objectFit: "cover",
-              borderRadius: "5px",
-            }}
-            alt="photo"
-          />
+          <picture>
+            <img
+              onClick={() => {
+                if (fileRef && fileRef.current) {
+                  fileRef.current.click();
+                }
+              }}
+              src={URL.createObjectURL(image)}
+              style={{
+                width: "300px",
+                aspectRatio: "16/9",
+                cursor: "pointer",
+                objectFit: "cover",
+                borderRadius: "5px",
+              }}
+              alt="photo"
+            />
+          </picture>
         );
       }
     } else {
@@ -120,6 +122,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
     if (content) {
       try {
         await apiCaller.contentApi.update(content._id, formData);
+        router.refresh();
       } catch (error: any) {
         if (Array.isArray(error?.response?.data?.message)) {
           error?.response?.data?.message.forEach((item: any) => {
@@ -139,6 +142,8 @@ export const FormContentAction = (props: FormContentActionProps) => {
     } else {
       try {
         await apiCaller.contentApi.create(formData);
+
+        router.replace("/owner/content");
       } catch (error: any) {
         if (Array.isArray(error?.response?.data?.message)) {
           error?.response?.data?.message.forEach((item: any) => {
@@ -156,8 +161,6 @@ export const FormContentAction = (props: FormContentActionProps) => {
         }
       }
     }
-
-    router.refresh();
   };
 
   return (
