@@ -142,53 +142,55 @@ export default async function ClientContentsPage() {
           gap-6 p-4 md:px-10 w-full md:w-4/5 mx-auto h-full"
           style={{ flex: 8 }}
         >
-          {contents.data.map((v: any) => (
-            <Link
-              href={`/content/${v._id}`}
-              key={v._id}
-              className="flex flex-row md:flex-col gap-2 
+          {contents.data.map((v: any) => {
+            return (
+              <Link
+                href={`/content/${v._id}`}
+                key={v._id}
+                className="flex flex-row md:flex-col gap-2 
           hover:shadow-slate-600 hover:shadow-md h-fit 
           rounded-md overflow-hidden ease-in-out duration-500
           cursor-pointer bg-slate-400"
-            >
-              <div
-                className="shadow-lg bg-center aspect-[3/2] 
-                     h-24 md:h-full bg-slate-400"
-                style={{
-                  cursor: "pointer",
-                  backgroundImage: `url(/service/${v.images[0].fileName})`,
-                  backgroundSize: "cover",
-                  position: "relative",
-                }}
-              />
-
-              <div
-                className="p-2 gap-2 flex flex-col justify-around "
-                style={{ transition: "all ease .3s" }}
               >
-                {v.category ? (
-                  <div className="bg-slate-100  top-4 left-0 px-4  rounded-md w-fit">
-                    <span className="text-[10px] sm:text-xs md:text-sm text-slate-800   font-semibold">
-                      {v.category.title}
-                    </span>
-                  </div>
-                ) : (
-                  <></>
-                )}
+                <div
+                  className="shadow-lg bg-center aspect-[3/2] 
+                     h-24 md:h-full bg-slate-400"
+                  style={{
+                    cursor: "pointer",
+                    backgroundImage: `url(/service/${v.image.fileName})`,
+                    backgroundSize: "cover",
+                    position: "relative",
+                  }}
+                />
 
-                <span
-                  className="text-slate-100 line-clamp-2 md:line-clamp-3 text-clip 
-            text-xs sm:text-sm md:text-md tracking-tight"
+                <div
+                  className="p-2 gap-2 flex flex-col justify-around "
+                  style={{ transition: "all ease .3s" }}
                 >
-                  {v.title}
-                </span>
+                  {v.category ? (
+                    <div className="bg-slate-100  top-4 left-0 px-4  rounded-md w-fit">
+                      <span className="text-[10px] sm:text-xs md:text-sm text-slate-800   font-semibold">
+                        {v.category.title}
+                      </span>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
 
-                <span className="text-slate-100 text-[10px] sm:text-xs md:text-sm  font-light">
-                  {getDateTime(v.created_at)}
-                </span>
-              </div>
-            </Link>
-          ))}
+                  <span
+                    className="text-slate-100 line-clamp-2 md:line-clamp-3 text-clip 
+            text-xs sm:text-sm md:text-md tracking-tight"
+                  >
+                    {v.title}
+                  </span>
+
+                  <span className="text-slate-100 text-[10px] sm:text-xs md:text-sm  font-light">
+                    {getDateTime(v.created_at)}
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
 

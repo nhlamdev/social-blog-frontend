@@ -122,6 +122,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
     if (content) {
       try {
         await apiCaller.contentApi.update(content._id, formData);
+        router.replace("/owner/content");
         router.refresh();
       } catch (error: any) {
         if (Array.isArray(error?.response?.data?.message)) {
@@ -142,8 +143,8 @@ export const FormContentAction = (props: FormContentActionProps) => {
     } else {
       try {
         await apiCaller.contentApi.create(formData);
-
         router.replace("/owner/content");
+        router.refresh();
       } catch (error: any) {
         if (Array.isArray(error?.response?.data?.message)) {
           error?.response?.data?.message.forEach((item: any) => {
