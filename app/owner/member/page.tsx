@@ -58,7 +58,7 @@ export default async function OwnerMemberPage(props: PageProps) {
             <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">Thông tin</th>
               <th className="py-3 px-6 text-center">Lượt xem</th>
-              <th className="py-3 px-6 text-center">Loại</th>
+              <th className="py-3 px-6 text-center">Quyền</th>
               <th className="py-3 px-6 text-center">Ngày tham gia</th>
             </tr>
           </thead>

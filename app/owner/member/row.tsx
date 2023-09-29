@@ -34,7 +34,7 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
         <span>20</span>
       </td>
       <td className="py-3 px-6 text-center">
-        <span className={`font-semibold`}>{item.provider}</span>
+        <span className={`font-semibold`}>{item.role}</span>
       </td>
       <td className="py-3 px-6 text-center">
         <span className="font-semibold font-sm">
