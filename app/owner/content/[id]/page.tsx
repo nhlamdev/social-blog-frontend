@@ -19,7 +19,7 @@ export default async function OwnerContentUpdatePage(props: PageProps) {
 
   try {
     const { data } = await axios.get(
-      `http://localhost:${backend}/content/${id}`,
+      `http://localhost:${backend}/content/by-id/${id}`,
       {
         headers: {
           Cookie: cookies().toString(),

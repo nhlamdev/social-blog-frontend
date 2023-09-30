@@ -25,7 +25,7 @@ export default async function OwnerDetailCategoryPage(props: PageProps) {
 
   try {
     const { data } = await axios.get(
-      `http://localhost:${backend}/category/${id}`,
+      `http://localhost:${backend}/category/by-id/${id}`,
       {
         headers: {
           Cookie: cookies().toString(),

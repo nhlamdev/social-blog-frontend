@@ -34,7 +34,7 @@ export const PopularItemsComponent = async () => {
               >
                 <picture>
                   <img
-                    src={`/service/${content.images[0].fileName}`}
+                    src={`/service/${content.image.fileName}`}
                     className="object-cover relative w-72 h-40"
                     alt="Landscape picture"
                   />

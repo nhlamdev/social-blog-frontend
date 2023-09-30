@@ -20,7 +20,7 @@ export const ClientHomeListContentItem = (
     >
       <picture>
         <img
-          src={`/service/${content.images[0].fileName}`}
+          src={`/service/${content.image.fileName}`}
           className="h-28 sm:h-32 md:h-40 aspect-square "
           style={{
             objectFit: "cover",

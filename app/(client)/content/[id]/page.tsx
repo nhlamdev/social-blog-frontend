@@ -16,7 +16,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
   }
 
   const { data: content } = await axios.get(
-    `http://localhost:${backend}/content/${id}`
+    `http://localhost:${backend}/content/by-id/${id}`
   );
 
   const { data: randomContens } = await axios.get(
@@ -26,6 +26,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
   if (!content) {
     notFound();
   }
+
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative ">
       <div
@@ -54,7 +55,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
 
         <picture>
           <img
-            src={`/service/${content.images[0].fileName}`}
+            src={`/service/${content.image.fileName}`}
             style={{
               objectFit: "cover",
               boxShadow:
