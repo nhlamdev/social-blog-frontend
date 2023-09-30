@@ -1,16 +1,9 @@
-import { apiCaller } from "@/api";
 import {
   EmptyDataComponent,
   PaginationDirectComponent,
 } from "@/components/custom";
-import {
-  CategoryControlDialog,
-  SeriesControlDialog,
-} from "@/components/dialog";
-import {
-  OwnerCategoryListView,
-  OwnerSeriesListView,
-} from "@/components/list-view";
+import { SeriesControlDialog } from "@/components/dialog";
+import { OwnerSeriesListView } from "@/components/list-view";
 import { PageProps } from "@/interface";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 import axios from "axios";

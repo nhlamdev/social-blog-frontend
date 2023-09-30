@@ -2,6 +2,7 @@
 import { apiCaller } from "@/api";
 import { PaginationChangeComponent } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
+import { enqueueSnackbar } from "notistack";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BiSolidBookAdd } from "react-icons/bi";
@@ -35,21 +36,62 @@ export const ListContentInSeriesDialog = (
   );
 
   const submit = async (contentId: string) => {
-    await apiCaller.contentApi.updateContentSeries(contentId, seriesId);
+    await apiCaller.contentApi
+      .updateContentSeries(contentId, seriesId)
+      .catch((error) => {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error?.response?.data?.message.forEach((item: any) => {
+            enqueueSnackbar(item, { variant: "error" });
+          });
+        } else {
+          enqueueSnackbar(
+            error?.response ? error.response.data?.message : error.message,
+            { variant: "error" }
+          );
+        }
+      });
 
-    apiCaller.contentApi.getContentsBySeries(seriesId, params).then((res) => {
-      const { data } = res;
-      setContents(data.data);
-      setTotal(data.max);
-    });
+    apiCaller.contentApi
+      .getContentsBySeries(seriesId, params)
+      .then((res) => {
+        const { data } = res;
+        setContents(data.data);
+        setTotal(data.max);
+      })
+      .catch((error) => {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error?.response?.data?.message.forEach((item: any) => {
+            enqueueSnackbar(item, { variant: "error" });
+          });
+        } else {
+          enqueueSnackbar(
+            error?.response ? error.response.data?.message : error.message,
+            { variant: "error" }
+          );
+        }
+      });
   };
 
   useEffect(() => {
-    apiCaller.contentApi.getContentsBySeries(seriesId, params).then((res) => {
-      const { data } = res;
-      setContents(data.data);
-      setTotal(data.max);
-    });
+    apiCaller.contentApi
+      .getContentsBySeries(seriesId, params)
+      .then((res) => {
+        const { data } = res;
+        setContents(data.data);
+        setTotal(data.max);
+      })
+      .catch((error) => {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error?.response?.data?.message.forEach((item: any) => {
+            enqueueSnackbar(item, { variant: "error" });
+          });
+        } else {
+          enqueueSnackbar(
+            error?.response ? error.response.data?.message : error.message,
+            { variant: "error" }
+          );
+        }
+      });
   }, [seriesId, params]);
 
   return (

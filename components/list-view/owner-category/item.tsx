@@ -51,14 +51,16 @@ export const ListViewItem = (props: SeriesItemProps) => {
           gap: "10px",
         }}
       >
-        <MdOutlineContentCopy
-          className="text-cyan-400"
-          style={{
-            fontSize: "24px",
-            cursor: "pointer",
-          }}
-          // onClick={() => setOpenContentsDialog(true)}
-        />
+        <Link href={`/owner/category/${item._id}/content-in`}>
+          <MdOutlineContentCopy
+            className="text-cyan-400"
+            style={{
+              fontSize: "24px",
+              cursor: "pointer",
+            }}
+          />
+        </Link>
+
         {/* {openContentsDialog ? (
           <ListContentInCategoryDialog
             close={() => setOpenContentsDialog(false)}
