@@ -1,5 +1,4 @@
 import { getDateTime } from "@/utils/global-func";
-import Image from "next/image";
 import Link from "next/link";
 
 interface RandomContentComponentProps {
@@ -30,16 +29,6 @@ export const RandomContentComponent = (props: RandomContentComponentProps) => {
                 "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
             }}
           >
-            {/* <div className="relative lg:w-full h-28 lg:h-full aspect-square">
-              <Image
-                src={`/service/${c.images[0].fileName}`}
-                fill
-                quality={75}
-                style={{ objectFit: "cover" }}
-                alt="photo"
-              />
-            </div> */}
-
             <picture>
               <img
                 src={`/service/${c.image_fileName}`}
@@ -64,7 +53,7 @@ export const RandomContentComponent = (props: RandomContentComponentProps) => {
                   wordBreak: "break-word",
                 }}
               >
-                {c.title}
+                {c.content_title}
               </span>
 
               <span

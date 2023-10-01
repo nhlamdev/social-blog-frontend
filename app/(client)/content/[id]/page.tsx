@@ -1,9 +1,8 @@
-import { CommentsComponent } from "@/components/custom/comments";
 import { PageProps } from "@/interface";
 import axios from "axios";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { RandomContentComponent } from "./random-content";
+import { CommentsComponent } from "@/components/custom/comments";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -56,29 +55,13 @@ export default async function ClientDetailContentPage(props: PageProps) {
         <picture>
           <img
             src={`/service/${content.image.fileName}`}
+            className="w-48 aspect-video rounded-md shadow-lg"
             style={{
               objectFit: "cover",
-              boxShadow:
-                "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset",
-            }}
-            className="h-48 relative aspect-video"
-            alt="Landscape picture"
-          />
-        </picture>
-
-        {/* <div className="h-48 relative aspect-video">
-          <Image
-            src={`/service/${content.images[0].fileName}`}
-            quality={75}
-            fill
-            style={{
-              objectFit: "cover",
-              boxShadow:
-                "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset",
             }}
             alt="photo"
           />
-        </div> */}
+        </picture>
       </div>
 
       <span className="text-slate-800 dark:text-slate-200 font-semibold text-2xl">
