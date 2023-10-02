@@ -6,7 +6,7 @@ const backend = process.env.SERVICE_PORT;
 
 export const PopularItemsComponent = async () => {
   const { data: topContents } = await axios.get(
-    `http://localhost:${backend}/content/top?take=3`
+    `http://localhost:${backend}/content/more-view?take=3`
   );
 
   const { data: topCategoryMoreContent } = await axios.get(

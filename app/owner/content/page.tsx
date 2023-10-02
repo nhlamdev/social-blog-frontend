@@ -52,7 +52,7 @@ export default async function OwnerContentsPage(props: PageProps) {
       },
     });
 
-    contents = data;
+    contents = { data: data[0], max: data[1] };
   } catch (error: any) {
     if (Array.isArray(error?.response?.data?.message)) {
       error?.response?.data?.message.forEach((item: any) => {
