@@ -32,7 +32,7 @@ export default async function OwnerSeriesPage(props: PageProps) {
   };
 
   const url = generateURLWithQueryParams(
-    `http://localhost:${backend}/series`,
+    `http://localhost:${backend}/series/owner`,
     params
   );
 
@@ -41,6 +41,10 @@ export default async function OwnerSeriesPage(props: PageProps) {
       Cookie: cookies().toString(),
     },
   });
+
+  if (!series) {
+    return <></>;
+  }
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
