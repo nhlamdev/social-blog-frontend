@@ -24,13 +24,13 @@ export default async function ContentPage(props: PageProps) {
       : 0;
 
   let role: "client" | "owner";
-  let contents;
+
   let seriesData;
 
   if (series) {
     try {
       const { data } = await axios.get(
-        `http://localhost:${backend}/series/${series}`
+        `http://localhost:${backend}/series/by-id/${series}`
       );
       seriesData = data;
     } catch {
@@ -38,37 +38,12 @@ export default async function ContentPage(props: PageProps) {
     }
   }
 
-  try {
-    const { data } = await axios.get(`http://localhost:${backend}/profile`, {
-      headers: {
-        Cookie: cookies().toString(),
-      },
-    });
-
-    role = data.role;
-  } catch {
-    role = "client";
-  }
-
-  if (role === "owner") {
-    const { data } = await axios.get(
-      `http://localhost:${backend}/content/owner`,
-      {
-        params: { ...searchParams, skip: (current * 6).toString(), take: "6" },
-        headers: {
-          Cookie: cookies().toString(),
-        },
-      }
-    );
-
-    contents = data;
-  } else {
-    const { data } = await axios.get(`http://localhost:${backend}/content`, {
+  const { data: contents } = await axios.get(
+    `http://localhost:${backend}/content`,
+    {
       params: { ...searchParams, skip: (current * 6).toString(), take: "6" },
-    });
-
-    contents = data;
-  }
+    }
+  );
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative ">
