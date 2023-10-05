@@ -66,6 +66,10 @@ export const ClientNavigator = () => {
           <Link href="/series" className="font-semibold text-sm">
             <span>Chuỗi bài viết</span>
           </Link>
+
+          <Link href="/series" className="font-semibold text-sm">
+            <span>Về tôi</span>
+          </Link>
         </div>
       </div>
 

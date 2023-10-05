@@ -23,8 +23,6 @@ export default async function ContentPage(props: PageProps) {
       ? Number(page) - 1
       : 0;
 
-  let role: "client" | "owner";
-
   let seriesData;
 
   if (series) {

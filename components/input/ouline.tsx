@@ -1,3 +1,4 @@
+"use client";
 interface OutlineInputComponentProps {
   txt: string;
   change: (txt: string) => void;
