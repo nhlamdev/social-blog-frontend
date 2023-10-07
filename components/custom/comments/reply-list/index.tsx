@@ -1,7 +1,6 @@
 "use client";
 import { apiCaller } from "@/api";
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import { PaginationChangeComponent } from "../..";
 import { getCountPage } from "@/utils/global-func";
 import { enqueueSnackbar } from "notistack";
@@ -82,18 +81,17 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
               <div key={`reply-${reply._id}`} className="flex flex-col gap-2">
                 <div className="flex flex-col gap-1 p-2  bg-slate-200 bg-opacity-40 rounded-md">
                   <div className="flex flex-row gap-2 items-center">
-                    <Image
-                      src={
-                        reply?.created_by?.image
-                          ? reply.created_by.image
-                          : "/avatar/test.jpg"
-                      }
-                      className="rounded-full aspect-square"
-                      style={{ objectFit: "cover" }}
-                      width={40}
-                      height={40}
-                      alt="photo"
-                    />
+                    <picture>
+                      <img
+                        src={
+                          reply?.created_by?.image
+                            ? reply.created_by.image
+                            : "/avatar/test.jpg"
+                        }
+                        className="rounded-full aspect-square w-10 h-10 object-cover"
+                        alt="photo"
+                      />
+                    </picture>
 
                     <div className="flex flex-col">
                       <span className="text-sm font-semibold">

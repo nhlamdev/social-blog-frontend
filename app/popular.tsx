@@ -52,10 +52,26 @@ export const PopularItemsComponent = async () => {
                       {getDateTime(content.created_at)}
                     </span>
                   </div>
+                  <div className="flex flex-row gap-2 items-center">
+                    <div className="relative w-6 h-6">
+                      <Image
+                        src={content.created_by.image}
+                        fill
+                        className="rounded-full aspect-square"
+                        alt="asd"
+                      />
+                    </div>
 
-                  <div>
-                    <span className="text-md">{content.title}</span>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-semibold">
+                        {content.created_by.name}
+                      </span>
+                      <span className="text-xs font-light">
+                        {content.created_by.email}
+                      </span>
+                    </div>
                   </div>
+                  <span className="text-md">{content.title}</span>
                 </div>
               </Link>
             );

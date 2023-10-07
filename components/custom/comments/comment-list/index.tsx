@@ -1,8 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import { apiCaller } from "@/api";
-import { enqueueSnackbar } from "notistack";
 import { ReplyCommentBox } from "../reply-list";
 
 interface ListCommentComponentProps {
@@ -25,20 +22,17 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
             <div className="flex flex-col gap-2">
               <div className="flex flex-col gap-1 p-2  bg-slate-200 bg-opacity-40 rounded-md">
                 <div className="flex flex-row gap-2 items-center">
-                  <div className="relative">
-                    <Image
+                  <picture>
+                    <img
                       src={
                         comment.created_by
                           ? comment.created_by.image
                           : "/avatar/test.jpg"
                       }
-                      className="rounded-full aspect-square"
-                      style={{ objectFit: "cover" }}
-                      width={40}
-                      height={40}
+                      className="rounded-full aspect-square w-10 h-10 object-cover"
                       alt="photo"
                     />
-                  </div>
+                  </picture>
 
                   <div className="flex flex-col">
                     <span className="text-sm font-semibold">
