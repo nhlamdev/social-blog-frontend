@@ -36,11 +36,26 @@ export const ClientHomeListContentItem = (
           <span className="font-bold text-xs sm:text-sm md:text-md text-slate-900">
             {content.title}
           </span>
-
-          <span className="font-light text-[11px] sm:text-[12px] md:text-[14px] text-slate-900">
-            Ngày tạo : {getDateTime(content.created_at)}
-          </span>
         </div>
+
+        <div className=" flex flex-row gap-2 items-center">
+          <div className="w-6 h-6 rounded-full relative overflow-hidden">
+            <Image src={content.created_by.image} fill alt="photo" />
+          </div>
+
+          <div className="flex flex-row">
+            <span className="text-xs font-semibold">
+              {content.created_by.name}
+            </span>
+
+            <div className="h-4 bg-slate-600 mx-1" style={{ width: "1px" }} />
+
+            <span className="font-light text-xs text-slate-900">
+              {getDateTime(content.created_at)}
+            </span>
+          </div>
+        </div>
+
         {content.category ? (
           <div
             style={{
