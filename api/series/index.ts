@@ -6,6 +6,10 @@ export const seriesApi = {
     const url = generateURLWithQueryParams("series", params);
     return axiosInstance.get(url);
   },
+  async getByCreateBy(params: { [key: string]: string }) {
+    const url = generateURLWithQueryParams("series/owner", params);
+    return axiosInstance.get(url);
+  },
   async create(data: { title: string; summary: string }) {
     return axiosInstance.post("series", data);
   },

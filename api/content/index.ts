@@ -6,17 +6,22 @@ export const contentApi = {
     const url = generateURLWithQueryParams("content/owner", params);
     return axiosInstance.get(url);
   },
+  allByUserCreate(params: { [key: string]: string }) {
+    const url = generateURLWithQueryParams("content/owner", params);
+    return axiosInstance.get(url);
+  },
+  getContentByIdAndOwner(id: string) {
+    return axiosInstance.get(`/content/by-id/${id}/owner`);
+  },
   getContentsByCategory(id: string, params: { [key: string]: string }) {
     const url = generateURLWithQueryParams(`content/by-category/${id}`, params);
     return axiosInstance.get(url);
   },
-
   async getContentsBySeries(id: string, params: { [key: string]: string }) {
     const url = generateURLWithQueryParams(`content/by-series/${id}`, params);
 
     return axiosInstance.get(url);
   },
-
   create(data: FormData) {
     return axiosInstance.post("/content", data, {
       headers: { "content-type": "multipart/form-data" },

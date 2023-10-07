@@ -1,43 +1,51 @@
+"use client";
+import { contentApi } from "@/api/content";
 import { FormContentAction } from "@/components/form";
 import { PageProps } from "@/interface";
-import axios from "axios";
-import { Metadata } from "next";
-import { cookies } from "next/headers";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const backend = process.env.SERVICE_PORT;
-
-export const metadata: Metadata = {
-  title: "Chỉnh sửa bài viết",
-  authors: { name: "Nguyễn Hoàng Lâm" },
-};
-
-export default async function OwnerContentUpdatePage(props: PageProps) {
+export default function OwnerContentUpdatePage(props: PageProps) {
   const { params } = props;
   const { id } = params;
 
-  let content;
+  const router = useRouter();
+  const [content, setContent] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
 
-  try {
-    const { data } = await axios.get(
-      `http://localhost:${backend}/content/by-id/${id}`,
-      {
-        headers: {
-          Cookie: cookies().toString(),
-        },
-      }
-    );
-
-    content = data;
-  } catch (error: any) {
-    if (Array.isArray(error?.response?.data?.message)) {
-      error?.response?.data?.message.forEach((item: any) => {
-        console.log(item);
-      });
-    } else {
-      console.log(
-        error?.response ? error.response.data?.message : error.message
-      );
+  useEffect(() => {
+    if (!id) {
+      router.replace("/");
+      return;
     }
+
+    setLoading(true);
+
+    contentApi
+      .getContentByIdAndOwner(id)
+      .then((res) => {
+        setContent(res.data);
+      })
+      .catch((error) => {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error?.response?.data?.message.forEach((item: any) => {
+            console.log(item);
+          });
+        } else {
+          console.log(
+            error?.response ? error.response.data?.message : error.message
+          );
+        }
+
+        router.replace("/");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [id, router]);
+
+  if (loading) {
+    return <span>loading</span>;
   }
 
   return (

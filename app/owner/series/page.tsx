@@ -18,33 +18,7 @@ export const metadata: Metadata = {
 const backend = process.env.SERVICE_PORT;
 
 export default async function OwnerSeriesPage(props: PageProps) {
-  const { page, search } = props.searchParams;
-
-  const current =
-    page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))
-      ? Number(page) - 1
-      : 0;
-
-  const params = {
-    skip: (current * 5).toString(),
-    take: "5",
-    search: search ? search : "",
-  };
-
-  const url = generateURLWithQueryParams(
-    `http://localhost:${backend}/series/owner`,
-    params
-  );
-
-  const { data: series } = await axios.get(url, {
-    headers: {
-      Cookie: cookies().toString(),
-    },
-  });
-
-  if (!series) {
-    return <></>;
-  }
+  const { searchParams } = props;
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
@@ -52,7 +26,9 @@ export default async function OwnerSeriesPage(props: PageProps) {
         Danh sách chuỗi bài viết
       </span>
 
-      {series.data.length !== 0 ? (
+      <OwnerSeriesListView searchParams={searchParams} />
+
+      {/* {series.data.length !== 0 ? (
         <OwnerSeriesListView series={series.data} />
       ) : (
         <EmptyDataComponent />
@@ -66,7 +42,7 @@ export default async function OwnerSeriesPage(props: PageProps) {
         />
       ) : (
         <></>
-      )}
+      )} */}
 
       <SeriesControlDialog />
     </div>

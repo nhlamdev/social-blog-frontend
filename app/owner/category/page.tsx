@@ -1,13 +1,6 @@
-import {
-  EmptyDataComponent,
-  PaginationDirectComponent,
-} from "@/components/custom";
 import { OwnerCategoryListView } from "@/components/list-view";
 import { PageProps } from "@/interface";
-import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
-import axios from "axios";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { IoIosCreate } from "react-icons/io";
 
@@ -16,32 +9,8 @@ export const metadata: Metadata = {
   authors: { name: "Nguyễn Hoàng Lâm" },
 };
 
-const backend = process.env.SERVICE_PORT;
-
 export default async function DashboardCategoryPage(props: PageProps) {
-  const { page, search } = props.searchParams;
-
-  const current =
-    page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))
-      ? Number(page) - 1
-      : 0;
-
-  const params = {
-    skip: (current * 5).toString(),
-    take: "5",
-    search: search ? search : "",
-  };
-
-  const url = generateURLWithQueryParams(
-    `http://localhost:${backend}/category`,
-    params
-  );
-
-  const { data: categories } = await axios.get(url, {
-    headers: {
-      Cookie: cookies().toString(),
-    },
-  });
+  const { searchParams } = props;
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
@@ -49,21 +18,7 @@ export default async function DashboardCategoryPage(props: PageProps) {
         Danh sách thể loại
       </span>
 
-      {categories.data.length !== 0 ? (
-        <OwnerCategoryListView categories={categories.data} />
-      ) : (
-        <EmptyDataComponent />
-      )}
-
-      {categories.max !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(categories.max, 5)}
-          urlDirect={(p) => `/owner/category?page=${p}`}
-        />
-      ) : (
-        <></>
-      )}
+      <OwnerCategoryListView searchParams={searchParams} />
 
       <Link
         href="/owner/category/create"
@@ -76,8 +31,6 @@ export default async function DashboardCategoryPage(props: PageProps) {
           }}
         />
       </Link>
-
-      {/* <CategoryControlDialog /> */}
     </div>
   );
 }
