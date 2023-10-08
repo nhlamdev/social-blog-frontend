@@ -5,6 +5,15 @@ import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 import { useEffect, useMemo, useState } from "react";
 import { OwnerMemberRow } from "./row";
 
+interface IOwnerMember {
+  name: string;
+  email: string;
+  image: string;
+  role: "member" | "writer" | "developer" | "owner";
+  created_at: string;
+  content_count: number;
+}
+
 interface IOwnerMemberTable {
   searchParams: { [key: string]: any };
 }
@@ -12,7 +21,7 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
   const { searchParams } = props;
   const { page, search } = searchParams;
 
-  const [members, setMembers] = useState<any[]>([]);
+  const [members, setMembers] = useState<IOwnerMember[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -35,13 +44,13 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
     authApi
       .allMemberByOwner(params)
       .then((res) => {
-        const [data, max] = res.data;
+        const { data, count } = res.data;
         if (data.length !== 0) {
           setMembers(data);
         }
 
-        if (max !== 0) {
-          setTotal(max);
+        if (count !== 0) {
+          setTotal(count);
         }
       })
       .catch((error) => {
@@ -71,7 +80,7 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
           <thead>
             <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">Thông tin</th>
-              <th className="py-3 px-6 text-center">Lượt xem</th>
+              <th className="py-3 px-6 text-center">Bài viết</th>
               <th className="py-3 px-6 text-center">Quyền</th>
               <th className="py-3 px-6 text-center">Ngày tham gia</th>
             </tr>
