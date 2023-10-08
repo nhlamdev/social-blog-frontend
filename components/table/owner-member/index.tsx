@@ -2,10 +2,11 @@
 import { authApi } from "@/api/auth";
 import { PaginationDirectComponent } from "@/components/custom";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { OwnerMemberRow } from "./row";
 
 interface IOwnerMember {
+  _id: string;
   name: string;
   email: string;
   image: string;
@@ -39,7 +40,7 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
     [current, search]
   );
 
-  useEffect(() => {
+  const fetchMembers = useCallback(() => {
     setLoading(true);
     authApi
       .allMemberByOwner(params)
@@ -69,6 +70,10 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
       });
   }, [params]);
 
+  useEffect(() => {
+    fetchMembers();
+  }, [fetchMembers]);
+
   if (loading) {
     return <span>loading</span>;
   }
@@ -87,7 +92,13 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
           </thead>
           <tbody className="text-slate-800 dark:text-slate-200 text-sm font-light">
             {members.map((m: any) => {
-              return <OwnerMemberRow key={m._id} item={m} />;
+              return (
+                <OwnerMemberRow
+                  key={m._id}
+                  item={m}
+                  reload={() => fetchMembers()}
+                />
+              );
             })}
           </tbody>
         </table>

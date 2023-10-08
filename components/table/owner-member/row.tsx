@@ -1,7 +1,9 @@
 import { getDateTime } from "@/utils/global-func";
 import { MEMBER_ROLE } from "@/constant";
+import { authApi } from "@/api/auth";
 
 interface IOwnerMember {
+  _id: string;
   name: string;
   email: string;
   image: string;
@@ -12,15 +14,18 @@ interface IOwnerMember {
 
 interface OwnerMemberRowProps {
   item: IOwnerMember;
+  reload: () => void;
 }
 export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
-  const { item } = props;
+  const { item, reload } = props;
 
-  const current_role = MEMBER_ROLE.find((v: any) => {
+  const current_role = MEMBER_ROLE.find((v) => {
     return v.key === item.role;
   });
 
-  console.log(current_role);
+  const other_role = MEMBER_ROLE.filter((v) => {
+    return v.key !== item.role;
+  });
 
   return (
     <tr
@@ -69,14 +74,16 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
                 transition: "all ease .3s",
               }}
             >
-              {MEMBER_ROLE.filter((v) => {
-                v.key === item.role;
-              }).map((v) => {
+              {other_role.map((v: any) => {
                 return (
                   <span
                     key={v.key}
                     className="font-semibold cursor-pointer select-none py-1 px-2 text-xs
                 whitespace-nowrap hover:bg-cyan-200 rounded-sm"
+                    onClick={async () => {
+                      await authApi.updateRole(item._id, v.key);
+                      reload();
+                    }}
                   >
                     {v.value}
                   </span>
