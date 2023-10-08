@@ -1,18 +1,23 @@
 "use client";
 import { apiCaller } from "@/api";
-import { useEffect, useMemo, useState } from "react";
-import { PaginationChangeComponent } from "../..";
 import { getCountPage } from "@/utils/global-func";
 import { enqueueSnackbar } from "notistack";
+import { useEffect, useMemo, useState } from "react";
+import { PaginationChangeComponent } from "../..";
+import { TiDelete } from "react-icons/ti";
+import { commentApi } from "@/api/comment";
+import { useAuth } from "@/hook/auth-hook";
 
 interface ReplyCommentBoxProps {
   comment: any;
   commentShowReply: string;
   changeCommentShowReply: () => void;
+  refresh: () => void;
 }
 
 export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
-  const { comment, commentShowReply, changeCommentShowReply } = props;
+  const { comment, commentShowReply, changeCommentShowReply, refresh } = props;
+  const { profile } = useAuth();
 
   const [replies, setReplies] = useState([]);
   const [total, setTotal] = useState(0);
@@ -75,10 +80,13 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
         >
           thu gọn
         </p>
-        <div className="flex flex-col gap-2 pl-10">
+        <div className="flex flex-col gap-2 pl-10 w-full">
           {replies.map((reply: any) => {
             return (
-              <div key={`reply-${reply._id}`} className="flex flex-col gap-2">
+              <div
+                key={`reply-${reply._id}`}
+                className="flex flex-col gap-2 w-full"
+              >
                 <div className="flex flex-col gap-1 p-2  bg-slate-200 bg-opacity-40 rounded-md">
                   <div className="flex flex-row gap-2 items-center">
                     <picture>
@@ -93,12 +101,27 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
                       />
                     </picture>
 
-                    <div className="flex flex-col">
-                      <span className="text-sm font-semibold">
-                        {reply.created_by
-                          ? reply.created_by.name
-                          : "Nguyễn Hoàng Lâm"}
-                      </span>
+                    <div className="flex flex-col  w-full">
+                      <div className="flex flex-row items-center">
+                        <span className="text-sm font-semibold flex-1">
+                          {reply.created_by
+                            ? reply.created_by.name
+                            : "Nguyễn Hoàng Lâm"}
+                        </span>
+
+                        {profile && profile._id === reply.created_by._id ? (
+                          <TiDelete
+                            className="text-rose-600 text-2xl cursor-pointer"
+                            onClick={async () => {
+                              await commentApi.removeComment(reply._id);
+                              refresh();
+                            }}
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+
                       <span className="text-xs">
                         {reply.created_by ? reply.created_by.email : "Tác giả"}
                       </span>

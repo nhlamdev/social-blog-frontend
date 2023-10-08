@@ -13,9 +13,8 @@ export const ClientHomeListContentItem = (
   const { content } = props;
 
   return (
-    <Link
-      href={`/content/${content._id}`}
-      className="w-full flex flex-row gap-2 bg-slate-100 bg-opacity-40 cursor-pointer 
+    <div
+      className="w-full flex flex-row gap-2 bg-slate-100 bg-opacity-40
       shadow-md rounded-md"
     >
       <picture>
@@ -32,11 +31,14 @@ export const ClientHomeListContentItem = (
 
       {/* --------------- */}
       <div className="flex flex-col justify-between py-2 sm:py-4 px-4">
-        <div className="flex flex-col" style={{ gap: "5px" }}>
-          <span className="font-bold text-xs sm:text-sm md:text-md text-slate-900">
+        <Link
+          href={`/content/${content._id}`}
+          className="group flex flex-col gap-1 cursor-pointer"
+        >
+          <span className="group-hover:underline font-bold text-xs sm:text-sm md:text-md text-slate-900">
             {content.title}
           </span>
-        </div>
+        </Link>
 
         <div className=" flex flex-row gap-2 items-center">
           <div className="w-6 h-6 rounded-full relative overflow-hidden">
@@ -94,6 +96,6 @@ export const ClientHomeListContentItem = (
       </div>
 
       {/* --------------- */}
-    </Link>
+    </div>
   );
 };

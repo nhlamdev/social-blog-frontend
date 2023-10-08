@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { PaginationChangeComponent } from "..";
 import { ListCommentComponent } from "./comment-list";
 import { apiCaller } from "@/api";
@@ -55,7 +55,7 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
     [page]
   );
 
-  useEffect(() => {
+  const fetchComments = useCallback(() => {
     apiCaller.commentApi.comments(contentId, params).then((res) => {
       const { data, max } = res.data;
       setComments(data);
@@ -63,15 +63,22 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
     });
   }, [contentId, params]);
 
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
+
   return (
     <div className="w-full flex flex-col gap-2">
       <div className="flex flex-row gap-2">
-        <p className="font-semibold text-lg">Bình luận</p>
-        <span className="flex-xs">{`(${countComment}) bình luận`}</span>
+        <span className="font-semibold text-lg">Bình luận</span>
+        <span className="flex-xs">{`(${total}) bình luận`}</span>
       </div>
 
       <div className="flex flex-col gap-4">
-        <ListCommentComponent comments={comments} />
+        <ListCommentComponent
+          comments={comments}
+          refresh={() => fetchComments()}
+        />
 
         {total !== 0 ? (
           <PaginationChangeComponent

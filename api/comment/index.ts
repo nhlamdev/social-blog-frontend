@@ -26,4 +26,7 @@ export const commentApi = {
       text: text,
     });
   },
+  removeComment(commentId: string) {
+    return axiosInstance.delete(`/comment/${commentId}`);
+  },
 };

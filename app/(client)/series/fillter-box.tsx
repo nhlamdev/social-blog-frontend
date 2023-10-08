@@ -1,5 +1,5 @@
 "use client";
-import { OutlineInputComponent } from "@/components/input";
+import { OutlineInputComponent } from "@/components/common/input";
 import { generateURLWithQueryParams } from "@/utils/global-func";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useRouter } from "next/navigation";

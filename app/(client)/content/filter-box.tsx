@@ -3,7 +3,7 @@ import {
   DropdownCategoryBox,
   SortOptionsComponent,
 } from "@/components/drop-down";
-import { OutlineInputComponent } from "@/components/input";
+import { OutlineInputComponent } from "@/components/common/input";
 import { generateURLWithQueryParams } from "@/utils/global-func";
 import { useRouter } from "next/navigation";
 import { useDeferredValue, useEffect, useState } from "react";
