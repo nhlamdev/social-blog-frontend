@@ -16,17 +16,7 @@ export const ClientListSeries = (props: ClientListSeriesProps) => {
       : 0;
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
-      <div
-        className="w-full"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          padding: "10px",
-          alignItems: "center",
-          gap: "20px",
-          flex: 1,
-        }}
-      >
+      <div className="w-full flex flex-col p-2 items-center gap-2 flex-1">
         {series.data.map((series: any, key: any) => {
           return (
             <SeriesItem key={`series-${series._id}-${key}`} item={series} />

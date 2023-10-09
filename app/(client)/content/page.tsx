@@ -49,11 +49,11 @@ export default async function ContentPage(props: PageProps) {
 
       {seriesData ? (
         <div
-          className="flex flex-col gap-2 w-3/5 bg-slate-100 bg-opacity-40 shadow-md 
-          border-2 border-solid border-slate-600 rounded-lg px-4 py-2"
+          className="flex flex-col gap-2 w-3/5 bg-slate-100 bg-opacity-40 shadow-sm 
+          border-2 border-solid border-slate-400 rounded-lg px-4 py-2"
         >
           <span className="text-sm font-semibold">{seriesData.title}</span>
-          <span className="text-sm font-normal">{seriesData.summary}</span>
+          <span className="text-xs font-normal">{seriesData.summary}</span>
           <span className="text-xs font-light">
             {getDateTime(seriesData.created_at)}
           </span>
