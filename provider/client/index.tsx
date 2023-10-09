@@ -10,7 +10,7 @@ export const ClientProviderComponent = (
 
   return (
     <main
-      className="min-h-screen bg-gradient-light dark:bg-gradient-dark"
+      className="min-h-screen bg-gradient-light dark:bg-gradient-dark flex flex-col gap-2"
       style={{
         transition: "all ease .3s",
       }}

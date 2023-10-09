@@ -42,18 +42,25 @@ export default function AboutMePage() {
               style={{ filter: "drop-shadow(5px 5px 5px #222)" }}
             />
           </div>
+          {/* -------- */}
+
+          {/* -------------- */}
         </div>
         {/* ------------------- */}
         <div
-          className="bottom-5 w-[400px] sm:w-[500px] md:w-[580px] bg-slate-800 "
+          className="bottom-5 w-[400px] sm:w-[500px] md:w-[580px]"
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             position: "absolute",
+            background:
+              "linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%)",
             left: "10px",
+            backgroundColor: "#00000040",
             boxShadow: "5px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+            backdropFilter: "blur(2.5px)",
             height: "fit-content",
             padding: "40px 20px",
             borderRadius: "10px",
@@ -87,19 +94,9 @@ export default function AboutMePage() {
           }}
           width={200}
           height={100}
+          sizes="100vw"
           alt="code-think"
         />
-
-        <div className="absolute top-5 right-5 sm:w-32 sm:h-32 md:w-20 md:h-20">
-          <Image
-            src="/avatar/test.jpg"
-            className="rounded-full shadow-xl border-slate-200
-                border-solid border-2"
-            style={{ objectFit: "cover" }}
-            fill
-            alt="photo"
-          />
-        </div>
       </header>
       {/* ----------- */}
       <section className="flex flex-col gap-2 px-2 py-4 w-full">
