@@ -2,8 +2,10 @@ import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { FiSearch } from "react-icons/fi";
 import { PopularItemsComponent } from "./popular";
 import { SeriesPopular } from "./series-popular";
+import { AuthBox } from "@/components/custom/auth-box";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -13,7 +15,50 @@ export default async function ClientContentsPage() {
   );
 
   return (
-    <main className="min-h-screen flex flex-col w-full tems-center gap-4 ">
+    <main className="min-h-screen flex flex-col w-full tems-center gap-4 p-4">
+      <header className="flex flex-row items-center justify-between">
+        <div className="w-16 h-16 relative">
+          <Image
+            className="shadow-md rounded-full"
+            src="/logo/logo.png"
+            fill
+            alt="logo"
+          />
+        </div>
+
+        <AuthBox />
+      </header>
+
+      <nav
+        className="px-4 py-2 gap-4 flex flex-row items-center"
+        style={{ borderBottom: "1px solid black" }}
+      >
+        <Link href="/content">
+          <span>Bài viết</span>
+        </Link>
+        <Link href="/series">
+          <span>Chuỗi bài viết</span>
+        </Link>
+        <Link href="/about-me">
+          <span>Về tôi</span>
+        </Link>
+
+        <form
+          action="/content"
+          className="select-none flex flex-row items-center justify-end gap-2  flex-1"
+        >
+          <input
+            type="text"
+            name="search"
+            className="rounded-md text-sm select-none w-2/5"
+          />
+
+          <button type="submit">
+            <FiSearch className="text-2xl" />
+          </button>
+        </form>
+      </nav>
+
       <div className="flex flex-col gap-2">
         <p className="text-2xl font-semibold text-center">Bài viết mới nhất</p>
         <div
