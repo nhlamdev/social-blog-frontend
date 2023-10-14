@@ -17,7 +17,7 @@ export const OwnerProviderComponent = (props: OwnerProviderComponentProps) => {
     return <OwnerFullLoading />;
   }
 
-  if (!profile || profile.role === "member") {
+  if (!profile.role.author && !profile.role.owner) {
     redirect("/");
   }
 

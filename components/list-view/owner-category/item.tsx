@@ -6,10 +6,11 @@ import { FaEdit } from "react-icons/fa";
 import { MdOutlineContentCopy, MdOutlineRemoveCircle } from "react-icons/md";
 interface SeriesItemProps {
   item: any;
+  reload: () => void;
 }
 
 export const ListViewItem = (props: SeriesItemProps) => {
-  const { item } = props;
+  const { item, reload } = props;
 
   const router = useRouter();
   return (
@@ -24,13 +25,6 @@ export const ListViewItem = (props: SeriesItemProps) => {
         alignItems: "center",
       }}
     >
-      <picture>
-        <img
-          src={`/service/${item.image.fileName}`}
-          className="h-20 rounded-md "
-          alt="photo"
-        />
-      </picture>
       <div
         style={{
           display: "flex",
@@ -61,14 +55,6 @@ export const ListViewItem = (props: SeriesItemProps) => {
           />
         </Link>
 
-        {/* {openContentsDialog ? (
-          <ListContentInCategoryDialog
-            close={() => setOpenContentsDialog(false)}
-            categoryId={item._id}
-          />
-        ) : (
-          <></>
-        )} */}
         <Link href={`/owner/category/${item._id}`}>
           <FaEdit
             className="text-amber-500"
@@ -78,7 +64,6 @@ export const ListViewItem = (props: SeriesItemProps) => {
             }}
           />
         </Link>
-        {/* <CategoryControlDialog value={item} /> */}
         <MdOutlineRemoveCircle
           className="text-rose-700"
           style={{
@@ -87,7 +72,7 @@ export const ListViewItem = (props: SeriesItemProps) => {
           }}
           onClick={async () => {
             await apiCaller.categoryApi.remove(item._id);
-            router.refresh();
+            reload();
           }}
         />
       </div>

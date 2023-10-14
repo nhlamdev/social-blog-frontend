@@ -9,10 +9,11 @@ import { useState } from "react";
 import { MdOutlineContentCopy, MdOutlineRemoveCircle } from "react-icons/md";
 interface SeriesItemProps {
   item: any;
+  reload: () => void;
 }
 
 export const ListViewItem = (props: SeriesItemProps) => {
-  const { item } = props;
+  const { item, reload } = props;
 
   const [openContentsDialog, setOpenContentsDialog] = useState(false);
   const route = useRouter();
@@ -66,7 +67,7 @@ export const ListViewItem = (props: SeriesItemProps) => {
           <></>
         )}
 
-        <SeriesControlDialog value={item} />
+        <SeriesControlDialog value={item} reload={() => reload()} />
 
         <MdOutlineRemoveCircle
           className="text-rose-700"
@@ -76,7 +77,7 @@ export const ListViewItem = (props: SeriesItemProps) => {
           }}
           onClick={async () => {
             await apiCaller.seriesApi.remove(item._id);
-            route.refresh();
+            reload();
           }}
         />
       </div>

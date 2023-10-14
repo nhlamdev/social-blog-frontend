@@ -9,9 +9,10 @@ import { IoIosCreate } from "react-icons/io";
 
 interface SeriesControlDialogProps {
   value?: any;
+  reload: () => void;
 }
 export const SeriesControlDialog = (props: SeriesControlDialogProps) => {
-  const { value } = props;
+  const { value, reload } = props;
 
   const route = useRouter();
   const [open, setOpen] = useState(false);
@@ -32,7 +33,7 @@ export const SeriesControlDialog = (props: SeriesControlDialogProps) => {
         await apiCaller.seriesApi.create(data);
       }
 
-      route.refresh();
+      reload();
       setOpen(false);
     } catch (error: any) {
       if (Array.isArray(error?.response?.data?.message)) {

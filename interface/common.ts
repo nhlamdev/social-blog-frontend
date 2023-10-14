@@ -15,11 +15,24 @@ export interface LayoutProps {
 }
 
 export interface IProfile {
+  delete_at: string | null;
+  created_at: string;
+  updated_at: string;
+  index: number;
   _id: string;
-  role: "member" | "writer" | "developer" | "owner";
   name: string;
   email: string;
   image: string;
+  role: {
+    delete_at: null;
+    created_at: string;
+    updated_at: string;
+    index: number;
+    _id: string;
+    author: boolean;
+    comment: boolean;
+    owner: boolean;
+  };
 }
 
 export interface IImage {

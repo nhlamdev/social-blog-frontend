@@ -25,8 +25,6 @@ export default function RootLayout(props: RootLayoutProps) {
           integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
           crossOrigin="anonymous"
         ></script>
-
-        <Script src="/script/socket.js" />
       </head>
       <body>
         <ProviderComponent>{children}</ProviderComponent>

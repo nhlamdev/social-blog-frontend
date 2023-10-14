@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ListViewItem } from "./item";
 import { categoryApi } from "@/api/category";
 import {
@@ -35,36 +35,43 @@ export const OwnerCategoryListView = (props: OwnerCategoryListViewProps) => {
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
 
+  const fetchAction = useCallback(
+    (params: { skip: string; take: string; search: any }) => {
+      setLoading(true);
+      categoryApi
+        .get(params)
+        .then((res) => {
+          const { data, max } = res.data;
+
+          if (data && data.length !== 0) {
+            setCategories(data);
+          }
+
+          if (max && max >= 0) {
+            setTotal(max);
+          }
+        })
+        .catch((error) => {
+          if (Array.isArray(error?.response?.data?.message)) {
+            error?.response?.data?.message.forEach((item: any) => {
+              console.log(item);
+            });
+          } else {
+            console.log(
+              error?.response ? error.response.data?.message : error.message
+            );
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    },
+    []
+  );
+
   useEffect(() => {
-    setLoading(true);
-    categoryApi
-      .get(params)
-      .then((res) => {
-        const { data, max } = res.data;
-
-        if (data && data.length !== 0) {
-          setCategories(data);
-        }
-
-        if (max && max >= 0) {
-          setTotal(max);
-        }
-      })
-      .catch((error) => {
-        if (Array.isArray(error?.response?.data?.message)) {
-          error?.response?.data?.message.forEach((item: any) => {
-            console.log(item);
-          });
-        } else {
-          console.log(
-            error?.response ? error.response.data?.message : error.message
-          );
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [params]);
+    fetchAction(params);
+  }, [fetchAction, params]);
 
   if (loading) {
     return <span>loading</span>;
@@ -91,7 +98,13 @@ export const OwnerCategoryListView = (props: OwnerCategoryListViewProps) => {
     <>
       <div className="flex flex-col gap-2 w-full items-center h-full">
         {categories.map((v: any) => {
-          return <ListViewItem key={v._id} item={v} />;
+          return (
+            <ListViewItem
+              key={v._id}
+              item={v}
+              reload={() => fetchAction(params)}
+            />
+          );
         })}
       </div>
 

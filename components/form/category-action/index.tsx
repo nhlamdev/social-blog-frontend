@@ -32,113 +32,16 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
   );
   const [loading, setLoading] = useState(false);
 
-  const [image, setImage] = useState<File | null | string>(
-    category?.image ? `/service/${category.image.fileName}` : null
-  );
-  const fileRef = useRef<HTMLInputElement | null>(null);
-
-  const generatorImage = () => {
-    if (image) {
-      if (typeof image === "string") {
-        return (
-          <picture>
-            <img
-              onClick={() => {
-                if (fileRef && fileRef.current) {
-                  fileRef.current.click();
-                }
-              }}
-              src={image}
-              style={{
-                width: "300px",
-                aspectRatio: "16/9",
-                cursor: "pointer",
-                objectFit: "cover",
-                borderRadius: "5px",
-              }}
-              alt="photo"
-            />
-          </picture>
-        );
-      } else {
-        return (
-          <picture>
-            <img
-              onClick={() => {
-                if (fileRef && fileRef.current) {
-                  fileRef.current.click();
-                }
-              }}
-              src={URL.createObjectURL(image)}
-              style={{
-                width: "300px",
-                aspectRatio: "16/9",
-                cursor: "pointer",
-                objectFit: "cover",
-                borderRadius: "5px",
-              }}
-              alt="photo"
-            />
-          </picture>
-        );
-      }
-    } else {
-      return (
-        <Image
-          onClick={() => {
-            if (fileRef && fileRef.current) {
-              fileRef.current.click();
-            }
-          }}
-          style={{
-            cursor: "pointer",
-            objectFit: "cover",
-            borderRadius: "5px",
-          }}
-          src="http://via.placeholder.com/300x200"
-          width={300}
-          height={200}
-          alt="image"
-        />
-      );
-    }
-  };
-
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
 
-        const formData = new FormData();
-
-        if (!category) {
-          if (!image) {
-            enqueueSnackbar("Bạn chưa chọn hình ảnh", {
-              variant: "error",
-            });
-            return;
-          }
-
-          if (typeof image === "string") {
-            enqueueSnackbar("Bạn chưa chọn hình ảnh", {
-              variant: "error",
-            });
-            return;
-          }
-        }
-
-        formData.append("title", title);
-        formData.append("summary", summary);
-
-        if (image && typeof image !== "string") {
-          formData.append("files", image, image.name);
-        }
-
         setLoading(true);
 
         if (category) {
           apiCaller.categoryApi
-            .update(category._id, formData)
+            .update(category._id, { title, summary })
             .then(() => {
               router.replace("/owner/category");
               router.refresh();
@@ -162,7 +65,7 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
             });
         } else {
           apiCaller.categoryApi
-            .create(formData)
+            .create({ title, summary })
             .then(() => {
               router.replace("/owner/category");
               router.refresh();
@@ -188,55 +91,37 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
       }}
       className="flex flex-col gap-5 w-full justify-center items-center"
     >
-      <div className="flex flex-row w-full p-4 gap-10 ">
-        <div className="flex flex-col gap-4" style={{ flex: 7 }}>
-          <label className="relative block w-full">
-            <span className="sr-only">Tiêu đề</span>
-            <input
-              className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-              placeholder="Nhập tiêu đề..."
-              value={title}
-              onChange={(e) => {
-                const { value } = e.target;
-                setTitle(value);
-              }}
-              type="text"
-              name="title"
-            />
-          </label>
-
-          <label className="relative block w-full">
-            <span className="sr-only">Tiêu đề</span>
-            <textarea
-              className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-              style={{ resize: "none" }}
-              value={summary}
-              onChange={(e) => {
-                const { value } = e.target;
-                setSummary(value);
-              }}
-              rows={4}
-              placeholder="Nhập mô tả..."
-              name="description"
-            />
-          </label>
-        </div>
-
-        <div style={{ flex: 3 }}>
-          {generatorImage()}
+      <div className="flex flex-col gap-4 w-3/5" style={{ flex: 7 }}>
+        <label className="relative block w-full">
+          <span className="sr-only">Tiêu đề</span>
           <input
-            ref={fileRef}
-            type="file"
-            hidden
+            className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+            placeholder="Nhập tiêu đề..."
+            value={title}
             onChange={(e) => {
-              if (e.target.files) {
-                const f = e.target.files[0];
-
-                setImage(f);
-              }
+              const { value } = e.target;
+              setTitle(value);
             }}
+            type="text"
+            name="title"
           />
-        </div>
+        </label>
+
+        <label className="relative block w-full">
+          <span className="sr-only">Tiêu đề</span>
+          <textarea
+            className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+            style={{ resize: "none" }}
+            value={summary}
+            onChange={(e) => {
+              const { value } = e.target;
+              setSummary(value);
+            }}
+            rows={4}
+            placeholder="Nhập mô tả..."
+            name="description"
+          />
+        </label>
       </div>
 
       {loading ? (

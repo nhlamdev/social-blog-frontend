@@ -7,13 +7,11 @@ export const categoryApi = {
     return axiosInstance.get(url);
   },
 
-  async create(formData: FormData) {
-    return axiosInstance.post("category", formData, {
-      headers: { "content-type": "multipart/form-data" },
-    });
+  async create(payload: { title: string; summary: string }) {
+    return axiosInstance.post("category", payload);
   },
-  async update(id: string, formData: FormData) {
-    return axiosInstance.put(`category/${id}`, formData, {
+  async update(id: string, payload: { title: string; summary: string }) {
+    return axiosInstance.put(`category/${id}`, payload, {
       headers: { "content-type": "multipart/form-data" },
     });
   },

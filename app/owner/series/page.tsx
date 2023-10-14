@@ -15,8 +15,6 @@ export const metadata: Metadata = {
   authors: { name: "Nguyễn Hoàng Lâm" },
 };
 
-const backend = process.env.SERVICE_PORT;
-
 export default async function OwnerSeriesPage(props: PageProps) {
   const { searchParams } = props;
 
@@ -27,24 +25,6 @@ export default async function OwnerSeriesPage(props: PageProps) {
       </span>
 
       <OwnerSeriesListView searchParams={searchParams} />
-
-      {/* {series.data.length !== 0 ? (
-        <OwnerSeriesListView series={series.data} />
-      ) : (
-        <EmptyDataComponent />
-      )}
-
-      {series.max !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(series.max, 5)}
-          urlDirect={(p) => `/owner/series?page=${p}`}
-        />
-      ) : (
-        <></>
-      )} */}
-
-      <SeriesControlDialog />
     </div>
   );
 }

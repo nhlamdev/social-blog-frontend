@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ListViewItem } from "./item";
 import { seriesApi } from "@/api/series";
 import {
@@ -7,6 +7,7 @@ import {
   PaginationDirectComponent,
 } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
+import { SeriesControlDialog } from "@/components/dialog";
 
 interface OwnerSeriesListViewProps {
   searchParams: { [key: string]: any };
@@ -35,36 +36,43 @@ export const OwnerSeriesListView = (props: OwnerSeriesListViewProps) => {
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
 
+  const fetchAction = useCallback(
+    (params: { skip: string; take: string; search: any }) => {
+      setLoading(true);
+      seriesApi
+        .getByCreateBy(params)
+        .then((res) => {
+          const { data, max } = res.data;
+
+          if (data && data.length !== 0) {
+            setSeries(data);
+          }
+
+          if (max && max >= 0) {
+            setTotal(max);
+          }
+        })
+        .catch((error) => {
+          if (Array.isArray(error?.response?.data?.message)) {
+            error?.response?.data?.message.forEach((item: any) => {
+              console.log(item);
+            });
+          } else {
+            console.log(
+              error?.response ? error.response.data?.message : error.message
+            );
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    },
+    []
+  );
+
   useEffect(() => {
-    setLoading(true);
-    seriesApi
-      .getByCreateBy(params)
-      .then((res) => {
-        const { data, max } = res.data;
-
-        if (data && data.length !== 0) {
-          setSeries(data);
-        }
-
-        if (max && max >= 0) {
-          setTotal(max);
-        }
-      })
-      .catch((error) => {
-        if (Array.isArray(error?.response?.data?.message)) {
-          error?.response?.data?.message.forEach((item: any) => {
-            console.log(item);
-          });
-        } else {
-          console.log(
-            error?.response ? error.response.data?.message : error.message
-          );
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [params]);
+    fetchAction(params);
+  }, [fetchAction, params]);
 
   if (loading) {
     return <span>loading</span>;
@@ -92,7 +100,13 @@ export const OwnerSeriesListView = (props: OwnerSeriesListViewProps) => {
     <>
       <div className="flex flex-col gap-2 w-full items-center h-full">
         {series?.map((v: any) => {
-          return <ListViewItem key={v._id} item={v} />;
+          return (
+            <ListViewItem
+              key={v._id}
+              item={v}
+              reload={() => fetchAction(params)}
+            />
+          );
         })}
       </div>
 
@@ -105,6 +119,8 @@ export const OwnerSeriesListView = (props: OwnerSeriesListViewProps) => {
       ) : (
         <></>
       )}
+
+      <SeriesControlDialog reload={() => fetchAction(params)} />
     </>
   );
 };
