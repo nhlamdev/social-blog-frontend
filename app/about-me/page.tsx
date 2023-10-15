@@ -2,6 +2,7 @@ import Image from "next/image";
 import { BsFacebook } from "react-icons/bs";
 import { AiFillGoogleCircle, AiFillGithub } from "react-icons/ai";
 import { techSkill } from "./tech-skill.mock";
+import Link from "next/link";
 
 export default function AboutMePage() {
   return (
@@ -30,7 +31,8 @@ export default function AboutMePage() {
             alignItems: "center",
           }}
         >
-          <div
+          <Link
+            href={"/"}
             className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] "
             style={{ position: "relative" }}
           >
@@ -41,7 +43,7 @@ export default function AboutMePage() {
               alt="logo"
               style={{ filter: "drop-shadow(5px 5px 5px #222)" }}
             />
-          </div>
+          </Link>
           {/* -------- */}
 
           {/* -------------- */}

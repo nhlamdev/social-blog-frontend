@@ -12,7 +12,6 @@ interface SeriesItemProps {
 export const ListViewItem = (props: SeriesItemProps) => {
   const { item, reload } = props;
 
-  const router = useRouter();
   return (
     <div
       className="shadow-md w-3/4 bg-slate-100 bg-opacity-60"
@@ -33,7 +32,15 @@ export const ListViewItem = (props: SeriesItemProps) => {
           gap: "10px",
         }}
       >
-        <span className="text-slate-800 text-md">{item.title}</span>
+        <div className="flex flex-row gap-2 items-center">
+          <span className="text-slate-800 text-md">{item.title}</span>
+          {item.contents > 0 ? (
+            <span className="text-xs font-light">({item.contents})</span>
+          ) : (
+            <></>
+          )}
+        </div>
+
         <span className="text-slate-800 text-xs">{item.summary}</span>
       </div>
 
@@ -45,7 +52,7 @@ export const ListViewItem = (props: SeriesItemProps) => {
           gap: "10px",
         }}
       >
-        <Link href={`/owner/category/${item._id}/content-in`}>
+        <Link href={`/owner/category/${item._id}/content`}>
           <MdOutlineContentCopy
             className="text-cyan-400"
             style={{
@@ -64,6 +71,7 @@ export const ListViewItem = (props: SeriesItemProps) => {
             }}
           />
         </Link>
+
         <MdOutlineRemoveCircle
           className="text-rose-700"
           style={{

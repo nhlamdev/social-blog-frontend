@@ -26,6 +26,8 @@ export default async function ClientContentsPage() {
           />
         </div>
 
+        <h1 className="text-xl font-semibold">swalog dev</h1>
+
         <AuthBox />
       </header>
 

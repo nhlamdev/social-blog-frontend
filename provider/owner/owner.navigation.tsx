@@ -2,6 +2,7 @@ import { LogoutBtn, ThemeToggleButton } from "@/components/custom";
 import { IProfile } from "@/interface";
 import Link from "next/link";
 import { navigation_mock } from "./nav.mock";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 interface OwnerNavigationProps {
   profile: IProfile;
@@ -16,6 +17,13 @@ export const OwnerNavigation = (props: OwnerNavigationProps) => {
   bg-opacity-40 p-4 min-w-fit shadow-slate-600 dark:shadow-slate-800"
     >
       <div className="px-2 py-1 flex flex-row items-center justify-between">
+        <Link href="/">
+          <BsFillArrowLeftCircleFill
+            className="hover:scale-110 text-emerald-600 text-2xl"
+            style={{ cursor: "pointer" }}
+          />
+        </Link>
+
         <span className="dark:text-slate-100 text-slate-800 font-semibold">
           Trang quản lý
         </span>

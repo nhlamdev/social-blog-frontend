@@ -83,7 +83,6 @@ export const OwnerSeriesListView = (props: OwnerSeriesListViewProps) => {
       <>
         <EmptyDataComponent />
         {total !== 0 ? (
-          // eslint-disable-next-line react/jsx-no-undef
           <PaginationDirectComponent
             current={current + 1}
             total={getCountPage(total, 5)}
@@ -114,13 +113,13 @@ export const OwnerSeriesListView = (props: OwnerSeriesListViewProps) => {
         <PaginationDirectComponent
           current={current + 1}
           total={getCountPage(total, 5)}
-          urlDirect={(p) => `/owner/category?page=${p}`}
+          urlDirect={(p) => `/owner/series?page=${p}`}
         />
       ) : (
         <></>
       )}
 
-      <SeriesControlDialog reload={() => fetchAction(params)} />
+      {/* <SeriesControlDialog reload={() => fetchAction(params)} /> */}
     </>
   );
 };

@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IImage } from "@/interface";
 
-interface ICategory {
+interface ISeries {
   delete_at: string | null;
   created_at: string;
   updated_at: string;
@@ -16,19 +16,17 @@ interface ICategory {
   summary: string;
 }
 
-interface OwnerCategoryActionProps {
-  category?: ICategory;
+interface OwnerSeriesActionProps {
+  series?: ISeries;
 }
 
-export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
+export const OwnerSeriesAction = (props: OwnerSeriesActionProps) => {
   const router = useRouter();
 
-  const { category } = props;
+  const { series } = props;
 
-  const [title, setTitle] = useState(category?.title ? category.title : "");
-  const [summary, setSummary] = useState(
-    category?.summary ? category.summary : ""
-  );
+  const [title, setTitle] = useState(series?.title ? series.title : "");
+  const [summary, setSummary] = useState(series?.summary ? series.summary : "");
   const [loading, setLoading] = useState(false);
 
   return (
@@ -38,12 +36,11 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
 
         setLoading(true);
 
-        if (category) {
-          apiCaller.categoryApi
-            .update(category._id, { title, summary })
+        if (series) {
+          apiCaller.seriesApi
+            .update(series._id, { title, summary })
             .then(() => {
-              router.replace("/owner/category");
-              router.refresh();
+              router.replace("/owner/series");
             })
             .catch((error) => {
               if (Array.isArray(error?.response?.data?.message)) {
@@ -63,11 +60,10 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
               setLoading(false);
             });
         } else {
-          apiCaller.categoryApi
+          apiCaller.seriesApi
             .create({ title, summary })
             .then(() => {
-              router.replace("/owner/category");
-              router.refresh();
+              router.replace("/owner/series");
             })
             .catch((error) => {
               if (Array.isArray(error?.response?.data?.message)) {

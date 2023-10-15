@@ -1,13 +1,17 @@
 import { getDateTime } from "@/utils/global-func";
 import { MEMBER_ROLE } from "@/constant";
 import { authApi } from "@/api/auth";
+import { ChangeEvent } from "react";
+import { enqueueSnackbar } from "notistack";
 
 interface IOwnerMember {
   _id: string;
   name: string;
   email: string;
   image: string;
-  role: "member" | "writer" | "developer" | "owner";
+  owner: boolean;
+  comment: boolean;
+  author: boolean;
   created_at: string;
   content_count: number;
 }
@@ -19,13 +23,28 @@ interface OwnerMemberRowProps {
 export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
   const { item, reload } = props;
 
-  const current_role = MEMBER_ROLE.find((v) => {
-    return v.key === item.role;
-  });
-
-  const other_role = MEMBER_ROLE.filter((v) => {
-    return v.key !== item.role;
-  });
+  const change = (e: ChangeEvent<HTMLInputElement>) => {
+    const { checked, name } = e.target;
+    authApi
+      .updateRole(item._id, name, checked)
+      .then(() => reload())
+      .catch((error) => {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error?.response?.data?.message.forEach((item: any) => {
+            enqueueSnackbar(item, {
+              variant: "error",
+            });
+          });
+        } else {
+          enqueueSnackbar(
+            error?.response ? error.response.data?.message : error.message,
+            {
+              variant: "error",
+            }
+          );
+        }
+      });
+  };
 
   return (
     <tr
@@ -46,51 +65,50 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
           />
         </picture>
 
-        <div className="flex flex-col">
-          <span className="font-medium text-sm">{item.name}</span>
-          <span className="font-light text-xs">{item.email}</span>
+        <div className="flex flex-col w-full gap-1">
+          <span className="font-medium text-sm w-full text-left select-none">
+            {item.name}
+          </span>
+          <span className="font-light text-xs w-full text-left select-none">
+            {item.email}
+          </span>
         </div>
       </td>
       <td className="py-3 px-6 text-center">
         <span>{item.content_count}</span>
       </td>
       <td className=" py-3 px-6">
-        <div className="flex justify-center">
-          <div className="group relative w-fit">
-            <span
-              className="font-semibold cursor-pointer select-none py-1 px-2 text xs"
-              style={{ border: "1px solid black", borderRadius: "10px" }}
-            >
-              {current_role ? current_role.value : ""}
-            </span>
-
-            <div
-              className="absolute opacity-0 invisible flex flex-row bg-slate-100 rounded-md p-1
-              group-hover:opacity-100 group-hover:visible"
-              style={{
-                right: "calc(100% + 4px)",
-                top: 0,
-                gap: "4px",
-                transition: "all ease .3s",
-              }}
-            >
-              {other_role.map((v: any) => {
-                return (
-                  <span
-                    key={v.key}
-                    className="font-semibold cursor-pointer select-none py-1 px-2 text-xs
-                whitespace-nowrap hover:bg-cyan-200 rounded-sm"
-                    onClick={async () => {
-                      await authApi.updateRole(item._id, v.key);
-                      reload();
-                    }}
-                  >
-                    {v.value}
-                  </span>
-                );
-              })}
-            </div>
-          </div>
+        <div className="flex flex-row justify-center gap-2">
+          <input
+            id="default-checkbox"
+            type="checkbox"
+            title="Quyền bình luận."
+            name="comment"
+            checked={item.comment}
+            onChange={(e) => change(e)}
+            style={{ cursor: "pointer" }}
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <input
+            id="default-checkbox"
+            type="checkbox"
+            title="Quyền đăng bài."
+            name="author"
+            checked={item.author}
+            onChange={(e) => change(e)}
+            style={{ cursor: "pointer" }}
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <input
+            id="default-checkbox"
+            type="checkbox"
+            name="owner"
+            title="Quyền toàn cục."
+            checked={item.owner}
+            onChange={(e) => change(e)}
+            style={{ cursor: "pointer" }}
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
         </div>
       </td>
       <td className="py-3 px-6 text-center">

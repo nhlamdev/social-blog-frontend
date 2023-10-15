@@ -6,8 +6,8 @@ export const authApi = {
     const url = generateURLWithQueryParams("all-members", params);
     return axiosInstance.get(url);
   },
-  updateRole(memberId: string, role: "member" | "writer" | "developer") {
-    return axiosInstance.patch(`/change-role/${memberId}/${role}`);
+  updateRole(memberId: string, key: string, value: boolean) {
+    return axiosInstance.patch(`/change-role/${memberId}`, { key, value });
   },
   profile() {
     return axiosInstance.get("profile");

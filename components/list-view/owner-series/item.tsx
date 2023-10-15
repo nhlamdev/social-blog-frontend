@@ -1,11 +1,8 @@
 "use client";
 import { apiCaller } from "@/api";
-import {
-  ListContentInSeriesDialog,
-  SeriesControlDialog,
-} from "@/components/dialog";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
+import { FaEdit } from "react-icons/fa";
 import { MdOutlineContentCopy, MdOutlineRemoveCircle } from "react-icons/md";
 interface SeriesItemProps {
   item: any;
@@ -16,7 +13,7 @@ export const ListViewItem = (props: SeriesItemProps) => {
   const { item, reload } = props;
 
   const [openContentsDialog, setOpenContentsDialog] = useState(false);
-  const route = useRouter();
+
   return (
     <div
       className="shadow-md w-3/4 bg-slate-100 bg-opacity-60"
@@ -49,26 +46,25 @@ export const ListViewItem = (props: SeriesItemProps) => {
           gap: "10px",
         }}
       >
-        <MdOutlineContentCopy
-          className="text-cyan-400"
-          style={{
-            fontSize: "24px",
-            cursor: "pointer",
-          }}
-          onClick={() => setOpenContentsDialog(true)}
-        />
-
-        {openContentsDialog ? (
-          <ListContentInSeriesDialog
-            close={() => setOpenContentsDialog(false)}
-            seriesId={item._id}
+        <Link href={`/owner/series/${item._id}/content-in`}>
+          <MdOutlineContentCopy
+            className="text-cyan-400"
+            style={{
+              fontSize: "24px",
+              cursor: "pointer",
+            }}
           />
-        ) : (
-          <></>
-        )}
+        </Link>
 
-        <SeriesControlDialog value={item} reload={() => reload()} />
-
+        <Link href={`/owner/series/${item._id}`}>
+          <FaEdit
+            className="text-amber-500"
+            style={{
+              fontSize: "24px",
+              cursor: "pointer",
+            }}
+          />
+        </Link>
         <MdOutlineRemoveCircle
           className="text-rose-700"
           style={{
