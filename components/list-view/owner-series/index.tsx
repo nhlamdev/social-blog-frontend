@@ -99,6 +99,7 @@ export const OwnerSeriesListView = (props: OwnerSeriesListViewProps) => {
     <>
       <div className="flex flex-col gap-2 w-full items-center h-full">
         {series?.map((v: any) => {
+          console.log("content : ", v);
           return (
             <ListViewItem
               key={v._id}

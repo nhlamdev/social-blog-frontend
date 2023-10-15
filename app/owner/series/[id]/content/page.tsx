@@ -1,13 +1,13 @@
 import { PageProps } from "@/interface";
 import { notFound } from "next/navigation";
-import { OwnerListContentInCategory } from "./list-data";
+import { OwnerListContentInSeries } from "./list-data";
 
-export default function ContentInCategoryPage(props: PageProps) {
+export default async function ContentInSeriesPage(props: PageProps) {
   const { searchParams, params: queryParams } = props;
 
-  const { id: categoryId } = queryParams;
+  const { id: seriesId } = queryParams;
 
-  if (!categoryId) {
+  if (!seriesId) {
     notFound();
   }
 
@@ -17,8 +17,8 @@ export default function ContentInCategoryPage(props: PageProps) {
         Danh sách bài viết
       </span>
 
-      <OwnerListContentInCategory
-        categoryId={categoryId}
+      <OwnerListContentInSeries
+        seriesId={seriesId}
         searchParams={searchParams}
       />
     </div>

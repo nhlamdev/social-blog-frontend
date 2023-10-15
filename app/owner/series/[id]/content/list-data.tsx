@@ -1,27 +1,22 @@
 "use client";
-import { categoryApi } from "@/api/category";
+import { contentApi } from "@/api/content";
 import { PaginationDirectComponent } from "@/components/custom";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 import Image from "next/image";
-import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { BiSolidAddToQueue } from "react-icons/bi";
-import { MdOutlineBackupTable } from "react-icons/md";
-import { IoIosRemoveCircle } from "react-icons/io";
-import { AiFillFolderAdd } from "react-icons/ai";
-import { apiCaller } from "@/api";
-import { contentApi } from "@/api/content";
 import { enqueueSnackbar } from "notistack";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { AiFillFolderAdd } from "react-icons/ai";
+import { BiSolidAddToQueue } from "react-icons/bi";
+import { IoIosRemoveCircle } from "react-icons/io";
+import { MdOutlineBackupTable } from "react-icons/md";
 
-interface IOwnerListContentInCategory {
-  categoryId: string;
+interface IOwnerListContentInSeries {
+  seriesId: string;
   searchParams: { [key: string]: string | undefined };
 }
 
-export const OwnerListContentInCategory = (
-  props: IOwnerListContentInCategory
-) => {
-  const { categoryId, searchParams } = props;
+export const OwnerListContentInSeries = (props: IOwnerListContentInSeries) => {
+  const { seriesId, searchParams } = props;
   const { page, search } = searchParams;
 
   const [contents, setContents] = useState([]);
@@ -49,8 +44,9 @@ export const OwnerListContentInCategory = (
 
   const fetchData = useCallback(() => {
     setLoading(true);
-    categoryApi
-      .ContentInCategory(categoryId, params)
+
+    contentApi
+      .getContentsBySeries(seriesId, params)
       .then((res) => {
         const { data, max } = res.data;
         setContents(data);
@@ -71,7 +67,7 @@ export const OwnerListContentInCategory = (
       .finally(() => {
         setLoading(false);
       });
-  }, [categoryId, params]);
+  }, [seriesId, params]);
 
   useEffect(() => {
     fetchData();
@@ -100,34 +96,19 @@ export const OwnerListContentInCategory = (
                   {content.title}
                 </span>
 
-                {content?.category ? (
+                {content?.series ? (
                   <span className="text-xs font-light">
-                    {content.category.title}
+                    {content.series.title}
                   </span>
                 ) : (
                   <></>
                 )}
-
-                <div className="flex flex-row gap-2 items-center">
-                  <div className="w-6 h-6 relative">
-                    <Image
-                      src={content.created_by.image}
-                      className="rounded-full"
-                      fill
-                      alt="photo"
-                    />
-                  </div>
-
-                  <span className="text-xs font-light">
-                    {content.created_by.email}
-                  </span>
-                </div>
               </div>
 
               <div
                 onClick={() => {
                   contentApi
-                    .updateContentCategory(content._id, categoryId)
+                    .updateContentSeries(content._id, seriesId)
                     .then(() => {
                       fetchData();
                     })
@@ -165,7 +146,7 @@ export const OwnerListContentInCategory = (
             const clone = { ...searchParams, page: p.toString() };
 
             return generateURLWithQueryParams(
-              `/owner/category/${categoryId}/content`,
+              `/owner/series/${seriesId}/content`,
               clone
             );
           }}
