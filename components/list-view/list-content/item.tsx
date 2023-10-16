@@ -35,7 +35,10 @@ export const ClientHomeListContentItem = (
           href={`/content/${content._id}`}
           className="group flex flex-col gap-1 cursor-pointer"
         >
-          <span className="group-hover:underline font-bold text-xs sm:text-sm md:text-md text-slate-900">
+          <span
+            className="group-hover:underline font-bold text-xs sm:text-sm md:text-md
+          text-slate-900 dark:text-slate-100"
+          >
             {content.title}
           </span>
         </Link>
@@ -46,13 +49,16 @@ export const ClientHomeListContentItem = (
           </div>
 
           <div className="flex flex-row">
-            <span className="text-xs font-semibold">
+            <span className="text-xs font-semibold dark:text-slate-100">
               {content.created_by.name}
             </span>
 
-            <div className="h-4 bg-slate-600 mx-1" style={{ width: "1px" }} />
+            <div
+              className="h-4 bg-slate-600 dark:bg-slate-200 mx-1"
+              style={{ width: "1px" }}
+            />
 
-            <span className="font-light text-xs text-slate-900">
+            <span className="font-light text-xs text-slate-900 dark:text-slate-100">
               {getDateTime(content.created_at)}
             </span>
           </div>
@@ -65,7 +71,10 @@ export const ClientHomeListContentItem = (
               width: "fit-content",
             }}
           >
-            <span className="font-semibold text-[9px] sm:text-[10px] md:text-[12px] text-slate-900">
+            <span
+              className="font-semibold text-[9px] sm:text-[10px] md:text-[12px] 
+            text-slate-900 dark:text-slate-100"
+            >
               {content.category?.title}
             </span>
           </div>
@@ -80,14 +89,16 @@ export const ClientHomeListContentItem = (
           {content.tags.map((t: string, key: number) => (
             <div
               key={`tags-${content._id}-${key}-${t}`}
-              className="flex flex-row items-center justify-center"
+              className="flex flex-row items-center justify-center py-1 px-2"
               style={{
-                padding: "5px",
                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                 borderRadius: "5px",
               }}
             >
-              <span className="font-semibold text-[10px] sm:text-[12px] md:text-[14px] text-slate-900">
+              <span
+                className="font-semibold text-[10px] sm:text-[12px] md:text-[14px] text-slate-900 
+              dark:text-slate-100"
+              >
                 {t}
               </span>
             </div>

@@ -42,11 +42,15 @@ export const PopularItemsComponent = async () => {
 
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-row items-center gap-2">
-                    <div className="bg-orange-400 px-2 py-1 rounded-md">
-                      <span className="text-sm text-slate-50 font-semibold">
-                        {content.category.title}
-                      </span>
-                    </div>
+                    {content?.category ? (
+                      <div className="bg-orange-400 px-2 py-1 rounded-md">
+                        <span className="text-sm text-slate-50 font-semibold">
+                          {content.category.title}
+                        </span>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
                     <span className="text-xs">
                       {getDateTime(content.created_at)}

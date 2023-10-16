@@ -41,7 +41,7 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
 
                 <div className="flex flex-col w-full">
                   <div className="flex flex-row items-center">
-                    <span className="text-sm font-semibold flex-1">
+                    <span className="text-sm font-semibold flex-1 dark:text-slate-100">
                       {comment.created_by
                         ? comment.created_by.name
                         : "Nguyễn Hoàng Lâm"}
@@ -60,14 +60,16 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
                     )}
                   </div>
 
-                  <span className="text-xs">
+                  <span className="text-xs dark:text-slate-100">
                     {comment.created_by ? comment.created_by.email : "Tác giả"}
                   </span>
                 </div>
               </div>
 
               <div className="pl-2">
-                <span className="text-sm">{comment.text}</span>
+                <span className="text-sm dark:text-slate-100">
+                  {comment.text}
+                </span>
               </div>
             </div>
 

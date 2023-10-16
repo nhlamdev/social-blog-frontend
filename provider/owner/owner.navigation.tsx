@@ -19,12 +19,12 @@ export const OwnerNavigation = (props: OwnerNavigationProps) => {
       <div className="px-2 py-1 flex flex-row items-center justify-between">
         <Link href="/">
           <BsFillArrowLeftCircleFill
-            className="hover:scale-110 text-emerald-600 text-2xl"
+            className="hover:scale-110 text-slate-800 dark:text-slate-100 text-2xl"
             style={{ cursor: "pointer" }}
           />
         </Link>
 
-        <span className="dark:text-slate-100 text-slate-800 font-semibold">
+        <span className="dark:text-slate-100 text-slate-900 font-semibold">
           Trang quản lý
         </span>
 
@@ -62,8 +62,8 @@ export const OwnerNavigation = (props: OwnerNavigationProps) => {
                   alignItems: "center",
                 }}
               >
-                <item.icon className="dark:text-slate-100 text-slate-800 group-hover:transition-transform scale-125 -translate-x-2" />
-                <span className="dark:text-slate-100 text-slate-800">
+                <item.icon className="dark:text-slate-100 text-slate-900 group-hover:transition-transform scale-125 -translate-x-2" />
+                <span className="dark:text-slate-100 text-slate-900">
                   {item.name}
                 </span>
               </Link>

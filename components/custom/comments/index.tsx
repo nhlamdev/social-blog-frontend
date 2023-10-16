@@ -70,8 +70,10 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
   return (
     <div className="w-full flex flex-col gap-2">
       <div className="flex flex-row gap-2">
-        <span className="font-semibold text-lg">Bình luận</span>
-        <span className="flex-xs">{`(${total}) bình luận`}</span>
+        <span className="font-semibold text-lg dark:text-slate-100">
+          Bình luận
+        </span>
+        <span className="flex-xs dark:text-slate-100">{`(${total})`}</span>
       </div>
 
       <div className="flex flex-col gap-4">

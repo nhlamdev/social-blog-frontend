@@ -14,15 +14,8 @@ export const ListViewItem = (props: SeriesItemProps) => {
 
   return (
     <div
-      className="shadow-md w-3/4 bg-slate-100 bg-opacity-60"
-      style={{
-        borderRadius: "10px",
-        display: "flex",
-        flexDirection: "row",
-        gap: "10px",
-        padding: "10px",
-        alignItems: "center",
-      }}
+      className="shadow-md w-3/4 bg-slate-100 bg-opacity-60 backdrop-blur
+    flex flex-row gap-2 p-2 rounded-lg items-center"
     >
       <div
         style={{

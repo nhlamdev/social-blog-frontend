@@ -19,7 +19,9 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
   return (
     <div
       className={`relative flex flex-col space-y-2  items-center  z-10
-      ${open ? "before:block" : "before:hidden"}
+      ${
+        open ? "before:block" : "before:hidden"
+      } bg-slate-100 bg-opacity-60 h-full px-2 py-1 rounded-md
       before:fixed before:top-0 before:right-0 before:left-0 before:bottom-0 `}
       ref={ref}
       onClick={() => setOpen(!open)}
@@ -53,7 +55,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
           left: 0,
         }}
       >
-        {profile.role !== "member" ? (
+        {profile.role.author || profile.role.owner ? (
           <Link
             href={"/owner/content"}
             className="flex flex-row gap-2 items-center px-6 py-2 hover:bg-slate-300 w-full whitespace-nowrap"

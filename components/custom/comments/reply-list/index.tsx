@@ -75,7 +75,7 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
     return (
       <>
         <p
-          className="font-semibold text-xs p-2 cursor-pointer"
+          className="font-semibold text-xs p-2 cursor-pointer text-slate-800 dark:text-slate-100"
           onClick={() => changeCommentShowReply()}
         >
           thu gọn
@@ -103,7 +103,10 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
 
                     <div className="flex flex-col  w-full">
                       <div className="flex flex-row items-center">
-                        <span className="text-sm font-semibold flex-1">
+                        <span
+                          className="text-sm font-semibold flex-1
+                        text-slate-900 dark:text-slate-100"
+                        >
                           {reply.created_by
                             ? reply.created_by.name
                             : "Nguyễn Hoàng Lâm"}
@@ -122,14 +125,16 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
                         )}
                       </div>
 
-                      <span className="text-xs">
+                      <span className="text-xs text-slate-900 dark:text-slate-100">
                         {reply.created_by ? reply.created_by.email : "Tác giả"}
                       </span>
                     </div>
                   </div>
 
                   <div className="pl-2">
-                    <span className="text-sm">{reply.text}</span>
+                    <span className="text-sm text-slate-900 dark:text-slate-100">
+                      {reply.text}
+                    </span>
                   </div>
                 </div>
               </div>

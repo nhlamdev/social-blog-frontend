@@ -2,17 +2,8 @@ import { PageProps } from "@/interface";
 import axios from "axios";
 import { notFound } from "next/navigation";
 import { RandomContentComponent } from "./random-content";
-import Link from "next/link";
-import { getDateTime } from "@/utils/global-func";
-
-// const RandomContentComponent = dynamic(
-//   () => import("./random-content").then((mod) => mod.RandomContentComponent),
-//   {
-//     loading: () => <p>Loading...</p>,
-//     ssr: false,
-//   }
-// );
 import { CommentsComponent } from "@/components/custom/comments";
+import Image from "next/image";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -62,16 +53,14 @@ export default async function ClientDetailContentPage(props: PageProps) {
           }}
         />
 
-        <picture>
-          <img
+        <div className="w-60 aspect-video shadow-lg relative">
+          <Image
             src={`/service/${content.image.fileName}`}
-            className="w-48 aspect-video rounded-md shadow-lg"
-            style={{
-              objectFit: "cover",
-            }}
+            className="object-cover  rounded-md"
+            fill
             alt="photo"
           />
-        </picture>
+        </div>
       </div>
 
       <span className="text-slate-800 dark:text-slate-200 font-semibold text-2xl">

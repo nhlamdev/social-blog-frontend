@@ -23,7 +23,7 @@ export const SeriesItem = (props: SeriesItemProps) => {
             padding: "10px",
           }}
         >
-          <span className="text-sm font-semibold text-slate-900 ">
+          <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">
             {item.title}
           </span>
 
@@ -37,7 +37,9 @@ export const SeriesItem = (props: SeriesItemProps) => {
               />
             </div>
 
-            <span className="text-xs">{item.created_by.name}</span>
+            <span className="text-xs text-slate-900 dark:text-slate-100">
+              {item.created_by.name}
+            </span>
           </div>
         </div>
 
@@ -45,9 +47,7 @@ export const SeriesItem = (props: SeriesItemProps) => {
           className="rounded-md bg-slate-200 flex items-center justify-center m-2
         w-10 h-10"
         >
-          <span className="text-md font-semibold text-slate-900 ">
-            {item.contents}
-          </span>
+          <span className="text-md font-semibold ">{item.contents}</span>
         </div>
       </div>
     </Link>

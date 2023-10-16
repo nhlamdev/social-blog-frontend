@@ -8,33 +8,16 @@ export default function AboutMePage() {
   return (
     <main className="flex flex-col">
       <header
-        className="bg-slate-100"
+        className="h-screen w-screen relative bg-slate-100
+        bg-blend-multiply bg-cover bg-fixed bg-center bg-no-repeat"
         style={{
           backgroundImage: 'url("/background/OIG (2).jfif")',
-          backgroundBlendMode: "multiply",
-          height: "100vh",
-          width: "100vw",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          position: "relative",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            position: "absolute",
-            top: "10px",
-            left: "10px",
-            alignItems: "center",
-          }}
-        >
+        <div className="flex flex-row absolute top-4 left-4 items-center">
           <Link
             href={"/"}
-            className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] "
-            style={{ position: "relative" }}
+            className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] relative"
           >
             <Image
               src="/logo/logo.png"
@@ -50,7 +33,7 @@ export default function AboutMePage() {
         </div>
         {/* ------------------- */}
         <div
-          className="bottom-5 w-[400px] sm:w-[500px] md:w-[580px]"
+          className="bottom-5 w-[400px] sm:w-[500px] md:w-[580px] h-fit"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -63,15 +46,13 @@ export default function AboutMePage() {
             backgroundColor: "#00000040",
             boxShadow: "5px 4px 4px 0px rgba(0, 0, 0, 0.25)",
             backdropFilter: "blur(2.5px)",
-            height: "fit-content",
             padding: "40px 20px",
             borderRadius: "10px",
           }}
         >
           <span
-            className="text-lg sm:text-2xl md:text-3xl"
+            className="text-lg sm:text-2xl md:text-3xl italic"
             style={{
-              fontStyle: "italic",
               background:
                 "linear-gradient(149deg, rgba(39, 174, 96, 0.80) 0%, rgba(236, 180, 182, 0.80) 100%)",
               WebkitBackgroundClip: "text",
@@ -139,7 +120,7 @@ export default function AboutMePage() {
         </div>
       </section>
       {/* ------------- */}
-      <section className="flex flex-col gap-2 px-4 py-4 w-full bg-slate-200 items-center">
+      <section className="flex flex-col gap-2 px-4 py-4 w-full bg-cyan-100 items-center">
         <p className="text-center font-semibold text-xl w-full">
           Techicel skill
         </p>
@@ -178,7 +159,27 @@ export default function AboutMePage() {
         </div>
       </section>
       {/* -----------== */}
-      <section className="flex flex-col p-4 gap-4">
+      <section className="flex flex-col justify-center items-center gap-4">
+        <p className="text-center font-semibold text-xl w-full">Why ?</p>
+
+        <div className="flex flex-col w-4/5 gap-4">
+          <span className="text-sm list-disc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Exercitationem est eos veritatis libero dolore, nam quibusdam
+            obcaecati vero laborum a nemo cupiditate illo blanditiis quidem
+            earum. Fugiat tempore nihil cumque?
+          </span>
+
+          <span className="text-sm list-disc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Exercitationem est eos veritatis libero dolore, nam quibusdam
+            obcaecati vero laborum a nemo cupiditate illo blanditiis quidem
+            earum. Fugiat tempore nihil cumque?
+          </span>
+        </div>
+      </section>
+      {/* -----------== */}
+      <section className="flex flex-col p-4 gap-4 bg-amber-100">
         <p className="text-xl font-semibold text-center">contact me</p>
         <div className="flex flex-row">
           <div className="flex-1 flex justify-center items-center">

@@ -8,7 +8,7 @@ export const LogoutBtn = () => {
   const { firstLoading, logout } = useAuth();
   return (
     <div
-      className="text-stone-600 bg-slate-900 dark:bg-cyan-600 px-4 py-2"
+      className="text-stone-600 bg-slate-900 px-4 py-2"
       style={{
         borderRadius: "10px",
         cursor: "pointer",

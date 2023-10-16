@@ -18,22 +18,28 @@ export const ClientNavigator = () => {
       className="w-screen flex flex-row items-center justify-between px-2
     bg-slate-200 bg-opacity-40"
     >
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-center gap-2">
         <Link href="/">
           <Image src="/logo/logo.png" width={60} height={60} alt="logo" />
         </Link>
 
-        <div className="flex flex-row items-center gap-2">
-          <Link href="/content" className="font-semibold text-sm">
-            <span>Bài viết</span>
+        <div className="flex flex-row items-center gap-4">
+          <Link href="/content">
+            <span className="font-semibold text-sm dark:text-slate-100">
+              Bài viết
+            </span>
           </Link>
 
-          <Link href="/series" className="font-semibold text-sm">
-            <span>Chuỗi bài viết</span>
+          <Link href="/series">
+            <span className="font-semibold text-sm dark:text-slate-100">
+              Chuỗi bài viết
+            </span>
           </Link>
 
-          <Link href="/about-me" className="font-semibold text-sm">
-            <span>Về tôi</span>
+          <Link href="/about-me">
+            <span className="font-semibold text-sm dark:text-slate-100">
+              Về tôi
+            </span>
           </Link>
         </div>
       </div>

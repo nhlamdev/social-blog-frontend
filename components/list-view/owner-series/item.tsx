@@ -16,15 +16,8 @@ export const ListViewItem = (props: SeriesItemProps) => {
 
   return (
     <div
-      className="shadow-md w-3/4 bg-slate-100 bg-opacity-60"
-      style={{
-        borderRadius: "10px",
-        display: "flex",
-        flexDirection: "row",
-        gap: "10px",
-        padding: "10px",
-        alignItems: "center",
-      }}
+      className="shadow-md w-3/4 bg-slate-100 bg-opacity-60 backdrop-blur
+      flex flex-row gap-2 p-2 rounded-lg items-center"
     >
       <div
         style={{
@@ -35,9 +28,11 @@ export const ListViewItem = (props: SeriesItemProps) => {
         }}
       >
         <div className="flex flex-row gap-2 items-center">
-          <span className="text-slate-800 text-md">{item.title}</span>
+          <span className="text-md  text-slate-900">{item.title}</span>
           {item.contents > 0 ? (
-            <span className="text-xs font-light">({item.contents})</span>
+            <span className="text-xs font-light  text-slate-900">
+              ({item.contents})
+            </span>
           ) : (
             <></>
           )}
