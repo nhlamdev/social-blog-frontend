@@ -22,8 +22,8 @@ export const SeriesPopular = async () => {
 
   topContents = data;
   return (
-    <div className="flex flex-col items-center pb-4">
-      <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center pb-4 gap-4">
+      <div className="flex flex-col items-center w-full">
         <p className="text-2xl font-semibold text-center p-2 ">
           Chuỗi bài viết tiêu biểu
         </p>

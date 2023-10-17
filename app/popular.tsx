@@ -15,16 +15,12 @@ export const PopularItemsComponent = async () => {
 
   return (
     <section>
-      <div className="flex flex-col items-center">
-        <p className="text-2xl font-semibold text-center p-2 ">
-          Nội dung tiêu biểu
-        </p>
-
-        <span className="h-[2px] w-1/5 bg-slate-400"></span>
-      </div>
-
-      <div className="flex flex-row gap-2 px-2 py-4">
+      <div className="flex lg:flex-row flex-col gap-2 px-2 py-4">
         <div style={{ flex: 2 }} className="flex flex-col gap-2">
+          <span className="text-2xl font-semibold text-center p-2 ">
+            Nội dung tiêu biểu
+          </span>
+
           {topContents.map((content: any) => {
             return (
               <Link
