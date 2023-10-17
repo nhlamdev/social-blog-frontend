@@ -36,7 +36,7 @@ export const SeriesPopular = async () => {
           return (
             <div
               key={v._id}
-              className="flex flex-col w-3/5 p-4 rounded-sm gap-4"
+              className="flex flex-col  md:w-3/5 w-full p-4 rounded-sm gap-4"
               style={{
                 boxShadow:
                   "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",

@@ -15,8 +15,8 @@ export const PopularItemsComponent = async () => {
 
   return (
     <section>
-      <div className="flex lg:flex-row flex-col gap-2 px-2 py-4">
-        <div style={{ flex: 2 }} className="flex flex-col gap-2">
+      <div className="flex lg:flex-row flex-col gap-4 px-2 py-4 items-center">
+        <div style={{ flex: 2 }} className="flex flex-col gap-2 w-full">
           <span className="text-2xl font-semibold text-center p-2 ">
             Nội dung tiêu biểu
           </span>
@@ -78,7 +78,10 @@ export const PopularItemsComponent = async () => {
           })}
         </div>
         {/* ----------- */}
-        <div style={{ flex: 1 }} className="flex flex-col gap-4">
+        <div
+          style={{ flex: 1 }}
+          className="flex flex-col gap-4 w-full md:w-3/5 lg:w-full "
+        >
           <span className="text-xl font-semibold ">Thể loại</span>
           <div className="flex flex-col gap-2">
             {topCategoryMoreContent.map((category: any) => {
@@ -86,7 +89,7 @@ export const PopularItemsComponent = async () => {
                 <Link
                   href={`/content?sortCase=TIME_DESC&category=${category._id}`}
                   key={category._id}
-                  className="flex flex-row items-center p-2 gap-2 rounded-md bg-slate-200 justify-between w-3/4"
+                  className="flex flex-row items-center p-2 gap-2 rounded-md bg-slate-200 justify-between w-full"
                 >
                   <span className="text-md">{category.title}</span>
                   <div className="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-red-100 bg-red-700 border border-red-700 ">

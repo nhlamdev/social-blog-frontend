@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useDeferredValue, useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { useDebouncedValue } from "@mantine/hooks";
+import { AuthBox } from "@/components/custom";
 interface FilterContentComponentProps {
   searchParams: { [key: string]: string | undefined };
 }
@@ -71,9 +72,10 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
 
         <label
           htmlFor="drawer-toggle"
-          className={` top-0 left-0 inline-block p-2 transition-all duration-500 bg-indigo-500 rounded-md`}
+          className="top-0 left-0 inline-block p-2 transition-all duration-500  shadow-lg
+          bg-slate-200 bg-opacity-40 rounded-md cursor-pointer select-none"
         >
-          <FaFilter className="font-sm" />
+          <FaFilter className="font-sm text-slate-800" />
         </label>
         <div
           className={`fixed top-0 left-0 z-20 w-64 h-full transition-all duration-500 transform ${
@@ -81,15 +83,16 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
           } bg-white shadow-lg`}
         >
           <div
-            className="px-2 py-4 h-full
-     bg-gradient-to-tr dark:from-[#0F2027] from-[#BE93C5] dark:via-[#203A43] dark:to-[#2C5364] to-[#7BC6CC]"
+            className="px-2 py-4 h-full flex flex-col  bg-gradient-to-tr 
+            dark:from-[#0F2027] from-[#BE93C5] dark:via-[#203A43] dark:to-[#2C5364] to-[#7BC6CC]"
           >
             <div className="pb-4">
               <span className="font-bold text-slate-800 dark:text-slate-200">
                 Bộ lọc
               </span>
             </div>
-            <div className="flex flex-col gap-2 ">
+
+            <div className="flex flex-col gap-2">
               <OutlineInputComponent
                 txt={search}
                 change={(txt) => setSearch(txt)}
