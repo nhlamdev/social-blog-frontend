@@ -1,5 +1,6 @@
 import { ClientNavigator } from "./navigation";
-import { ClientNavigatorMobile } from "./navigation-mobile";
+import { ClientNavigatorMobile } from "./navigation";
+
 interface ClientProviderComponentProps {
   children: React.ReactNode;
 }

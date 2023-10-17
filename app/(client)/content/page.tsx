@@ -36,12 +36,12 @@ export default async function ContentPage(props: PageProps) {
     }
   }
 
-  const { data: contents } = await axios.get(
-    `http://localhost:${backend}/content`,
-    {
-      params: { ...searchParams, skip: (current * 6).toString(), take: "6" },
-    }
-  );
+  // const { data: contents } = await axios.get(
+  //   `http://localhost:${backend}/content`,
+  //   {
+  //     params: { ...searchParams, skip: (current * 6).toString(), take: "6" },
+  //   }
+  // );
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative ">
@@ -62,7 +62,7 @@ export default async function ContentPage(props: PageProps) {
         <></>
       )}
 
-      <ClientContentListView contents={contents} searchParams={searchParams} />
+      {/* <ClientContentListView contents={contents} searchParams={searchParams} /> */}
     </div>
   );
 }
