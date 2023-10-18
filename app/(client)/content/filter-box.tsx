@@ -57,11 +57,11 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
 
     const url = generateURLWithQueryParams("/content", filteredNullParams);
     router.replace(url);
-  }, [category, debounced, router, searchParams, sortCase]);
+  }, [category, debounced, router, sortCase]);
 
   return (
     <>
-      <div className="flex sm:hidden w-full justify-end">
+      <div className="flex sm:hidden w-full justify-end ">
         <input
           type="checkbox"
           id="drawer-toggle"
@@ -112,6 +112,7 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
           </div>
         </div>
       </div>
+
       <div className="hidden sm:flex flex-row items-center justify-end w-full h-fit gap-4">
         <OutlineInputComponent txt={search} change={(txt) => setSearch(txt)} />
 
