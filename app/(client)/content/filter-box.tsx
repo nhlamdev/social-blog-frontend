@@ -77,15 +77,13 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
         >
           <FaFilter className="font-sm text-slate-800" />
         </label>
+
         <div
           className={`fixed top-0 left-0 z-20 w-64 h-full transition-all duration-500 transform ${
             openDrawer ? "-translate-x-full" : "peer-checked:translate-x-0"
           } bg-white shadow-lg`}
         >
-          <div
-            className="px-2 py-4 h-full flex flex-col  bg-gradient-to-tr 
-            dark:from-[#0F2027] from-[#BE93C5] dark:via-[#203A43] dark:to-[#2C5364] to-[#7BC6CC]"
-          >
+          <div className="px-2 py-4 h-full flex flex-col  bg-slate-50">
             <div className="pb-4">
               <span className="font-bold text-slate-800 dark:text-slate-200">
                 Bộ lọc

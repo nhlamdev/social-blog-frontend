@@ -1,27 +1,24 @@
 "use client";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AuthBox } from "@/components/custom";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BiMenu } from "react-icons/bi";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { AuthBox, ThemeToggleButton } from "@/components/custom";
-import { useState } from "react";
 
-export const ClientNavigatorMobile = () => {
+export const ClientHomeHeaderMobile = () => {
   const [open, setOpen] = useState<boolean>(false);
-
   return (
-    <nav
-      className="w-screen flex flex-row items-center justify-between px-4 py-2
-  bg-slate-200 bg-opacity-40 md:hidden "
+    <header
+      className="flex flex-row md:hidden px-4 py-2 items-center justify-between"
+      style={{ borderBottom: "1px solid black" }}
     >
-      <BiMenu
-        className="text-2xl cursor-pointer"
+      <GiHamburgerMenu
+        className="text-xl cursor-pointer"
         onClick={() => setOpen(true)}
       />
 
-      <div>
-        <AuthBox />
-      </div>
+      <AuthBox />
 
       {open ? (
         <div
@@ -69,12 +66,11 @@ export const ClientNavigatorMobile = () => {
               </Link>
             </div>
             <div className="flex-1" />
-            <ThemeToggleButton />
           </div>
         </div>
       ) : (
         <></>
       )}
-    </nav>
+    </header>
   );
 };
