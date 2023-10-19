@@ -43,31 +43,32 @@ export const ClientNavigatorMobile = () => {
               />
             </div>
 
-            <div className="flex flex-col items-center gap-2 ">
+            <div className="flex flex-col items-center gap-4 ">
               <Link
                 href="/content"
-                className="font-semibold text-sm dark:text-slate-100 bg-slate-200 w-full
-              px-2 py-1 rounded-md"
+                className="font-semibold text-sm w-full px-2 py-1 "
+                style={{ borderBottom: "1px solid black" }}
               >
                 Bài viết
               </Link>
 
               <Link
                 href="/series"
-                className="font-semibold text-sm dark:text-slate-100 bg-slate-200 w-full
-              px-2 py-1 rounded-md"
+                className="font-semibold text-sm w-full px-2 py-1 "
+                style={{ borderBottom: "1px solid black" }}
               >
                 Chuỗi bài viết
               </Link>
 
               <Link
                 href="/about-me"
-                className="font-semibold text-sm dark:text-slate-100 bg-slate-200 w-full
-              px-2 py-1 rounded-md"
+                className="font-semibold text-sm w-full px-2 py-1 "
+                style={{ borderBottom: "1px solid black" }}
               >
                 Về tôi
               </Link>
             </div>
+
             <div className="flex-1" />
             <ThemeToggleButton />
           </div>

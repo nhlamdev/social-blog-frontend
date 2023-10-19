@@ -1,12 +1,11 @@
+import { ClientContentFilter } from "@/components/custom/content-filter";
+import { ClientContentListView } from "@/components/list-view";
 import { PageProps } from "@/interface";
+import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
-import { FilterContentComponent } from "./filter-box";
-import { ClientContentListView } from "@/components/list-view";
-import { getDateTime } from "@/utils/global-func";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 const backend = process.env.SERVICE_PORT;
 
 export const metadata: Metadata = {
@@ -46,8 +45,12 @@ export default async function ContentPage(props: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative">
-      <FilterContentComponent searchParams={searchParams} />
+      {/* <FilterContentComponent searchParams={searchParams} /> */}
 
+      {/* <ClientContentFilterDesktopComponent searchParams={searchParams} /> */}
+      {/* <ClientContentFilterMobileComponent searchParams={searchParams} /> */}
+
+      <ClientContentFilter searchParams={searchParams} />
       {seriesData ? (
         <div
           className="flex flex-col gap-2 md:w-4/5 lg:w-3/5 w-full bg-slate-100 bg-opacity-40 shadow-sm 

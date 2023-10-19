@@ -16,6 +16,7 @@ export const OutlineInputComponent = (props: OutlineInputComponentProps) => {
           rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none 
           focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-xs sm:text-sm"
           placeholder="Nhập từ khoá..."
+          autoComplete="off"
           type="text"
           value={txt}
           name="search"
