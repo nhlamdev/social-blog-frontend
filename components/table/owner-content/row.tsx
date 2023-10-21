@@ -19,11 +19,15 @@ export const OwnerContentRow = (props: OwnerContentRowProps) => {
       className="border-b border-gray-200
     dark:hover:bg-gray-600 hover:bg-gray-100 hover:bg-opacity-40"
     >
-      <td className="py-3 px-6 text-left whitespace-nowrap">
-        <span className="font-medium">{item.title}</span>
+      <td className="py-3 px-6">
+        <span className="font-medium w-full block text-left lg:text-sm text-xs whitespace-nowrap">
+          {item.title}
+        </span>
       </td>
-      <td className="py-3 px-6 text-center">
-        <span>{getDateTime(item.created_at)}</span>
+      <td className="py-3 px-6">
+        <span className="font-medium w-full block text-center lg:text-sm text-xs whitespace-nowrap">
+          {getDateTime(item.created_at)}
+        </span>
       </td>
       <td className="py-3 px-6 flex items-center justify-center">
         <div>

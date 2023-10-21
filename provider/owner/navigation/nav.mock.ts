@@ -24,12 +24,6 @@ export const navigation_mock: INav[] = [
     icon: AiFillDashboard,
   },
   {
-    url: "/owner/statistical",
-    name: "Thống kê",
-    require_owner: true,
-    icon: AiOutlineLineChart,
-  },
-  {
     url: "/owner/content",
     name: "Bài viết",
     require_owner: false,

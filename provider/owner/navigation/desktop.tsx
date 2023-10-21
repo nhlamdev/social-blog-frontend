@@ -1,20 +1,21 @@
-import { LogoutBtn, ThemeToggleButton } from "@/components/custom";
 import { IProfile } from "@/interface";
 import Link from "next/link";
-import { navigation_mock } from "./nav.mock";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import { navigation_mock } from "./nav.mock";
+import { LogoutBtn, ThemeToggleButton } from "@/components/custom";
 
-interface OwnerNavigationProps {
+interface IOwnerNavigationDesktop {
   profile: IProfile;
 }
 
-export const OwnerNavigation = (props: OwnerNavigationProps) => {
+export const OwnerNavigationDesktop = (props: IOwnerNavigationDesktop) => {
   const { profile } = props;
 
   return (
     <nav
-      className="h-fit m-1 rounded-md gap-2 bg-slate-200 shadow-md
-  bg-opacity-40 p-4 min-w-fit shadow-slate-600 dark:shadow-slate-800"
+      className="h-fit m-1 rounded-md gap-2 bg-slate-200 shadow-md bg-opacity-40 p-4 min-w-fit
+         shadow-slate-600 dark:shadow-slate-800 hidden lg:block"
+      id="owner-navigation"
     >
       <div className="px-2 py-1 flex flex-row items-center justify-between">
         <Link href="/">
@@ -51,10 +52,10 @@ export const OwnerNavigation = (props: OwnerNavigationProps) => {
             return (
               <Link
                 href={item.url}
-                key={`item-navigation-${key}`}
+                key={`item-navigation-d-${key}`}
                 className="group px-10 py-4  hover:bg-slate-400
-              duration-300 transition-all ease-in-out rounded-md
-              font-medium text-sm gap-2"
+                duration-300 transition-all ease-in-out rounded-md
+                font-medium text-sm gap-2"
                 style={{
                   cursor: "pointer",
                   display: "flex",

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDebouncedState } from "@mantine/hooks";
 import { useRouter, usePathname } from "next/navigation";
 import { generateURLWithQueryParams } from "@/utils/global-func";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 interface OwnerContentsHeadProps {
   searchParams: { [key: string]: string | undefined };

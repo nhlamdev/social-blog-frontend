@@ -68,10 +68,26 @@ export const OwnerContentTableComponent = (
         <table className="bg-slate-100 bg-opacity-20 min-w-max w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
-              <th className="py-3 px-6 text-left">Tiêu đề</th>
-              <th className="py-3 px-6 text-center">Ngày tạo</th>
-              <th className="py-3 px-6 text-center">Công khai</th>
-              <th className="py-3 px-6 text-right">Thao tác</th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-left lg:text-sm text-xs">
+                  Tiêu đề
+                </span>
+              </th>
+              <th className="py-3 px-6 text-center">
+                <span className="w-full block text-center lg:text-sm text-xs">
+                  Ngày tạo
+                </span>
+              </th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-center lg:text-sm text-xs">
+                  Công khai
+                </span>
+              </th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-right lg:text-sm text-xs">
+                  Thao tác
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody className="text-slate-800 dark:text-slate-200 text-sm font-light">

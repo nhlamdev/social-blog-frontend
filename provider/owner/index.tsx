@@ -1,6 +1,6 @@
 "use client";
 import { useAuth } from "@/hook/auth-hook";
-import { OwnerNavigation } from "./owner.navigation";
+import { OwnerNavigationDesktop, OwnerNavigationMobile } from "./navigation";
 import { redirect } from "next/navigation";
 import { OwnerFullLoading } from "./loading";
 
@@ -23,7 +23,8 @@ export const OwnerProviderComponent = (props: OwnerProviderComponentProps) => {
 
   return (
     <>
-      <OwnerNavigation profile={profile} />
+      <OwnerNavigationDesktop profile={profile} />
+      <OwnerNavigationMobile profile={profile} />
       {children}
     </>
   );

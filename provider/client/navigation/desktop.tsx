@@ -7,7 +7,7 @@ import Link from "next/link";
 export const ClientNavigator = () => {
   return (
     <nav
-      className="w-screen md:flex flex-row items-center justify-between px-2
+      className="w-screen lg:flex flex-row items-center justify-between px-2
     bg-slate-200 bg-opacity-40 hidden "
     >
       <div className="flex flex-row items-center gap-2">

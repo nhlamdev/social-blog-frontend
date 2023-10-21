@@ -84,10 +84,26 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
         <table className="bg-slate-100 bg-opacity-20 min-w-max w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
-              <th className="py-3 px-6 text-left">Thông tin</th>
-              <th className="py-3 px-6 text-center">Bài viết</th>
-              <th className="py-3 px-6 text-center">Quyền</th>
-              <th className="py-3 px-6 text-center">Ngày tham gia</th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-left lg:text-sm text-xs">
+                  Thông tin
+                </span>
+              </th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-center lg:text-sm text-xs">
+                  Bài viết
+                </span>
+              </th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-center lg:text-sm text-xs">
+                  Quyền
+                </span>
+              </th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-right lg:text-sm text-xs">
+                  Ngày tham gia
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody className="text-slate-800 dark:text-slate-200 text-sm font-light">

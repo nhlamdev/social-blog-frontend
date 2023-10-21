@@ -55,7 +55,7 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
         <picture>
           <img
             style={{ objectFit: "cover" }}
-            className="w-8 h-8 rounded-full"
+            className="w-8 h-8 rounded-full aspect-square"
             src={
               item.image
                 ? `${item.image}`
@@ -66,16 +66,18 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
         </picture>
 
         <div className="flex flex-col w-full gap-1">
-          <span className="font-medium text-sm w-full text-left select-none">
+          <span className="font-medium lg:text-sm text-xs w-full text-left select-none">
             {item.name}
           </span>
-          <span className="font-light text-xs w-full text-left select-none">
+          <span className="font-light lg:text-sm text-xs w-full text-left select-none">
             {item.email}
           </span>
         </div>
       </td>
-      <td className="py-3 px-6 text-center">
-        <span>{item.content_count}</span>
+      <td className="py-3 px-6">
+        <span className="font-medium w-full block text-center lg:text-sm text-xs">
+          {item.content_count}
+        </span>
       </td>
       <td className=" py-3 px-6">
         <div className="flex flex-row justify-center gap-2">
@@ -111,8 +113,8 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
           />
         </div>
       </td>
-      <td className="py-3 px-6 text-center">
-        <span className="font-semibold font-sm">
+      <td className="py-3 px-6">
+        <span className="font-medium w-full block text-right lg:text-sm text-xs">
           {getDateTime(item.created_at)}
         </span>
       </td>
