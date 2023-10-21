@@ -5,12 +5,24 @@ import { SnackbarProvider } from "notistack";
 import { apiCaller } from "@/api";
 import "react-quill/dist/quill.snow.css";
 import { SWRConfig } from "swr";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
+
 interface ProviderComponentProps {
   children: React.ReactNode;
 }
 export const ProviderComponent = (props: ProviderComponentProps) => {
   const emotionCache = createCache({ key: "css" });
   const { children } = props;
+
+  useEffect(() => {
+    const socket = io("http://localhost:4000");
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   return (
     <SWRConfig
       value={{
