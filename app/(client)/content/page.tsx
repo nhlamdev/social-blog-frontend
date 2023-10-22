@@ -44,13 +44,12 @@ export default async function ContentPage(props: PageProps) {
   );
 
   return (
-    <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative">
-      {/* <FilterContentComponent searchParams={searchParams} /> */}
-
-      {/* <ClientContentFilterDesktopComponent searchParams={searchParams} /> */}
-      {/* <ClientContentFilterMobileComponent searchParams={searchParams} /> */}
-
+    <div
+      className="min-h-screen flex flex-col w-full p-2 md:p-4 items-center gap-4 relative 
+    justify-between"
+    >
       <ClientContentFilter searchParams={searchParams} />
+
       {seriesData ? (
         <div
           className="flex flex-col gap-2 md:w-4/5 lg:w-3/5 w-full bg-slate-100 bg-opacity-40 shadow-sm 
@@ -58,7 +57,6 @@ export default async function ContentPage(props: PageProps) {
         >
           <span className="text-md font-semibold">{seriesData.title}</span>
           <span className="text-sm font-normal">{seriesData.summary}</span>
-
           <div className="flex flex-row gap-2 items-center">
             <div>
               <Image

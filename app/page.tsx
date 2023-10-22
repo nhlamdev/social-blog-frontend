@@ -11,19 +11,19 @@ const backend = process.env.SERVICE_PORT;
 
 export default async function ClientContentsPage() {
   const { data: contents } = await axios.get(
-    `http://localhost:${backend}/content?skip=0&take=6`
+    `http://localhost:${backend}/content?skip=0&take=3`
   );
 
   return (
-    <main className="min-h-screen flex flex-col w-full tems-center gap-4 p-4">
-      <ClientHead />
+    <main className="min-h-screen flex flex-col w-full  gap-4 p-2 sm:p-4">
+      {ClientHead ? <ClientHead /> : <></>}
 
       <div className="flex flex-col gap-2">
         <p className="text-2xl font-semibold text-center">Bài viết mới nhất</p>
+
         <div
-          className="flex flex-col
-          md:grid md:grid-flow-row grid-cols-1  md:grid-cols-2 lg:grid-cols-3 sm:grid-rows-2 
-          gap-6 p-4 md:px-10 w-full md:w-4/5 mx-auto h-full"
+          className="grid grid-flow-row grid-cols-1  sm:grid-cols-3 sm:grid-rows-1
+          gap-6 px-10 md:w-full lg:w-4/5 w-full mx-auto h-fit "
           style={{ flex: 8 }}
         >
           {contents.data.map((v: any) => {
@@ -31,8 +31,8 @@ export default async function ClientContentsPage() {
               <Link
                 href={`/content/${v._id}`}
                 key={v._id}
-                className="flex flex-row md:flex-col gap-2 h-fit 
-                rounded-md overflow-hidden ease-in-out duration-500 cursor-pointer"
+                className="flex-col gap-2 h-fit rounded-md overflow-hidden 
+                ease-in-out duration-500 cursor-pointer"
                 style={{
                   boxShadow:
                     "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
@@ -40,7 +40,7 @@ export default async function ClientContentsPage() {
               >
                 <div
                   className="shadow-lg bg-center aspect-[3/2] 
-                     h-24 md:h-full bg-slate-400"
+                     h-full bg-slate-400"
                   style={{
                     cursor: "pointer",
                     backgroundImage: `url(/service/${v.image.fileName})`,
@@ -83,7 +83,10 @@ export default async function ClientContentsPage() {
                     </span>
                   </div>
 
-                  <span className="text-slate-800 text-sm sm:text-xs md:text-sm  font-light">
+                  <span
+                    className="text-slate-800 text-sm sm:text-xs md:text-sm whitespace-nowrap
+                   font-light"
+                  >
                     {getDateTime(v.created_at)}
                   </span>
                 </div>
@@ -94,7 +97,7 @@ export default async function ClientContentsPage() {
       </div>
 
       <Link
-        href="/content?page=2"
+        href="/content?page=1"
         className="bg-slate-800 dark:bg-slate-100 bg-opacity-20  shadow-md
         w-fit px-8 py-2 rounded-md mx-auto cursor-pointer mb-4"
         style={{

@@ -1,4 +1,4 @@
-import { ClientNavigator } from "./navigation";
+import { ClientNavigatorDesktop } from "./navigation";
 import { ClientNavigatorMobile } from "./navigation";
 
 interface ClientProviderComponentProps {
@@ -17,7 +17,7 @@ export const ClientProviderComponent = (
         transition: "all ease .3s",
       }}
     >
-      <ClientNavigator />
+      <ClientNavigatorDesktop />
       <ClientNavigatorMobile />
       {children}
     </main>

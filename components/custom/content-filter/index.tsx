@@ -2,12 +2,17 @@
 
 "use client";
 import dynamic from "next/dynamic";
+import { BaseLoading } from "..";
 
 const ClientContentFilterDesktopComponent = dynamic(
   () =>
     import("./desktop").then((mod) => mod.ClientContentFilterDesktopComponent),
   {
-    loading: () => <p className="md:block  hidden">Loading...</p>,
+    loading: () => (
+      <div className="md:flex hidden flex-row justify-end w-full">
+        <BaseLoading title="Đang tải bộ lọc" />
+      </div>
+    ),
     ssr: false,
   }
 );
@@ -16,7 +21,11 @@ const ClientContentFilterMobileComponent = dynamic(
   () =>
     import("./mobile").then((mod) => mod.ClientContentFilterMobileComponent),
   {
-    loading: () => <p className="block  md:hidden">Loading...</p>,
+    loading: () => (
+      <div className="flex md:hidden flex-row justify-end w-full">
+        <BaseLoading title="Đang tải bộ lọc" />
+      </div>
+    ),
     ssr: false,
   }
 );

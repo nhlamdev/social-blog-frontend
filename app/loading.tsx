@@ -1,9 +1,9 @@
-export const OwnerFullLoading = () => {
+export default function FullLoading() {
   return (
     <section className="flex flex-row gap-2 w-screen h-screen p-2 items-center justify-center">
       <div
         className=" bg-slate-200 rounded-md gap-4 py-14 px-20 shadow-md
-        flex flex-col justify-center items-center"
+          flex flex-col justify-center items-center"
       >
         <span className="text-lg select-none">Đang truyền nạp dữ liệu</span>
 
@@ -17,4 +17,4 @@ export const OwnerFullLoading = () => {
       </div>
     </section>
   );
-};
+}

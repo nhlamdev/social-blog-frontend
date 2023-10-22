@@ -8,22 +8,9 @@ export const ThemeToggleButton = () => {
       onClick={() => {
         document.documentElement.classList.toggle("dark");
       }}
-      className={`
-        w-12 
-        h-6 
-        rounded-full 
-        p-1 
-        bg-gray-400 
-        dark:bg-gray-600
-        relative 
-        transition-colors 
-        duration-500 
-        ease-in
-        focus:outline-none 
-        focus:ring-2 
-        focus:ring-blue-700 
-        dark:focus:ring-blue-600
-        focus:border-transparent
+      className={`w-12 h-6 rounded-full p-1 bg-gray-200 dark:bg-gray-400 relative transition-colors 
+        duration-500 ease-in focus:outline-none focus:ring-2 focus:ring-blue-700 dark:focus:ring-blue-600
+        focus:border-transparent shadow-md
       `}
     >
       <div
