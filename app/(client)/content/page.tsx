@@ -6,6 +6,8 @@ import axios from "axios";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { IoMdTimer } from "react-icons/io";
+
 const backend = process.env.SERVICE_PORT;
 
 export const metadata: Metadata = {
@@ -53,38 +55,37 @@ export default async function ContentPage(props: PageProps) {
       {seriesData ? (
         <div
           className="flex flex-col gap-2 md:w-4/5 lg:w-3/5 w-full bg-slate-100 bg-opacity-40 shadow-sm 
-          rounded-md px-4 py-2"
+          rounded-md p-4"
         >
-          <span className="text-md font-semibold">{seriesData.title}</span>
-          <span className="text-sm font-normal">{seriesData.summary}</span>
-          <div className="flex flex-row gap-2 items-center">
-            <div>
-              <Image
-                src={seriesData.created_by.image}
-                className="rounded-full shadow-md"
-                width={25}
-                height={25}
-                alt="photo"
-              />
-            </div>
+          <span className="text-md font-semibold dark:text-slate-100">
+            {seriesData.title}
+          </span>
 
+          <span className="text-sm font-normal dark:text-slate-100">
+            {seriesData.summary}
+          </span>
+
+          <div className="flex flex-row gap-2 items-center">
             <div className="flex flex-col">
-              <span className="text-xs font-semibold">
+              <span className="text-xs font-semibold dark:text-slate-100">
                 {seriesData.created_by.name}
               </span>
-              <span className="text-xs font-light">
+              <span className="text-[10px] font-light dark:text-slate-100">
                 {seriesData.created_by.email}
               </span>
             </div>
 
             <div
-              style={{ width: "2px", height: "20px" }}
-              className="bg-slate-600"
+              className="h-4 bg-slate-600 dark:bg-slate-200 mx-1"
+              style={{ width: "1px" }}
             />
 
-            <span className="text-xs font-light">
-              {getDateTime(seriesData.created_at)}
-            </span>
+            <div className="flex flex-row items-center gap-2">
+              <IoMdTimer className="text-sm dark:text-slate-100" />
+              <span className="text-xs font-light dark:text-slate-100">
+                {getDateTime(seriesData.created_at)}
+              </span>
+            </div>
           </div>
         </div>
       ) : (

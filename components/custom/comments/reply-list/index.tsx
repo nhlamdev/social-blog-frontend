@@ -88,7 +88,7 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
                 className="flex flex-col gap-2 w-full"
               >
                 <div className="flex flex-col gap-1 p-2  bg-slate-200 bg-opacity-40 rounded-md">
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex flex-row gap-2">
                     <picture>
                       <img
                         src={
@@ -96,7 +96,7 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
                             ? reply.created_by.image
                             : "/avatar/test.jpg"
                         }
-                        className="rounded-full aspect-square w-10 h-10 object-cover"
+                        className="rounded-full aspect-square w-6 h-6 object-cover"
                         alt="photo"
                       />
                     </picture>

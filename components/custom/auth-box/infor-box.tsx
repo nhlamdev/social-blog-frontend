@@ -45,27 +45,28 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
       </div>
 
       <div
-        className="flex flex-col items-center w-fit justify-center absolute bg-slate-200 top-full right-1/2"
+        className="flex flex-col items-center w-fit justify-center absolute bg-slate-100 top-full 
+        right-1/2 left-0 rounded-md"
         style={{
           opacity: open ? 1 : 0,
           visibility: open ? "visible" : "hidden",
           transform: `translateY(${open ? 0 : "20px"})`,
           transition: "all ease .3s",
           width: `${ref.current?.clientWidth}px`,
-          left: 0,
         }}
       >
         {profile.role.author || profile.role.owner ? (
           <Link
             href={"/owner/content"}
-            className="flex flex-row gap-2 items-center px-6 py-2 hover:bg-slate-300 w-full whitespace-nowrap"
+            className="flex flex-row gap-2 items-center px-6 py-2 w-full 
+            whitespace-nowrap"
             style={{
               transition: "all ease .3s",
               cursor: "pointer",
             }}
           >
             <span className="text-xs font-semibold whitespace-nowrap">
-              Quản trị nội dung
+              Quản trị nội
             </span>
           </Link>
         ) : (
@@ -73,7 +74,8 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
         )}
 
         <div
-          className="flex flex-row gap-2 items-center px-6 py-2 hover:bg-slate-300 w-full whitespace-nowrap"
+          className="flex flex-row gap-2 items-center px-6 py-2 
+          w-full whitespace-nowrap"
           style={{
             transition: "all ease .3s",
             cursor: "pointer",

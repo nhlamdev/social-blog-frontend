@@ -18,22 +18,17 @@ export const RandomContentComponent = (props: RandomContentComponentProps) => {
           <Link
             key={c.content__id + `-${key}-random`}
             href={`/content/${c.content__id}`}
-            className="lg:w-1/4 w-full flex lg:flex-col flex-row lg:aspect-video"
+            className="lg:w-1/4 w-full flex lg:flex-col flex-row lg:aspect-video relative
+            cursor-pointer rounded-md shadow-md overflow-hidden"
             style={{
-              position: "relative",
-              cursor: "pointer",
-              borderRadius: "5px",
-              overflow: "hidden",
               border: "1px solid white",
-              boxShadow:
-                "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
             }}
           >
-            <picture>
+            <picture className="h-full">
               <img
                 src={`/service/${c.image_fileName}`}
                 style={{ objectFit: "cover" }}
-                className="relative lg:w-full h-28 lg:h-full"
+                className="lg:w-full h-28 lg:h-full"
                 alt="Landscape picture"
               />
             </picture>
