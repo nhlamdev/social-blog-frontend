@@ -5,7 +5,7 @@ import {
 } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
 import { IconType } from "react-icons/lib";
-import { MdContentPaste,MdToken } from "react-icons/md";
+import { MdContentPaste, MdToken } from "react-icons/md";
 import { SiSteelseries } from "react-icons/si";
 import { FaUserFriends } from "react-icons/fa";
 
@@ -48,7 +48,7 @@ export const navigation_mock: INav[] = [
     icon: FaUserFriends,
   },
   {
-    url: "/owner/auth",
+    url: "/owner/session",
     name: "Phiên",
     require_owner: false,
     icon: MdToken,

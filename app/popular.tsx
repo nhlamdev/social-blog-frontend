@@ -16,7 +16,10 @@ export const PopularItemsComponent = async () => {
   return (
     <section className="flex lg:flex-row flex-col gap-4 px-2 py-4">
       <div style={{ flex: 2 }} className="flex flex-col gap-2 w-full">
-        <span className="text-2xl font-semibold text-center p-2 ">
+        <span
+          className="text-2xl font-semibold text-center p-2 
+        text-slate-900 dark:text-slate-100"
+        >
           Nội dung tiêu biểu
         </span>
 
@@ -25,7 +28,7 @@ export const PopularItemsComponent = async () => {
             <Link
               href={`/content/${content._id}`}
               key={content._id}
-              className="flex flex-row gap-2"
+              className="flex flex-row gap-2 bg-slate-400 bg-opacity-40"
             >
               <picture>
                 <img
@@ -35,11 +38,14 @@ export const PopularItemsComponent = async () => {
                 />
               </picture>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 w-full p-2">
                 <div className="flex flex-row items-center gap-2">
                   {content?.category ? (
                     <div className="bg-orange-400 px-2 py-1 rounded-md">
-                      <span className="text-sm text-slate-50 font-semibold">
+                      <span
+                        className="text-sm font-semibold
+                      text-slate-900 dark:text-slate-100"
+                      >
                         {content.category.title}
                       </span>
                     </div>
@@ -47,7 +53,7 @@ export const PopularItemsComponent = async () => {
                     <></>
                   )}
 
-                  <span className="text-xs">
+                  <span className="text-xs text-slate-900 dark:text-slate-100">
                     {getDateTime(content.created_at)}
                   </span>
                 </div>
@@ -62,15 +68,17 @@ export const PopularItemsComponent = async () => {
                   </div>
 
                   <div className="flex flex-col">
-                    <span className="text-xs font-semibold">
+                    <span className="text-xs font-semibold text-slate-900 dark:text-slate-100">
                       {content.created_by.name}
                     </span>
-                    <span className="text-xs font-light">
+                    <span className="text-xs font-light text-slate-900 dark:text-slate-100">
                       {content.created_by.email}
                     </span>
                   </div>
                 </div>
-                <span className="text-md">{content.title}</span>
+                <span className="text-md text-slate-900 dark:text-slate-100">
+                  {content.title}
+                </span>
               </div>
             </Link>
           );
@@ -79,21 +87,31 @@ export const PopularItemsComponent = async () => {
       {/* ----------- */}
       <div
         style={{ flex: 1 }}
-        className="flex flex-col gap-4 w-full md:w-3/5  "
+        className="flex flex-col gap-4 w-full md:w-3/5 mx-auto"
       >
-        <span className="text-xl font-semibold ">Thể loại</span>
-        <div className="flex flex-col gap-2">
+        <span
+          className="text-xl font-semibold p-2 text-left
+        text-slate-900 dark:text-slate-100"
+        >
+          Thể loại
+        </span>
+        <div className="flex flex-col gap-2 w-full">
           {topCategoryMoreContent.map((category: any) => {
             return (
               <Link
                 href={`/content?sortCase=TIME_DESC&category=${category._id}`}
                 key={category._id}
-                className="flex flex-row items-center p-2 gap-2 rounded-sm bg-green-100
-                justify-between w-full shadow-md"
+                className="flex flex-row items-center p-2 gap-2 rounded-sm justify-between w-full 
+                shadow-md bg-slate-200 bg-opacity-40"
               >
-                <span className="text-md">{category.title}</span>
-                <div className="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-red-100 bg-red-700 border border-red-700 ">
-                  <span className="text-xs font-normal leading-none max-w-full flex-initial">
+                <span className="text-md text-slate-900 dark:text-slate-100">
+                  {category.title}
+                </span>
+                <div className="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full bg-cyan-400">
+                  <span
+                    className="text-xs font-normal leading-none max-w-full flex-initial
+                  text-slate-900 "
+                  >
                     {category.contentcount}
                   </span>
                 </div>

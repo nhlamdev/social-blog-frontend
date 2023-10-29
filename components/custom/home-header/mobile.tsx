@@ -1,10 +1,11 @@
 "use client";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { AuthBox } from "@/components/custom";
-import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { ThemeToggleButton } from "@/components/custom";
 
 export const ClientHomeHeaderMobile = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -14,7 +15,7 @@ export const ClientHomeHeaderMobile = () => {
       style={{ borderBottom: "1px solid black" }}
     >
       <GiHamburgerMenu
-        className="text-xl cursor-pointer"
+        className="text-xl cursor-pointer dark:text-slate-100 text-slate-900"
         onClick={() => setOpen(true)}
       />
 
@@ -22,18 +23,20 @@ export const ClientHomeHeaderMobile = () => {
 
       {open ? (
         <div
-          className="fixed left-0 top-0 w-screen h-screen bg-slate-400 bg-opacity-40"
+          className="fixed left-0 top-0 w-screen h-screen bg-slate-600 bg-opacity-40"
           style={{ zIndex: 10 }}
         >
           <div
             className="w-64 flex flex-col gap-4 left-0 top-0 bottom-0 absolute p-2 
-            bg-slate-50"
+            bg-slate-50 bg-gradient-light dark:bg-gradient-dark"
           >
             <div className="flex flex-row justify-between items-center">
               <Link href="/">
                 <Image src="/logo/logo.png" width={60} height={60} alt="logo" />
               </Link>
-              <span className="text-sm">swalor dev</span>
+              <span className="text-md dark:text-slate-100 text-slate-900">
+                swalor dev
+              </span>
               <AiFillCloseCircle
                 className="text-red-500 text-2xl cursor-pointer"
                 onClick={() => setOpen(false)}
@@ -43,30 +46,35 @@ export const ClientHomeHeaderMobile = () => {
             <div className="flex flex-col items-center gap-4 ">
               <Link
                 href="/content"
-                className="font-semibold text-sm w-full px-2 py-1 "
-                style={{ borderBottom: "1px solid black" }}
+                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
+                dark:border-slate-100 border-slate-900"
+                style={{ borderBottom: "1px solid" }}
               >
                 Bài viết
               </Link>
 
               <Link
                 href="/series"
-                className="font-semibold text-sm w-full px-2 py-1 "
-                style={{ borderBottom: "1px solid black" }}
+                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
+                dark:border-slate-100 border-slate-900"
+                style={{ borderBottom: "1px solid" }}
               >
                 Chuỗi bài viết
               </Link>
 
               <Link
                 href="/about-me"
-                className="font-semibold text-sm w-full px-2 py-1 "
-                style={{ borderBottom: "1px solid black" }}
+                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
+                dark:border-slate-100 border-slate-900"
+                style={{ borderBottom: "1px solid" }}
               >
                 Về tôi
               </Link>
             </div>
 
-            <div className="flex-1" />
+            <div className="absolute bottom-2 left-2">
+              <ThemeToggleButton />
+            </div>
           </div>
         </div>
       ) : (

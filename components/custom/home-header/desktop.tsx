@@ -1,6 +1,6 @@
 "use client";
+import { AuthBox, ThemeToggleButton } from "@/components/custom";
 import Image from "next/image";
-import { AuthBox } from "@/components/custom";
 import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
 
@@ -18,27 +18,31 @@ export const ClientHomeHeaderDesktop = () => {
         </div>
 
         <div className="flex flex-col gap-2 items-center">
-          <h1 className="text-xl font-semibold">swalog dev</h1>
-          <span className="text-sm italic">
+          <h1 className="text-xl font-semibold dark:text-slate-100 text-slate-900">
+            swalog dev
+          </h1>
+          <span className="text-sm italic dark:text-slate-100 text-slate-900">
             Make your way to the future with passion and perseverance !
           </span>
         </div>
 
-        <AuthBox />
+        <div className="flex flex-row items-center gap-2">
+          <ThemeToggleButton />
+          <AuthBox />
+        </div>
       </header>
 
-      <nav
-        className="px-4 py-2 gap-4 md:flex flex-row items-center hidden"
-        style={{ borderBottom: "1px solid black" }}
-      >
+      <nav className="px-4 py-2 gap-4 md:flex flex-row items-center hidden ">
         <Link href="/content">
-          <span>Bài viết</span>
+          <span className="dark:text-slate-100 text-slate-900">Bài viết</span>
         </Link>
         <Link href="/series">
-          <span>Chuỗi bài viết</span>
+          <span className="dark:text-slate-100 text-slate-900">
+            Chuỗi bài viết
+          </span>
         </Link>
         <Link href="/about-me">
-          <span>Về tôi</span>
+          <span className="dark:text-slate-100 text-slate-900">Về tôi</span>
         </Link>
 
         <form
@@ -52,10 +56,16 @@ export const ClientHomeHeaderDesktop = () => {
           />
 
           <button type="submit">
-            <FiSearch className="text-2xl" />
+            <FiSearch className="text-2xl dark:text-slate-100 text-slate-900" />
           </button>
         </form>
       </nav>
+
+      <div
+        className="mx-auto w-full 
+        dark:bg-slate-100 bg-slate-900 "
+        style={{ height: "1px" }}
+      />
     </>
   );
 };
