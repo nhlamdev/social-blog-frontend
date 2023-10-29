@@ -20,7 +20,7 @@ export default async function ClientContentsPage() {
      gap-4 p-2 sm:p-4"
     >
       {ClientHead ? <ClientHead /> : <></>}
-
+      {/* 
       <div className="flex flex-col gap-2">
         <p
           className="text-2xl font-semibold text-center 
@@ -108,9 +108,9 @@ export default async function ClientContentsPage() {
             );
           })}
         </div>
-      </div>
+      </div> */}
 
-      <Link
+      {/* <Link
         href="/content?page=1"
         className=" bg-opacity-20  shadow-lg w-fit px-8 py-2 rounded-md mx-auto cursor-pointer 
          border-slate-900 dark:border-slate-100 border-2 border-solid"
@@ -118,7 +118,7 @@ export default async function ClientContentsPage() {
         <span className=" text-slate-900 dark:text-slate-100 text:md font-semibold">
           Xem tiếp
         </span>
-      </Link>
+      </Link> */}
 
       <PopularItemsComponent />
       <SeriesPopular />

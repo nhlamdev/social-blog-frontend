@@ -30,7 +30,7 @@ export const PopularItemsComponent = async () => {
               key={content._id}
               className="flex flex-row gap-2 bg-slate-400 bg-opacity-40"
             >
-              <picture>
+              <picture className="md:block hidden">
                 <img
                   src={`/service/${content.image.fileName}`}
                   className="object-cover relative w-72 h-40"
