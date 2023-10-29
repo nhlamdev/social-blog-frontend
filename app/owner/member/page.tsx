@@ -8,7 +8,6 @@ export default async function OwnerMemberPage(props: PageProps) {
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4">
       <OwnerMembersHead searchParams={searchParams} />
-
       <OwnerMemberTable searchParams={searchParams} />
     </div>
   );

@@ -6,6 +6,7 @@ export interface PageProps {
     [key: string]: string | undefined;
   };
 }
+
 export interface LayoutProps {
   children?: React.ReactNode;
 
@@ -45,4 +46,19 @@ export interface IImage {
   fileName: string;
   mimeType: string;
   size: number;
+}
+
+export interface ISession {
+  browser: string;
+  created_at: string;
+  delete_at: string | null;
+  device: "desktop" | "mobile";
+  index: number;
+  ip: string;
+  os: string;
+  provider: "google" | "github" | "discord";
+  provider_id: string;
+  updated_at: string;
+  isCurrent: boolean;
+  _id: string;
 }

@@ -7,12 +7,18 @@ export const authApi = {
     return axiosInstance.get(url);
   },
   updateRole(memberId: string, key: string, value: boolean) {
-    return axiosInstance.patch(`/change-role/${memberId}`, { key, value });
+    return axiosInstance.patch(`change-role/${memberId}`, { key, value });
+  },
+  session() {
+    return axiosInstance.get("all-session");
   },
   profile() {
     return axiosInstance.get("profile");
   },
   logout() {
     return axiosInstance.delete("logout");
+  },
+  forceLogout(sessionId: string) {
+    return axiosInstance.delete(`/logout-target/${sessionId}`);
   },
 };
