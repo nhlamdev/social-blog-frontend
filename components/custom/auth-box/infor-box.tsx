@@ -55,6 +55,26 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
           width: `${ref.current?.clientWidth}px`,
         }}
       >
+        {profile.role.author || profile.role.owner ? (
+          <Link
+            href={"/owner/content"}
+            className="flex flex-row gap-2 items-center px-6 py-2 w-full group
+          whitespace-nowrap"
+            style={{
+              transition: "all ease .3s",
+              cursor: "pointer",
+            }}
+          >
+            <span
+              className="group-hover:pl-2 text-xs font-semibold whitespace-nowrap"
+              style={{ transition: "all ease .3s" }}
+            >
+              Quản trị cá nhân
+            </span>
+          </Link>
+        ) : (
+          <></>
+        )}
         <Link
           href={"/owner/content"}
           className="group flex flex-row gap-2 items-center px-6 py-2 w-full 
@@ -71,27 +91,6 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
             Đã lưu
           </span>
         </Link>
-        {profile.role.author || profile.role.owner ? (
-          <Link
-            href={"/owner/content"}
-            className="flex flex-row gap-2 items-center px-6 py-2 w-full group
-            whitespace-nowrap"
-            style={{
-              transition: "all ease .3s",
-              cursor: "pointer",
-            }}
-          >
-            <span
-              className="group-hover:pl-2 text-xs font-semibold whitespace-nowrap"
-              style={{ transition: "all ease .3s" }}
-            >
-              Quản trị nội dung
-            </span>
-          </Link>
-        ) : (
-          <></>
-        )}
-
         <div
           className="group flex flex-row gap-2 items-center px-6 py-2 group
           w-full whitespace-nowrap"

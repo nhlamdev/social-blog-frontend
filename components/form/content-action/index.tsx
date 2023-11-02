@@ -7,6 +7,8 @@ import { ContentActionTagsBox } from "./tag-box";
 import { ContentCategoryBox } from "./categories-box";
 import { apiCaller } from "@/api";
 import { enqueueSnackbar } from "notistack";
+import { CasePublicContentType } from "@/interface";
+import { casePublicData } from "@/constant";
 export const TextEditor = dynamic(
   () => import("@/components/custom/text-editor"),
   {
@@ -29,11 +31,12 @@ export const FormContentAction = (props: FormContentActionProps) => {
   const [image, setImage] = useState<File | null | string>(
     content?.image ? `/service/${content.image.fileName}` : null
   );
+
+  const [casePublic, setCasePublic] = useState<CasePublicContentType>("public");
   const [category, setCategory] = useState(
     content && content.category ? content.category._id : ""
   );
   const [tags, setTags] = useState<string[]>(content ? content.tags : []);
-  const [complete, setComplete] = useState(true);
 
   const fileRef = useRef<HTMLInputElement | null>(null);
 
@@ -104,13 +107,11 @@ export const FormContentAction = (props: FormContentActionProps) => {
     }
   };
 
-  const action = async (isDraft: boolean) => {
+  const action = async () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("body", body);
     formData.append("category", category);
-    formData.append("draft", isDraft.toString());
-    formData.append("complete", complete.toString());
     tags.forEach((tag, key) => {
       formData.append(`tags[${key}]`, tag);
     });
@@ -190,24 +191,27 @@ export const FormContentAction = (props: FormContentActionProps) => {
 
           <ContentActionTagsBox tags={tags} change={(tags) => setTags(tags)} />
 
-          <label className="mt-2 flex items-center relative w-max cursor-pointer select-none">
-            <span className="text-sm font-semibold mr-3 dark:text-slate-200 text-slate-800">
-              {"Công khai"}
-            </span>
-
-            <input
-              type="checkbox"
-              checked={complete}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setComplete(e.target.checked);
-              }}
-              className={`appearance-none transition-colors cursor-pointer w-14 h-6
-                          rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2
-                          focus:ring-offset-black focus:ring-blue-500 ${
-                            complete ? "bg-green-500" : "bg-slate-500"
-                          }`}
-            />
-          </label>
+          <div className="flex flex-row gap-2 justify-center items-center">
+            {casePublicData.map((c) => {
+              return (
+                <span
+                  key={c.key}
+                  className={`text-xs px-4 py-2 rounded-md select-none 
+            cursor-pointer bg-opacity-40 shadow-md ${
+              casePublic === c.key
+                ? " bg-slate-900 text-slate-100"
+                : "dark:text-slate-100"
+            }`}
+                  style={{ border: "1px solid white" }}
+                  onClick={() => {
+                    setCasePublic(c.key);
+                  }}
+                >
+                  {c.value}
+                </span>
+              );
+            })}
+          </div>
         </div>
 
         <div className="w-fit">
@@ -235,17 +239,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
       <div className="flex flex-row w-full px-2 justify-end">
         <button
           onClick={() => {
-            action(true);
-          }}
-          className="text-teal-500 bg-transparent border border-solid border-teal-500 hover:bg-teal-500 hover:text-white active:bg-teal-600 
-        font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-        >
-          Lưu nháp
-        </button>
-        <button
-          onClick={() => {
-            action(false);
+            action();
           }}
           className="text-teal-500 bg-transparent border border-solid border-teal-500 hover:bg-teal-500 hover:text-white active:bg-teal-600 
         font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

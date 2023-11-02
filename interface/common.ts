@@ -48,6 +48,8 @@ export interface IImage {
   size: number;
 }
 
+export type CasePublicContentType = "noly-me" | "have-link" | "public";
+
 export interface ISession {
   browser: string;
   created_at: string;

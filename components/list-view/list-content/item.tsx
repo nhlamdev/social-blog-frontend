@@ -17,7 +17,7 @@ export const ClientHomeListContentItem = (
       className="w-full flex flex-row gap-2 bg-slate-100 bg-opacity-40
       shadow-md rounded-md"
     >
-      <picture>
+      <picture className=" md:block hidden">
         <img
           src={`/service/${content.image.fileName}`}
           className="h-28 sm:h-32 md:h-40 aspect-square "
