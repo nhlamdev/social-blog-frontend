@@ -42,7 +42,7 @@ export const OwnerNavigationDesktop = (props: IOwnerNavigationDesktop) => {
       <div className="p-2 g-2">
         {navigation_mock
           .filter((v) => {
-            if (profile.role.owner) {
+            if (profile.role_owner) {
               return true;
             } else {
               return !v.require_owner;

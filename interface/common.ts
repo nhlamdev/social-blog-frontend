@@ -24,16 +24,9 @@ export interface IProfile {
   name: string;
   email: string;
   image: string;
-  role: {
-    delete_at: null;
-    created_at: string;
-    updated_at: string;
-    index: number;
-    _id: string;
-    author: boolean;
-    comment: boolean;
-    owner: boolean;
-  };
+  role_author: boolean;
+  role_comment: boolean;
+  role_owner: boolean;
 }
 
 export interface IImage {
