@@ -1,7 +1,4 @@
-import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
-import Image from "next/image";
-import Link from "next/link";
 import { PopularItemsComponent } from "./popular";
 import { SeriesPopular } from "./series-popular";
 

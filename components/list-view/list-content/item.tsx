@@ -17,18 +17,6 @@ export const ClientHomeListContentItem = (
       className="w-full flex flex-row gap-2 bg-slate-100 bg-opacity-40
       shadow-md rounded-md"
     >
-      <picture className=" md:block hidden">
-        <img
-          src={`/service/${content.image.fileName}`}
-          className="h-28 sm:h-32 md:h-40 aspect-square "
-          style={{
-            objectFit: "cover",
-            borderRadius: "5px",
-          }}
-          alt="photo"
-        />
-      </picture>
-
       {/* --------------- */}
       <div className="flex flex-col justify-between py-2 md:py-4 px-4">
         <Link
@@ -119,13 +107,13 @@ export const ClientHomeListContentItem = (
           <div className="flex flex-row items-center gap-2">
             <LuView className="md:text-xs text-[10px] text-slate-900 dark:text-slate-100" />
             <span className="md:text-xs font-semibold text-[10px] text-slate-900 dark:text-slate-100">
-              {content.count_comments}
+              {content.count_view}
             </span>
           </div>
           <div className="flex flex-row items-center gap-1">
             <BiCommentDetail className="md:text-xs text-[10px] text-slate-900 dark:text-slate-100" />
             <span className="md:text-xs font-semibold text-[10px] text-slate-900 dark:text-slate-100">
-              {content.count_view}
+              {content.count_comments}
             </span>
           </div>
         </div>

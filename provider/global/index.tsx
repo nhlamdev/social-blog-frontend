@@ -3,7 +3,6 @@ import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import { SnackbarProvider } from "notistack";
 import { apiCaller } from "@/api";
-import "react-quill/dist/quill.snow.css";
 import { SWRConfig } from "swr";
 import { useEffect } from "react";
 import { io } from "socket.io-client";

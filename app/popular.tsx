@@ -2,6 +2,7 @@ import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { LuView } from "react-icons/lu";
 const backend = process.env.SERVICE_PORT;
 
 export const PopularItemsComponent = async () => {
@@ -28,48 +29,60 @@ export const PopularItemsComponent = async () => {
             <Link
               href={`/content/${content._id}`}
               key={content._id}
-              className="flex flex-row gap-2 bg-slate-400 bg-opacity-40"
+              className="flex flex-col gap-2 p-2 bg-slate-400 bg-opacity-40"
             >
-              <div className="flex flex-col gap-2 w-full p-2">
-                <div className="flex flex-row items-center gap-2">
-                  {content?.category ? (
-                    <div className="bg-orange-400 px-2 py-1 rounded-md">
-                      <span
-                        className="text-sm font-semibold
-                      text-slate-900 dark:text-slate-100"
-                      >
-                        {content.category.title}
-                      </span>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
+              <span className="text-md text-slate-900 dark:text-slate-100">
+                {content.title}
+              </span>
 
-                  <span className="text-xs text-slate-900 dark:text-slate-100">
-                    {getDateTime(content.created_at)}
+              <div className="flex flex-row gap-2 items-center">
+                <div className="relative w-6 h-6">
+                  <Image
+                    src={content.created_by.image}
+                    fill
+                    className="rounded-full aspect-square"
+                    alt="asd"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold text-slate-900 dark:text-slate-100">
+                    {content.created_by.name}
+                  </span>
+                  <span className="text-xs font-light text-slate-900 dark:text-slate-100">
+                    {content.created_by.email}
                   </span>
                 </div>
-                <div className="flex flex-row gap-2 items-center">
-                  <div className="relative w-6 h-6">
-                    <Image
-                      src={content.created_by.image}
-                      fill
-                      className="rounded-full aspect-square"
-                      alt="asd"
-                    />
-                  </div>
 
-                  <div className="flex flex-col">
-                    <span className="text-xs font-semibold text-slate-900 dark:text-slate-100">
-                      {content.created_by.name}
-                    </span>
-                    <span className="text-xs font-light text-slate-900 dark:text-slate-100">
-                      {content.created_by.email}
+                <div
+                  className="h-4 bg-slate-600 dark:bg-slate-200 mx-1"
+                  style={{ width: "1px" }}
+                />
+
+                <div className="flex flex-row items-center gap-2">
+                  <LuView className="md:text-xs text-[10px] text-slate-900 dark:text-slate-100" />
+                  <span className="md:text-xs font-semibold text-[10px] text-slate-900 dark:text-slate-100">
+                    {content.count_view}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-row items-center gap-2">
+                {content?.category ? (
+                  <div className="bg-orange-400 px-2 py-1 rounded-md">
+                    <span
+                      className="text-sm font-semibold
+                      text-slate-900 dark:text-slate-100"
+                    >
+                      {content.category.title}
                     </span>
                   </div>
-                </div>
-                <span className="text-md text-slate-900 dark:text-slate-100">
-                  {content.title}
+                ) : (
+                  <></>
+                )}
+
+                <span className="text-xs text-slate-900 dark:text-slate-100">
+                  {getDateTime(content.created_at)}
                 </span>
               </div>
             </Link>

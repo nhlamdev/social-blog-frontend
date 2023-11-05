@@ -2,7 +2,6 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
-import Image from "next/image";
 import { ContentActionTagsBox } from "./tag-box";
 import { ContentCategoryBox } from "./categories-box";
 import { apiCaller } from "@/api";
@@ -147,7 +146,11 @@ export const FormContentAction = (props: FormContentActionProps) => {
       </div>
 
       <div className="bg-slate-50 w-full">
-        <TextEditor value={body} change={(value) => setBody(value)} />
+        {document ? (
+          <TextEditor value={body} change={(value) => setBody(value)} />
+        ) : (
+          <></>
+        )}
       </div>
 
       <div className="flex flex-row w-full px-2 justify-end">

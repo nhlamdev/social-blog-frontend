@@ -1,10 +1,12 @@
 "use client";
-import dynamic from "next/dynamic";
+import ImageResize from "quill-image-resize-module-react";
 
-export const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
-  loading: () => <p>Loading...</p>,
-  ssr: false,
-});
+import ReactQuill, { Quill } from "react-quill";
+
+import QuillNoSSRWrapper from "react-quill";
+
+import "react-quill/dist/quill.snow.css";
+Quill.register("modules/imageResize", ImageResize);
 
 const modules = {
   toolbar: [
@@ -29,7 +31,16 @@ const modules = {
     ["link", "image", "video"],
     ["clean"],
   ],
-
+  imageResize: {
+    parchment: Quill.import("parchment"),
+    modules: ["Resize", "DisplaySize", "Toolbar"],
+    displayStyles: {
+      backgroundColor: "black",
+      border: "none",
+      color: "#fff",
+      // other camelCase styles for size display
+    },
+  },
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,

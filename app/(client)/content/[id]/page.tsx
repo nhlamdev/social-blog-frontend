@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { RandomContentComponent } from "./random-content";
 import { CommentsComponent } from "@/components/custom/comments";
 import Image from "next/image";
+import { getDateTime } from "@/utils/global-func";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -29,43 +30,16 @@ export default async function ClientDetailContentPage(props: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative ">
-      <div
-        style={{
-          alignItems: "center",
-          width: "100%",
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            content: '""',
-            zIndex: "-1",
-            border: "5px",
-            position: "absolute",
-            width: "100%",
-            height: "80%",
-            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-          }}
-        />
+      <div className="flex flex-col items-center">
+        <span className="text-slate-800 dark:text-slate-200 font-semibold text-2xl select-none">
+          {content.title}
+        </span>
 
-        <div className="w-60 aspect-video shadow-lg relative">
-          <Image
-            src={`/service/${content.image.fileName}`}
-            className="object-cover  rounded-md"
-            fill
-            alt="photo"
-          />
-        </div>
+        <span className="text-slate-800 dark:text-slate-200 font-light text-md select-none">
+          {getDateTime(content.created_at)}
+        </span>
       </div>
 
-      <span className="text-slate-800 dark:text-slate-200 font-semibold text-2xl">
-        {content.title}
-      </span>
       {/* ----------------- */}
       <div className="p-2 bg-slate-100 bg-opacity-80 w-full lg:w-4/5 min-h-[300px] rounded-md">
         <div
