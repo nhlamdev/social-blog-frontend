@@ -30,14 +30,6 @@ export const PopularItemsComponent = async () => {
               key={content._id}
               className="flex flex-row gap-2 bg-slate-400 bg-opacity-40"
             >
-              <picture className="md:block hidden">
-                <img
-                  src={`/service/${content.image.fileName}`}
-                  className="object-cover relative w-72 h-40"
-                  alt="Landscape picture"
-                />
-              </picture>
-
               <div className="flex flex-col gap-2 w-full p-2">
                 <div className="flex flex-row items-center gap-2">
                   {content?.category ? (

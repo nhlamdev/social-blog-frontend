@@ -22,15 +22,11 @@ export const contentApi = {
 
     return axiosInstance.get(url);
   },
-  create(data: FormData) {
-    return axiosInstance.post("/content", data, {
-      headers: { "content-type": "multipart/form-data" },
-    });
+  create(data: any) {
+    return axiosInstance.post("/content", data);
   },
-  update(id: string, data: FormData) {
-    return axiosInstance.put(`/content/${id}`, data, {
-      headers: { "content-type": "multipart/form-data" },
-    });
+  update(id: string, data: any) {
+    return axiosInstance.put(`/content/${id}`, data);
   },
   updateContentCategory(content: string, category: string) {
     return axiosInstance.patch(

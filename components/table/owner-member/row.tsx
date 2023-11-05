@@ -9,9 +9,9 @@ interface IOwnerMember {
   name: string;
   email: string;
   image: string;
-  owner: boolean;
-  comment: boolean;
-  author: boolean;
+  role_owner: boolean;
+  role_author: boolean;
+  role_comment: boolean;
   created_at: string;
   content_count: number;
 }
@@ -25,6 +25,7 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
 
   const change = (e: ChangeEvent<HTMLInputElement>) => {
     const { checked, name } = e.target;
+
     authApi
       .updateRole(item._id, name, checked)
       .then(() => reload())
@@ -86,7 +87,7 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
             type="checkbox"
             title="Quyền bình luận."
             name="comment"
-            checked={item.comment}
+            checked={item.role_comment}
             onChange={(e) => change(e)}
             style={{ cursor: "pointer" }}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -96,7 +97,7 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
             type="checkbox"
             title="Quyền đăng bài."
             name="author"
-            checked={item.author}
+            checked={item.role_author}
             onChange={(e) => change(e)}
             style={{ cursor: "pointer" }}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -106,7 +107,7 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
             type="checkbox"
             name="owner"
             title="Quyền toàn cục."
-            checked={item.owner}
+            checked={item.role_owner}
             onChange={(e) => change(e)}
             style={{ cursor: "pointer" }}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"

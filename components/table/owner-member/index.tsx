@@ -10,7 +10,9 @@ interface IOwnerMember {
   name: string;
   email: string;
   image: string;
-  role: "member" | "writer" | "developer" | "owner";
+  role_owner: boolean;
+  role_author: boolean;
+  role_comment: boolean;
   created_at: string;
   content_count: number;
 }

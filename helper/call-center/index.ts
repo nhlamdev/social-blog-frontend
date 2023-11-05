@@ -20,11 +20,11 @@ axiosInstance.interceptors.request.use(
       if (!accessTokenName) {
         return Promise.reject();
       }
-      console.log(1);
+      // console.log(1);
       const checkAccess = await Cookies.get(accessTokenName);
 
       if (!checkAccess) {
-        console.log(2);
+        // console.log(2);
         if (!refreshTokenName) {
           return Promise.reject();
         }
@@ -36,7 +36,7 @@ axiosInstance.interceptors.request.use(
         }
 
         try {
-          console.log(2.5);
+          // console.log(2.5);
           await axios.get("/service/renew-token");
         } catch (error) {
           Cookies.remove(accessTokenName);

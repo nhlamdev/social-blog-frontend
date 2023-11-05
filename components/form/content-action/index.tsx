@@ -28,9 +28,6 @@ export const FormContentAction = (props: FormContentActionProps) => {
 
   const [title, setTitle] = useState(content ? content.title : "");
   const [body, setBody] = useState(content ? content.body : "");
-  const [image, setImage] = useState<File | null | string>(
-    content?.image ? `/service/${content.image.fileName}` : null
-  );
 
   const [casePublic, setCasePublic] = useState<CasePublicContentType>("public");
   const [category, setCategory] = useState(
@@ -38,91 +35,27 @@ export const FormContentAction = (props: FormContentActionProps) => {
   );
   const [tags, setTags] = useState<string[]>(content ? content.tags : []);
 
-  const fileRef = useRef<HTMLInputElement | null>(null);
-
-  const generatorImage = () => {
-    if (image) {
-      if (typeof image === "string") {
-        return (
-          <picture>
-            <img
-              onClick={() => {
-                if (fileRef && fileRef.current) {
-                  fileRef.current.click();
-                }
-              }}
-              src={image}
-              style={{
-                width: "300px",
-                aspectRatio: "16/9",
-                cursor: "pointer",
-                objectFit: "cover",
-                borderRadius: "5px",
-              }}
-              alt="photo"
-            />
-          </picture>
-        );
-      } else {
-        return (
-          <picture>
-            <img
-              onClick={() => {
-                if (fileRef && fileRef.current) {
-                  fileRef.current.click();
-                }
-              }}
-              src={URL.createObjectURL(image)}
-              style={{
-                width: "300px",
-                aspectRatio: "16/9",
-                cursor: "pointer",
-                objectFit: "cover",
-                borderRadius: "5px",
-              }}
-              alt="photo"
-            />
-          </picture>
-        );
-      }
-    } else {
-      return (
-        <Image
-          onClick={() => {
-            if (fileRef && fileRef.current) {
-              fileRef.current.click();
-            }
-          }}
-          style={{
-            cursor: "pointer",
-            objectFit: "cover",
-            borderRadius: "5px",
-          }}
-          src="http://via.placeholder.com/300x200"
-          width={300}
-          height={200}
-          alt="image"
-        />
-      );
-    }
-  };
-
   const action = async () => {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("body", body);
-    formData.append("category", category);
-    tags.forEach((tag, key) => {
-      formData.append(`tags[${key}]`, tag);
-    });
+    // const formData = new FormData();
+    // formData.append("title", title);
+    // formData.append("body", body);
+    // formData.append("category", category);
+    // tags.forEach((tag, key) => {
+    //   formData.append(`tags[${key}]`, tag);
+    // });
 
-    if (image && typeof image !== "string") {
-      formData.append("files", image, image.name);
-    }
+    const payload = {
+      title: title,
+      body: body,
+      category: category,
+      complete: true,
+      tags: tags,
+      casePublic: casePublic,
+    };
 
     if (content) {
       try {
-        await apiCaller.contentApi.update(content._id, formData);
+        await apiCaller.contentApi.update(content._id, payload);
         router.replace("/owner/content");
         router.refresh();
       } catch (error: any) {
@@ -143,7 +76,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
       }
     } else {
       try {
-        await apiCaller.contentApi.create(formData);
+        await apiCaller.contentApi.create(payload);
         router.replace("/owner/content");
         router.refresh();
       } catch (error: any) {
@@ -167,68 +100,49 @@ export const FormContentAction = (props: FormContentActionProps) => {
 
   return (
     <div className="flex flex-col w-full gap-4 ">
-      <div className="flex flex-row w-full gap-4 px-2  justify-between">
-        <div className="gap-6 flex flex-col px-10  flex-1">
-          <label className="relative block">
-            <span className="sr-only">Tiêu đề</span>
-            <input
-              className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-              placeholder="Nhập tiêu đề..."
-              type="text"
-              name="title"
-              value={title}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                const { value } = e.target;
-                setTitle(value);
-              }}
-            />
-          </label>
-
-          <ContentCategoryBox
-            value={category}
-            change={(txt) => setCategory(txt)}
+      <div className="gap-6 flex flex-col px-10 lg:w-4/6 w-4/5 mx-auto  flex-1">
+        <label className="relative block">
+          <span className="sr-only">Tiêu đề</span>
+          <input
+            className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+            placeholder="Nhập tiêu đề..."
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              const { value } = e.target;
+              setTitle(value);
+            }}
           />
+        </label>
 
-          <ContentActionTagsBox tags={tags} change={(tags) => setTags(tags)} />
+        <ContentCategoryBox
+          value={category}
+          change={(txt) => setCategory(txt)}
+        />
 
-          <div className="flex flex-row gap-2 justify-center items-center">
-            {casePublicData.map((c) => {
-              return (
-                <span
-                  key={c.key}
-                  className={`text-xs px-4 py-2 rounded-md select-none 
+        <ContentActionTagsBox tags={tags} change={(tags) => setTags(tags)} />
+
+        <div className="flex flex-row gap-2 justify-center items-center">
+          {casePublicData.map((c) => {
+            return (
+              <span
+                key={c.key}
+                className={`text-xs px-4 py-2 rounded-md select-none 
             cursor-pointer bg-opacity-40 shadow-md ${
               casePublic === c.key
                 ? " bg-slate-900 text-slate-100"
                 : "dark:text-slate-100"
             }`}
-                  style={{ border: "1px solid white" }}
-                  onClick={() => {
-                    setCasePublic(c.key);
-                  }}
-                >
-                  {c.value}
-                </span>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="w-fit">
-          {generatorImage()}
-
-          <input
-            ref={fileRef}
-            type="file"
-            hidden
-            onChange={(e) => {
-              if (e.target.files) {
-                const f = e.target.files[0];
-
-                setImage(f);
-              }
-            }}
-          />
+                style={{ border: "1px solid white" }}
+                onClick={() => {
+                  setCasePublic(c.key);
+                }}
+              >
+                {c.value}
+              </span>
+            );
+          })}
         </div>
       </div>
 
