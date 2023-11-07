@@ -1,10 +1,7 @@
 "use client";
-import ImageResize from "quill-image-resize-module-react";
-
+const ImageResize = require("quill-image-resize-module-react");
 import ReactQuill, { Quill } from "react-quill";
-
 import QuillNoSSRWrapper from "react-quill";
-
 import "react-quill/dist/quill.snow.css";
 
 Quill.register("modules/imageResize", ImageResize);
