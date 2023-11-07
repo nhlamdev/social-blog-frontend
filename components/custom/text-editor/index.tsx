@@ -6,11 +6,12 @@ import ReactQuill, { Quill } from "react-quill";
 import QuillNoSSRWrapper from "react-quill";
 
 import "react-quill/dist/quill.snow.css";
+
 Quill.register("modules/imageResize", ImageResize);
 
 const modules = {
   toolbar: [
-    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }],
     [{ size: [] }],
     [
       "bold",
@@ -18,6 +19,7 @@ const modules = {
       "underline",
       "strike",
       "blockquote",
+      "code-block",
       { color: [] },
       { background: [] },
       { align: [] },
@@ -48,6 +50,7 @@ const modules = {
 };
 const formats = [
   "header",
+  "width",
   "font",
   "size",
   "bold",
