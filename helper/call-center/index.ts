@@ -20,11 +20,9 @@ axiosInstance.interceptors.request.use(
       if (!accessTokenName) {
         return Promise.reject();
       }
-      // console.log(1);
       const checkAccess = await Cookies.get(accessTokenName);
 
       if (!checkAccess) {
-        // console.log(2);
         if (!refreshTokenName) {
           return Promise.reject();
         }
@@ -36,7 +34,6 @@ axiosInstance.interceptors.request.use(
         }
 
         try {
-          // console.log(2.5);
           await axios.get("/service/renew-token");
         } catch (error) {
           Cookies.remove(accessTokenName);
@@ -44,10 +41,8 @@ axiosInstance.interceptors.request.use(
           return Promise.reject();
         }
       }
-      // return config;
     }
 
-    console.log(4);
     return config;
   },
   (err: AxiosError) => {
@@ -57,12 +52,10 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   async (response) => {
-    console.log("response : ", response);
     return response;
   },
 
   async (err) => {
-    console.log("err : ", err);
     if (err.response && err.response?.data) {
     } else {
       return err;
