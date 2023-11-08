@@ -4,7 +4,6 @@ import { PageProps } from "@/interface";
 import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { IoMdTimer } from "react-icons/io";
 

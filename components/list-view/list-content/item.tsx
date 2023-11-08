@@ -18,7 +18,7 @@ export const ClientHomeListContentItem = (
       shadow-md rounded-md"
     >
       {/* --------------- */}
-      <div className="flex flex-col justify-between py-2 md:py-4 px-4">
+      <div className="flex flex-col justify-between py-2 md:py-4 px-4 gap-2">
         <Link
           href={`/content/${content._id}`}
           className="group flex flex-col gap-1 cursor-pointer"

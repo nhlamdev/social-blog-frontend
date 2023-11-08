@@ -1,7 +1,11 @@
 "use client";
 import { categoryApi } from "@/api/category";
 import { PaginationDirectComponent } from "@/components/custom";
-import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
+import {
+  generateURLWithQueryParams,
+  getCountPage,
+  getDateTime,
+} from "@/utils/global-func";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -84,7 +88,7 @@ export const OwnerListContentInCategory = (
   return (
     <>
       <div
-        className="w-4/5 flex flex-col gap-4"
+        className="w-4/5 flex flex-col gap-2"
         style={{
           flex: 1,
         }}
@@ -107,8 +111,10 @@ export const OwnerListContentInCategory = (
                 ) : (
                   <></>
                 )}
-
-                <div className="flex flex-row gap-2 items-center">
+                <span className="text-xs font-light">
+                  Tạo lúc : {getDateTime(content.created_at)}
+                </span>
+                {/* <div className="flex flex-row gap-2 items-center">
                   <div className="w-6 h-6 relative">
                     <Image
                       src={content.created_by.image}
@@ -121,7 +127,7 @@ export const OwnerListContentInCategory = (
                   <span className="text-xs font-light">
                     {content.created_by.email}
                   </span>
-                </div>
+                </div> */}
               </div>
 
               <div

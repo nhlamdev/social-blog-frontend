@@ -147,7 +147,11 @@ export const FormContentAction = (props: FormContentActionProps) => {
 
       <div className="bg-slate-50 w-full">
         {document ? (
-          <TextEditor value={body} change={(value) => setBody(value)} />
+          <TextEditor
+            value={body}
+            change={(value) => setBody(value)}
+            height="500px"
+          />
         ) : (
           <></>
         )}

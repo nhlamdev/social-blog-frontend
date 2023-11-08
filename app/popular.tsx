@@ -82,7 +82,7 @@ export const PopularItemsComponent = async () => {
                 )}
 
                 <span className="text-xs text-slate-900 dark:text-slate-100">
-                  {getDateTime(content.created_at)}
+                  ngày tạo : {getDateTime(content.created_at)}
                 </span>
               </div>
             </Link>

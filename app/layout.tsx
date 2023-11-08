@@ -1,8 +1,7 @@
 import { ProviderComponent } from "@/provider";
 import "@/styles/global.scss";
 import type { Metadata } from "next";
-import Image from "next/image";
-import Script from "next/script";
+import "react-quill/dist/quill.snow.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",

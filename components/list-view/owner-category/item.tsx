@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaEdit } from "react-icons/fa";
 import { MdOutlineContentCopy, MdOutlineRemoveCircle } from "react-icons/md";
+import { BiBookContent } from "react-icons/bi";
+import { getDateTime } from "@/utils/global-func";
 interface SeriesItemProps {
   item: any;
   reload: () => void;
@@ -15,26 +17,22 @@ export const ListViewItem = (props: SeriesItemProps) => {
   return (
     <div
       className="shadow-md w-4/5 lg:w-3/4 bg-slate-100 bg-opacity-60 backdrop-blur
-    flex flex-row gap-2 p-2 rounded-lg items-center"
+    flex flex-row gap-2 p-2 rounded-md items-center"
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flex: 1,
-          gap: "10px",
-        }}
-      >
-        <div className="flex flex-row gap-2 items-center">
-          <span className="text-slate-800 text-md">{item.title}</span>
-          {item.contents > 0 ? (
-            <span className="text-xs font-light">({item.contents})</span>
-          ) : (
-            <></>
-          )}
-        </div>
+      <div className="flex flex-col gap-2 flex-1">
+        <span className="text-slate-800 text-md">{item.title}</span>
 
-        <span className="text-slate-800 text-xs">{item.summary}</span>
+        {/* <span className="text-slate-800 text-xs">{item.summary}</span> */}
+
+        {item.contents > 0 ? (
+          <span className="text-xs font-light">{item.contents} bài viết</span>
+        ) : (
+          <span className="text-xs font-light">Chưa có bài viết</span>
+        )}
+
+        <span className="text-xs font-light">
+          Tạo lúc : {getDateTime(item.created_at)}
+        </span>
       </div>
 
       <div
