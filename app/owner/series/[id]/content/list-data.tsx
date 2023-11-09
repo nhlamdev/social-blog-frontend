@@ -1,8 +1,11 @@
 "use client";
 import { contentApi } from "@/api/content";
 import { PaginationDirectComponent } from "@/components/custom";
-import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
-import Image from "next/image";
+import {
+  generateURLWithQueryParams,
+  getCountPage,
+  getDateTime,
+} from "@/utils/global-func";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AiFillFolderAdd } from "react-icons/ai";
@@ -101,8 +104,14 @@ export const OwnerListContentInSeries = (props: IOwnerListContentInSeries) => {
                     {content.series.title}
                   </span>
                 ) : (
-                  <></>
+                  <span className="text-xs font-light">
+                    Không thuộc chuỗi nào.
+                  </span>
                 )}
+
+                <span className="text-xs font-light">
+                  Tạo lúc : {getDateTime(content.created_at)}
+                </span>
               </div>
 
               <div

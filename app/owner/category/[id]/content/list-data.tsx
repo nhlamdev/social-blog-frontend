@@ -109,25 +109,13 @@ export const OwnerListContentInCategory = (
                     {content.category.title}
                   </span>
                 ) : (
-                  <></>
+                  <span className="text-xs font-light">
+                    Không thuộc thể loại nào.
+                  </span>
                 )}
                 <span className="text-xs font-light">
                   Tạo lúc : {getDateTime(content.created_at)}
                 </span>
-                {/* <div className="flex flex-row gap-2 items-center">
-                  <div className="w-6 h-6 relative">
-                    <Image
-                      src={content.created_by.image}
-                      className="rounded-full"
-                      fill
-                      alt="photo"
-                    />
-                  </div>
-
-                  <span className="text-xs font-light">
-                    {content.created_by.email}
-                  </span>
-                </div> */}
               </div>
 
               <div

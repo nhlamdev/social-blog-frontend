@@ -1,5 +1,6 @@
 "use client";
 import { apiCaller } from "@/api";
+import { getDateTime } from "@/utils/global-func";
 import Link from "next/link";
 import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
@@ -15,27 +16,20 @@ export const ListViewItem = (props: SeriesItemProps) => {
   return (
     <div
       className="shadow-md w-4/5 lg:w-3/4 bg-slate-100 bg-opacity-60 backdrop-blur
-      flex flex-row gap-2 p-2 rounded-lg items-center"
+    flex flex-row gap-2 p-2 rounded-md items-center"
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flex: 1,
-          gap: "10px",
-        }}
-      >
-        <div className="flex flex-row gap-2 items-center">
-          <span className="text-md  text-slate-900">{item.title}</span>
-          {item.contents > 0 ? (
-            <span className="text-xs font-light  text-slate-900">
-              ({item.contents})
-            </span>
-          ) : (
-            <></>
-          )}
-        </div>
-        <span className="text-slate-800 text-xs">{item.summary}</span>
+      <div className="flex flex-col gap-2 flex-1">
+        <span className="text-slate-900 text-md">{item.title}</span>
+
+        {item.contents > 0 ? (
+          <span className="text-xs font-light">{item.contents} bài viết</span>
+        ) : (
+          <span className="text-xs font-light">Chưa có bài viết</span>
+        )}
+
+        <span className="text-xs font-light">
+          Tạo lúc : {getDateTime(item.created_at)}
+        </span>
       </div>
 
       <div

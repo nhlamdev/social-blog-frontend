@@ -9,8 +9,9 @@ export const authApi = {
   updateRole(memberId: string, key: string, value: boolean) {
     return axiosInstance.patch(`change-role/${memberId}`, { key, value });
   },
-  session() {
-    return axiosInstance.get("all-session");
+  session(params: { [key: string]: string }) {
+    const url = generateURLWithQueryParams("all-session", params);
+    return axiosInstance.get(url);
   },
   profile() {
     return axiosInstance.get("profile");

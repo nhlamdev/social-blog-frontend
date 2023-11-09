@@ -20,9 +20,7 @@ export const ListViewItem = (props: SeriesItemProps) => {
     flex flex-row gap-2 p-2 rounded-md items-center"
     >
       <div className="flex flex-col gap-2 flex-1">
-        <span className="text-slate-800 text-md">{item.title}</span>
-
-        {/* <span className="text-slate-800 text-xs">{item.summary}</span> */}
+        <span className="text-slate-900 text-md">{item.title}</span>
 
         {item.contents > 0 ? (
           <span className="text-xs font-light">{item.contents} bài viết</span>

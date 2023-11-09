@@ -1,20 +1,42 @@
 "use client";
 import { authApi } from "@/api/auth";
 import { ISession } from "@/interface";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { SessionRow } from "./row";
 import { enqueueSnackbar } from "notistack";
+import { useSearchParams } from "next/navigation";
+import { PaginationDirectComponent } from "@/components/custom";
+import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 
 export const HistoryLoginTable = () => {
   const [session, setSession] = useState<ISession[]>([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const searchParams = useSearchParams();
+
+  const page = searchParams.get("page");
+
+  const current =
+    page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))
+      ? Number(page) - 1
+      : 0;
+
+  const params = useMemo(
+    () => ({
+      skip: (current * 5).toString(),
+      take: "5",
+    }),
+    [current]
+  );
 
   const fetchData = useCallback(() => {
     setLoading(true);
     authApi
-      .session()
+      .session(params)
       .then((res) => {
-        const { data } = res;
+        const { data, count } = res.data;
+        setTotal(count);
         setSession(data);
       })
       .catch((error) => {
@@ -32,7 +54,7 @@ export const HistoryLoginTable = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     fetchData();
@@ -43,41 +65,66 @@ export const HistoryLoginTable = () => {
   }
 
   return (
-    <table className="bg-slate-100 bg-opacity-20 min-w-max w-full table-auto">
-      <thead>
-        <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
-          <th className="py-3 px-6">
-            <span className="w-full block text-left lg:text-sm text-xs">
-              Thông tin
-            </span>
-          </th>
-          <th className="py-3 px-6">
-            <span className="w-full block text-center lg:text-sm text-xs">
-              Ngày tạo
-            </span>
-          </th>
-          <th className="py-3 px-6">
-            <span className="w-full block text-center lg:text-sm text-xs">
-              Thiết bị
-            </span>
-          </th>
-          <th className="py-3 px-6">
-            <span className="w-full block text-center lg:text-sm text-xs">
-              Loại
-            </span>
-          </th>
-          <th className="py-3 px-6">
-            <span className="w-full block text-center lg:text-sm text-xs">
-              Thao tác
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody className="text-slate-800 dark:text-slate-200 text-sm font-light">
-        {session.map((s) => {
-          return <SessionRow key={s._id} item={s} reload={() => fetchData()} />;
-        })}
-      </tbody>
-    </table>
+    <>
+      <div className="rounded my-6 w-full h-full">
+        <table className="bg-slate-100 bg-opacity-20 min-w-max w-full table-auto flex-1">
+          <thead>
+            <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
+              <th className="py-3 px-6">
+                <span className="w-full block text-left lg:text-sm text-xs">
+                  Thông tin
+                </span>
+              </th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-center lg:text-sm text-xs">
+                  Ngày tạo
+                </span>
+              </th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-center lg:text-sm text-xs">
+                  Thiết bị
+                </span>
+              </th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-center lg:text-sm text-xs">
+                  Loại
+                </span>
+              </th>
+              <th className="py-3 px-6">
+                <span className="w-full block text-center lg:text-sm text-xs">
+                  Thao tác
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="text-slate-800 dark:text-slate-200 text-sm font-light">
+            {session.map((s) => {
+              return (
+                <SessionRow key={s._id} item={s} reload={() => fetchData()} />
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {total !== 0 ? (
+        <PaginationDirectComponent
+          current={current + 1}
+          total={getCountPage(total, 8)}
+          urlDirect={(p) => {
+            const newSearchParams = {
+              page: p.toString(),
+            };
+            const url = generateURLWithQueryParams(
+              "/owner/session",
+              newSearchParams
+            );
+
+            return url;
+          }}
+        />
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
