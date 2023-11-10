@@ -61,6 +61,14 @@ export const ClientNavigatorMobile = () => {
               </Link>
 
               <Link
+                href="/author"
+                className="font-semibold text-sm w-full px-2 py-1 "
+                style={{ borderBottom: "1px solid black" }}
+              >
+                Tác giả
+              </Link>
+
+              <Link
                 href="/about-me"
                 className="font-semibold text-sm w-full px-2 py-1 "
                 style={{ borderBottom: "1px solid black" }}

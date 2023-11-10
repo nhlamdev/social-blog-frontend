@@ -26,6 +26,7 @@ export const ClientContentListView = (props: ClientContentListViewProps) => {
         style={{ width: "100%", gap: "10px", flex: 1 }}
       >
         {contents.data.map((content: any) => {
+          console.log("content : ", content);
           return (
             <ClientHomeListContentItem key={content._id} content={content} />
           );

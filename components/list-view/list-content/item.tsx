@@ -24,7 +24,6 @@ export const ClientHomeListContentItem = (
           href={`/content/${content._id}`}
           className="group flex flex-col gap-1 cursor-pointer"
         >
-          <span>{content.category}</span>
           <span
             className="group-hover:underline font-bold text-xs sm:text-sm md:text-md
           text-slate-900 dark:text-slate-100"

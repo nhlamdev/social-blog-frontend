@@ -28,6 +28,12 @@ export const ClientNavigatorDesktop = () => {
             </span>
           </Link>
 
+          <Link href="/author">
+            <span className="font-semibold text-sm dark:text-slate-100">
+              Tác giả
+            </span>
+          </Link>
+
           <Link href="/about-me">
             <span className="font-semibold text-sm dark:text-slate-100">
               Về tôi
