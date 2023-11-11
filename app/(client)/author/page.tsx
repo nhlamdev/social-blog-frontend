@@ -1,4 +1,4 @@
-import { AuththorsBoxDisplay } from "@/components/list-view/author-box";
+import { ListViewAuthors } from "@/components/list-view/list-author";
 import axios from "axios";
 import Image from "next/image";
 const backend = process.env.SERVICE_PORT;
@@ -10,7 +10,7 @@ export default async function AuthorContentPage() {
 
   return (
     <div className="min-h-screen flex flex-row w-full p-4 gap-4 justify-center">
-      <AuththorsBoxDisplay members={members} />
+      <ListViewAuthors members={members} />
     </div>
   );
 }

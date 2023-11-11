@@ -2,6 +2,11 @@ import { axiosInstance } from "@/helper";
 import { generateURLWithQueryParams } from "@/utils/global-func";
 
 export const contentApi = {
+  allWithPublic(params: { [key: string]: string }) {
+    const url = generateURLWithQueryParams("content", params);
+    return axiosInstance.get(url);
+  },
+
   all(params: { [key: string]: string }) {
     const url = generateURLWithQueryParams("content/owner", params);
     return axiosInstance.get(url);

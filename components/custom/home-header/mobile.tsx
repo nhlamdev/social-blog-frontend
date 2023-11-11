@@ -68,6 +68,15 @@ export const ClientHomeHeaderMobile = () => {
                 dark:border-slate-100 border-slate-900"
                 style={{ borderBottom: "1px solid" }}
               >
+                Tác giả
+              </Link>
+
+              <Link
+                href="/about-me"
+                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
+                dark:border-slate-100 border-slate-900"
+                style={{ borderBottom: "1px solid" }}
+              >
                 Về tôi
               </Link>
             </div>

@@ -41,10 +41,12 @@ export const ClientHomeHeaderDesktop = () => {
             Chuỗi bài viết
           </span>
         </Link>
+        <Link href="/author">
+          <span className="dark:text-slate-100 text-slate-900">Tác giả</span>
+        </Link>
         <Link href="/about-me">
           <span className="dark:text-slate-100 text-slate-900">Về tôi</span>
         </Link>
-
         <form
           action="/content"
           className="select-none flex flex-row items-center justify-end gap-2  flex-1"

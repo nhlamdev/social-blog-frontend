@@ -14,6 +14,7 @@ export const ClientListSeries = (props: ClientListSeriesProps) => {
     page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))
       ? Number(page) - 1
       : 0;
+
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
       <div className="w-full flex flex-col p-2 items-center gap-2 flex-1">

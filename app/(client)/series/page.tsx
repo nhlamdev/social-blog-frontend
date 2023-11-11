@@ -25,9 +25,6 @@ export default async function ClientSeriesPage(props: PageProps) {
     }
   );
 
-  // console.log("series : ", series);
-  console.log("render render");
-
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
       <ClientSeriesSearchBox searchParams={searchParams} />
