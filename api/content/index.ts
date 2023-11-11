@@ -15,8 +15,16 @@ export const contentApi = {
     const url = generateURLWithQueryParams("content/owner", params);
     return axiosInstance.get(url);
   },
+
+  allUniqueTags(author?: string) {
+    if (author) {
+      return axiosInstance.get(`content/tags-by-author?author=${author}`);
+    } else {
+      return axiosInstance.get(`content/tags-by-author`);
+    }
+  },
   getContentByIdAndOwner(id: string) {
-    return axiosInstance.get(`/content/by-id/${id}/owner`);
+    return axiosInstance.get(`content/by-id/${id}/owner`);
   },
   getContentsByCategory(id: string, params: { [key: string]: string }) {
     const url = generateURLWithQueryParams(`content/by-category/${id}`, params);
