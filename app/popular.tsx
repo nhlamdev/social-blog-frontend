@@ -7,11 +7,15 @@ const backend = process.env.SERVICE_PORT;
 
 export const PopularItemsComponent = async () => {
   const { data: topContents } = await axios.get(
-    `http://localhost:${backend}/content/more-view?take=3`
+    `http://localhost:${backend}/content/more-view?take=4`
   );
 
   const { data: topCategoryMoreContent } = await axios.get(
     `http://localhost:${backend}/category/more-contents?take=5`
+  );
+
+  const { data: tags } = await axios.get(
+    `http://localhost:${backend}/content/tags-by-author`
   );
 
   return (
@@ -121,6 +125,34 @@ export const PopularItemsComponent = async () => {
                   </span>
                 </div>
               </Link>
+            );
+          })}
+        </div>
+
+        <span
+          className="text-xl font-semibold p-2 text-left
+        text-slate-900 dark:text-slate-100"
+        >
+          Thẻ
+        </span>
+
+        <div className="flex flex-row flex-wrap gap-2">
+          {Object.keys(tags).map((tag) => {
+            return (
+              <div
+                key={tag}
+                className="flex flex-row gap-2 px-4 py-2 rounded-md bg-cyan-400 shadow-md
+            items-center"
+              >
+                <span className="text-xs select-none">{tag}</span>
+
+                <span
+                  className="text-xs p-1 bg-slate-100 bg-opacity-40 w-6 h-6 items-center justify-center
+            rounded-full select-none flex font-bold"
+                >
+                  {tags[tag]}
+                </span>
+              </div>
             );
           })}
         </div>
