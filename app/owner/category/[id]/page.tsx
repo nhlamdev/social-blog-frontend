@@ -23,7 +23,6 @@ export default async function OwnerDetailCategoryPage(props: PageProps) {
   let category: ICategory | undefined;
 
   try {
-    console.log("render");
     const { data } = await axios.get(
       `http://localhost:${backend}/category/by-id/${id}`
     );
