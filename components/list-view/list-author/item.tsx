@@ -11,6 +11,7 @@ interface IListViewAuthorsItem {
 
 export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
   const { member } = props;
+  console.log("member : ", member);
   return (
     <Link
       href={`/author/${member._id}`}
@@ -44,7 +45,7 @@ export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
       <div className="flex flex-row items-center gap-1">
         <div className="flex flex-row items-center gap-2">
           <BiBookContent className="text-xs" />
-          <span className="text-xs">{member.countContent}</span>
+          <span className="text-xs">{member.content_count}</span>
         </div>
 
         <div
@@ -53,7 +54,7 @@ export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
         />
         <div className="flex flex-row items-center gap-2">
           <SiSteelseries className="text-xs" />
-          <span className="text-xs">{member.countContent}</span>
+          <span className="text-xs">{member.series_count}</span>
         </div>
         <div
           className="h-4 bg-slate-600 dark:bg-slate-200 mx-1"
@@ -61,7 +62,7 @@ export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
         />
         <div className="flex flex-row items-center gap-2">
           <BsFillBookmarksFill className="text-xs" />
-          <span className="text-xs">0</span>
+          <span className="text-xs">{member.follow_by.length}</span>
         </div>
       </div>
     </Link>

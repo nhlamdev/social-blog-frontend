@@ -3,7 +3,6 @@ import { PageProps } from "@/interface";
 import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
-import { BsBookmarksFill } from "react-icons/bs";
 import { FollowButton } from "./follow-btn";
 
 const backend = process.env.SERVICE_PORT;
@@ -40,7 +39,7 @@ export default async function ContentInAuthorPage(props: PageProps) {
             Tham gia lúc : {getDateTime(member.created_at)}
           </span>
 
-          <FollowButton />
+          <FollowButton member={member} />
         </div>
       </div>
 

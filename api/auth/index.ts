@@ -9,6 +9,9 @@ export const authApi = {
   updateRole(memberId: string, key: string, value: boolean) {
     return axiosInstance.patch(`change-role/${memberId}`, { key, value });
   },
+  updateFollowed(targetAuthor: string) {
+    return axiosInstance.patch(`update-follow/${targetAuthor}`);
+  },
   session(params: { [key: string]: string }) {
     const url = generateURLWithQueryParams("all-session", params);
     return axiosInstance.get(url);
