@@ -76,7 +76,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
           <></>
         )}
         <Link
-          href={"/content/my-save"}
+          href={"/content/bookmark"}
           className="group flex flex-row gap-2 items-center px-6 py-2 w-full 
             whitespace-nowrap"
           style={{

@@ -5,6 +5,7 @@ import { RandomContentComponent } from "./random-content";
 import { CommentsComponent } from "@/components/custom/comments";
 import Image from "next/image";
 import { getDateTime } from "@/utils/global-func";
+import { MdFavorite } from "react-icons/md";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -30,7 +31,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative ">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col w-full lg:w-4/5">
         <span className="text-slate-800 dark:text-slate-200 font-semibold text-2xl select-none">
           {content.title}
         </span>
@@ -41,7 +42,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
       </div>
 
       {/* ----------------- */}
-      <div className="p-2 bg-slate-100 bg-opacity-80 w-full lg:w-4/5 min-h-[300px] rounded-md">
+      <div className="p-2 bg-slate-100 bg-opacity-80 w-full lg:w-4/5 min-h-[300px] rounded-md relative">
         <div
           className="w-full"
           dangerouslySetInnerHTML={{ __html: content.body }}

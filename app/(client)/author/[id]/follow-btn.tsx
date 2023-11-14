@@ -5,7 +5,9 @@ import { useState } from "react";
 import { BsBookmarksFill, BsFillBookmarkXFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
-
+import { FaPlus } from "react-icons/fa";
+import { FaMinusCircle } from "react-icons/fa";
+import { FaCirclePlus } from "react-icons/fa6";
 interface IFollowButton {
   member: any;
 }
@@ -28,10 +30,10 @@ export const FollowButton = (props: IFollowButton) => {
         className="flex flex-row items-center gap-2 cursor-pointer bg-slate-400
   rounded-md hover:shadow-sm px-4 py-2 w-fit bg-opacity-40"
       >
-        <BsBookmarksFill />
-        <span>Theo dõi</span>
+        {/* <BsBookmarksFill /> */}
+        <span className="select-none">Theo dõi</span>
         {member.follow_by.length > 0 ? (
-          <span>{member.follow_by.length}</span>
+          <span className="select-none">{member.follow_by.length}</span>
         ) : (
           <></>
         )}
@@ -73,14 +75,14 @@ export const FollowButton = (props: IFollowButton) => {
       onClick={() => submit()}
     >
       {member.follow_by.includes(profile._id) ? (
-        <BsFillBookmarkXFill />
+        <FaMinusCircle />
       ) : (
-        <BsBookmarksFill />
+        <FaCirclePlus />
       )}
 
-      <span>Theo dõi</span>
+      <span className="select-none">Theo dõi</span>
       {member.follow_by.length > 0 ? (
-        <span>{member.follow_by.length}</span>
+        <span className="select-none">{member.follow_by.length}</span>
       ) : (
         <></>
       )}
