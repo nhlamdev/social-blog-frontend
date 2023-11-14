@@ -2,7 +2,6 @@
 import { authApi } from "@/api/auth";
 import { useAuth } from "@/hook/auth-hook";
 import { useState } from "react";
-import { BsBookmarksFill, BsFillBookmarkXFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { FaPlus } from "react-icons/fa";
