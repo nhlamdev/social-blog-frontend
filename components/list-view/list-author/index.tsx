@@ -1,11 +1,5 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
-import { BiBookContent } from "react-icons/bi";
-import { BsFillBookmarksFill } from "react-icons/bs";
 import { ListViewAuthorsItem } from "./item";
-import { PaginationDirectComponent } from "@/components/custom";
-import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 
 interface IListViewAuthors {
   members: any[];

@@ -11,6 +11,10 @@ export const contentApi = {
     const url = generateURLWithQueryParams("content/owner", params);
     return axiosInstance.get(url);
   },
+  allBookmarkContent(params: { [key: string]: string }) {
+    const url = generateURLWithQueryParams("content/bookmark", params);
+    return axiosInstance.get(url);
+  },
   allByUserCreate(params: { [key: string]: string }) {
     const url = generateURLWithQueryParams("content/owner", params);
     return axiosInstance.get(url);
