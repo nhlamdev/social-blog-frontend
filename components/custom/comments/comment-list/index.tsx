@@ -29,11 +29,7 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
               <div className="flex flex-row gap-2">
                 <picture>
                   <img
-                    src={
-                      comment.created_by
-                        ? comment.created_by.image
-                        : "/avatar/test.jpg"
-                    }
+                    src={`/service/${comment.created_by.image}`}
                     className="rounded-full aspect-square w-6 h-6 object-cover"
                     alt="photo"
                   />

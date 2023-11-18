@@ -9,6 +9,11 @@ export const authApi = {
   updateRole(memberId: string, key: string, value: boolean) {
     return axiosInstance.patch(`change-role/${memberId}`, { key, value });
   },
+  updateProle(formData: FormData) {
+    return axiosInstance.put("change", formData, {
+      headers: { "content-type": "multipart/form-data" },
+    });
+  },
   updateFollowed(targetAuthor: string) {
     return axiosInstance.patch(`update-follow/${targetAuthor}`);
   },

@@ -46,7 +46,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
         <div className="flex flex-col gap-2">
           <div className="relative w-8 h-8">
             <Image
-              src={content.created_by.image}
+              src={`/service/${content.created_by.image}`}
               fill
               style={{ borderRadius: "50%" }}
               alt="photo"

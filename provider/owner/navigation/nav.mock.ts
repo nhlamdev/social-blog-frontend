@@ -56,7 +56,7 @@ export const navigation_mock: INav[] = [
   {
     url: "/owner/setting",
     name: "Thiết lập",
-    require_owner: true,
+    require_owner: false,
     icon: AiFillSetting,
   },
 ];

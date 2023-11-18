@@ -31,7 +31,7 @@ export const OwnerNavigationDesktop = (props: IOwnerNavigationDesktop) => {
 
         <picture>
           <img
-            src={`${profile.image}`}
+            src={`/service/${profile.image}`}
             className="rounded-full w-8 h-8  shadow-lg"
             style={{ border: "2px solid black" }}
             alt="photo"

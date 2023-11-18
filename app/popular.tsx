@@ -42,7 +42,7 @@ export const PopularItemsComponent = async () => {
               <div className="flex flex-row gap-2 items-center">
                 <div className="relative w-6 h-6">
                   <Image
-                    src={content.created_by.image}
+                    src={`/service/${content.created_by.image}`}
                     fill
                     className="rounded-full aspect-square"
                     alt="asd"

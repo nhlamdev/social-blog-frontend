@@ -34,7 +34,11 @@ export const ClientHomeListContentItem = (
 
         <div className=" flex flex-row gap-2 items-center">
           <div className="w-6 h-6 rounded-full relative overflow-hidden">
-            <Image src={content.created_by.image} fill alt="photo" />
+            <Image
+              src={`/service/${content.created_by.image}`}
+              fill
+              alt="photo"
+            />
           </div>
 
           <div className="flex flex-row">

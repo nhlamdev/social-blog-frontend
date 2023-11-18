@@ -40,7 +40,7 @@ export const SeriesItem = (props: SeriesItemProps) => {
       <div className="flex flex-row w-full gap-2 items-center">
         <div className="w-6 h-6 relative">
           <Image
-            src={item.created_by.image}
+            src={`/service/${item.created_by.image}`}
             className="rounded-full"
             fill
             alt="photo"
