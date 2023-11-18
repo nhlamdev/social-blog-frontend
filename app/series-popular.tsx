@@ -53,7 +53,7 @@ export const SeriesPopular = async () => {
               <div className="flex flex-row gap-2">
                 <div className="w-6 h-6">
                   <Image
-                    src={v.created_image}
+                    src={`/service/${v.created_image}`}
                     className="object-cover rounded-full"
                     width={25}
                     height={25}

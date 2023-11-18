@@ -11,7 +11,7 @@ export const AuthBox = () => {
       <div
         role="status"
         className="flex flex-row items-center gap-2 shadow-xl py-2 px-4 rounded-lg 
-        bg-slate-200 bg-opacity-60"
+        bg-slate-200 bg-opacity-60 "
         style={{
           border: "1px solid #33333360",
         }}

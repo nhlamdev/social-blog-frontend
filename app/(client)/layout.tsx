@@ -1,6 +1,5 @@
 "use client";
 import { ClientProviderComponent } from "@/provider";
-import Image from "next/image";
 interface ClientLayoutProps {
   children: React.ReactNode;
   params: any;

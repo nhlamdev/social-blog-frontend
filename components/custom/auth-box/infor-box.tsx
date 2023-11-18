@@ -16,9 +16,13 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
 
   const { firstLoading, logout } = useAuth();
 
+  if (firstLoading) {
+    return <div>loading ...</div>;
+  }
+
   return (
     <div
-      className={`relative flex flex-col space-y-2  items-center  z-10
+      className={`relative flex flex-col space-y-2  items-center  z-10 min-w-[160px] justify-between
       ${
         open ? "before:block" : "before:hidden"
       } bg-slate-100 bg-opacity-60 h-full px-2 py-1 rounded-md
@@ -35,7 +39,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
         </span>
 
         <Image
-          src={profile?.image}
+          src={`/service/${profile.image}`}
           width={40}
           height={30}
           className="w-8 h-8 rounded-full object-cover"

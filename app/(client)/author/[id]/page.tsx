@@ -20,7 +20,7 @@ export default async function ContentInAuthorPage(props: PageProps) {
     <div className="min-h-screen flex flex-col w-full py-4 px-10 items-center gap-4">
       <div className="flex flex-row w-full gap-4 items-center">
         <Image
-          src={member.image}
+          src={`/service/${member.image}`}
           className="rounded-full shadow-lg "
           width={150}
           height={150}

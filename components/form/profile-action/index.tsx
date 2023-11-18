@@ -30,17 +30,13 @@ export const ProfileActionComponent = () => {
   }
 
   const submit = async () => {
-    console.log(1);
-
     if (!nameRef.current) {
-      console.log(2);
       return;
     }
 
     const name = nameRef.current.value;
 
     if (!Boolean(name)) {
-      console.log(3);
       return;
     }
 
@@ -49,14 +45,12 @@ export const ProfileActionComponent = () => {
     const image = imageRef.current?.files;
 
     if (typeof image !== "string" && image && image[0]) {
-      console.log(4, " ", image[0]);
       formData.append("files", image[0], image[0].name);
     }
 
     formData.append("name", name);
 
     setLoading(true);
-    console.log(5);
     try {
       await authApi.updateProle(formData);
     } catch {

@@ -11,7 +11,6 @@ interface IListViewAuthorsItem {
 
 export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
   const { member } = props;
-  console.log("member : ", member);
   return (
     <Link
       href={`/author/${member._id}`}
@@ -26,7 +25,7 @@ export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
       <div className="flex flex-row gap-2 w-full">
         <div className="w-8 h-8 aspect-square rounded-full shadow-lg overflow-hidden relative">
           <Image
-            src={member.image}
+            src={`/service/${member.image}`}
             style={{ objectFit: "cover" }}
             fill
             alt="image"
