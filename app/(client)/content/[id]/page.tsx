@@ -1,14 +1,12 @@
-import { PageProps } from "@/interface";
-import axios from "axios";
-import { notFound } from "next/navigation";
-import { RandomContentComponent } from "./random-content";
 import { CommentsComponent } from "@/components/custom/comments";
-import Image from "next/image";
+import { PageProps } from "@/interface";
 import { getDateTime } from "@/utils/global-func";
+import axios from "axios";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
-
-import { BsBookmarksFill, BsFillBookmarkXFill } from "react-icons/bs";
-import { BookmarkActionButton } from "./bookmark-action";
+import { RandomContentComponent } from "./random-content";
+import { BookmarkActionButton } from "@/components/custom";
 
 const backend = process.env.SERVICE_PORT;
 

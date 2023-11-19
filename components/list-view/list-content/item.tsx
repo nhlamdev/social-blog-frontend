@@ -1,11 +1,10 @@
-import Image from "next/image";
+import { BookmarkActionButton } from "@/components/custom";
 import { getDateTime } from "@/utils/global-func";
-import { LuView } from "react-icons/lu";
-import { BiCommentDetail } from "react-icons/bi";
+import Image from "next/image";
 import Link from "next/link";
-import { FaChevronCircleUp, FaChevronCircleDown } from "react-icons/fa";
-import { BsBookmarksFill } from "react-icons/bs";
-
+import { BiCommentDetail } from "react-icons/bi";
+import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
+import { LuView } from "react-icons/lu";
 interface ClientHomeListContentItemProps {
   content: any;
 }
@@ -16,27 +15,22 @@ export const ClientHomeListContentItem = (
   const { content } = props;
 
   return (
-    <div
-      className="w-full flex flex-row  bg-slate-100 bg-opacity-40
-      shadow-md rounded-md"
-    >
+    <div className="w-full flex flex-row gap-2">
       <div className="flex flex-col gap-2 p-2 justify-center">
         <div className="flex flex-col items-center gap-1">
           <FaChevronCircleUp className="cursor-pointer text-lg" />
           <span className="font-semibold">2</span>
-          <FaChevronCircleDown className="cursor-pointer  text-lg" />
+          <FaChevronCircleDown className="cursor-pointer text-lg" />
         </div>
 
-        <div
-          className="relative p-2 flex items-center justify-center rounded-full"
-          style={{ border: "1px solid black", cursor: "pointer" }}
-        >
-          <BsBookmarksFill className="text-md" />
-        </div>
+        <BookmarkActionButton content={content} size="small" />
       </div>
 
       {/* --------------- */}
-      <div className="flex flex-col justify-between py-2 md:py-4 px-4 gap-2">
+      <div
+        className="flex flex-col justify-between py-2 md:py-4 px-4 gap-2  w-full
+      shadow-md rounded-md bg-slate-100 bg-opacity-40"
+      >
         <Link
           href={`/content/${content._id}`}
           className="group flex flex-col gap-1 cursor-pointer"
