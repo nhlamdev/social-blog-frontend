@@ -6,7 +6,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 import { RandomContentComponent } from "./random-content";
-import { BookmarkActionButton } from "@/components/custom";
+import { BookmarkActionButton, VoteContentControl } from "@/components/custom";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -34,11 +34,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative ">
       <div className="flex flex-col w-full lg:w-4/5 items-center gap-2">
         <div className="flex flex-row w-full gap-4 items-center">
-          <div className="flex flex-col items-center gap-2">
-            <FaChevronCircleUp className="cursor-pointer text-lg" />
-            <span className="font-semibold">2</span>
-            <FaChevronCircleDown className="cursor-pointer  text-lg" />
-          </div>
+          <VoteContentControl content={content} />
 
           <div className="flex flex-col flex-1 gap-2">
             <div className="flex flex-col flex-1">

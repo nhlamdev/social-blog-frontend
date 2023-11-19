@@ -19,7 +19,6 @@ export const contentApi = {
     const url = generateURLWithQueryParams("content/owner", params);
     return axiosInstance.get(url);
   },
-
   allUniqueTags(author?: string) {
     if (author) {
       return axiosInstance.get(`content/tags-by-author?author=${author}`);
@@ -44,6 +43,9 @@ export const contentApi = {
   },
   makeBookmarkContent(contentId: string) {
     return axiosInstance.patch(`content/bookmark-content/${contentId}`);
+  },
+  voteAction(contentId: string, voteAction: "up" | "down") {
+    return axiosInstance.patch(`content/${contentId}/vote-${voteAction}`);
   },
   update(id: string, data: any) {
     return axiosInstance.put(`content/${id}`, data);

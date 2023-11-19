@@ -1,4 +1,4 @@
-import { BookmarkActionButton } from "@/components/custom";
+import { BookmarkActionButton, VoteContentControl } from "@/components/custom";
 import { getDateTime } from "@/utils/global-func";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,11 +17,7 @@ export const ClientHomeListContentItem = (
   return (
     <div className="w-full flex flex-row gap-2">
       <div className="flex flex-col gap-2 p-2 justify-center">
-        <div className="flex flex-col items-center gap-1">
-          <FaChevronCircleUp className="cursor-pointer text-lg" />
-          <span className="font-semibold">2</span>
-          <FaChevronCircleDown className="cursor-pointer text-lg" />
-        </div>
+        <VoteContentControl content={content} />
 
         <BookmarkActionButton content={content} size="small" />
       </div>
