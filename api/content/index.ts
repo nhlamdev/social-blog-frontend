@@ -34,7 +34,7 @@ export const contentApi = {
     const url = generateURLWithQueryParams(`content/by-category/${id}`, params);
     return axiosInstance.get(url);
   },
-  async getContentsBySeries(id: string, params: { [key: string]: string }) {
+  getContentsBySeries(id: string, params: { [key: string]: string }) {
     const url = generateURLWithQueryParams(`content/by-series/${id}`, params);
 
     return axiosInstance.get(url);
@@ -42,8 +42,11 @@ export const contentApi = {
   create(data: any) {
     return axiosInstance.post("/content", data);
   },
+  makeBookmarkContent(contentId: string) {
+    return axiosInstance.patch(`content/bookmark-content/${contentId}`);
+  },
   update(id: string, data: any) {
-    return axiosInstance.put(`/content/${id}`, data);
+    return axiosInstance.put(`content/${id}`, data);
   },
   updateContentCategory(content: string, category: string) {
     return axiosInstance.patch(

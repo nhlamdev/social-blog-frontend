@@ -3,6 +3,8 @@ import { getDateTime } from "@/utils/global-func";
 import { LuView } from "react-icons/lu";
 import { BiCommentDetail } from "react-icons/bi";
 import Link from "next/link";
+import { FaChevronCircleUp, FaChevronCircleDown } from "react-icons/fa";
+import { BsBookmarksFill } from "react-icons/bs";
 
 interface ClientHomeListContentItemProps {
   content: any;
@@ -15,9 +17,24 @@ export const ClientHomeListContentItem = (
 
   return (
     <div
-      className="w-full flex flex-row gap-2 bg-slate-100 bg-opacity-40
+      className="w-full flex flex-row  bg-slate-100 bg-opacity-40
       shadow-md rounded-md"
     >
+      <div className="flex flex-col gap-2 p-2 justify-center">
+        <div className="flex flex-col items-center gap-1">
+          <FaChevronCircleUp className="cursor-pointer text-lg" />
+          <span className="font-semibold">2</span>
+          <FaChevronCircleDown className="cursor-pointer  text-lg" />
+        </div>
+
+        <div
+          className="relative p-2 flex items-center justify-center rounded-full"
+          style={{ border: "1px solid black", cursor: "pointer" }}
+        >
+          <BsBookmarksFill className="text-md" />
+        </div>
+      </div>
+
       {/* --------------- */}
       <div className="flex flex-col justify-between py-2 md:py-4 px-4 gap-2">
         <Link

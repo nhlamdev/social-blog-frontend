@@ -5,8 +5,10 @@ import { RandomContentComponent } from "./random-content";
 import { CommentsComponent } from "@/components/custom/comments";
 import Image from "next/image";
 import { getDateTime } from "@/utils/global-func";
+import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 
 import { BsBookmarksFill, BsFillBookmarkXFill } from "react-icons/bs";
+import { BookmarkActionButton } from "./bookmark-action";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -32,33 +34,42 @@ export default async function ClientDetailContentPage(props: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative ">
-      <div className="flex flex-row w-full lg:w-4/5">
-        <div className="flex flex-col w-full gap-2">
-          <span className="text-slate-800 dark:text-slate-200 font-semibold text-2xl select-none">
-            {content.title}
-          </span>
-
-          <span className="text-slate-800 dark:text-slate-200 font-light text-md select-none">
-            {getDateTime(content.created_at)}
-          </span>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <div className="relative w-8 h-8">
-            <Image
-              src={`/service/${content.created_by.image}`}
-              fill
-              style={{ borderRadius: "50%" }}
-              alt="photo"
-            />
+      <div className="flex flex-col w-full lg:w-4/5 items-center gap-2">
+        <div className="flex flex-row w-full gap-4 items-center">
+          <div className="flex flex-col items-center gap-2">
+            <FaChevronCircleUp className="cursor-pointer text-lg" />
+            <span className="font-semibold">2</span>
+            <FaChevronCircleDown className="cursor-pointer  text-lg" />
           </div>
 
-          <div
-            className="relative w-8 h-8 flex items-center justify-center rounded-full"
-            style={{ border: "1px solid black" }}
-          >
-            <BsBookmarksFill />
+          <div className="flex flex-col flex-1 gap-2">
+            <div className="flex flex-col flex-1">
+              <span className="text-slate-800 dark:text-slate-200 font-semibold text-2xl select-none">
+                {content.title}
+              </span>
+
+              <span className="text-slate-800 dark:text-slate-200 font-light text-md select-none">
+                {getDateTime(content.created_at)}
+              </span>
+            </div>
+
+            <div className="flex flex-row gap-2 items-center w-full">
+              <div className="relative w-8 h-8">
+                <Image
+                  src={`/service/${content.created_by.image}`}
+                  fill
+                  style={{ borderRadius: "50%" }}
+                  alt="photo"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs">{content.created_by.name}</span>
+                <span className="text-xs">{content.created_by.email}</span>
+              </div>
+            </div>
           </div>
+
+          <BookmarkActionButton content={content} />
         </div>
       </div>
 
