@@ -41,7 +41,7 @@ export interface IImage {
   size: number;
 }
 
-export type CasePublicContentType = "noly-me" | "have-link" | "public";
+export type CasePublicContentType = "only-me" | "have-link" | "public";
 
 export interface ISession {
   browser: string;

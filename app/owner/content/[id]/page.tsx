@@ -3,6 +3,7 @@ import { contentApi } from "@/api/content";
 import { FormContentAction } from "@/components/form";
 import { PageProps } from "@/interface";
 import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 
 export default function OwnerContentUpdatePage(props: PageProps) {
@@ -29,11 +30,12 @@ export default function OwnerContentUpdatePage(props: PageProps) {
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {
           error?.response?.data?.message.forEach((item: any) => {
-            console.log(item);
+            enqueueSnackbar(item, { variant: "error" });
           });
         } else {
-          console.log(
-            error?.response ? error.response.data?.message : error.message
+          enqueueSnackbar(
+            error?.response ? error.response.data?.message : error.message,
+            { variant: "error" }
           );
         }
 

@@ -8,7 +8,7 @@ export const MEMBER_ROLE: { key: string; value: string }[] = [
 ];
 
 export const casePublicData: { key: CasePublicContentType; value: string }[] = [
-  { key: "noly-me", value: "Chỉ mình tôi" },
+  { key: "only-me", value: "Chỉ mình tôi" },
   { key: "have-link", value: "Chỉ đường dẫn" },
   { key: "public", value: "Công khai" },
 ];
