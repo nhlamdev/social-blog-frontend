@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 import { RandomContentComponent } from "./random-content";
 import { BookmarkActionButton, VoteContentControl } from "@/components/custom";
+import { WatchActionComponent } from "./watch-action";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -32,6 +33,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative ">
+      <WatchActionComponent content={content} />
       <div className="flex flex-col w-full lg:w-4/5 items-center gap-2">
         <div className="flex flex-row w-full gap-4 items-center">
           <VoteContentControl content={content} />

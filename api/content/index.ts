@@ -44,6 +44,9 @@ export const contentApi = {
   makeBookmarkContent(contentId: string) {
     return axiosInstance.patch(`content/bookmark-content/${contentId}`);
   },
+  makeWatch(contentId: string) {
+    return axiosInstance.patch(`content/${contentId}/watch`);
+  },
   voteAction(contentId: string, voteAction: "up" | "down") {
     return axiosInstance.patch(`content/${contentId}/vote-${voteAction}`);
   },

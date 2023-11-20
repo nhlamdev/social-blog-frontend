@@ -1,7 +1,5 @@
 import { getDateTime } from "@/utils/global-func";
 import Link from "next/link";
-import Image from "next/image";
-import { LuView } from "react-icons/lu";
 
 interface RandomContentComponentProps {
   contents: any[];
