@@ -3,14 +3,9 @@ import { PopularItemsComponent } from "./popular";
 import { SeriesPopular } from "./series-popular";
 
 import { ClientHead } from "@/components/custom";
-
-const backend = process.env.SERVICE_PORT;
+import { ContentMoreComments } from "./content-more-content";
 
 export default async function ClientContentsPage() {
-  const { data: contents } = await axios.get(
-    `http://localhost:${backend}/content?skip=0&take=3`
-  );
-
   return (
     <main
       className="min-h-screen flex flex-col w-full bg-gradient-light dark:bg-gradient-dark
@@ -20,6 +15,7 @@ export default async function ClientContentsPage() {
 
       <PopularItemsComponent />
       <SeriesPopular />
+      <ContentMoreComments />
     </main>
   );
 }

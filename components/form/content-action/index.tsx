@@ -28,21 +28,15 @@ export const FormContentAction = (props: FormContentActionProps) => {
   const [title, setTitle] = useState(content ? content.title : "");
   const [body, setBody] = useState(content ? content.body : "");
 
-  const [casePublic, setCasePublic] = useState<CasePublicContentType>("public");
+  const [casePublic, setCasePublic] = useState<CasePublicContentType>(
+    content.case_allow ? content.case_allow : "public"
+  );
   const [category, setCategory] = useState(
     content && content.category ? content.category._id : ""
   );
   const [tags, setTags] = useState<string[]>(content ? content.tags : []);
 
   const action = async () => {
-    // const formData = new FormData();
-    // formData.append("title", title);
-    // formData.append("body", body);
-    // formData.append("category", category);
-    // tags.forEach((tag, key) => {
-    //   formData.append(`tags[${key}]`, tag);
-    // });
-
     const payload = {
       title: title,
       body: body,
@@ -55,7 +49,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
     if (content) {
       try {
         await apiCaller.contentApi.update(content._id, payload);
-        router.replace("/owner/content");
+        // router.replace("/owner/content");
         router.refresh();
       } catch (error: any) {
         if (Array.isArray(error?.response?.data?.message)) {
