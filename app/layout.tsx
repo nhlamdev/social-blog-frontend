@@ -23,7 +23,12 @@ export default function RootLayout(props: RootLayoutProps) {
           src="https://cdn.socket.io/4.6.0/socket.io.min.js"
           integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
           crossOrigin="anonymous"
-        ></script>
+        />
+
+        <script
+          async
+          src="https://cdn.ckeditor.com/ckeditor5/40.1.0/super-build/ckeditor.js"
+        />
       </head>
       <body>
         <ProviderComponent>{children}</ProviderComponent>
