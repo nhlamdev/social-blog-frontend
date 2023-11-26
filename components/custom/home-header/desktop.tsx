@@ -3,6 +3,7 @@ import { AuthBox, ThemeToggleButton } from "@/components/custom";
 import Image from "next/image";
 import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
+import { BsBellFill } from "react-icons/bs";
 
 export const ClientHomeHeaderDesktop = () => {
   return (
@@ -27,6 +28,7 @@ export const ClientHomeHeaderDesktop = () => {
         </div>
 
         <div className="flex flex-row items-center gap-2">
+          <BsBellFill />
           <ThemeToggleButton />
           <AuthBox />
         </div>

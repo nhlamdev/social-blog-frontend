@@ -3,6 +3,7 @@ import { AuthBox } from "@/components/custom/auth-box";
 import { ThemeToggleButton } from "@/components/custom/color-mode";
 import Image from "next/image";
 import Link from "next/link";
+import { BsBellFill } from "react-icons/bs";
 
 export const ClientNavigatorDesktop = () => {
   return (
@@ -43,6 +44,7 @@ export const ClientNavigatorDesktop = () => {
       </div>
 
       <div className="flex flex-row items-center gap-4">
+        <BsBellFill />
         <ThemeToggleButton />
         <AuthBox />
       </div>

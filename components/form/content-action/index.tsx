@@ -29,7 +29,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
   const [body, setBody] = useState(content ? content.body : "");
 
   const [casePublic, setCasePublic] = useState<CasePublicContentType>(
-    content.case_allow ? content.case_allow : "public"
+    content ? content.case_allow : "public"
   );
   const [category, setCategory] = useState(
     content && content.category ? content.category._id : ""
