@@ -3,7 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { BiMenu } from "react-icons/bi";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { AuthBox, ThemeToggleButton } from "@/components/custom";
+import {
+  AuthBox,
+  NotifyBellComponent,
+  ThemeToggleButton,
+} from "@/components/custom";
 import { useState } from "react";
 
 export const ClientNavigatorMobile = () => {
@@ -19,7 +23,8 @@ export const ClientNavigatorMobile = () => {
         onClick={() => setOpen(true)}
       />
 
-      <div>
+      <div className="flex flex-row gap-2">
+        <NotifyBellComponent />
         <AuthBox />
       </div>
 

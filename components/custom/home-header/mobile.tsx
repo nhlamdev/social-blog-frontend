@@ -1,5 +1,5 @@
 "use client";
-import { AuthBox } from "@/components/custom";
+import { AuthBox, NotifyBellComponent } from "@/components/custom";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -19,7 +19,10 @@ export const ClientHomeHeaderMobile = () => {
         onClick={() => setOpen(true)}
       />
 
-      <AuthBox />
+      <div className="flex flex-row gap-4 items-center">
+        <NotifyBellComponent />
+        <AuthBox />
+      </div>
 
       {open ? (
         <div

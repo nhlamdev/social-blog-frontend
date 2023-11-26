@@ -51,7 +51,7 @@ export const VoteContentControl = (props: IVoteContentControl) => {
         onClick={() => submit("up")}
       />
 
-      <span className="font-semibold">
+      <span className="font-semibold select-none">
         {content.member_up_vote.length - content.member_down_vote.length}
       </span>
 

@@ -32,19 +32,25 @@ export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
           />
         </div>
         <div className="flex flex-col">
-          <span className="text-sm font-semibold">{member.name}</span>
-          <span className="text-xs font-light">{member.email}</span>
+          <span className="text-sm font-semibold text-slate-900 dark:text-slate-200">
+            {member.name}
+          </span>
+          <span className="text-xs font-light text-slate-900 dark:text-slate-200">
+            {member.email}
+          </span>
         </div>
       </div>
 
-      <span className="text-xs font-light">
+      <span className="text-xs font-light text-slate-900 dark:text-slate-200">
         Ngày tham gia : {getDateTime(member.created_at)}
       </span>
 
       <div className="flex flex-row items-center gap-1">
         <div className="flex flex-row items-center gap-2">
-          <BiBookContent className="text-xs" />
-          <span className="text-xs">{member.content_count}</span>
+          <BiBookContent className="text-xs text-slate-900 dark:text-slate-200" />
+          <span className="text-xs text-slate-900 dark:text-slate-200">
+            {member.content_count}
+          </span>
         </div>
 
         <div
@@ -52,16 +58,20 @@ export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
           style={{ width: "1px" }}
         />
         <div className="flex flex-row items-center gap-2">
-          <SiSteelseries className="text-xs" />
-          <span className="text-xs">{member.series_count}</span>
+          <SiSteelseries className="text-xs text-slate-900 dark:text-slate-200" />
+          <span className="text-xs text-slate-900 dark:text-slate-200">
+            {member.series_count}
+          </span>
         </div>
         <div
           className="h-4 bg-slate-600 dark:bg-slate-200 mx-1"
           style={{ width: "1px" }}
         />
         <div className="flex flex-row items-center gap-2">
-          <BsFillBookmarksFill className="text-xs" />
-          <span className="text-xs">{member.follow_by.length}</span>
+          <BsFillBookmarksFill className="text-xs text-slate-900 dark:text-slate-200" />
+          <span className="text-xs text-slate-900 dark:text-slate-200">
+            {member.follow_by.length}
+          </span>
         </div>
       </div>
     </Link>

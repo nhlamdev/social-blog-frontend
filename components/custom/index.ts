@@ -8,3 +8,4 @@ export * from "./home-header";
 export * from "./base-loading";
 export * from "./bookmark-button";
 export * from "./vote-control";
+export * from "./notify-bell";

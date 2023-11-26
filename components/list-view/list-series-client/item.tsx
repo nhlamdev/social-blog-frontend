@@ -16,24 +16,28 @@ export const SeriesItem = (props: SeriesItemProps) => {
       className="w-full md:w-4/5 lg:w-3/5 flex flex-col gap-2 cursor-pointer overflow-hidden
       bg-slate-100 bg-opacity-40 shadow-sm rounded-md p-4"
     >
-      <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <span className="text-sm font-semibold text-slate-900 dark:text-slate-200">
         {item.title}
       </span>
 
       <div className="flex flex-row items-center">
         <div className="flex flex-row items-center gap-2">
-          <MdOutlineContentCopy className="text-sm" />
-          <span className="text-[10px]">{item.contents} </span>
+          <MdOutlineContentCopy className="text-sm text-slate-900 dark:text-slate-200" />
+          <span className="text-[10px] text-slate-900 dark:text-slate-200">
+            {item.contents}{" "}
+          </span>
         </div>
 
         <div
-          className="h-4 bg-slate-600 dark:bg-slate-200 mx-1"
+          className="h-4 bg-slate-600 dark:bg-slate-200 mx-1 text-slate-900 dark:text-slate-200"
           style={{ width: "1px" }}
         />
 
         <div className="flex flex-row items-center gap-2">
-          <IoMdTimer className="text-sm" />
-          <span className="text-[10px]">{getDateTime(item.created_at)}</span>
+          <IoMdTimer className="text-sm text-slate-900 dark:text-slate-200" />
+          <span className="text-[10px] text-slate-900 dark:text-slate-200">
+            {getDateTime(item.created_at)}
+          </span>
         </div>
       </div>
 
@@ -47,7 +51,7 @@ export const SeriesItem = (props: SeriesItemProps) => {
           />
         </div>
 
-        <span className="text-xs text-slate-900 dark:text-slate-100">
+        <span className="text-xs text-slate-900 dark:text-slate-200">
           {item.created_by.name}
         </span>
       </div>

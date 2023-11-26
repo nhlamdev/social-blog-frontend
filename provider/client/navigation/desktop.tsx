@@ -1,4 +1,5 @@
 "use client";
+import { NotifyBellComponent } from "@/components/custom";
 import { AuthBox } from "@/components/custom/auth-box";
 import { ThemeToggleButton } from "@/components/custom/color-mode";
 import Image from "next/image";
@@ -44,7 +45,7 @@ export const ClientNavigatorDesktop = () => {
       </div>
 
       <div className="flex flex-row items-center gap-4">
-        <BsBellFill />
+        <NotifyBellComponent />
         <ThemeToggleButton />
         <AuthBox />
       </div>
