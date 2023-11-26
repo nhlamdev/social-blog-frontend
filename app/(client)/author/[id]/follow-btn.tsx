@@ -30,9 +30,13 @@ export const FollowButton = (props: IFollowButton) => {
   rounded-md hover:shadow-sm px-4 py-2 w-fit bg-opacity-40"
       >
         {/* <BsBookmarksFill /> */}
-        <span className="select-none">Theo dõi</span>
+        <span className="select-none text-slate-900 dark:text-slate-200">
+          Theo dõi
+        </span>
         {member.follow_by.length > 0 ? (
-          <span className="select-none">{member.follow_by.length}</span>
+          <span className="select-none text-slate-900 dark:text-slate-200">
+            {member.follow_by.length}
+          </span>
         ) : (
           <></>
         )}
@@ -79,9 +83,13 @@ export const FollowButton = (props: IFollowButton) => {
         <FaCirclePlus />
       )}
 
-      <span className="select-none">Theo dõi</span>
+      <span className="select-none text-slate-900 dark:text-slate-200">
+        Theo dõi
+      </span>
       {member.follow_by.length > 0 ? (
-        <span className="select-none">{member.follow_by.length}</span>
+        <span className="select-none text-slate-900 dark:text-slate-200">
+          {member.follow_by.length}
+        </span>
       ) : (
         <></>
       )}
