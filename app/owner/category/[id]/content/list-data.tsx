@@ -142,9 +142,15 @@ export const OwnerListContentInCategory = (
                 }}
               >
                 {isOutSide ? (
-                  <AiFillFolderAdd className="mr-3 text-3xl text-cyan-500 cursor-pointer" />
+                  <AiFillFolderAdd
+                    className="mr-3 text-3xl text-slate-900 dark:text-slate-200
+                  cursor-pointer"
+                  />
                 ) : (
-                  <IoIosRemoveCircle className="mr-3 text-3xl text-rose-500 cursor-pointer" />
+                  <IoIosRemoveCircle
+                    className="mr-3 text-3xl text-slate-900 dark:text-slate-200
+                  cursor-pointer"
+                  />
                 )}
               </div>
             </div>

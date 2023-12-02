@@ -23,14 +23,19 @@ export const TagsByAuthor = (props: ITagsByAuthor) => {
         return (
           <div
             key={tag}
-            className="flex flex-row gap-2 px-4 py-2 rounded-md bg-cyan-400 shadow-md
-            items-center"
+            className="flex flex-row gap-2 px-4 py-2 rounded-md shadow-md items-center
+            bg-slate-400 bg-opacity-40"
           >
-            <span className="text-xs select-none">{tag}</span>
+            <span
+              className="text-xs select-none 
+            dark:text-slate-200 text-slate-900"
+            >
+              {tag}
+            </span>
 
             <span
               className="text-xs p-1 bg-slate-100 bg-opacity-40 w-6 h-6 items-center justify-center
-            rounded-full select-none flex font-bold"
+            rounded-full select-none flex font-bold dark:text-slate-200"
             >
               {tags[tag]}
             </span>
