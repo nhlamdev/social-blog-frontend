@@ -3,7 +3,8 @@ import { contentApi } from "@/api/content";
 import { useAuth } from "@/hook/auth-hook";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 
 interface IVoteContentControl {
@@ -42,25 +43,48 @@ export const VoteContentControl = (props: IVoteContentControl) => {
     }
   };
 
+  const isMyUpVote = useMemo(
+    () => content.member_up_vote.includes(profile?._id),
+    [content.member_up_vote, profile?._id]
+  );
+  const isMYDownVote = useMemo(
+    () => content.member_down_vote.includes(profile?._id),
+    [content.member_down_vote, profile?._id]
+  );
+  const avgVote = useMemo(
+    () => content.member_up_vote.length - content.member_down_vote.length,
+    [content.member_down_vote.length, content.member_up_vote.length]
+  );
+
   return (
     <div className="flex flex-col items-center gap-2">
-      <FaChevronCircleUp
-        className={`cursor-pointer text-lg text-${
-          content.member_up_vote.includes(profile?._id) ? "cyan" : "gray"
-        }-900`}
-        onClick={() => submit("up")}
-      />
+      {isMyUpVote ? (
+        <AiFillCloseCircle
+          className="cursor-pointer text-lg text-slate-900 dark:text-slate-200"
+          onClick={() => submit("up")}
+        />
+      ) : (
+        <FaChevronCircleUp
+          className="cursor-pointer text-lg text-slate-900 dark:text-slate-200"
+          onClick={() => submit("up")}
+        />
+      )}
 
-      <span className="font-semibold select-none">
-        {content.member_up_vote.length - content.member_down_vote.length}
+      <span className="font-semibold select-none text-slate-900 dark:text-slate-200">
+        {avgVote}
       </span>
 
-      <FaChevronCircleDown
-        className={`cursor-pointer text-lg text-${
-          content.member_down_vote.includes(profile?._id) ? "cyan" : "gray"
-        }-900`}
-        onClick={() => submit("down")}
-      />
+      {isMYDownVote ? (
+        <AiFillCloseCircle
+          className="cursor-pointer text-lg text-slate-900 dark:text-slate-200"
+          onClick={() => submit("up")}
+        />
+      ) : (
+        <FaChevronCircleDown
+          className="cursor-pointer text-lg text-slate-900 dark:text-slate-200"
+          onClick={() => submit("up")}
+        />
+      )}
     </div>
   );
 };

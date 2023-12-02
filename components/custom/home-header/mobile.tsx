@@ -11,37 +11,45 @@ export const ClientHomeHeaderMobile = () => {
   const [open, setOpen] = useState<boolean>(false);
   return (
     <header
-      className="flex flex-row md:hidden px-4 py-2 items-center justify-between"
-      style={{ borderBottom: "1px solid black" }}
+      className="flex flex-row md:hidden items-center justify-between select-none
+    bg-slate-800 dark:bg-opacity-80 bg-opacity-20 p-2 shadow-md"
     >
       <GiHamburgerMenu
-        className="text-xl cursor-pointer dark:text-slate-100 text-slate-900"
+        className="text-lg cursor-pointer dark:text-slate-100 text-slate-900"
         onClick={() => setOpen(true)}
       />
 
       <div className="flex flex-row gap-4 items-center">
         <NotifyBellComponent />
+        <ThemeToggleButton />
         <AuthBox />
       </div>
 
       {open ? (
-        <div
-          className="fixed left-0 top-0 w-screen h-screen bg-slate-600 bg-opacity-40"
-          style={{ zIndex: 10 }}
-        >
+        <div className="fixed left-0 top-0 w-screen h-screen z-10">
           <div
-            className="w-64 flex flex-col gap-4 left-0 top-0 bottom-0 absolute p-2 
-            bg-slate-50 bg-gradient-light dark:bg-gradient-dark"
+            className="absolute top-0 left-0 right-0 bottom-0 
+          bg-slate-600 bg-opacity-60"
+          />
+
+          <div
+            className="w-64 flex flex-col gap-8 left-0 top-0 bottom-0 absolute
+            bg-slate-400 dark:bg-slate-600 shadow-xl p-4"
           >
             <div className="flex flex-row justify-between items-center">
-              <Link href="/">
-                <Image src="/logo/logo.png" width={60} height={60} alt="logo" />
-              </Link>
-              <span className="text-md dark:text-slate-100 text-slate-900">
+              <div className="p-3 rounded-full bg-slate-100 bg-opacity-40 shadow-lg">
+                <Image
+                  src="/logo/logo-crop.png"
+                  width={30}
+                  height={30}
+                  alt="logo"
+                />
+              </div>
+              {/* <span className="text-md dark:text-slate-100 text-slate-900">
                 swalor dev
-              </span>
+              </span> */}
               <AiFillCloseCircle
-                className="text-red-500 text-2xl cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 text-2xl cursor-pointer"
                 onClick={() => setOpen(false)}
               />
             </div>
@@ -82,10 +90,6 @@ export const ClientHomeHeaderMobile = () => {
               >
                 Về tôi
               </Link>
-            </div>
-
-            <div className="absolute bottom-2 left-2">
-              <ThemeToggleButton />
             </div>
           </div>
         </div>

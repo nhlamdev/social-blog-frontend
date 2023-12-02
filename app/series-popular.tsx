@@ -1,5 +1,9 @@
 import axios from "axios";
 import Image from "next/image";
+import { MdContentCopy } from "react-icons/md";
+import { FaRegEye } from "react-icons/fa";
+import { TbLoadBalancer } from "react-icons/tb";
+
 const backend = process.env.SERVICE_PORT;
 
 interface ITopContent {
@@ -74,34 +78,37 @@ export const SeriesPopular = async () => {
               <div className="flex flex-row gap-2">
                 <div
                   className="flex flex-row gap-2 items-center justify-center px-2 py-1 rounded-sm 
-                  border-slate-900 dark:border-slate-100 border-2 border-solid"
+                  border-slate-900 dark:border-slate-100 border-0 sm:border-2 border-solid"
                 >
-                  <span className="text-xs text-slate-900 dark:text-slate-100">
+                  <span className="hidden sm:inline-block text-xs text-slate-900 dark:text-slate-100">
                     Số bài viết :
                   </span>
-                  <span className="text-xs text-slate-900 dark:text-slate-100">
+                  <MdContentCopy className="sm:hidden inline-block " />
+                  <span className="text-xs text-slate-900 dark:text-slate-100 font-semibold">
                     {v.content_count}
                   </span>
                 </div>
                 <div
                   className="flex flex-row gap-2 items-center justify-center px-2 py-1 rounded-sm 
-                  border-slate-900 dark:border-slate-100 border-2 border-solid"
+                  border-slate-900 dark:border-slate-100 border-0 sm:border-2 border-solid"
                 >
-                  <span className="text-xs text-slate-900 dark:text-slate-100">
+                  <span className="hidden sm:inline-block text-xs text-slate-900 dark:text-slate-100">
                     Tổng lượi xem :
                   </span>
-                  <span className="text-xs text-slate-900 dark:text-slate-100">
+                  <FaRegEye className="sm:hidden inline-block" />
+                  <span className="text-xs text-slate-900 dark:text-slate-100 font-semibold">
                     {v.contents_total_views}
                   </span>
                 </div>
                 <div
                   className="flex flex-row gap-2 items-center justify-center px-2 py-1 rounded-sm 
-                  border-slate-900 dark:border-slate-100 border-2 border-solid"
+                  border-slate-900 dark:border-slate-100 border-0 sm:border-2 border-solid"
                 >
-                  <span className="text-xs text-slate-900 dark:text-slate-100">
+                  <span className="hidden sm:inline-block text-xs text-slate-900 dark:text-slate-100">
                     Trung bình lượt xem :
                   </span>
-                  <span className="text-xs text-slate-900 dark:text-slate-100">
+                  <TbLoadBalancer className="sm:hidden inline-block" />
+                  <span className="text-xs text-slate-900 dark:text-slate-100 font-semibold">
                     {v.contents_avg_view}
                   </span>
                 </div>

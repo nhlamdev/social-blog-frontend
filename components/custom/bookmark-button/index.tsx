@@ -20,8 +20,9 @@ export const BookmarkActionButton = (props: IBookmarkActionButton) => {
 
   return (
     <div
-      className="relative p-2 flex items-center justify-center rounded-full"
-      style={{ border: "1px solid black", cursor: "pointer" }}
+      className="relative p-2 flex items-center justify-center rounded-full 
+      text-slate-900 dark:text-slate-200"
+      style={{ border: "1px solid", cursor: "pointer" }}
       onClick={async () => {
         try {
           await contentApi.makeBookmarkContent(content._id);
@@ -31,10 +32,16 @@ export const BookmarkActionButton = (props: IBookmarkActionButton) => {
     >
       {content.bookmark_by.includes(profile._id) ? (
         <BsFillBookmarkXFill
-          className={size === "small" ? "text-md" : "text-xl"}
+          className={`text-slate-900 dark:text-slate-200 ${
+            size === "small" ? "text-md" : "text-xl"
+          }`}
         />
       ) : (
-        <BsBookmarksFill className={size === "small" ? "text-md" : "text-xl"} />
+        <BsBookmarksFill
+          className={`text-slate-900 dark:text-slate-200 ${
+            size === "small" ? "text-md" : "text-xl"
+          }`}
+        />
       )}
     </div>
   );

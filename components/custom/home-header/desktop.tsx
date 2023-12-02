@@ -11,14 +11,9 @@ import { FiSearch } from "react-icons/fi";
 export const ClientHomeHeaderDesktop = () => {
   return (
     <>
-      <header className="md:flex flex-row items-center justify-between hidden">
-        <div className="w-16 h-16 relative">
-          <Image
-            className="shadow-md rounded-full"
-            src="/logo/logo.png"
-            fill
-            alt="logo"
-          />
+      <header className="hidden md:flex flex-row items-center justify-between p-2">
+        <div className="p-3 rounded-full bg-slate-100 bg-opacity-40 shadow-lg">
+          <Image src="/logo/logo-crop.png" width={40} height={40} alt="logo" />
         </div>
 
         <div className="flex flex-col gap-2 items-center">
@@ -37,7 +32,7 @@ export const ClientHomeHeaderDesktop = () => {
         </div>
       </header>
 
-      <nav className="px-4 py-2 gap-4 md:flex flex-row items-center hidden ">
+      <nav className="px-4 py-2 gap-2 md:flex flex-row items-center hidden ">
         <Link href="/content">
           <span className="dark:text-slate-100 text-slate-900">Bài viết</span>
         </Link>
@@ -70,7 +65,7 @@ export const ClientHomeHeaderDesktop = () => {
 
       <div
         className="mx-auto w-full 
-        dark:bg-slate-100 bg-slate-900 "
+        dark:bg-slate-100 bg-slate-900 hidden md:flex "
         style={{ height: "1px" }}
       />
     </>

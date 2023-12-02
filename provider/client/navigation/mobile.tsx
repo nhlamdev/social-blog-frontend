@@ -16,34 +16,47 @@ export const ClientNavigatorMobile = () => {
   return (
     <nav
       className="w-screen flex flex-row items-center justify-between px-4 py-2
-  bg-slate-200 bg-opacity-40 md:hidden "
+  bg-slate-200 bg-opacity-40 md:hidden h-full"
     >
       <BiMenu
         className="text-2xl cursor-pointer"
         onClick={() => setOpen(true)}
       />
 
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row gap-2 h-full items-center justify-center">
         <NotifyBellComponent />
+        <ThemeToggleButton />
         <AuthBox />
       </div>
 
       {open ? (
         <div
-          className="fixed left-0 top-0 w-screen h-screen bg-slate-400 bg-opacity-40"
-          style={{ zIndex: 10 }}
+          className="fixed left-0 top-0 w-screen h-screen 
+          z-30"
         >
           <div
-            className="w-64 flex flex-col gap-4 left-0 top-0 bottom-0 absolute p-2 
-            bg-slate-50"
+            className="absolute top-0 left-0 right-0 bottom-0 
+          bg-slate-600 bg-opacity-60"
+            onClick={() => setOpen(false)}
+          />
+          <div
+            className="w-64 flex flex-col gap-8 left-0 top-0 bottom-0 absolute
+           bg-slate-400 dark:bg-slate-600 shadow-xl p-4"
           >
             <div className="flex flex-row justify-between items-center">
-              <Link href="/">
-                <Image src="/logo/logo.png" width={60} height={60} alt="logo" />
+              <Link
+                href="/"
+                className="p-3 rounded-full bg-slate-100 bg-opacity-40 shadow-lg"
+              >
+                <Image
+                  src="/logo/logo-crop.png"
+                  width={30}
+                  height={30}
+                  alt="logo"
+                />
               </Link>
-              <span className="text-sm">swalor dev</span>
               <AiFillCloseCircle
-                className="text-red-500 text-2xl cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 text-2xl cursor-pointer"
                 onClick={() => setOpen(false)}
               />
             </div>
@@ -51,39 +64,40 @@ export const ClientNavigatorMobile = () => {
             <div className="flex flex-col items-center gap-4 ">
               <Link
                 href="/content"
-                className="font-semibold text-sm w-full px-2 py-1 "
-                style={{ borderBottom: "1px solid black" }}
+                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
+                dark:border-slate-100 border-slate-900"
+                style={{ borderBottom: "1px solid" }}
               >
                 Bài viết
               </Link>
 
               <Link
                 href="/series"
-                className="font-semibold text-sm w-full px-2 py-1 "
-                style={{ borderBottom: "1px solid black" }}
+                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
+                dark:border-slate-100 border-slate-900"
+                style={{ borderBottom: "1px solid" }}
               >
                 Chuỗi bài viết
               </Link>
 
               <Link
-                href="/author"
-                className="font-semibold text-sm w-full px-2 py-1 "
-                style={{ borderBottom: "1px solid black" }}
+                href="/about-me"
+                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
+                dark:border-slate-100 border-slate-900"
+                style={{ borderBottom: "1px solid" }}
               >
                 Tác giả
               </Link>
 
               <Link
                 href="/about-me"
-                className="font-semibold text-sm w-full px-2 py-1 "
-                style={{ borderBottom: "1px solid black" }}
+                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
+                dark:border-slate-100 border-slate-900"
+                style={{ borderBottom: "1px solid" }}
               >
                 Về tôi
               </Link>
             </div>
-
-            <div className="flex-1" />
-            <ThemeToggleButton />
           </div>
         </div>
       ) : (

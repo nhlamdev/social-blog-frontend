@@ -12,9 +12,12 @@ export const ClientNavigatorDesktop = () => {
       className="w-screen md:flex flex-row items-center justify-between px-2
     bg-slate-200 bg-opacity-40 hidden "
     >
-      <div className="flex flex-row items-center gap-2">
-        <Link href="/">
-          <Image src="/logo/logo.png" width={60} height={60} alt="logo" />
+      <div className="flex flex-row items-center gap-4 p-2">
+        <Link
+          href="/"
+          className="p-2 rounded-full bg-slate-200 bg-opacity-60 shadow-xl"
+        >
+          <Image src="/logo/logo-crop.png" width={30} height={30} alt="logo" />
         </Link>
 
         <div className="flex flex-row items-center gap-4">
