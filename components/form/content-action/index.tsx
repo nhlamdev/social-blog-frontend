@@ -6,8 +6,6 @@ import { ContentActionTagsBox } from "./tag-box";
 import { ContentCategoryBox } from "./categories-box";
 import { apiCaller } from "@/api";
 import { enqueueSnackbar } from "notistack";
-import { CasePublicContentType } from "@/interface";
-import { casePublicData } from "@/constant";
 export const TextEditor = dynamic(
   () => import("@/components/custom/text-editor"),
   {
@@ -28,8 +26,8 @@ export const FormContentAction = (props: FormContentActionProps) => {
   const [title, setTitle] = useState(content ? content.title : "");
   const [body, setBody] = useState(content ? content.body : "");
 
-  const [casePublic, setCasePublic] = useState<CasePublicContentType>(
-    content ? content.case_allow : "public"
+  const [casePublic, setCasePublic] = useState<boolean>(
+    content ? content.public : true
   );
   const [category, setCategory] = useState(
     content && content.category ? content.category._id : ""
@@ -43,7 +41,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
       category: category,
       complete: true,
       tags: tags,
-      casePublic: casePublic,
+      public: casePublic,
     };
 
     if (content) {
@@ -117,25 +115,35 @@ export const FormContentAction = (props: FormContentActionProps) => {
         <ContentActionTagsBox tags={tags} change={(tags) => setTags(tags)} />
 
         <div className="flex flex-row gap-2 justify-center items-center">
-          {casePublicData.map((c) => {
-            return (
-              <span
-                key={c.key}
-                className={`text-xs px-4 py-2 rounded-md select-none 
+          <span
+            className={`text-xs px-4 py-2 rounded-md select-none 
             cursor-pointer bg-opacity-40 shadow-md ${
-              casePublic === c.key
-                ? " bg-slate-900 text-slate-100"
-                : "dark:text-slate-100"
+              casePublic === true
+                ? "bg-slate-900 text-slate-200"
+                : "dark:text-slate-200"
             }`}
-                style={{ border: "1px solid white" }}
-                onClick={() => {
-                  setCasePublic(c.key);
-                }}
-              >
-                {c.value}
-              </span>
-            );
-          })}
+            style={{ border: "1px solid white" }}
+            onClick={() => {
+              setCasePublic(true);
+            }}
+          >
+            Công khai
+          </span>
+
+          <span
+            className={`text-xs px-4 py-2 rounded-md select-none 
+            cursor-pointer bg-opacity-40 shadow-md ${
+              casePublic === false
+                ? "bg-slate-900 text-slate-200"
+                : "dark:text-slate-200"
+            }`}
+            style={{ border: "1px solid white" }}
+            onClick={() => {
+              setCasePublic(false);
+            }}
+          >
+            Chỉ mình tôi
+          </span>
         </div>
       </div>
 

@@ -10,13 +10,18 @@ export const OwnerNavigationMobile = (props: IOwnerNavigationMobile) => {
   return (
     <nav className="lg:hidden flex flex-col gap-2 m-1 h-fit items-center">
       <Link href="/">
-        <Image
-          src="/logo/logo.png"
-          className="drop-shadow-md"
-          width={40}
-          height={40}
-          alt="logo"
-        />
+        <div
+          className="flex items-center justify-center p-2 bg-slate-600 bg-opacity-40 
+        rounded-full shadow-xl"
+        >
+          <Image
+            src="/logo/logo-crop.png"
+            className="drop-shadow-md"
+            width={30}
+            height={30}
+            alt="logo"
+          />
+        </div>
       </Link>
       {navigation_mock.map((v, k) => {
         return (
