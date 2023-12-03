@@ -16,26 +16,43 @@ export default async function ContentInAuthorPage(props: PageProps) {
     `http://localhost:${backend}/author/${id}`
   );
 
+  const { data: membersFollow } = await axios.get(
+    `http://localhost:${backend}/member-follow/${member._id}`
+  );
+
   return (
-    <div className="min-h-screen flex flex-col w-full py-4 px-10 items-center gap-4">
+    <div
+      className="min-h-screen flex flex-col w-full items-center gap-4
+    py-2 px-4 sm:py-4 sm:px-8"
+    >
       <div className="flex flex-row w-full gap-4 items-center">
-        <Image
-          src={`/service/${member.image}`}
-          className="rounded-full shadow-lg "
-          width={150}
-          height={150}
-          style={{ objectFit: "cover", border: "4px solid white" }}
-          alt="photo"
-        />
+        <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 relative">
+          <Image
+            src={`/service/${member.image}`}
+            className="rounded-full shadow-lg "
+            fill
+            style={{ objectFit: "cover", border: "4px solid white" }}
+            alt="photo"
+          />
+        </div>
 
         <div className="flex flex-col gap-2">
-          <span className="text-lg font-semibold text-gray-900 dark:text-gray-200">
+          <span
+            className="text-sm sm:text-md md:text-lg font-semibold 
+          text-gray-900 dark:text-gray-200"
+          >
             Tác giả : {member.name}
           </span>
-          <span className="text-md font-light text-gray-900 dark:text-gray-200">
+          <span
+            className="text-xs sm:text-sm md:text-md font-light 
+          text-gray-900 dark:text-gray-200"
+          >
             Đia chỉ mail : {member.email}
           </span>
-          <span className="text-md font-light text-gray-900 dark:text-gray-200">
+          <span
+            className="text-xs md:text-md font-light 
+          text-gray-900 dark:text-gray-200"
+          >
             Tham gia lúc : {getDateTime(member.created_at)}
           </span>
 
@@ -43,7 +60,7 @@ export default async function ContentInAuthorPage(props: PageProps) {
         </div>
       </div>
 
-      <AuthorTabsView member={member} />
+      <AuthorTabsView member={{ ...member, follower: membersFollow }} />
     </div>
   );
 }

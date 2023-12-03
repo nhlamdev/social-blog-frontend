@@ -93,7 +93,11 @@ export const AuthorTabsView = (props: IAuthorTabsView) => {
       {/* ------------------ */}
 
       {caseView === "content" ? <ContentsByAuthor member={member} /> : <></>}
-      {caseView === "followed" ? <FollowedByAuthor /> : <></>}
+      {caseView === "followed" ? (
+        <FollowedByAuthor members={member.follower} />
+      ) : (
+        <></>
+      )}
       {caseView === "series" ? <SeriesByAuthor member={member} /> : <></>}
       {caseView === "tags" ? <TagsByAuthor member={member} /> : <></>}
     </div>
