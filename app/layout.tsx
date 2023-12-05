@@ -2,6 +2,7 @@ import { ProviderComponent } from "@/provider";
 import "@/styles/global.scss";
 import type { Metadata } from "next";
 import "react-quill/dist/quill.snow.css";
+import { Be_Vietnam_Pro } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,11 +13,17 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
+const inter = Be_Vietnam_Pro({
+  subsets: ["vietnamese"],
+  display: "swap",
+  weight: "400",
+});
+
 export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
 
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <head>
         <script
           async

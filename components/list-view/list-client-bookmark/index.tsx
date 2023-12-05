@@ -44,6 +44,10 @@ export const ClientBookMarkListView = (props: IClientBookMarkListView) => {
         setTotal(count);
       })
       .catch((error) => {
+        if (!error) {
+          return;
+        }
+
         if (Array.isArray(error?.response?.data?.message)) {
           error?.response?.data?.message.forEach((item: any) => {
             console.log(item);
@@ -64,7 +68,7 @@ export const ClientBookMarkListView = (props: IClientBookMarkListView) => {
   }
 
   return (
-    <div className="flex flex-col w-3/5 gap-2 flex-1">
+    <div className="flex flex-col w-full gap-2 flex-1">
       {contents.map((content) => {
         return (
           <ClientBookMarkListViewItem key={content._id} content={content} />

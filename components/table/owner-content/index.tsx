@@ -68,12 +68,12 @@ export const OwnerContentTableComponent = (
         <table className="bg-slate-100 bg-opacity-20 min-w-max w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
-              <th className="py-3 px-6">
+              <th className="py-3 px-6 ">
                 <span className="w-full block text-left lg:text-sm text-xs">
                   Tiêu đề
                 </span>
               </th>
-              <th className="py-3 px-6 text-center">
+              <th className="py-3 px-6 text-center hidden sm:table-cell">
                 <span className="w-full block text-center lg:text-sm text-xs">
                   Ngày tạo
                 </span>

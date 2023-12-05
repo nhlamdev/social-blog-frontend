@@ -1,4 +1,5 @@
 import { OwnerSeriesListView } from "@/components/list-view";
+import { OwnerMobileNavigation } from "@/components/navigation/owner-mobile";
 import { PageProps } from "@/interface";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -14,9 +15,12 @@ export default async function OwnerSeriesPage(props: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
-      <span className="text-center text-xl font-semibold dark:text-slate-100 text-slate-900">
-        Danh sách chuỗi bài viết
-      </span>
+      <div className="flex flex-row justify-between w-full items-center">
+        <OwnerMobileNavigation />
+        <span className="text-xl font-semibold dark:text-slate-200 text-slate-800">
+          Danh sách chuỗi bài viết
+        </span>
+      </div>
 
       <OwnerSeriesListView searchParams={searchParams} />
 

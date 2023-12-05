@@ -30,8 +30,8 @@ export const ClientBookMarkListViewItem = (
 
   return (
     <div
-      className="w-full flex flex-row gap-2 bg-slate-100 bg-opacity-40
-      shadow-md rounded-md"
+      className="w-full sm:w-5/6 lg:w-3/5 flex flex-row gap-2 bg-slate-100 bg-opacity-40
+      shadow-md rounded-md mx-auto"
     >
       {/* --------------- */}
       <div className="flex flex-col justify-between py-2 md:py-4 px-4 gap-2">

@@ -24,7 +24,7 @@ export const OwnerProviderComponent = (props: OwnerProviderComponentProps) => {
   return (
     <>
       <OwnerNavigationDesktop profile={profile} />
-      <OwnerNavigationMobile profile={profile} />
+      {/* <OwnerNavigationMobile profile={profile} /> */}
       {children}
     </>
   );

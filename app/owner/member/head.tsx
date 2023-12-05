@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDebouncedState } from "@mantine/hooks";
 import { useRouter, usePathname } from "next/navigation";
 import { generateURLWithQueryParams } from "@/utils/global-func";
+import { OwnerMobileNavigation } from "@/components/navigation/owner-mobile";
 
 interface OwnerContentsHeadProps {
   searchParams: { [key: string]: string | undefined };
@@ -55,7 +56,8 @@ export const OwnerMembersHead = (props: OwnerContentsHeadProps) => {
 
   return (
     <div className="flex flex-row w-full items-center justify-between">
-      <span className="text-center text-xl font-semibold text-slate-800 dark:text-slate-200">
+      <OwnerMobileNavigation />
+      <span className="text-xl font-semibold dark:text-slate-200 text-slate-900">
         Danh sách thành viên
       </span>
 
