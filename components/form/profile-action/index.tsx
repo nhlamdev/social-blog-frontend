@@ -71,7 +71,7 @@ export const ProfileActionComponent = () => {
 
   return (
     <div
-      className="w-2/5 h-fit flex flex-col gap-10 items-center justify-center px-10 py-6 
+      className=" w-full sm:w-[300px] md:w-[350px] lg:w-[400px] h-fit flex flex-col gap-10 items-center justify-center px-10 py-6 
       rounded-lg shadow-lg bg-slate-400 bg-opacity-40"
     >
       <div className="relative w-24 h-24 rounded-full shadow-lg">

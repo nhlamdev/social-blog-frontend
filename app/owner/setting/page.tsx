@@ -6,7 +6,7 @@ export default function OwnerSettingPage() {
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
       <div className="flex flex-row justify-between w-full items-center">
         <OwnerMobileNavigation />
-        <span className="text-xl font-semibold dark:text-slate-200 text-slate-800">
+        <span className="text:md md:text-xl font-semibold dark:text-slate-200 text-slate-800">
           Thông tin cá nhân
         </span>
       </div>

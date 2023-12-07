@@ -88,7 +88,7 @@ export const OwnerListContentInCategory = (
   return (
     <>
       <div
-        className="w-4/5 flex flex-col gap-2"
+        className="w-full sm:w-4/5 flex flex-col gap-2"
         style={{
           flex: 1,
         }}

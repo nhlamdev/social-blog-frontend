@@ -91,7 +91,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
 
   return (
     <div className="flex flex-col w-full gap-4 ">
-      <div className="gap-6 flex flex-col px-10 lg:w-4/6 w-4/5 mx-auto  flex-1">
+      <div className="gap-6 flex flex-col  sm:px-4 md:px-10 lg:w-4/6 sm:w-4/5 w-full  mx-auto  flex-1">
         <label className="relative block">
           <span className="sr-only">Tiêu đề</span>
           <input

@@ -29,8 +29,6 @@ export const OwnerContentRow = (props: OwnerContentRowProps) => {
           }}
         >
           {item.title}
-          sssssssssssssssssssssssssssssssssssssss
-          ssssssssssssssssssssssssssssssssssssssssssssss
         </span>
       </td>
       <td className="py-2 px-4 hidden sm:table-cell">

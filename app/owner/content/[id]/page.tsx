@@ -2,9 +2,11 @@
 import { contentApi } from "@/api/content";
 import { FormContentAction } from "@/components/form";
 import { PageProps } from "@/interface";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { useEffect, useState } from "react";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 export default function OwnerContentUpdatePage(props: PageProps) {
   const { params } = props;
@@ -52,9 +54,17 @@ export default function OwnerContentUpdatePage(props: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
-      <span className="text-center text-xl font-semibold text-slate-800 dark:text-slate-200">
-        Thêm mới bài viết
-      </span>
+      <div className="flex flex-row gap-4 w-full">
+        <Link href="/owner/content">
+          <BsFillArrowLeftCircleFill
+            className="hover:scale-110 text-slate-800 dark:text-slate-100 text-2xl"
+            style={{ cursor: "pointer" }}
+          />
+        </Link>
+        <span className="text-center text-md md:text-xl font-semibold text-slate-900 dark:text-slate-200">
+          Chỉnh sửa bài viết
+        </span>
+      </div>
 
       <FormContentAction content={content} />
     </div>

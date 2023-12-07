@@ -66,8 +66,8 @@ export const HistoryLoginTable = () => {
 
   return (
     <>
-      <div className="rounded my-6 w-full h-full">
-        <table className="bg-slate-100 bg-opacity-20 min-w-max w-full table-auto flex-1">
+      <div className="rounded my-6 w-full h-full overflow-auto">
+        <table className="bg-slate-100 bg-opacity-20 min-w-[600px] md:min-w-max md:w-full table-auto ">
           <thead>
             <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
               <th className="py-3 px-6">

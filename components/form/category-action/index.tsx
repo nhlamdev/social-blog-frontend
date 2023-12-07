@@ -90,7 +90,10 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
       }}
       className="flex flex-col gap-5 w-full justify-center items-center"
     >
-      <div className="flex flex-col gap-4 w-4/5 lg:w-3/4" style={{ flex: 7 }}>
+      <div
+        className="flex flex-col gap-4 w-full sm:w-4/5 lg:w-3/4"
+        style={{ flex: 7 }}
+      >
         <label className="relative block w-full">
           <span className="sr-only">Tiêu đề</span>
           <input
