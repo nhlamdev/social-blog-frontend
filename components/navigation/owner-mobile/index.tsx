@@ -16,7 +16,7 @@ export const OwnerMobileNavigation = () => {
   return (
     <div className="flex flex-row lg:hidden ">
       <BiMenu
-        className="text-3xl cursor-pointer"
+        className="text-3xl cursor-pointer text-slate-900 dark:text-slate-200"
         onClick={() => setOpen(true)}
       />
 
@@ -32,8 +32,9 @@ export const OwnerMobileNavigation = () => {
 
       {open ? (
         <div
-          className="h-fit m-1 rounded-md gap-2 bg-slate-200 dark:bg-slate-600 shadow-md p-4 min-w-fit
-         shadow-slate-600 dark:shadow-slate-800 block fixed top-0 bottom-0 left-0 z-20"
+          className="h-auto sm:h-fit  m-0 sm:m-1 gap-2 bg-slate-200 dark:bg-slate-600 
+         shadow-slate-600 dark:shadow-slate-800 flex flex-col fixed shadow-md p-4 min-w-fit
+         top-0 bottom-0 left-0 right-0 sm:right-auto z-20 sm:rounded-md  rounded-none"
           id="owner-navigation"
         >
           <div className="px-2 py-1 flex flex-row items-center justify-between">
@@ -49,8 +50,9 @@ export const OwnerMobileNavigation = () => {
               onClick={() => setOpen(false)}
             />
           </div>
+
           {profile ? (
-            <div className="p-2 g-2">
+            <div className="p-2 g-2 flex-1">
               {navigation_mock
                 .filter((v) => {
                   if (profile.role_owner) {
