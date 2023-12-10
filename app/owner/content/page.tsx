@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { IoIosCreate } from "react-icons/io";
 import { OwnerContentsHead } from "./head";
+import { CreateActionButton } from "@/components/custom";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -21,23 +22,7 @@ export default async function OwnerContentsPage(props: PageProps) {
 
       <OwnerContentTableComponent searchParams={searchParams} />
 
-      <Link
-        className="text-slate-800 dark:text-slate-100"
-        href="/owner/content/create"
-        style={{
-          display: "block",
-          position: "fixed",
-          right: "30px",
-          bottom: "30px",
-          cursor: "pointer",
-        }}
-      >
-        <IoIosCreate
-          style={{
-            fontSize: "36px",
-          }}
-        />
-      </Link>
+      <CreateActionButton direct="/owner/content/create" />
     </div>
   );
 }

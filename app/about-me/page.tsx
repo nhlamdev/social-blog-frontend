@@ -17,10 +17,11 @@ export default function AboutMePage() {
         <div className="flex flex-row absolute top-4 left-4 items-center">
           <Link
             href={"/"}
-            className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] relative"
+            className="w-[100px] md:w-[100px] h-[100px] md:h-[100px] relative 
+            bg-slate-200 rounded-full"
           >
             <Image
-              src="/logo/logo.png"
+              src="/logo/logo-none-crop.png"
               fill
               sizes="100vw"
               alt="logo"

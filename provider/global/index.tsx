@@ -6,6 +6,7 @@ import { apiCaller } from "@/api";
 import { SWRConfig } from "swr";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
+import { COLOR_THEME_CASE } from "@/constant";
 
 interface ProviderComponentProps {
   children: React.ReactNode;
@@ -20,6 +21,20 @@ export const ProviderComponent = (props: ProviderComponentProps) => {
     return () => {
       socket.disconnect();
     };
+  }, []);
+
+  useEffect(() => {
+    if (!document) {
+      return;
+    }
+
+    const mode = localStorage.getItem(COLOR_THEME_CASE);
+
+    if (mode === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, []);
 
   return (

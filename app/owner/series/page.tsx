@@ -1,3 +1,4 @@
+import { CreateActionButton } from "@/components/custom";
 import { OwnerSeriesListView } from "@/components/list-view";
 import { OwnerMobileNavigation } from "@/components/navigation/owner-mobile";
 import { PageProps } from "@/interface";
@@ -24,17 +25,7 @@ export default async function OwnerSeriesPage(props: PageProps) {
 
       <OwnerSeriesListView searchParams={searchParams} />
 
-      <Link
-        href="/owner/series/create"
-        className="block fixed right-8 bottom-8 cursor-pointer"
-      >
-        <IoIosCreate
-          className="text-slate-800 dark:text-slate-100"
-          style={{
-            fontSize: "36px",
-          }}
-        />
-      </Link>
+      <CreateActionButton direct="/owner/series/create" />
     </div>
   );
 }
