@@ -6,6 +6,10 @@ const nextConfig = {
         source: "/service/:path*",
         destination: `http://localhost:${process.env.SERVICE_PORT}/:path*`,
       },
+      {
+        source: "/landing-page",
+        destination: `/landing/index.html`,
+      },
     ];
   },
 };

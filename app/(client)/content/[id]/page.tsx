@@ -40,11 +40,11 @@ export default async function ClientDetailContentPage(props: PageProps) {
 
           <div className="flex flex-col flex-1 gap-2">
             <div className="flex flex-col flex-1">
-              <span className="text-slate-800 dark:text-slate-200 font-semibold text-2xl select-none">
+              <span className="text-slate-900 dark:text-slate-200 font-semibold text-2xl select-none">
                 {content.title}
               </span>
 
-              <span className="text-slate-800 dark:text-slate-200 font-light text-md select-none">
+              <span className="text-slate-900 dark:text-slate-200 font-light text-md select-none">
                 {getDateTime(content.created_at)}
               </span>
             </div>
@@ -59,8 +59,12 @@ export default async function ClientDetailContentPage(props: PageProps) {
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-xs">{content.created_by.name}</span>
-                <span className="text-xs">{content.created_by.email}</span>
+                <span className="text-xs text-slate-900 dark:text-slate-200">
+                  {content.created_by.name}
+                </span>
+                <span className="text-xs text-slate-900 dark:text-slate-200">
+                  {content.created_by.email}
+                </span>
               </div>
             </div>
           </div>

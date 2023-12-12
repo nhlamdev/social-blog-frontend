@@ -17,7 +17,7 @@ interface ReplyCommentBoxProps {
 
 export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
   const { comment, commentShowReply, changeCommentShowReply, refresh } = props;
-  const { profile } = useAuth();
+  const { profile, firstLoading } = useAuth();
 
   const [replies, setReplies] = useState([]);
   const [total, setTotal] = useState(0);
@@ -151,44 +151,48 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
             <></>
           )}
 
-          <div className="flex flex-col gap-2">
-            <div className="pl-10">
-              <label
-                htmlFor="first_name"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                {`${text.length}/200`}
-              </label>
-              <textarea
-                id="first_name"
-                rows={3}
-                value={text}
-                onChange={(e) => {
-                  const { value } = e.target;
-                  if (!(value.length > 200)) {
-                    setText(value);
-                  }
-                }}
-                style={{
-                  wordBreak: "break-all",
-                  resize: "none",
-                }}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="John"
-                required
-              />
-            </div>
+          {!firstLoading && profile.role_comment ? (
+            <div className="flex flex-col gap-2">
+              <div className="pl-10">
+                <label
+                  htmlFor="first_name"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  {`${text.length}/200`}
+                </label>
+                <textarea
+                  id="first_name"
+                  rows={3}
+                  value={text}
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    if (!(value.length > 200)) {
+                      setText(value);
+                    }
+                  }}
+                  style={{
+                    wordBreak: "break-all",
+                    resize: "none",
+                  }}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                />
+              </div>
 
-            <div className="flex justify-end">
-              <button
-                onClick={() => createReply()}
-                type="button"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-              >
-                Gui
-              </button>
+              <div className="flex justify-end">
+                <button
+                  onClick={() => createReply()}
+                  type="button"
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                  Gui
+                </button>
+              </div>
             </div>
-          </div>
+          ) : (
+            <></>
+          )}
         </div>
       </>
     );

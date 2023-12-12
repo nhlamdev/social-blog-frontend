@@ -5,6 +5,7 @@ import { ListCommentComponent } from "./comment-list";
 import { apiCaller } from "@/api";
 import { enqueueSnackbar } from "notistack";
 import { getCountPage } from "@/utils/global-func";
+import { useAuth } from "@/hook/auth-hook";
 
 interface CommentsComponentProps {
   contentId: string;
@@ -13,6 +14,9 @@ interface CommentsComponentProps {
 
 export const CommentsComponent = (props: CommentsComponentProps) => {
   const [text, setText] = useState("");
+
+  const { firstLoading, profile } = useAuth();
+
   const { contentId, countComment } = props;
 
   const [comments, setComments] = useState([]);
@@ -97,43 +101,49 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
         )}
       </div>
 
-      <div>
-        <label
-          htmlFor="first_name"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          {`${text.length}/200`}
-        </label>
-        <textarea
-          id="first_name"
-          rows={4}
-          value={text}
-          onChange={(e) => {
-            const { value } = e.target;
+      {!firstLoading && profile.role_comment ? (
+        <>
+          <div>
+            <label
+              htmlFor="first_name"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              {`${text.length}/200`}
+            </label>
+            <textarea
+              id="first_name"
+              rows={4}
+              value={text}
+              onChange={(e) => {
+                const { value } = e.target;
 
-            if (!(value.length > 200)) {
-              setText(value);
-            }
-          }}
-          style={{
-            wordBreak: "break-all",
-            resize: "none",
-          }}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="John"
-          required
-        />
-      </div>
+                if (!(value.length > 200)) {
+                  setText(value);
+                }
+              }}
+              style={{
+                wordBreak: "break-all",
+                resize: "none",
+              }}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="John"
+              required
+            />
+          </div>
 
-      <div className="flex justify-end">
-        <button
-          onClick={() => createComment()}
-          type="button"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-        >
-          Gui
-        </button>
-      </div>
+          <div className="flex justify-end">
+            <button
+              onClick={() => createComment()}
+              type="button"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
+              Gui
+            </button>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
