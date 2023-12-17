@@ -3,21 +3,11 @@ import { BsFacebook } from "react-icons/bs";
 
 export const ContactComponent = () => {
   return (
-    <section
-      className="flex flex-col p-4 md:p-8 gap-4 bg-amber-100 rounded-md
-      shadow-lg bg-opacity-20 backdrop-blur-md"
-    >
-      <h2
-        className="text-center font-semibold text-slate-900
-          text-xl sm:text-2xl md:text-2xl dark:text-slate-100"
-      >
-        Liên hệ
-      </h2>
-
+    <section className="flex flex-col p-4 md:p-8 gap-4 ">
       <div className="flex flex-row gap-20 w-full ">
         <picture
           className="justify-center items-center w-3/12 
-           hidden md:flex"
+           hidden lg:flex xs:p-4 lg:p-10"
         >
           <img
             src="/svg/contact.svg"
@@ -26,7 +16,16 @@ export const ContactComponent = () => {
           />
         </picture>
 
-        <div className="flex flex-col gap-2 w-full md:w-9/12">
+        <div
+          className="flex flex-col gap-2 w-full md:w-9/12 p-8 mx-auto
+        rounded-md shadow-lg bg-opacity-20 backdrop-blur-md bg-slate-200"
+        >
+          <h2
+            className="text-center font-semibold text-slate-900
+          text-xl sm:text-2xl md:text-2xl dark:text-slate-100"
+          >
+            Liên hệ
+          </h2>
           <div className=" flex-col gap-4 w-full flex">
             <div>
               <label
@@ -58,7 +57,7 @@ export const ContactComponent = () => {
               </label>
               <textarea
                 id="contact_body"
-                rows={4}
+                rows={6}
                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
                 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
                 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
