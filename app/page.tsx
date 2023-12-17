@@ -2,8 +2,9 @@ import axios from "axios";
 import { PopularItemsComponent } from "./popular";
 import { SeriesPopular } from "./series-popular";
 
-import { ClientHead } from "@/components/custom";
+import { ClientHead, WorkCycleComponent } from "@/components/home";
 import { ContentMoreComments } from "./content-more-content";
+import { ContactComponent } from "@/components/home/contact-me";
 
 export default async function ClientContentsPage() {
   return (
@@ -13,10 +14,12 @@ export default async function ClientContentsPage() {
     >
       {ClientHead ? <ClientHead /> : <></>}
 
-      <div className="flex flex-col p-2 sm:p-4">
+      <div className="flex flex-col gap-4 p-2 sm:p-4">
         <PopularItemsComponent />
         <SeriesPopular />
         <ContentMoreComments />
+        <WorkCycleComponent />
+        <ContactComponent />
       </div>
     </main>
   );

@@ -4,7 +4,6 @@ export * from "./pagination";
 export * from "./text-editor";
 export * from "./empty";
 export * from "./auth-box";
-export * from "./home-header";
 export * from "./base-loading";
 export * from "./bookmark-button";
 export * from "./vote-control";

@@ -1,2 +1,2 @@
 export * from "./common";
-export * from "./localstore.key";
+export * from "./localStore.key";

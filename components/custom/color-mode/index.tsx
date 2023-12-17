@@ -7,8 +7,19 @@ export const ThemeToggleButton = () => {
     <button
       title="Toggle Theme"
       onClick={() => {
+        if (!document) {
+          return;
+        }
+
         document.documentElement.classList.toggle("dark");
-        localStorage.setItem(COLOR_THEME_CASE, "dark");
+
+        const mode = localStorage.getItem(COLOR_THEME_CASE);
+
+        if (mode === "dark") {
+          localStorage.removeItem(COLOR_THEME_CASE);
+        } else {
+          localStorage.setItem(COLOR_THEME_CASE, "dark");
+        }
       }}
       className={`w-12 h-6 rounded-full p-1 bg-gray-200 dark:bg-gray-400 relative transition-colors 
         duration-500 ease-in focus:outline-none focus:ring-2 focus:ring-blue-700 dark:focus:ring-blue-600

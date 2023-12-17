@@ -2,7 +2,11 @@ import { ProviderComponent } from "@/provider";
 import "@/styles/global.scss";
 import type { Metadata } from "next";
 import "react-quill/dist/quill.snow.css";
+import Image from "next/image";
 import { Be_Vietnam_Pro } from "next/font/google";
+import { WorkCycleComponent } from "@/components/home";
+import { BsFacebook } from "react-icons/bs";
+import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,15 +35,11 @@ export default function RootLayout(props: RootLayoutProps) {
           integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
           crossOrigin="anonymous"
         />
-
-        <script
-          async
-          src="https://cdn.ckeditor.com/ckeditor5/40.1.0/super-build/ckeditor.js"
-        />
       </head>
       <body>
         <ProviderComponent>{children}</ProviderComponent>
-        {/* <section className="flex flex-col p-4  gap-2 bg-slate-200">
+
+        <section className="flex flex-col p-4  gap-2 bg-slate-200">
           <div className="flex flex-row  gap-4 justify-center ">
             <Image
               src="/logo/next-js.png"
@@ -76,7 +76,7 @@ export default function RootLayout(props: RootLayoutProps) {
           <p className="text-center text-sm font-semibold ">
             Copyright ©2023 by Nguyen Hoang Lam
           </p>
-        </section> */}
+        </section>
         <script
           defer
           src="https://cdn.jsdelivr.net/npm/@preline/preline@1.0.0/dist/hs-ui.bundle.min.js"
