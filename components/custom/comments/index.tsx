@@ -5,7 +5,7 @@ import { ListCommentComponent } from "./comment-list";
 import { apiCaller } from "@/api";
 import { enqueueSnackbar } from "notistack";
 import { getCountPage } from "@/utils/global-func";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 
 interface CommentsComponentProps {
   contentId: string;

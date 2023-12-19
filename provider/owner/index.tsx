@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import { OwnerNavigationDesktop, OwnerNavigationMobile } from "./navigation";
 import { redirect } from "next/navigation";
 import { OwnerFullLoading } from "./loading";

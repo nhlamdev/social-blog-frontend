@@ -1,6 +1,6 @@
 "use client";
 import { contentApi } from "@/api/content";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useMemo, useState } from "react";

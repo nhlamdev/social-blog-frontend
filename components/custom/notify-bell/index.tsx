@@ -1,6 +1,6 @@
 "use client";
 import { commonApi } from "@/api/common";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import { INotify } from "@/interface";
 import Image from "next/image";
 import { enqueueSnackbar } from "notistack";

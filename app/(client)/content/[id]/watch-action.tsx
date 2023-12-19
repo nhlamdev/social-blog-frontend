@@ -1,7 +1,7 @@
 "use client";
 
 import { contentApi } from "@/api/content";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import { useEffect } from "react";
 
 interface IWatchActionComponent {

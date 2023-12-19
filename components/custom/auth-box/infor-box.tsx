@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import { IProfile } from "@/interface";
 import Image from "next/image";
 import Link from "next/link";

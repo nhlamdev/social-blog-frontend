@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import Link from "next/link";
 import { IoIosCreate } from "react-icons/io";
 

@@ -48,6 +48,12 @@ export const navigation_mock: INav[] = [
     icon: FaUserFriends,
   },
   {
+    url: "/owner/contact",
+    name: "Liên hệ",
+    require_owner: true,
+    icon: FaUserFriends,
+  },
+  {
     url: "/owner/session",
     name: "Phiên",
     require_owner: false,

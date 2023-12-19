@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import { useCallback, useRef, useState } from "react";
 import { FaRegImage } from "react-icons/fa";
 import { authApi } from "@/api/auth";

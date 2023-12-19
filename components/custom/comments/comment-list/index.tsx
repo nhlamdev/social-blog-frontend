@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ReplyCommentBox } from "../reply-list";
 import { TiDelete } from "react-icons/ti";
 import { commentApi } from "@/api/comment";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 
 interface ListCommentComponentProps {
   comments: any[];

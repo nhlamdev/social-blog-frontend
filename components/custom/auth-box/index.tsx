@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import { NavInfoBox } from "./infor-box";
 import { ActionButtonComponent } from "./action-button";
 

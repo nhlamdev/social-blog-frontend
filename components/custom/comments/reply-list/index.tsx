@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { PaginationChangeComponent } from "../..";
 import { TiDelete } from "react-icons/ti";
 import { commentApi } from "@/api/comment";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 
 interface ReplyCommentBoxProps {
   comment: any;

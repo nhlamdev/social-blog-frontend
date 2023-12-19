@@ -1,6 +1,6 @@
 "use client";
 import { LogoutBtn, ThemeToggleButton } from "@/components/custom";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import { navigation_mock } from "@/provider/owner/navigation/nav.mock";
 import Link from "next/link";
 import { useState } from "react";

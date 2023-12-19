@@ -1,7 +1,7 @@
 "use client";
 
 import { apiCaller } from "@/api";
-import { useAuth } from "@/hook/auth-hook";
+import { useAuth } from "@/hook/auth.hook";
 import { useRouter } from "next/navigation";
 
 export const LogoutBtn = () => {
