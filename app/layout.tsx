@@ -7,6 +7,7 @@ import { Be_Vietnam_Pro } from "next/font/google";
 import { WorkCycleComponent } from "@/components/home";
 import { BsFacebook } from "react-icons/bs";
 import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -41,8 +42,13 @@ const technical_logo = [
 export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
 
+  const locale = cookies().get("locale")?.value;
+
   return (
-    <html lang="en" className={inter.className}>
+    <html
+      lang={locale && locale === "vi" ? "vi" : "en"}
+      className={inter.className}
+    >
       <head>
         <script
           async
@@ -54,7 +60,7 @@ export default function RootLayout(props: RootLayoutProps) {
       <body>
         <ProviderComponent>{children}</ProviderComponent>
 
-        <section className="flex flex-col p-4  gap-4 bg-cyan-400 dark:bg-slate-600 bg-opacity-40">
+        <section className="flex flex-col p-4  gap-4 bg-cyan-200 dark:bg-slate-600 bg-opacity-40">
           <div className="flex flex-row  gap-4 justify-center ">
             {technical_logo.map((icon) => {
               return (

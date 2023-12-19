@@ -4,3 +4,5 @@ export const MEMBER_ROLE: { key: string; value: string }[] = [
   { key: "developer", value: "Lập trình viên" },
   { key: "owner", value: "Quản trị viên" },
 ];
+
+export const LANGUAGE = ["vi", "en"];

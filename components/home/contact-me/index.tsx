@@ -1,11 +1,14 @@
 "use client";
 import { commonApi } from "@/api/common";
+import { useAuth } from "@/hook";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useState } from "react";
 import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 
 export const ContactComponent = () => {
+  const { firstLoading, profile } = useAuth();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,6 +38,10 @@ export const ContactComponent = () => {
       setLoading(false);
     }
   }, [description, loading, title]);
+
+  if (firstLoading || !profile) {
+    return <></>;
+  }
 
   return (
     <section className="flex flex-col p-4 md:p-8 gap-4 ">
@@ -78,6 +85,12 @@ export const ContactComponent = () => {
                 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Tiêu đề"
                 required
+                value={title}
+                onChange={(e) => {
+                  const { value } = e.target;
+
+                  setTitle(value);
+                }}
               />
             </div>
 
@@ -98,6 +111,12 @@ export const ContactComponent = () => {
                 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 style={{ resize: "none" }}
                 placeholder="Mô tả nội dung"
+                value={description}
+                onChange={(e) => {
+                  const { value } = e.target;
+
+                  setDescription(value);
+                }}
               />
             </div>
 

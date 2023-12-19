@@ -4,6 +4,12 @@ import {
   NotifyBellComponent,
   ThemeToggleButton,
 } from "@/components/custom";
+import dynamic from "next/dynamic";
+
+const LanguageButton = dynamic(
+  () => import("@/components/custom").then((mod) => mod.LanguageButton),
+  { ssr: false, loading: () => <div>loading</div> }
+);
 import Image from "next/image";
 import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
@@ -28,6 +34,7 @@ export const ClientHomeHeaderDesktop = () => {
         <div className="flex flex-row items-center gap-2">
           <NotifyBellComponent />
           <ThemeToggleButton />
+          <LanguageButton />
           <AuthBox />
         </div>
       </header>

@@ -1,3 +1,4 @@
+import { serverMappingLanguage } from "@/language";
 import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
@@ -25,7 +26,7 @@ export const PopularItemsComponent = async () => {
           className="text-2xl font-semibold text-center p-2 
         text-slate-900 dark:text-slate-100"
         >
-          Nội dung tiêu biểu
+          {serverMappingLanguage("POPULAR_CONTENT")}
         </span>
 
         {topContents.map((content: any) => {
@@ -102,7 +103,7 @@ export const PopularItemsComponent = async () => {
           className="text-xl font-semibold p-2 text-left
         text-slate-900 dark:text-slate-100"
         >
-          Thể loại
+          {serverMappingLanguage("CATEGORIES")}
         </span>
         <div className="flex flex-col gap-2 w-full">
           {topCategoryMoreContent.map((category: any) => {

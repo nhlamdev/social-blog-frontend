@@ -23,10 +23,10 @@ export const commonApi = {
   },
   contacts(params: { [key: string]: string }) {
     const url = generateURLWithQueryParams(`common/contacts`, params);
-    return axiosInstance.post(url);
+    return axiosInstance.get(url);
   },
   removeContact(id: string) {
-    return axiosInstance.post(`common/contact/${id}`);
+    return axiosInstance.delete(`common/contact/${id}`);
   },
   makeSeenAllNotifies() {
     return axiosInstance.patch("common/notifies-seen-all");

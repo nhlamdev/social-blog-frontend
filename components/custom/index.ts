@@ -9,3 +9,4 @@ export * from "./bookmark-button";
 export * from "./vote-control";
 export * from "./notify-bell";
 export * from "./create-btn";
+export * from "./language-button";
