@@ -1,7 +1,41 @@
+"use client";
+import { commonApi } from "@/api/common";
+import { enqueueSnackbar } from "notistack";
+import { useCallback, useState } from "react";
 import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 
 export const ContactComponent = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const submit = useCallback(async () => {
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await commonApi.createContact({ title, description });
+      enqueueSnackbar("Đã gửi thành công", { variant: "success" });
+    } catch (error: any) {
+      if (Array.isArray(error?.response?.data?.message)) {
+        error?.response?.data?.message.forEach((item: any) => {
+          enqueueSnackbar(item, { variant: "error" });
+        });
+      } else {
+        enqueueSnackbar(
+          error?.response ? error.response.data?.message : error.message,
+          { variant: "error" }
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [description, loading, title]);
+
   return (
     <section className="flex flex-col p-4 md:p-8 gap-4 ">
       <div className="flex flex-row gap-20 w-full ">
@@ -26,7 +60,7 @@ export const ContactComponent = () => {
           >
             Liên hệ
           </h2>
-          <div className=" flex-col gap-4 w-full flex">
+          <form className=" flex-col gap-4 w-full flex">
             <div>
               <label
                 htmlFor="contact_title"
@@ -74,10 +108,11 @@ export const ContactComponent = () => {
               dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg 
               dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 
               text-center mr-2 mb-2 w-fit ml-auto"
+              onClick={() => submit()}
             >
               Gửi
             </button>
-          </div>
+          </form>
           <div className="flex flex-row w-full gap-4 justify-center">
             <BsFacebook
               style={{ fontSize: "30px" }}

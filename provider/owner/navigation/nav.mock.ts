@@ -8,6 +8,7 @@ import { IconType } from "react-icons/lib";
 import { MdContentPaste, MdToken } from "react-icons/md";
 import { SiSteelseries } from "react-icons/si";
 import { FaUserFriends } from "react-icons/fa";
+import { MdContactPhone } from "react-icons/md";
 
 interface INav {
   url: string;
@@ -51,7 +52,7 @@ export const navigation_mock: INav[] = [
     url: "/owner/contact",
     name: "Liên hệ",
     require_owner: true,
-    icon: FaUserFriends,
+    icon: MdContactPhone,
   },
   {
     url: "/owner/session",

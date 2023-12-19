@@ -55,3 +55,5 @@ export interface ISession {
   isCurrent: boolean;
   _id: string;
 }
+
+export type TypeLocationLanguage = "vi" | "en";

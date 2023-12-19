@@ -3,6 +3,7 @@ import { categoryApi } from "./category";
 import { commentApi } from "./comment";
 import { contentApi } from "./content";
 import { seriesApi } from "./series";
+import { commonApi } from "./common";
 
 export const apiCaller = {
   authApi,
@@ -10,4 +11,5 @@ export const apiCaller = {
   commentApi,
   contentApi,
   seriesApi,
+  commonApi,
 };

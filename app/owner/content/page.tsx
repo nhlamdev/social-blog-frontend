@@ -19,9 +19,7 @@ export default async function OwnerContentsPage(props: PageProps) {
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
       <OwnerContentsHead searchParams={searchParams} />
-
       <OwnerContentTableComponent searchParams={searchParams} />
-
       <CreateActionButton direct="/owner/content/create" />
     </div>
   );

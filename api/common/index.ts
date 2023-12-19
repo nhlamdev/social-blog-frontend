@@ -18,13 +18,14 @@ export const commonApi = {
 
     return axiosInstance.get(url);
   },
-  createContact(payload: any) {
+  createContact(payload: { title: string; description: string }) {
     return axiosInstance.post("common/make-contact", payload);
   },
-  contacts() {
-    return axiosInstance.post("common/contacts");
+  contacts(params: { [key: string]: string }) {
+    const url = generateURLWithQueryParams(`common/contacts`, params);
+    return axiosInstance.post(url);
   },
-  removeContacts(id: string) {
+  removeContact(id: string) {
     return axiosInstance.post(`common/contact/${id}`);
   },
   makeSeenAllNotifies() {

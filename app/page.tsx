@@ -1,4 +1,3 @@
-import axios from "axios";
 import { PopularItemsComponent } from "./popular";
 import { SeriesPopular } from "./series-popular";
 
