@@ -1,11 +1,17 @@
 "use client";
-import { AuthBox, NotifyBellComponent } from "@/components/custom";
+import {
+  AuthBox,
+  LanguageButton,
+  NotifyBellComponent,
+} from "@/components/custom";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ThemeToggleButton } from "@/components/custom";
+import { clientNavigation } from "@/constant";
+import { clientMappingLanguage } from "@/language/translate-client";
 
 export const ClientHomeHeaderMobile = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -21,7 +27,7 @@ export const ClientHomeHeaderMobile = () => {
 
       <div className="flex flex-row gap-4 items-center">
         <NotifyBellComponent />
-        <ThemeToggleButton />
+
         <AuthBox />
       </div>
 
@@ -45,51 +51,33 @@ export const ClientHomeHeaderMobile = () => {
                   alt="logo"
                 />
               </div>
-              {/* <span className="text-md dark:text-slate-100 text-slate-900">
-                swalor dev
-              </span> */}
+
               <AiFillCloseCircle
                 className="text-slate-600 dark:text-slate-400 text-2xl cursor-pointer"
                 onClick={() => setOpen(false)}
               />
             </div>
 
-            <div className="flex flex-col items-center gap-4 ">
-              <Link
-                href="/content"
-                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
-                dark:border-slate-100 border-slate-900"
-                style={{ borderBottom: "1px solid" }}
-              >
-                Bài viết
-              </Link>
+            <nav className="flex flex-col items-center gap-4 flex-1">
+              {clientNavigation.map((nav) => {
+                return (
+                  <Link
+                    href={nav.url}
+                    key={`client-nav-${nav.display}`}
+                    className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 
+                    text-slate-900 dark:border-slate-100 border-slate-900
+                    capitalize"
+                    style={{ borderBottom: "1px solid" }}
+                  >
+                    {clientMappingLanguage(nav.display)}
+                  </Link>
+                );
+              })}
+            </nav>
 
-              <Link
-                href="/series"
-                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
-                dark:border-slate-100 border-slate-900"
-                style={{ borderBottom: "1px solid" }}
-              >
-                Chuỗi bài viết
-              </Link>
-
-              <Link
-                href="/about-me"
-                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
-                dark:border-slate-100 border-slate-900"
-                style={{ borderBottom: "1px solid" }}
-              >
-                Tác giả
-              </Link>
-
-              <Link
-                href="/about-me"
-                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
-                dark:border-slate-100 border-slate-900"
-                style={{ borderBottom: "1px solid" }}
-              >
-                Về tôi
-              </Link>
+            <div className="flex flex-row justify-between px-2">
+              <ThemeToggleButton />
+              <LanguageButton />
             </div>
           </div>
         </div>

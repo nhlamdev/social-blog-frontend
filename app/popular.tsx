@@ -1,4 +1,4 @@
-import { serverMappingLanguage } from "@/language";
+import { serverMappingLanguage } from "@/language/translate-server";
 import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
@@ -134,7 +134,7 @@ export const PopularItemsComponent = async () => {
           className="text-xl font-semibold p-2 text-left
         text-slate-900 dark:text-slate-100"
         >
-          Thẻ
+          {serverMappingLanguage("TAGS")}
         </span>
 
         <div className="flex flex-row flex-wrap gap-2">

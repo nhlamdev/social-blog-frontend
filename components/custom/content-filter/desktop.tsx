@@ -4,6 +4,7 @@ import {
   DropdownCategoryBox,
   SortOptionsComponent,
 } from "@/components/drop-down";
+import { clientMappingLanguage } from "@/language/translate-client";
 import { generateURLWithQueryParams } from "@/utils/global-func";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useRouter } from "next/navigation";
@@ -61,7 +62,11 @@ export const ClientContentFilterDesktopComponent = (
   }, [category, debounced, router, sortCase]);
   return (
     <div className="hidden sm:flex flex-row items-center justify-end w-full h-fit gap-4">
-      <OutlineInputComponent txt={search} change={(txt) => setSearch(txt)} />
+      <OutlineInputComponent
+        txt={search}
+        change={(txt) => setSearch(txt)}
+        placeholder={clientMappingLanguage("SEARCH_PLACEHOLDER")}
+      />
 
       <DropdownCategoryBox
         value={category}

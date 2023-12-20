@@ -1,16 +1,6 @@
+import { serverMappingLanguage } from "@/language/translate-server";
 import "./style.scss";
-
-interface IWorkMakeItem {
-  key: string;
-  url: string;
-  display: string;
-}
-
-const mocks: IWorkMakeItem[] = [
-  { key: "Working", display: "Làm việc", url: "/svg/developer.svg" },
-  { key: "Upgrade", display: "Học hỏi", url: "/svg/read-book.svg" },
-  { key: "Relax", display: "Thư giãn", url: "/svg/relax.svg" },
-];
+import { WorkCycleMocks } from "@/constant";
 
 export const WorkCycleComponent = () => {
   return (
@@ -21,13 +11,13 @@ export const WorkCycleComponent = () => {
           className="text-center font-semibold text-slate-900
           text-lg sm:text-xl md:text-2xl dark:text-slate-100"
         >
-          Work cycle
+          {serverMappingLanguage("WORK_CYCLE")}
         </h2>
         <div className="h-[2px] w-20 bg-slate-900 dark:bg-slate-100" />
       </div>
 
       <div className="work-cycle-items">
-        {mocks.map((v, k) => {
+        {WorkCycleMocks.map((v, k) => {
           return (
             <div
               key={`work-cycle-item-${v.key}`}
@@ -48,7 +38,7 @@ export const WorkCycleComponent = () => {
                 className="text-slate-900 dark:text-slate-100 sm:!text-slate-100 
               border-slate-100 text-lg"
               >
-                {v.display}
+                {serverMappingLanguage(v.key)}
               </span>
             </div>
           );

@@ -6,13 +6,17 @@ import {
 } from "@/components/custom";
 import dynamic from "next/dynamic";
 
+import Image from "next/image";
+import { FiSearch } from "react-icons/fi";
+
 const LanguageButton = dynamic(
   () => import("@/components/custom").then((mod) => mod.LanguageButton),
   { ssr: false, loading: () => <div>loading</div> }
 );
-import Image from "next/image";
-import Link from "next/link";
-import { FiSearch } from "react-icons/fi";
+const DesktopNavigationComponent = dynamic(
+  () => import("./nav").then((mod) => mod.DesktopNavigationComponent),
+  { ssr: false, loading: () => <div>loading</div> }
+);
 
 export const ClientHomeHeaderDesktop = () => {
   return (
@@ -21,7 +25,7 @@ export const ClientHomeHeaderDesktop = () => {
         <div className="p-3 rounded-full bg-slate-100 bg-opacity-40 shadow-lg">
           <Image src="/logo/logo-crop.png" width={40} height={40} alt="logo" />
         </div>
-
+        {/* 
         <div className="flex flex-col gap-2 items-center">
           <h1 className="text-xl font-semibold dark:text-slate-100 text-slate-900">
             swalog dev
@@ -29,7 +33,7 @@ export const ClientHomeHeaderDesktop = () => {
           <span className="text-sm italic dark:text-slate-100 text-slate-900">
             Make your way to the future with passion and perseverance !
           </span>
-        </div>
+        </div> */}
 
         <div className="flex flex-row items-center gap-2">
           <NotifyBellComponent />
@@ -40,20 +44,7 @@ export const ClientHomeHeaderDesktop = () => {
       </header>
 
       <nav className="px-4 py-2 gap-2 md:flex flex-row items-center hidden ">
-        <Link href="/content">
-          <span className="dark:text-slate-100 text-slate-900">Bài viết</span>
-        </Link>
-        <Link href="/series">
-          <span className="dark:text-slate-100 text-slate-900">
-            Chuỗi bài viết
-          </span>
-        </Link>
-        <Link href="/author">
-          <span className="dark:text-slate-100 text-slate-900">Tác giả</span>
-        </Link>
-        <Link href="/about-me">
-          <span className="dark:text-slate-100 text-slate-900">Về tôi</span>
-        </Link>
+        <DesktopNavigationComponent />
         <form
           action="/content"
           className="select-none flex flex-row items-center justify-end gap-2  flex-1"

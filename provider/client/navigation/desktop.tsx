@@ -2,9 +2,17 @@
 import { NotifyBellComponent } from "@/components/custom";
 import { AuthBox } from "@/components/custom/auth-box";
 import { ThemeToggleButton } from "@/components/custom/color-mode";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { BsBellFill } from "react-icons/bs";
+const LanguageButton = dynamic(
+  () => import("@/components/custom").then((mod) => mod.LanguageButton),
+  { ssr: false, loading: () => <div>loading</div> }
+);
+const ClientNavigationComponent = dynamic(
+  () => import("./nav").then((mod) => mod.ClientNavigationComponent),
+  { ssr: false, loading: () => <div>loading</div> }
+);
 
 export const ClientNavigatorDesktop = () => {
   return (
@@ -19,37 +27,13 @@ export const ClientNavigatorDesktop = () => {
         >
           <Image src="/logo/logo-crop.png" width={30} height={30} alt="logo" />
         </Link>
-
-        <div className="flex flex-row items-center gap-4">
-          <Link href="/content">
-            <span className="font-semibold text-sm dark:text-slate-100">
-              Bài viết
-            </span>
-          </Link>
-
-          <Link href="/series">
-            <span className="font-semibold text-sm dark:text-slate-100">
-              Chuỗi bài viết
-            </span>
-          </Link>
-
-          <Link href="/author">
-            <span className="font-semibold text-sm dark:text-slate-100">
-              Tác giả
-            </span>
-          </Link>
-
-          <Link href="/about-me">
-            <span className="font-semibold text-sm dark:text-slate-100">
-              Về tôi
-            </span>
-          </Link>
-        </div>
+        <ClientNavigationComponent />
       </div>
 
       <div className="flex flex-row items-center gap-4">
         <NotifyBellComponent />
         <ThemeToggleButton />
+        <LanguageButton />
         <AuthBox />
       </div>
     </nav>

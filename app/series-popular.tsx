@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MdContentCopy } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
 import { TbLoadBalancer } from "react-icons/tb";
+import { serverMappingLanguage } from "@/language/translate-server";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -32,7 +33,7 @@ export const SeriesPopular = async () => {
           className="text-2xl font-semibold text-center p-2 
         text-slate-900 dark:text-slate-100"
         >
-          Chuỗi bài viết tiêu biểu
+          {serverMappingLanguage("TOP_SERIES_MORE_VIEWS")}
         </p>
 
         <span className="h-[2px] w-1/5 bg-slate-900 dark:bg-slate-100"></span>

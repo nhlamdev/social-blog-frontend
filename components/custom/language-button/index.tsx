@@ -19,7 +19,7 @@ export const LanguageButton = () => {
       }}
     >
       <span
-        className="text-sm text-slate-900 dark:text-slate-100 font-semibold
+        className="text-sm text-slate-900 font-semibold
         select-none"
       >
         {locale}

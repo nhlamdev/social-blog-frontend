@@ -1,6 +1,7 @@
 "use client";
 import { commonApi } from "@/api/common";
 import { useAuth } from "@/hook";
+import { clientMappingLanguage } from "@/language/translate-client";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useState } from "react";
 import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
@@ -65,16 +66,16 @@ export const ContactComponent = () => {
             className="text-center font-semibold text-slate-900
           text-xl sm:text-2xl md:text-2xl dark:text-slate-100"
           >
-            Liên hệ
+            {clientMappingLanguage("CONTACT")}
           </h2>
           <form className=" flex-col gap-4 w-full flex">
             <div>
               <label
                 htmlFor="contact_title"
-                className="block mb-2 text-md font-medium
+                className="block mb-2 text-md font-medium capitalize
                 text-gray-900 dark:text-slate-100"
               >
-                Tiêu đề
+                {clientMappingLanguage("TITLE")}
               </label>
               <input
                 type="text"
@@ -97,10 +98,10 @@ export const ContactComponent = () => {
             <div>
               <label
                 htmlFor="contact_body"
-                className="block mb-2 text-md font-medium 
+                className="block mb-2 text-md font-medium capitalize
                 text-gray-900 dark:text-slate-100"
               >
-                Nội dung
+                {clientMappingLanguage("DESCRIPTION")}
               </label>
               <textarea
                 id="contact_body"
@@ -129,7 +130,7 @@ export const ContactComponent = () => {
               text-center mr-2 mb-2 w-fit ml-auto"
               onClick={() => submit()}
             >
-              Gửi
+              {clientMappingLanguage("SUBMIT")}
             </button>
           </form>
           <div className="flex flex-row w-full gap-4 justify-center">

@@ -10,6 +10,7 @@ import { useDeferredValue, useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { useDebouncedValue } from "@mantine/hooks";
 import { AuthBox } from "@/components/custom";
+import { clientMappingLanguage } from "@/language/translate-client";
 interface FilterContentComponentProps {
   searchParams: { [key: string]: string | undefined };
 }
@@ -94,6 +95,7 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
               <OutlineInputComponent
                 txt={search}
                 change={(txt) => setSearch(txt)}
+                placeholder={clientMappingLanguage("SEARCH_PLACEHOLDER")}
               />
 
               <DropdownCategoryBox
@@ -112,7 +114,11 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
       </div>
 
       <div className="hidden sm:flex flex-row items-center justify-end w-full h-fit gap-4">
-        <OutlineInputComponent txt={search} change={(txt) => setSearch(txt)} />
+        <OutlineInputComponent
+          txt={search}
+          change={(txt) => setSearch(txt)}
+          placeholder={clientMappingLanguage("SEARCH_PLACEHOLDER")}
+        />
 
         <DropdownCategoryBox
           value={category}
@@ -124,6 +130,7 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
             }
           }}
         />
+
         <SortOptionsComponent
           sortCase={sortCase}
           change={(txt) => setSortCase(txt)}

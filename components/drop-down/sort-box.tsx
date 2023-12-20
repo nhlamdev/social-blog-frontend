@@ -1,3 +1,4 @@
+import { clientMappingLanguage } from "@/language/translate-client";
 import { useState } from "react";
 import { PiSortDescendingBold } from "react-icons/pi";
 import { TbSortDescending } from "react-icons/tb";
@@ -16,24 +17,30 @@ export const SortOptionsComponent = (props: SortOptionsComponentProps) => {
     { key: "TIME_DESC", value: "Mới nhất", icon: PiSortDescendingBold },
   ];
 
-  const genegrateTitle = () => {
+  const generateTitle = () => {
     const check = data.filter((c) => c.key === sortCase);
     if (!check || check.length === 0) {
       return "Bộ lọc";
     } else {
-      return check[0].value;
+      return clientMappingLanguage(check[0].key);
     }
   };
 
   return (
-    <div className="flex flex-col items-center relative">
+    <div className="flex flex-col items-center relative w-full sm:w-40">
       <div className="w-full cursor-pointer" onClick={() => setOpen(!open)}>
         <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
           <div className="flex flex-auto flex-wrap"></div>
-          <span className="p-1 px-2 appearance-none outline-none w-full text-gray-800 text-sm">
-            {genegrateTitle()}
+          <span
+            className="p-1 px-2 appearance-none outline-none w-full 
+          text-gray-800 text-sm select-none"
+          >
+            {generateTitle()}
           </span>
-          <div className="text-gray-800 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 rotate-">
+          <div
+            className="text-gray-800 w-8 py-1 pl-2 pr-1 border-l flex items-center 
+                        border-gray-200 rotate-"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="100%"
@@ -71,7 +78,8 @@ export const SortOptionsComponent = (props: SortOptionsComponentProps) => {
       {/* ----------------- */}
       <div
         style={{ display: open ? "block" : "none", zIndex: 3 }}
-        className="top-full absolute shadow bg-white top-100 z-40 w-full left-0 rounded max-h-select overflow-y-auto "
+        className="top-full absolute shadow bg-white z-40 w-full left-0 rounded 
+        max-h-select overflow-y-auto "
       >
         {data.map((s: any, key) => {
           return (
@@ -84,10 +92,13 @@ export const SortOptionsComponent = (props: SortOptionsComponentProps) => {
               }}
             >
               <div className="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100">
-                <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                  <div className="w-full items-center flex">
-                    <div className="mx-2">{s.value}</div>
-                  </div>
+                <div
+                  className="flex w-full items-center p-2 pl-2 border-transparent 
+                  border-l-2 relative hover:border-teal-100"
+                >
+                  <span className="mx-2 whitespace-nowrap text-sm">
+                    {clientMappingLanguage(s.key)}
+                  </span>
                 </div>
               </div>
             </div>

@@ -1,4 +1,3 @@
-import { LANGUAGE } from "@/constant";
 import Cookies from "js-cookie";
 import { languages } from "./value";
 
