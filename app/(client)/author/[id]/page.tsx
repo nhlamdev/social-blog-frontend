@@ -1,9 +1,10 @@
 import { AuthorTabsView } from "@/components/tabs-view";
 import { PageProps } from "@/interface";
-import { getDateTime } from "@/utils/global-func";
+import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
 import { FollowButton } from "./follow-btn";
+import { serverMappingLanguage } from "@/language/translate-server";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -41,19 +42,22 @@ export default async function ContentInAuthorPage(props: PageProps) {
             className="text-sm sm:text-md md:text-lg font-semibold 
           text-gray-900 dark:text-gray-200"
           >
-            Tác giả : {member.name}
+            {capitalizeFirstLetter(serverMappingLanguage("AUTHOR"))} :{" "}
+            {member.name}
           </span>
           <span
             className="text-xs sm:text-sm md:text-md font-light 
           text-gray-900 dark:text-gray-200"
           >
-            Đia chỉ mail : {member.email}
+            {capitalizeFirstLetter(serverMappingLanguage("EMAIL_ADDRESS"))} :{" "}
+            {member.email}
           </span>
           <span
             className="text-xs md:text-md font-light 
           text-gray-900 dark:text-gray-200"
           >
-            Tham gia lúc : {getDateTime(member.created_at)}
+            {capitalizeFirstLetter(serverMappingLanguage("JOIN_AT"))} :{" "}
+            {getDateTime(member.created_at)}
           </span>
 
           <FollowButton member={member} />

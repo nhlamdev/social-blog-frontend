@@ -20,4 +20,9 @@ export const en: { [key: string]: string } = {
   TIME_ASC: "Newest",
   TIME_DESC: "Oldest",
   SEARCH_PLACEHOLDER: "search keywords...",
+  EMAIL_ADDRESS: "email address",
+  JOIN_AT: "join at",
+  FOLLOWERS: "followers",
+  FOLLOW: "follow",
+  FOLLOWED: "followed",
 };

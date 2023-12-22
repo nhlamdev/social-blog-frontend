@@ -7,6 +7,7 @@ import { enqueueSnackbar } from "notistack";
 import { FaPlus } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
+import { clientMappingLanguage } from "@/language/translate-client";
 interface IFollowButton {
   member: any;
 }
@@ -27,11 +28,11 @@ export const FollowButton = (props: IFollowButton) => {
     return (
       <div
         className="flex flex-row items-center gap-2 cursor-pointer bg-slate-400
-  rounded-md hover:shadow-sm px-4 py-2 w-fit bg-opacity-40"
+        rounded-md hover:shadow-sm px-4 py-2 w-fit bg-opacity-40"
       >
         {/* <BsBookmarksFill /> */}
         <span className="select-none text-slate-900 dark:text-slate-200">
-          Theo dõi
+          {clientMappingLanguage("FOLLOWERS")}
         </span>
         {member.follow_by.length > 0 ? (
           <span className="select-none text-slate-900 dark:text-slate-200">
@@ -84,7 +85,9 @@ export const FollowButton = (props: IFollowButton) => {
       )}
 
       <span className="select-none text-slate-900 dark:text-slate-200">
-        Theo dõi
+        {member.follow_by.includes(profile._id)
+          ? clientMappingLanguage("FOLLOWED")
+          : clientMappingLanguage("FOLLOW")}
       </span>
       {member.follow_by.length > 0 ? (
         <span className="select-none text-slate-900 dark:text-slate-200">

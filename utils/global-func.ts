@@ -35,6 +35,10 @@ export const detectDevice = (userAgent: any) => {
   return { os, browser, device };
 };
 
+export function capitalizeFirstLetter(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 export const detectIp = (ipAddress: string) => {
   const ipRegex = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
 

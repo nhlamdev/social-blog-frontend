@@ -20,4 +20,9 @@ export const vi: { [key: string]: string } = {
   TIME_ASC: "Mới nhất",
   TIME_DESC: "Cũ nhất",
   SEARCH_PLACEHOLDER: "nhập từ khoá...",
+  EMAIL_ADDRESS: "địa chỉ email",
+  JOIN_AT: "tham gia lúc",
+  FOLLOWERS: "người theo dõi",
+  FOLLOW: "theo dỏi",
+  FOLLOWED: "đã theo dõi",
 };
