@@ -1,11 +1,12 @@
 "use client";
+import { apiCaller } from "@/api";
+import { useAuth } from "@/hook/auth.hook";
+import { useAppSelector } from "@/hook/redux.hook";
+import { getCountPage } from "@/utils/global-func";
+import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { PaginationChangeComponent } from "..";
 import { ListCommentComponent } from "./comment-list";
-import { apiCaller } from "@/api";
-import { enqueueSnackbar } from "notistack";
-import { getCountPage } from "@/utils/global-func";
-import { useAuth } from "@/hook/auth.hook";
 
 interface CommentsComponentProps {
   contentId: string;
@@ -16,12 +17,15 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
   const [text, setText] = useState("");
 
   const { firstLoading, profile } = useAuth();
+  const translate = useAppSelector((state) => state.common.translate);
 
   const { contentId, countComment } = props;
 
   const [comments, setComments] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
+
+  console.log("translate : ", translate);
 
   const createComment = () => {
     apiCaller.commentApi
@@ -73,35 +77,45 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
 
   return (
     <div className="w-full flex flex-col gap-2">
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row gap-2 items-center">
         <span className="font-semibold text-lg dark:text-slate-100">
-          Bình luận
+          {translate !== null ? translate["COMMENTS"] : <></>}
         </span>
-        <span className="flex-xs dark:text-slate-100">{`(${total})`}</span>
+
+        <span className="flex-xs dark:text-slate-100" suppressHydrationWarning>
+          {translate && `(${total})`}
+        </span>
       </div>
 
-      <div className="flex flex-col gap-4">
-        <ListCommentComponent
-          comments={comments}
-          refresh={() => fetchComments()}
-        />
-
-        {total !== 0 ? (
-          <PaginationChangeComponent
-            current={page}
-            total={getCountPage(total, 5)}
-            onchange={(p: number) => {
-              if (page !== p) {
-                setPage(p);
-              }
-            }}
+      {comments.length === 0 ? (
+        <div className="flex flex-col gap-4 items-center justify-center w-full p-6">
+          <span className="text-xl font-semibold">
+            Hiện Không có bình luận để hiển thị.
+          </span>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4">
+          <ListCommentComponent
+            comments={comments}
+            refresh={() => fetchComments()}
           />
-        ) : (
-          <></>
-        )}
-      </div>
 
-      {!firstLoading && profile.role_comment ? (
+          {total !== 0 ? (
+            <PaginationChangeComponent
+              current={page}
+              total={getCountPage(total, 5)}
+              onchange={(p: number) => {
+                if (page !== p) {
+                  setPage(p);
+                }
+              }}
+            />
+          ) : (
+            <></>
+          )}
+        </div>
+      )}
+      {!firstLoading && profile?.role_comment ? (
         <>
           <div>
             <label
@@ -137,7 +151,7 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              Gui
+              Gửi
             </button>
           </div>
         </>

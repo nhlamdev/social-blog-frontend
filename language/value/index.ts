@@ -1,16 +1,13 @@
 import { en } from "./en";
 import { vi } from "./vi";
 
-interface ILanguage {
-  vi: {
-    [key: string]: string;
-  };
-  en: {
+export interface ILanguages {
+  [key: string]: {
     [key: string]: string;
   };
 }
 
-export const languages: ILanguage = {
+export const languages: ILanguages = {
   en,
   vi,
 };

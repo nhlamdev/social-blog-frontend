@@ -1,8 +1,8 @@
-import { PopularItemsComponent } from "./popular";
-import { SeriesPopular } from "./series-popular";
+import { PopularItemsComponent } from "../components/home/popular";
+import { SeriesPopular } from "../components/home/series-popular";
 
 import { ClientHead, WorkCycleComponent } from "@/components/home";
-import { ContentMoreComments } from "./content-more-content";
+import { ContentMoreComments } from "../components/home/content-more-content";
 import { ContactComponent } from "@/components/home/contact-me";
 
 export default async function ClientContentsPage() {

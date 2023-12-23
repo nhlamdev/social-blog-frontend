@@ -1,4 +1,5 @@
-import { getDateTime } from "@/utils/global-func";
+import { serverMappingLanguage } from "@/language/translate-server";
+import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
 import Link from "next/link";
 
 interface RandomContentComponentProps {
@@ -41,7 +42,8 @@ export const RandomContentComponent = (props: RandomContentComponentProps) => {
               className="text-xs font-light text-slate-900 dark:text-slate-200
               line-clamp-2 break-words"
             >
-              Ngày tạo : {getDateTime(c.created_at)}
+              {capitalizeFirstLetter(serverMappingLanguage("JOIN_AT"))} :{" "}
+              {getDateTime(c.created_at)}
             </span>
           </Link>
         );

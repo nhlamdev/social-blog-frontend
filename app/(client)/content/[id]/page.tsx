@@ -1,13 +1,22 @@
+import { BookmarkActionButton, VoteContentControl } from "@/components/custom";
 import { CommentsComponent } from "@/components/custom/comments";
 import { PageProps } from "@/interface";
 import { getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 import { RandomContentComponent } from "./random-content";
-import { BookmarkActionButton, VoteContentControl } from "@/components/custom";
 import { WatchActionComponent } from "./watch-action";
+import { serverMappingLanguage } from "@/language/translate-server";
+// import dynamic from "next/dynamic";
+// const CommentsComponent = dynamic(
+//   () =>
+//     import("@/components/custom/comments").then((mod) => mod.CommentsComponent),
+//   {
+//     ssr: false,
+//     loading: () => <></>,
+//   }
+// );
 
 const backend = process.env.SERVICE_PORT;
 
@@ -82,20 +91,20 @@ export default async function ClientDetailContentPage(props: PageProps) {
       </div>
       {/* ---------------- */}
 
-      {/* ----------------- */}
-      <div className="flex flex-col w-full gap-2">
-        <p className="text-slate-800 dark:text-slate-200 font-semibold text-lg text-center">
-          Bài viết ngẫu nhiên
-        </p>
-
-        <RandomContentComponent contents={randomContents} />
-      </div>
-
       {id ? (
         <CommentsComponent contentId={id} countComment={content.countComment} />
       ) : (
         <></>
       )}
+
+      {/* ----------------- */}
+      <div className="flex flex-col w-full gap-2">
+        <p className="text-slate-800 dark:text-slate-200 font-semibold text-lg text-center">
+          {serverMappingLanguage("RANDOM_CONTENT")}
+        </p>
+
+        <RandomContentComponent contents={randomContents} />
+      </div>
     </div>
   );
 }

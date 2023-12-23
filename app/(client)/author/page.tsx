@@ -3,7 +3,6 @@ import { ListViewAuthors } from "@/components/list-view/list-author";
 import { PageProps } from "@/interface";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 import axios from "axios";
-import Image from "next/image";
 const backend = process.env.SERVICE_PORT;
 
 export default async function AuthorContentPage(props: PageProps) {

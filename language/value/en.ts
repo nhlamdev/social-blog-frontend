@@ -25,4 +25,6 @@ export const en: { [key: string]: string } = {
   FOLLOWERS: "followers",
   FOLLOW: "follow",
   FOLLOWED: "followed",
+  RANDOM_CONTENT: "random content",
+  COMMENTS: "comments",
 };

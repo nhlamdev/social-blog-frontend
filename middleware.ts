@@ -9,6 +9,7 @@ export function middleware(request: NextRequest) {
 
   if (
     nextUrl.pathname.startsWith("/_next/") ||
+    nextUrl.pathname.startsWith(".") ||
     locales.some((locale) => {
       return nextUrl.pathname.startsWith(`/${locale}`);
     })

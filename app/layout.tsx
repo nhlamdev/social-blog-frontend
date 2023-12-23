@@ -1,13 +1,10 @@
 import { ProviderComponent } from "@/provider";
 import "@/styles/global.scss";
 import type { Metadata } from "next";
-import "react-quill/dist/quill.snow.css";
-import Image from "next/image";
 import { Be_Vietnam_Pro } from "next/font/google";
-import { WorkCycleComponent } from "@/components/home";
-import { BsFacebook } from "react-icons/bs";
-import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
 import { cookies } from "next/headers";
+import Image from "next/image";
+import "react-quill/dist/quill.snow.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -43,12 +40,10 @@ export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
 
   const locale = cookies().get("locale")?.value;
+  const lang = locale && locale === "vi" ? "vi" : "en";
 
   return (
-    <html
-      lang={locale && locale === "vi" ? "vi" : "en"}
-      className={inter.className}
-    >
+    <html lang={lang} className={inter.className}>
       <head>
         <script
           async

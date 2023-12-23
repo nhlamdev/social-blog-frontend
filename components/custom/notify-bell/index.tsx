@@ -37,8 +37,10 @@ export const NotifyBellComponent = () => {
   }, []);
 
   useEffect(() => {
-    fetchNotifies();
-  }, [fetchNotifies]);
+    if (!firstLoading && profile) {
+      fetchNotifies();
+    }
+  }, [fetchNotifies, firstLoading, profile]);
 
   if (firstLoading || !profile) {
     return <></>;

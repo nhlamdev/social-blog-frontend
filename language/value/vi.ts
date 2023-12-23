@@ -25,4 +25,6 @@ export const vi: { [key: string]: string } = {
   FOLLOWERS: "người theo dõi",
   FOLLOW: "theo dỏi",
   FOLLOWED: "đã theo dõi",
+  RANDOM_CONTENT: "bài viết ngẫu nhiên",
+  COMMENTS: "Bình luận",
 };

@@ -1,4 +1,3 @@
-"use client";
 import { ListViewAuthorsItem } from "./item";
 
 interface IListViewAuthors {

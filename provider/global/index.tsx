@@ -7,6 +7,11 @@ import { SWRConfig } from "swr";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 import { COLOR_THEME_CASE } from "@/constant";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
+import { useAppDispatch } from "@/hook/redux.hook";
+import { changeTranslator } from "@/redux/reducers/common";
+import { ReduxInitProvider } from "./redux.provider";
 
 interface ProviderComponentProps {
   children: React.ReactNode;
@@ -45,9 +50,13 @@ export const ProviderComponent = (props: ProviderComponentProps) => {
         revalidateOnReconnect: true,
       }}
     >
-      <CacheProvider value={emotionCache}>
-        <SnackbarProvider>{children}</SnackbarProvider>
-      </CacheProvider>
+      <Provider store={store}>
+        <ReduxInitProvider>
+          <CacheProvider value={emotionCache}>
+            <SnackbarProvider>{children}</SnackbarProvider>
+          </CacheProvider>
+        </ReduxInitProvider>
+      </Provider>
     </SWRConfig>
   );
 };

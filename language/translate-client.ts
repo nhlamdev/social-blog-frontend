@@ -3,7 +3,14 @@ import { languages } from "./value";
 
 export const clientMappingLanguage = (key: string) => {
   const locale = Cookies.get("locale");
-  const l = locale && locale === "vi" ? "vi" : "en";
+  const l = (locale && ["vi", "en"].includes(locale) ? locale : "unset") as
+    | "vi"
+    | "en"
+    | "unset";
 
-  return languages[l][key];
+  if (l === "unset") {
+    return "...";
+  } else {
+    return languages[l][key];
+  }
 };

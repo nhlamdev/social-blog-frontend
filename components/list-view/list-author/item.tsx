@@ -4,6 +4,8 @@ import { BsFillBookmarksFill } from "react-icons/bs";
 import Image from "next/image";
 import { SiSteelseries } from "react-icons/si";
 import { getDateTime } from "@/utils/global-func";
+import { clientMappingLanguage } from "@/language/translate-client";
+import { serverMappingLanguage } from "@/language/translate-server";
 
 interface IListViewAuthorsItem {
   member: any;
@@ -11,6 +13,7 @@ interface IListViewAuthorsItem {
 
 export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
   const { member } = props;
+
   return (
     <Link
       href={`/author/${member._id}`}
@@ -41,8 +44,11 @@ export const ListViewAuthorsItem = (props: IListViewAuthorsItem) => {
         </div>
       </div>
 
-      <span className="text-xs font-light text-slate-900 dark:text-slate-200">
-        Ngày tham gia : {getDateTime(member.created_at)}
+      <span
+        className="text-xs font-light text-slate-900 dark:text-slate-200"
+        suppressHydrationWarning
+      >
+        {serverMappingLanguage("JOIN_AT")} : {getDateTime(member.created_at)}
       </span>
 
       <div className="flex flex-row items-center gap-1">
