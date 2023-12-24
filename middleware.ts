@@ -10,6 +10,8 @@ export function middleware(request: NextRequest) {
   if (
     nextUrl.pathname.startsWith("/_next/") ||
     nextUrl.pathname.startsWith(".") ||
+    nextUrl.pathname.startsWith("/static/") ||
+    nextUrl.pathname.startsWith("/service/") ||
     locales.some((locale) => {
       return nextUrl.pathname.startsWith(`/${locale}`);
     })
@@ -23,11 +25,13 @@ export function middleware(request: NextRequest) {
   const expires = new Date().getTime() + 1000 * 60 * 60 * 24 * 365;
 
   if (location && locales.includes(location)) {
+    nextUrl.pathname = `/${location}${nextUrl.pathname}`;
     const response = NextResponse.rewrite(nextUrl);
     response.cookies.set("locale", location, { expires: expires });
 
     return response;
   } else {
+    nextUrl.pathname = `/vi${nextUrl.pathname}`;
     const response = NextResponse.rewrite(nextUrl);
     response.cookies.set("locale", "vi", { expires: expires });
 
@@ -35,11 +39,11 @@ export function middleware(request: NextRequest) {
   }
 }
 
-// export const config = {
-//   matcher: [
-//     // Skip all internal paths (_next)
-//     "/((?!_next).*)",
-//     // Optional: only run on root (/) URL
-//     // '/'
-//   ],
-// };
+export const config = {
+  matcher: [
+    // Skip all internal paths (_next)
+    "/((?!_next).*)",
+    // Optional: only run on root (/) URL
+    // '/'
+  ],
+};

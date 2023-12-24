@@ -1,8 +1,9 @@
 import { cookies } from "next/headers";
 import { languages } from "./value";
 
-export const serverMappingLanguage = (key: string) => {
+export const serverTranslate = () => {
   const locale = cookies().get("locale")?.value;
   const l = locale && locale === "vi" ? "vi" : "en";
-  return languages[l][key];
+
+  return languages[l];
 };

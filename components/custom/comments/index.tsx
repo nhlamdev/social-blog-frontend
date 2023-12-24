@@ -7,6 +7,7 @@ import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { PaginationChangeComponent } from "..";
 import { ListCommentComponent } from "./comment-list";
+import { useClientTranslate } from "@/language/translate-client";
 
 interface CommentsComponentProps {
   contentId: string;
@@ -17,15 +18,14 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
   const [text, setText] = useState("");
 
   const { firstLoading, profile } = useAuth();
-  const translate = useAppSelector((state) => state.common.translate);
+
+  const useTranslate = useClientTranslate();
 
   const { contentId, countComment } = props;
 
   const [comments, setComments] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-
-  console.log("translate : ", translate);
 
   const createComment = () => {
     apiCaller.commentApi
@@ -79,12 +79,10 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
     <div className="w-full flex flex-col gap-2">
       <div className="flex flex-row gap-2 items-center">
         <span className="font-semibold text-lg dark:text-slate-100">
-          {translate !== null ? translate["COMMENTS"] : <></>}
+          {useTranslate["COMMENTS"]}
         </span>
 
-        <span className="flex-xs dark:text-slate-100" suppressHydrationWarning>
-          {translate && `(${total})`}
-        </span>
+        <span className="flex-xs dark:text-slate-100">{`(${total})`}</span>
       </div>
 
       {comments.length === 0 ? (

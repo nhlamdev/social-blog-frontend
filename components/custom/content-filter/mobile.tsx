@@ -13,7 +13,7 @@ import {
   DropdownCategoryBox,
   SortOptionsComponent,
 } from "@/components/drop-down";
-import { clientMappingLanguage } from "@/language/translate-client";
+import { useClientTranslate } from "@/language/translate-client";
 
 interface IClientContentFilterMobileComponent {
   searchParams: { [key: string]: string | undefined };
@@ -27,6 +27,8 @@ export const ClientContentFilterMobileComponent = (
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
+
+  const translate = useClientTranslate();
 
   const [category, setCategory] = useState<string>(
     searchParams.category ? searchParams.category : ""
@@ -96,7 +98,7 @@ export const ClientContentFilterMobileComponent = (
             <OutlineInputComponent
               txt={search}
               change={(txt) => setSearch(txt)}
-              placeholder={clientMappingLanguage("SEARCH_PLACEHOLDER")}
+              placeholder={translate["SEARCH_PLACEHOLDER"]}
             />
 
             <DropdownCategoryBox

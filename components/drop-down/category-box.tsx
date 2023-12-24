@@ -1,6 +1,6 @@
 "use client";
 import { apiCaller } from "@/api";
-import { clientMappingLanguage } from "@/language/translate-client";
+import { useClientTranslate } from "@/language/translate-client";
 import { useEffect, useState } from "react";
 
 interface DropdownCategoryBoxProps {
@@ -13,6 +13,9 @@ export const DropdownCategoryBox = (props: DropdownCategoryBoxProps) => {
 
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState<any>([]);
+
+  const translate = useClientTranslate();
+
   useEffect(() => {
     apiCaller.categoryApi.get({}).then((res) => {
       setCategories(res.data.data);
@@ -22,7 +25,7 @@ export const DropdownCategoryBox = (props: DropdownCategoryBoxProps) => {
   const generateTitle = () => {
     const check = categories.filter((c: any) => c._id === value);
     if (!check || check.length === 0) {
-      return clientMappingLanguage("CHOOSE_CATEGORIES");
+      return translate["CHOOSE_CATEGORIES"];
       // return {clientL} "Hãy chọn một thể loại";
     } else {
       return check[0].title;

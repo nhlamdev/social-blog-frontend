@@ -1,4 +1,4 @@
-import { serverMappingLanguage } from "@/language/translate-server";
+import { serverTranslate } from "@/language/translate-server";
 import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
 import Link from "next/link";
 
@@ -8,7 +8,7 @@ interface RandomContentComponentProps {
 
 export const RandomContentComponent = (props: RandomContentComponentProps) => {
   const { contents } = props;
-
+  const translate = serverTranslate();
   return (
     <div
       className="flex flex-col w-full"
@@ -42,7 +42,7 @@ export const RandomContentComponent = (props: RandomContentComponentProps) => {
               className="text-xs font-light text-slate-900 dark:text-slate-200
               line-clamp-2 break-words"
             >
-              {capitalizeFirstLetter(serverMappingLanguage("JOIN_AT"))} :{" "}
+              {capitalizeFirstLetter(translate["JOIN_AT"])} :{" "}
               {getDateTime(c.created_at)}
             </span>
           </Link>

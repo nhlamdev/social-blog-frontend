@@ -4,7 +4,7 @@ import {
   DropdownCategoryBox,
   SortOptionsComponent,
 } from "@/components/drop-down";
-import { clientMappingLanguage } from "@/language/translate-client";
+import { useClientTranslate } from "@/language/translate-client";
 import { generateURLWithQueryParams } from "@/utils/global-func";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useRouter } from "next/navigation";
@@ -20,6 +20,7 @@ export const ClientContentFilterDesktopComponent = (
   const { searchParams } = props;
 
   const router = useRouter();
+  const translate = useClientTranslate();
 
   const [category, setCategory] = useState<string>(
     searchParams.category ? searchParams.category : ""
@@ -65,7 +66,7 @@ export const ClientContentFilterDesktopComponent = (
       <OutlineInputComponent
         txt={search}
         change={(txt) => setSearch(txt)}
-        placeholder={clientMappingLanguage("SEARCH_PLACEHOLDER")}
+        placeholder={translate["SEARCH_PLACEHOLDER"]}
       />
 
       <DropdownCategoryBox

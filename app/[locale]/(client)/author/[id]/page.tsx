@@ -4,7 +4,7 @@ import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
 import { FollowButton } from "./follow-btn";
-import { serverMappingLanguage } from "@/language/translate-server";
+import { serverTranslate } from "@/language/translate-server";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -12,6 +12,7 @@ export default async function ContentInAuthorPage(props: PageProps) {
   const { params } = props;
 
   const { id } = params;
+  const translate = serverTranslate();
 
   const { data: member } = await axios.get(
     `http://localhost:${backend}/author/${id}`
@@ -42,21 +43,19 @@ export default async function ContentInAuthorPage(props: PageProps) {
             className="text-sm sm:text-md md:text-lg font-semibold 
           text-gray-900 dark:text-gray-200"
           >
-            {capitalizeFirstLetter(serverMappingLanguage("AUTHOR"))} :{" "}
-            {member.name}
+            {capitalizeFirstLetter(translate["AUTHOR"])} : {member.name}
           </span>
           <span
             className="text-xs sm:text-sm md:text-md font-light 
           text-gray-900 dark:text-gray-200"
           >
-            {capitalizeFirstLetter(serverMappingLanguage("EMAIL_ADDRESS"))} :{" "}
-            {member.email}
+            {capitalizeFirstLetter(translate["EMAIL_ADDRESS"])} : {member.email}
           </span>
           <span
             className="text-xs md:text-md font-light 
           text-gray-900 dark:text-gray-200"
           >
-            {capitalizeFirstLetter(serverMappingLanguage("JOIN_AT"))} :{" "}
+            {capitalizeFirstLetter(translate["JOIN_AT"])} :{" "}
             {getDateTime(member.created_at)}
           </span>
 

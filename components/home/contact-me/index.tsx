@@ -1,7 +1,7 @@
 "use client";
 import { commonApi } from "@/api/common";
 import { useAuth } from "@/hook";
-import { clientMappingLanguage } from "@/language/translate-client";
+import { useClientTranslate } from "@/language/translate-client";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useState } from "react";
 import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
@@ -9,6 +9,8 @@ import { BsFacebook } from "react-icons/bs";
 
 export const ContactComponent = () => {
   const { firstLoading, profile } = useAuth();
+
+  const translate = useClientTranslate();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -52,7 +54,7 @@ export const ContactComponent = () => {
            hidden lg:flex xs:p-4 lg:p-10"
         >
           <img
-            src="/svg/contact.svg"
+            src="/static/svg/contact.svg"
             className=" h-full aspect-square"
             alt="contact"
           />
@@ -66,7 +68,7 @@ export const ContactComponent = () => {
             className="text-center font-semibold text-slate-900
           text-xl sm:text-2xl md:text-2xl dark:text-slate-100"
           >
-            {clientMappingLanguage("CONTACT")}
+            {translate["CONTACT"]}
           </h2>
           <form className=" flex-col gap-4 w-full flex">
             <div>
@@ -75,7 +77,7 @@ export const ContactComponent = () => {
                 className="block mb-2 text-md font-medium capitalize
                 text-gray-900 dark:text-slate-100"
               >
-                {clientMappingLanguage("TITLE")}
+                {translate["TITLE"]}
               </label>
               <input
                 type="text"
@@ -101,7 +103,7 @@ export const ContactComponent = () => {
                 className="block mb-2 text-md font-medium capitalize
                 text-gray-900 dark:text-slate-100"
               >
-                {clientMappingLanguage("DESCRIPTION")}
+                {translate["DESCRIPTION"]}
               </label>
               <textarea
                 id="contact_body"
@@ -130,7 +132,7 @@ export const ContactComponent = () => {
               text-center mr-2 mb-2 w-fit ml-auto"
               onClick={() => submit()}
             >
-              {clientMappingLanguage("SUBMIT")}
+              {translate["SUBMIT"]}
             </button>
           </form>
           <div className="flex flex-row w-full gap-4 justify-center">

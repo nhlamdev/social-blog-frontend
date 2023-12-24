@@ -12,9 +12,9 @@ interface IWorkMakeItem {
 }
 
 export const WorkCycleMocks: IWorkMakeItem[] = [
-  { key: "WORKING", display: "Làm việc", url: "/svg/developer.svg" },
-  { key: "UPGRADE", display: "Học hỏi", url: "/svg/read-book.svg" },
-  { key: "RELAX", display: "Thư giãn", url: "/svg/relax.svg" },
+  { key: "WORKING", display: "Làm việc", url: "/static/svg/developer.svg" },
+  { key: "UPGRADE", display: "Học hỏi", url: "/static/svg/read-book.svg" },
+  { key: "RELAX", display: "Thư giãn", url: "/static/svg/relax.svg" },
 ];
 
 export const LANGUAGE = ["vi", "en"];

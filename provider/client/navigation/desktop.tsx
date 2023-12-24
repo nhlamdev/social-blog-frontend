@@ -25,7 +25,12 @@ export const ClientNavigatorDesktop = () => {
           href="/"
           className="p-2 rounded-full bg-slate-200 bg-opacity-60 shadow-xl"
         >
-          <Image src="/logo/logo-crop.png" width={30} height={30} alt="logo" />
+          <Image
+            src="/static/logo/logo-crop.png"
+            width={30}
+            height={30}
+            alt="logo"
+          />
         </Link>
         <ClientNavigationComponent />
       </div>

@@ -3,7 +3,8 @@ import Image from "next/image";
 import { MdContentCopy } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
 import { TbLoadBalancer } from "react-icons/tb";
-import { serverMappingLanguage } from "@/language/translate-server";
+import { serverTranslate } from "@/language/translate-server";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -21,6 +22,8 @@ interface ITopContent {
 export const SeriesPopular = async () => {
   let topContents: ITopContent[] = [];
 
+  const translate = serverTranslate();
+
   const { data } = await axios.get(
     `http://localhost:${backend}/series/more-avg-views-content?take=3`
   );
@@ -33,7 +36,7 @@ export const SeriesPopular = async () => {
           className="text-2xl font-semibold text-center p-2 
         text-slate-900 dark:text-slate-100"
         >
-          {serverMappingLanguage("TOP_SERIES_MORE_VIEWS")}
+          {translate["TOP_SERIES_MORE_VIEWS"]}
         </p>
 
         <span className="h-[2px] w-1/5 bg-slate-900 dark:bg-slate-100"></span>
@@ -81,8 +84,11 @@ export const SeriesPopular = async () => {
                   className="flex flex-row gap-2 items-center justify-center px-2 py-1 rounded-sm 
                   border-slate-900 dark:border-slate-100 border-0 sm:border-2 border-solid"
                 >
-                  <span className="hidden sm:inline-block text-xs text-slate-900 dark:text-slate-100">
-                    Số bài viết :
+                  <span
+                    className="hidden sm:inline-block text-xs text-slate-900 dark:text-slate-100
+                    capitalize"
+                  >
+                    {translate["CONTENT"]} :
                   </span>
                   <MdContentCopy className="sm:hidden inline-block " />
                   <span className="text-xs text-slate-900 dark:text-slate-100 font-semibold">
@@ -94,7 +100,7 @@ export const SeriesPopular = async () => {
                   border-slate-900 dark:border-slate-100 border-0 sm:border-2 border-solid"
                 >
                   <span className="hidden sm:inline-block text-xs text-slate-900 dark:text-slate-100">
-                    Tổng lượi xem :
+                    {capitalizeFirstLetter(translate["TOTAL_VIEWS"])} :
                   </span>
                   <FaRegEye className="sm:hidden inline-block" />
                   <span className="text-xs text-slate-900 dark:text-slate-100 font-semibold">
@@ -106,7 +112,7 @@ export const SeriesPopular = async () => {
                   border-slate-900 dark:border-slate-100 border-0 sm:border-2 border-solid"
                 >
                   <span className="hidden sm:inline-block text-xs text-slate-900 dark:text-slate-100">
-                    Trung bình lượt xem :
+                    {capitalizeFirstLetter(translate["AVG_VIEWS"])} :
                   </span>
                   <TbLoadBalancer className="sm:hidden inline-block" />
                   <span className="text-xs text-slate-900 dark:text-slate-100 font-semibold">

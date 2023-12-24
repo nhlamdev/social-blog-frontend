@@ -1,16 +1,20 @@
-import Cookies from "js-cookie";
+"use client";
+import { useParams } from "next/navigation";
 import { languages } from "./value";
 
-export const clientMappingLanguage = (key: string) => {
-  const locale = Cookies.get("locale");
-  const l = (locale && ["vi", "en"].includes(locale) ? locale : "unset") as
-    | "vi"
-    | "en"
-    | "unset";
+export type TypeLanguagesKeys = "vi" | "en";
+export const languagesKeys: string[] = ["vi", "en"];
 
-  if (l === "unset") {
-    return "...";
-  } else {
-    return languages[l][key];
-  }
+export const useClientTranslate = (): { [key: string]: string } => {
+  const params = useParams();
+
+  const { locale } = params;
+
+  const l = (
+    locale && languagesKeys.includes(locale.toString())
+      ? locale.toString()
+      : "en"
+  ) as TypeLanguagesKeys;
+
+  return languages[l];
 };

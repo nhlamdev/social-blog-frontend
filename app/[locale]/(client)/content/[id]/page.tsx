@@ -7,7 +7,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { RandomContentComponent } from "./random-content";
 import { WatchActionComponent } from "./watch-action";
-import { serverMappingLanguage } from "@/language/translate-server";
+import { serverTranslate } from "@/language/translate-server";
 // import dynamic from "next/dynamic";
 // const CommentsComponent = dynamic(
 //   () =>
@@ -23,6 +23,7 @@ const backend = process.env.SERVICE_PORT;
 export default async function ClientDetailContentPage(props: PageProps) {
   const { params } = props;
   const { id } = params;
+  const translate = serverTranslate();
 
   if (!id && !backend) {
     notFound();
@@ -100,7 +101,7 @@ export default async function ClientDetailContentPage(props: PageProps) {
       {/* ----------------- */}
       <div className="flex flex-col w-full gap-2">
         <p className="text-slate-800 dark:text-slate-200 font-semibold text-lg text-center">
-          {serverMappingLanguage("RANDOM_CONTENT")}
+          {translate["RANDOM_CONTENT"]}
         </p>
 
         <RandomContentComponent contents={randomContents} />

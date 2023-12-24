@@ -4,23 +4,28 @@ import { useRef, useState } from "react";
 import { BiLogoGoogle } from "react-icons/bi";
 import { BsDiscord, BsFacebook, BsGithub } from "react-icons/bs";
 import { MdAccountCircle } from "react-icons/md";
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 
 export const ActionButtonComponent = () => {
-  const [open, setOpen] = useState(false);
+  const translate = useClientTranslate();
 
+  const [open, setOpen] = useState(false);
   return (
     <div
-      className={`relative flex flex-col space-y-2  items-center  z-10
+      className={`relative flex flex-col space-y-2 items-center z-10 w-40
       ${open ? "before:block" : "before:hidden"}
       before:fixed before:top-0 before:right-0 before:left-0 before:bottom-0 `}
       onClick={() => setOpen(!open)}
     >
       <div
         className="flex flex-row items-center gap-4 shadow-lg px-4 py-2
-        bg-slate-200 bg-opacity-40 cursor-pointer rounded-md"
+        bg-slate-200 bg-opacity-40 cursor-pointer rounded-md "
         onClick={() => setOpen(!open)}
       >
-        <span className="text-xs select-none font-semibold">Đăng nhập</span>
+        <span className="text-xs select-none font-semibold flex-1">
+          {capitalizeFirstLetter(translate["LOGIN"])}
+        </span>
         <MdAccountCircle style={{ fontSize: "24px" }} />
       </div>
 

@@ -1,8 +1,9 @@
-import { serverMappingLanguage } from "@/language/translate-server";
+import { serverTranslate } from "@/language/translate-server";
 import "./style.scss";
 import { WorkCycleMocks } from "@/constant";
 
 export const WorkCycleComponent = () => {
+  const translate = serverTranslate();
   return (
     <section className="gap-4 px-2 py-4 w-full work-cycle">
       <div className="w-full flex flex-row justify-center items-center gap-4">
@@ -11,7 +12,7 @@ export const WorkCycleComponent = () => {
           className="text-center font-semibold text-slate-900
           text-lg sm:text-xl md:text-2xl dark:text-slate-100"
         >
-          {serverMappingLanguage("WORK_CYCLE")}
+          {translate["WORK_CYCLE"]}
         </h2>
         <div className="h-[2px] w-20 bg-slate-900 dark:bg-slate-100" />
       </div>
@@ -38,7 +39,7 @@ export const WorkCycleComponent = () => {
                 className="text-slate-900 dark:text-slate-100 sm:!text-slate-100 
               border-slate-100 text-lg"
               >
-                {serverMappingLanguage(v.key)}
+                {translate[v.key]}
               </span>
             </div>
           );

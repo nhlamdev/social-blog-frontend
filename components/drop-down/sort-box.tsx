@@ -1,4 +1,4 @@
-import { clientMappingLanguage } from "@/language/translate-client";
+import { useClientTranslate } from "@/language/translate-client";
 import { useState } from "react";
 import { PiSortDescendingBold } from "react-icons/pi";
 import { TbSortDescending } from "react-icons/tb";
@@ -9,6 +9,8 @@ interface SortOptionsComponentProps {
 }
 export const SortOptionsComponent = (props: SortOptionsComponentProps) => {
   const { change, sortCase } = props;
+
+  const translate = useClientTranslate();
   const [open, setOpen] = useState(false);
   const data = [
     { key: "NAME_ASC", value: "Tên A => Z", icon: PiSortDescendingBold },
@@ -22,7 +24,7 @@ export const SortOptionsComponent = (props: SortOptionsComponentProps) => {
     if (!check || check.length === 0) {
       return "Bộ lọc";
     } else {
-      return clientMappingLanguage(check[0].key);
+      return translate[check[0].key];
     }
   };
 
@@ -97,7 +99,7 @@ export const SortOptionsComponent = (props: SortOptionsComponentProps) => {
                   border-l-2 relative hover:border-teal-100"
                 >
                   <span className="mx-2 whitespace-nowrap text-sm">
-                    {clientMappingLanguage(s.key)}
+                    {translate[s.key]}
                   </span>
                 </div>
               </div>

@@ -43,7 +43,7 @@ export const NotifyBellComponent = () => {
   }, [fetchNotifies, firstLoading, profile]);
 
   if (firstLoading || !profile) {
-    return <></>;
+    return <BsBellFill className=" text-slate-900 dark:text-slate-200" />;
   }
 
   return (

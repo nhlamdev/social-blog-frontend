@@ -49,7 +49,7 @@ export const ClientNavigatorMobile = () => {
                 className="p-3 rounded-full bg-slate-100 bg-opacity-40 shadow-lg"
               >
                 <Image
-                  src="/logo/logo-crop.png"
+                  src="/static/logo/logo-crop.png"
                   width={30}
                   height={30}
                   alt="logo"

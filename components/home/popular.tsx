@@ -1,5 +1,5 @@
-import { serverMappingLanguage } from "@/language/translate-server";
-import { getDateTime } from "@/utils/global-func";
+import { serverTranslate } from "@/language/translate-server";
+import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +7,8 @@ import { LuView } from "react-icons/lu";
 const backend = process.env.SERVICE_PORT;
 
 export const PopularItemsComponent = async () => {
+  const translate = serverTranslate();
+
   const { data: topContents } = await axios.get(
     `http://localhost:${backend}/content/more-view?take=4`
   );
@@ -26,7 +28,7 @@ export const PopularItemsComponent = async () => {
           className="text-2xl font-semibold text-center p-2 
         text-slate-900 dark:text-slate-100"
         >
-          {serverMappingLanguage("POPULAR_CONTENT")}
+          {translate["POPULAR_CONTENT"]}
         </span>
 
         {topContents.map((content: any) => {
@@ -87,7 +89,8 @@ export const PopularItemsComponent = async () => {
                 )}
 
                 <span className="text-xs text-slate-900 dark:text-slate-100">
-                  ngày tạo : {getDateTime(content.created_at)}
+                  {capitalizeFirstLetter(translate["JOIN_AT"])} :{" "}
+                  {getDateTime(content.created_at)}
                 </span>
               </div>
             </Link>
@@ -103,7 +106,7 @@ export const PopularItemsComponent = async () => {
           className="text-xl font-semibold p-2 text-left
         text-slate-900 dark:text-slate-100"
         >
-          {serverMappingLanguage("CATEGORIES")}
+          {translate["CATEGORIES"]}
         </span>
         <div className="flex flex-col gap-2 w-full">
           {topCategoryMoreContent.map((category: any) => {
@@ -134,7 +137,7 @@ export const PopularItemsComponent = async () => {
           className="text-xl font-semibold p-2 text-left
         text-slate-900 dark:text-slate-100"
         >
-          {serverMappingLanguage("TAGS")}
+          {translate["TAGS"]}
         </span>
 
         <div className="flex flex-row flex-wrap gap-2">

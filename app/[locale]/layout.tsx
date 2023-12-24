@@ -24,15 +24,15 @@ const inter = Be_Vietnam_Pro({
 const technical_logo = [
   {
     key: "next",
-    image: "/logo/next-js.png",
+    image: "/static/logo/next-js.png",
   },
   {
     key: "nest",
-    image: "/logo/nest-icon.png",
+    image: "/static/logo/nest-icon.png",
   },
   {
     key: "postgres",
-    image: "/logo/postgres-icon.png",
+    image: "/static/logo/postgres-icon.png",
   },
 ];
 

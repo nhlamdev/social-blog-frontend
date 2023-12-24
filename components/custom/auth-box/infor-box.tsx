@@ -1,6 +1,8 @@
 "use client";
 import { useAuth } from "@/hook/auth.hook";
 import { IProfile } from "@/interface";
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -11,18 +13,20 @@ interface NavInfoBoxProps {
 
 export const NavInfoBox = (props: NavInfoBoxProps) => {
   const { profile } = props;
+
+  const translate = useClientTranslate();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
   const { firstLoading, logout } = useAuth();
 
   if (firstLoading) {
-    return <div>loading ...</div>;
+    return <div>loading...</div>;
   }
 
   return (
     <div
-      className={`relative flex flex-col space-y-2  items-center  z-10 min-w-[160px] justify-between
+      className={`relative flex flex-col space-y-2  items-center  -10 min-w-40 justify-between
       ${
         open ? "before:block" : "before:hidden"
       } bg-slate-100 bg-opacity-60 h-full px-2 py-1 rounded-md
@@ -31,7 +35,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
       onClick={() => setOpen(!open)}
     >
       <div
-        className="flex flex-row gap-2 items-center cursor-pointer"
+        className="flex flex-row gap-2 items-center cursor-pointer w-full"
         onClick={() => setOpen(!open)}
       >
         <span className="text-xs font-semibold select-none">
@@ -73,7 +77,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
               className="group-hover:pl-2 text-xs font-semibold whitespace-nowrap"
               style={{ transition: "all ease .3s" }}
             >
-              Quản trị cá nhân
+              {capitalizeFirstLetter(translate["MY_DASHBOARD"])}
             </span>
           </Link>
         ) : (
@@ -92,7 +96,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
             className="group-hover:pl-2 text-xs font-semibold whitespace-nowrap"
             style={{ transition: "all ease .3s" }}
           >
-            Đã lưu
+            {capitalizeFirstLetter(translate["MY_SAVED"])}
           </span>
         </Link>
         <div
@@ -112,7 +116,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
             className="group-hover:pl-2 text-xs font-semibold whitespace-nowrap"
             style={{ transition: "all ease .3s" }}
           >
-            Đăng xuất
+            {capitalizeFirstLetter(translate["LOGOUT"])}
           </span>
         </div>
       </div>

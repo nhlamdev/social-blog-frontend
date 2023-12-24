@@ -11,14 +11,18 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ThemeToggleButton } from "@/components/custom";
 import { clientNavigation } from "@/constant";
-import { clientMappingLanguage } from "@/language/translate-client";
+import { useClientTranslate } from "@/language/translate-client";
 
 export const ClientHomeHeaderMobile = () => {
+  const translate = useClientTranslate();
+
   const [open, setOpen] = useState<boolean>(false);
+
   return (
     <header
       className="flex flex-row md:hidden items-center justify-between select-none
-    bg-slate-800 dark:bg-opacity-80 bg-opacity-20 p-2 shadow-md"
+      bg-gradient-light dark:bg-gradient-dark p-2 shadow-md sticky top-0
+      z-20 shadow-xl"
     >
       <GiHamburgerMenu
         className="text-lg cursor-pointer dark:text-slate-100 text-slate-900"
@@ -27,7 +31,7 @@ export const ClientHomeHeaderMobile = () => {
 
       <div className="flex flex-row gap-4 items-center">
         <NotifyBellComponent />
-
+        <LanguageButton />
         <AuthBox />
       </div>
 
@@ -45,7 +49,7 @@ export const ClientHomeHeaderMobile = () => {
             <div className="flex flex-row justify-between items-center">
               <div className="p-3 rounded-full bg-slate-100 bg-opacity-40 shadow-lg">
                 <Image
-                  src="/logo/logo-crop.png"
+                  src="/static/logo/logo-crop.png"
                   width={30}
                   height={30}
                   alt="logo"
@@ -69,15 +73,14 @@ export const ClientHomeHeaderMobile = () => {
                     capitalize"
                     style={{ borderBottom: "1px solid" }}
                   >
-                    {clientMappingLanguage(nav.display)}
+                    {translate[nav.display]}
                   </Link>
                 );
               })}
             </nav>
 
-            <div className="flex flex-row justify-between px-2">
+            <div className="flex flex-row px-2">
               <ThemeToggleButton />
-              <LanguageButton />
             </div>
           </div>
         </div>

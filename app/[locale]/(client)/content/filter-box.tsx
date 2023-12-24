@@ -10,7 +10,7 @@ import { useDeferredValue, useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { useDebouncedValue } from "@mantine/hooks";
 import { AuthBox } from "@/components/custom";
-import { clientMappingLanguage } from "@/language/translate-client";
+import { useClientTranslate } from "@/language/translate-client";
 interface FilterContentComponentProps {
   searchParams: { [key: string]: string | undefined };
 }
@@ -18,6 +18,7 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
   const { searchParams } = props;
 
   const router = useRouter();
+  const translate = useClientTranslate();
 
   const [openDrawer, setIsOpenDrawer] = useState(true);
   const [category, setCategory] = useState<string>(
@@ -95,7 +96,7 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
               <OutlineInputComponent
                 txt={search}
                 change={(txt) => setSearch(txt)}
-                placeholder={clientMappingLanguage("SEARCH_PLACEHOLDER")}
+                placeholder={translate["SEARCH_PLACEHOLDER"]}
               />
 
               <DropdownCategoryBox
@@ -117,7 +118,7 @@ export const FilterContentComponent = (props: FilterContentComponentProps) => {
         <OutlineInputComponent
           txt={search}
           change={(txt) => setSearch(txt)}
-          placeholder={clientMappingLanguage("SEARCH_PLACEHOLDER")}
+          placeholder={translate["SEARCH_PLACEHOLDER"]}
         />
 
         <DropdownCategoryBox

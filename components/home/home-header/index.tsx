@@ -1,3 +1,4 @@
+"use client";
 import { ClientHomeHeaderDesktop } from "./desktop";
 import { ClientHomeHeaderMobile } from "./mobile";
 

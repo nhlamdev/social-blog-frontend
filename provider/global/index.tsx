@@ -1,16 +1,14 @@
 "use client";
+import { apiCaller } from "@/api";
+import { COLOR_THEME_CASE } from "@/constant";
+import { store } from "@/redux/store";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import { SnackbarProvider } from "notistack";
-import { apiCaller } from "@/api";
-import { SWRConfig } from "swr";
 import { useEffect } from "react";
-import { io } from "socket.io-client";
-import { COLOR_THEME_CASE } from "@/constant";
 import { Provider } from "react-redux";
-import { store } from "@/redux/store";
-import { useAppDispatch } from "@/hook/redux.hook";
-import { changeTranslator } from "@/redux/reducers/common";
+import { io } from "socket.io-client";
+import { SWRConfig } from "swr";
 import { ReduxInitProvider } from "./redux.provider";
 
 interface ProviderComponentProps {
