@@ -2,7 +2,7 @@
 import { apiCaller } from "@/api";
 import { getCountPage } from "@/utils/global-func";
 import { enqueueSnackbar } from "notistack";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { PaginationChangeComponent } from "../..";
 import { TiDelete } from "react-icons/ti";
 import { commentApi } from "@/api/comment";
@@ -33,35 +33,73 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
     [page]
   );
 
-  const createReply = () => {
-    if (text) {
-      apiCaller.commentApi
-        .createReply(text, comment._id)
-        .then(() => {
-          setText("");
-          apiCaller.commentApi.replies(comment._id, params).then((res) => {
-            const { data, max } = res.data;
-            setReplies(data);
-            setTotal(max);
-            enqueueSnackbar("Tạo mới bình luận thành công", {
-              variant: "success",
-            });
-          });
-        })
-        .catch((error) => {
-          if (Array.isArray(error?.response?.data?.message)) {
-            error?.response?.data?.message.forEach((item: any) => {
-              enqueueSnackbar(item, { variant: "error" });
-            });
-          } else {
-            enqueueSnackbar(
-              error?.response ? error.response.data?.message : error.message,
-              { variant: "error" }
-            );
-          }
-        });
+  const fetchReplies = useCallback(async () => {
+    const {
+      data: { data, max },
+    } = await apiCaller.commentApi.replies(comment._id, params);
+
+    setReplies(data);
+    setTotal(max);
+  }, [comment._id, params]);
+
+  const createReply = useCallback(async () => {
+    if (!text) {
+      return;
     }
-  };
+
+    try {
+      await apiCaller.commentApi.createReply(text, comment._id);
+
+      setText("");
+      await fetchReplies();
+      enqueueSnackbar("Tạo mới bình luận thành công", {
+        variant: "success",
+      });
+    } catch (error: any) {
+      if (Array.isArray(error?.response?.data?.message)) {
+        error?.response?.data?.message.forEach((item: any) => {
+          enqueueSnackbar(item, { variant: "error" });
+        });
+      } else {
+        enqueueSnackbar(
+          error?.response ? error.response.data?.message : error.message,
+          { variant: "error" }
+        );
+      }
+    }
+
+    // if (text) {
+    //   apiCaller.commentApi
+    //     .createReply(text, comment._id)
+    //     .then(async () => {
+    //       setText("");
+    //       await fetchReplies();
+    //       enqueueSnackbar("Tạo mới bình luận thành công", {
+    //         variant: "success",
+    //       });
+    //       // apiCaller.commentApi.replies(comment._id, params).then((res) => {
+    //       //   const { data, max } = res.data;
+    //       //   setReplies(data);
+    //       //   setTotal(max);
+    //       //   enqueueSnackbar("Tạo mới bình luận thành công", {
+    //       //     variant: "success",
+    //       //   });
+    //       // });
+    //     })
+    //     .catch((error) => {
+    //       if (Array.isArray(error?.response?.data?.message)) {
+    //         error?.response?.data?.message.forEach((item: any) => {
+    //           enqueueSnackbar(item, { variant: "error" });
+    //         });
+    //       } else {
+    //         enqueueSnackbar(
+    //           error?.response ? error.response.data?.message : error.message,
+    //           { variant: "error" }
+    //         );
+    //       }
+    //     });
+    // }
+  }, [comment._id, fetchReplies, text]);
 
   useEffect(() => {
     apiCaller.commentApi.replies(comment._id, params).then((res) => {
@@ -113,7 +151,8 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
                             className="text-rose-600 text-2xl cursor-pointer"
                             onClick={async () => {
                               await commentApi.removeComment(reply._id);
-                              refresh();
+                              await fetchReplies();
+                              // refresh();
                             }}
                           />
                         ) : (

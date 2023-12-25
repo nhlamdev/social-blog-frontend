@@ -27,34 +27,6 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
 
-  const createComment = () => {
-    apiCaller.commentApi
-      .createComment(text, contentId)
-      .then(() => {
-        setText("");
-        apiCaller.commentApi.comments(contentId, params).then((res) => {
-          const { data, max } = res.data;
-          setComments(data);
-          setTotal(max);
-          enqueueSnackbar("Tạo mới bình luận thành công", {
-            variant: "success",
-          });
-        });
-      })
-      .catch((error) => {
-        if (Array.isArray(error?.response?.data?.message)) {
-          error?.response?.data?.message.forEach((item: any) => {
-            enqueueSnackbar(item, { variant: "error" });
-          });
-        } else {
-          enqueueSnackbar(
-            error?.response ? error.response.data?.message : error.message,
-            { variant: "error" }
-          );
-        }
-      });
-  };
-
   const params = useMemo(
     () => ({
       skip: ((page - 1) * 5).toString(),
@@ -63,13 +35,51 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
     [page]
   );
 
-  const fetchComments = useCallback(() => {
-    apiCaller.commentApi.comments(contentId, params).then((res) => {
-      const { data, max } = res.data;
+  const fetchComments = useCallback(async () => {
+    try {
+      const {
+        data: { data, max },
+      } = await apiCaller.commentApi.comments(contentId, params);
       setComments(data);
       setTotal(max);
-    });
+    } catch (error: any) {
+      if (Array.isArray(error?.response?.data?.message)) {
+        error?.response?.data?.message.forEach((item: any) => {
+          enqueueSnackbar(item, { variant: "error" });
+        });
+      } else {
+        enqueueSnackbar(
+          error?.response ? error.response.data?.message : error.message,
+          { variant: "error" }
+        );
+      }
+    } finally {
+    }
   }, [contentId, params]);
+
+  const createComment = async () => {
+    try {
+      await apiCaller.commentApi.createComment(text, contentId);
+      setText("");
+
+      enqueueSnackbar("Tạo mới bình luận thành công", {
+        variant: "success",
+      });
+
+      await fetchComments();
+    } catch (error: any) {
+      if (Array.isArray(error?.response?.data?.message)) {
+        error?.response?.data?.message.forEach((item: any) => {
+          enqueueSnackbar(item, { variant: "error" });
+        });
+      } else {
+        enqueueSnackbar(
+          error?.response ? error.response.data?.message : error.message,
+          { variant: "error" }
+        );
+      }
+    }
+  };
 
   useEffect(() => {
     fetchComments();

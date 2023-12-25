@@ -8,15 +8,6 @@ import { notFound } from "next/navigation";
 import { RandomContentComponent } from "./random-content";
 import { WatchActionComponent } from "./watch-action";
 import { serverTranslate } from "@/language/translate-server";
-// import dynamic from "next/dynamic";
-// const CommentsComponent = dynamic(
-//   () =>
-//     import("@/components/custom/comments").then((mod) => mod.CommentsComponent),
-//   {
-//     ssr: false,
-//     loading: () => <></>,
-//   }
-// );
 
 const backend = process.env.SERVICE_PORT;
 

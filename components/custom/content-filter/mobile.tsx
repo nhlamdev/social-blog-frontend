@@ -1,19 +1,16 @@
 "use client";
-import { generateURLWithQueryParams } from "@/utils/global-func";
-import { useDebouncedValue } from "@mantine/hooks";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { FaFilter } from "react-icons/fa";
-import Image from "next/image";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { ThemeToggleButton } from "..";
 import { OutlineInputComponent } from "@/components/common";
 import {
   DropdownCategoryBox,
   SortOptionsComponent,
 } from "@/components/drop-down";
 import { useClientTranslate } from "@/language/translate-client";
+import { generateURLWithQueryParams } from "@/utils/global-func";
+import { useDebouncedValue } from "@mantine/hooks";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { FaFilter } from "react-icons/fa";
 
 interface IClientContentFilterMobileComponent {
   searchParams: { [key: string]: string | undefined };

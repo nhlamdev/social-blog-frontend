@@ -1,20 +1,15 @@
 "use client";
-import { NotifyBellComponent } from "@/components/custom";
+import { LanguageButton, NotifyBellComponent } from "@/components/custom";
 import { AuthBox } from "@/components/custom/auth-box";
 import { ThemeToggleButton } from "@/components/custom/color-mode";
+import { clientNavigation } from "@/constant";
+import { useClientTranslate } from "@/language/translate-client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-const LanguageButton = dynamic(
-  () => import("@/components/custom").then((mod) => mod.LanguageButton),
-  { ssr: false, loading: () => <div>loading</div> }
-);
-const ClientNavigationComponent = dynamic(
-  () => import("./nav").then((mod) => mod.ClientNavigationComponent),
-  { ssr: false, loading: () => <div>loading</div> }
-);
 
 export const ClientNavigatorDesktop = () => {
+  const translate = useClientTranslate();
   return (
     <nav
       className="w-screen md:flex flex-row items-center justify-between px-2
@@ -32,7 +27,17 @@ export const ClientNavigatorDesktop = () => {
             alt="logo"
           />
         </Link>
-        <ClientNavigationComponent />
+        <div className="flex flex-row items-center gap-4">
+          {clientNavigation.map((n) => {
+            return (
+              <Link href={n.url} key={`client-nav-${n.display}`}>
+                <span className="font-semibold text-sm dark:text-slate-100 capitalize">
+                  {translate[n.display]}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
       </div>
 
       <div className="flex flex-row items-center gap-4">

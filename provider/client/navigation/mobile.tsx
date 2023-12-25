@@ -5,6 +5,7 @@ import { BiMenu } from "react-icons/bi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import {
   AuthBox,
+  LanguageButton,
   NotifyBellComponent,
   ThemeToggleButton,
 } from "@/components/custom";
@@ -25,7 +26,7 @@ export const ClientNavigatorMobile = () => {
 
       <div className="flex flex-row gap-2 h-full items-center justify-center">
         <NotifyBellComponent />
-        <ThemeToggleButton />
+        <LanguageButton />
         <AuthBox />
       </div>
 
@@ -61,7 +62,7 @@ export const ClientNavigatorMobile = () => {
               />
             </div>
 
-            <div className="flex flex-col items-center gap-4 ">
+            <div className="flex flex-col items-center gap-4 flex-1">
               <Link
                 href="/content"
                 className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
@@ -97,6 +98,10 @@ export const ClientNavigatorMobile = () => {
               >
                 Về tôi
               </Link>
+            </div>
+
+            <div>
+              <ThemeToggleButton />
             </div>
           </div>
         </div>
