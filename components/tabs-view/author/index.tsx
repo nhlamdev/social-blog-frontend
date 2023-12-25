@@ -10,8 +10,9 @@ import { ContentsByAuthor } from "./content";
 import { SeriesByAuthor } from "./series";
 import { FollowedByAuthor } from "./followed";
 import { TagsByAuthor } from "./tags";
+import { useClientTranslate } from "@/language/translate-client";
 
-type CaseViewType = "content" | "series" | "tags" | "followed";
+type CaseViewType = "CONTENT" | "SERIES" | "TAGS" | "FOLLOWED";
 
 interface ITabListItem {
   key: CaseViewType;
@@ -20,10 +21,10 @@ interface ITabListItem {
 }
 
 const tabList: ITabListItem[] = [
-  { key: "content", title: "Bài viết", icon: BiSolidBookContent },
-  { key: "series", title: "Chuỗi bài viết", icon: SiSteelseries },
-  { key: "tags", title: "Thẻ", icon: AiFillTags },
-  { key: "followed", title: "Theo dõi", icon: TbCirclesRelation },
+  { key: "CONTENT", title: "Bài viết", icon: BiSolidBookContent },
+  { key: "SERIES", title: "Chuỗi bài viết", icon: SiSteelseries },
+  { key: "TAGS", title: "Thẻ", icon: AiFillTags },
+  { key: "FOLLOWED", title: "Theo dõi", icon: TbCirclesRelation },
 ];
 
 interface IAuthorTabsView {
@@ -33,7 +34,8 @@ interface IAuthorTabsView {
 export const AuthorTabsView = (props: IAuthorTabsView) => {
   const { member } = props;
 
-  const [caseView, setCaseView] = useState<CaseViewType>("content");
+  const translate = useClientTranslate();
+  const [caseView, setCaseView] = useState<CaseViewType>("CONTENT");
 
   return (
     <div className="w-full min-h-full flex flex-col gap-10 flex-1">
@@ -56,7 +58,7 @@ export const AuthorTabsView = (props: IAuthorTabsView) => {
                     className="text-xs text-blue-600 dark:text-blue-500"
                     style={{ transition: "all ease .3s" }}
                   >
-                    {v.title}
+                    {translate[v.key]}
                   </span>
                 </li>
               );
@@ -81,7 +83,7 @@ export const AuthorTabsView = (props: IAuthorTabsView) => {
                   hover:text-gray-600"
                     style={{ transition: "all ease .3s" }}
                   >
-                    {v.title}
+                    {translate[v.key]}
                   </span>
                 </li>
               );
@@ -92,14 +94,14 @@ export const AuthorTabsView = (props: IAuthorTabsView) => {
 
       {/* ------------------ */}
 
-      {caseView === "content" ? <ContentsByAuthor member={member} /> : <></>}
-      {caseView === "followed" ? (
+      {caseView === "CONTENT" ? <ContentsByAuthor member={member} /> : <></>}
+      {caseView === "FOLLOWED" ? (
         <FollowedByAuthor members={member.follower} />
       ) : (
         <></>
       )}
-      {caseView === "series" ? <SeriesByAuthor member={member} /> : <></>}
-      {caseView === "tags" ? <TagsByAuthor member={member} /> : <></>}
+      {caseView === "SERIES" ? <SeriesByAuthor member={member} /> : <></>}
+      {caseView === "TAGS" ? <TagsByAuthor member={member} /> : <></>}
     </div>
   );
 };

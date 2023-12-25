@@ -85,6 +85,10 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
     fetchComments();
   }, [fetchComments]);
 
+  if (firstLoading) {
+    return <></>;
+  }
+
   return (
     <div className="w-full flex flex-col gap-2">
       <div className="flex flex-row gap-2 items-center">

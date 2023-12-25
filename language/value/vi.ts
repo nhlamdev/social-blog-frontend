@@ -35,4 +35,7 @@ export const vi: { [key: string]: string } = {
   MY_DASHBOARD: "quản trị cá nhân",
   MY_SAVED: "đã lưu",
   LOGOUT: "đăng xuất",
+  REPLY: "trả lời",
+  REPLIES: "lượt",
+  COLLAPSE: "thu gọn",
 };

@@ -1,4 +1,5 @@
-import { getDateTime } from "@/utils/global-func";
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,6 +9,8 @@ interface IFollowedByAuthor {
 
 export const FollowedByAuthor = async (props: IFollowedByAuthor) => {
   const { members } = props;
+
+  const translate = useClientTranslate();
 
   return (
     <div className="min-h-full flex flex-col gap-2  flex-1">
@@ -44,7 +47,8 @@ export const FollowedByAuthor = async (props: IFollowedByAuthor) => {
               </div>
 
               <span className="text-xs font-light text-slate-900 dark:text-slate-200">
-                Ngày tham gia : {getDateTime(member.created_at)}
+                {capitalizeFirstLetter(translate["JOIN_AT"])} :{" "}
+                {getDateTime(member.created_at)}
               </span>
             </Link>
           );

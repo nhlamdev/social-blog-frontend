@@ -7,6 +7,7 @@ import { PaginationChangeComponent } from "../..";
 import { TiDelete } from "react-icons/ti";
 import { commentApi } from "@/api/comment";
 import { useAuth } from "@/hook/auth.hook";
+import { useClientTranslate } from "@/language/translate-client";
 
 interface ReplyCommentBoxProps {
   comment: any;
@@ -17,6 +18,8 @@ interface ReplyCommentBoxProps {
 
 export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
   const { comment, commentShowReply, changeCommentShowReply, refresh } = props;
+
+  const translate = useClientTranslate();
   const { profile, firstLoading } = useAuth();
 
   const [replies, setReplies] = useState([]);
@@ -67,38 +70,6 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
         );
       }
     }
-
-    // if (text) {
-    //   apiCaller.commentApi
-    //     .createReply(text, comment._id)
-    //     .then(async () => {
-    //       setText("");
-    //       await fetchReplies();
-    //       enqueueSnackbar("Tạo mới bình luận thành công", {
-    //         variant: "success",
-    //       });
-    //       // apiCaller.commentApi.replies(comment._id, params).then((res) => {
-    //       //   const { data, max } = res.data;
-    //       //   setReplies(data);
-    //       //   setTotal(max);
-    //       //   enqueueSnackbar("Tạo mới bình luận thành công", {
-    //       //     variant: "success",
-    //       //   });
-    //       // });
-    //     })
-    //     .catch((error) => {
-    //       if (Array.isArray(error?.response?.data?.message)) {
-    //         error?.response?.data?.message.forEach((item: any) => {
-    //           enqueueSnackbar(item, { variant: "error" });
-    //         });
-    //       } else {
-    //         enqueueSnackbar(
-    //           error?.response ? error.response.data?.message : error.message,
-    //           { variant: "error" }
-    //         );
-    //       }
-    //     });
-    // }
   }, [comment._id, fetchReplies, text]);
 
   useEffect(() => {
@@ -116,7 +87,7 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
           className="font-semibold text-xs p-2 cursor-pointer text-slate-800 dark:text-slate-100"
           onClick={() => changeCommentShowReply()}
         >
-          thu gọn
+          {translate["COLLAPSE"]}
         </p>
         <div className="flex flex-col gap-2 pl-10 w-full">
           {replies.map((reply: any) => {
@@ -242,7 +213,9 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
         onClick={() => {
           changeCommentShowReply();
         }}
-      >{`${total !== 0 ? `(${total}) lượt ` : ""} trả lời `}</p>
+      >{`${
+        total !== 0 ? `(${total}) ${translate["REPLIES"]} ` : translate["REPLY"]
+      }`}</p>
     );
   }
 };

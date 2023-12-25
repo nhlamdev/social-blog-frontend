@@ -1,7 +1,7 @@
 export const en: { [key: string]: string } = {
   POPULAR_CONTENT: "Popular content",
   CATEGORIES: "Categories",
-  TAGS: "Tags",
+  TAGS: "tags",
   TOP_SERIES_MORE_VIEWS: "Top series contents more views",
   TOP_CONTENT_MORE_COMMENTS: "Top contents more views",
   WORK_CYCLE: "Work cycle",
@@ -35,4 +35,7 @@ export const en: { [key: string]: string } = {
   MY_DASHBOARD: "my dashboard",
   MY_SAVED: "my saved",
   LOGOUT: "logout",
+  REPLY: "reply",
+  REPLIES: "replies",
+  COLLAPSE: "collapse",
 };
