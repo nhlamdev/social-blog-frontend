@@ -38,4 +38,10 @@ export const en: { [key: string]: string } = {
   REPLY: "reply",
   REPLIES: "replies",
   COLLAPSE: "collapse",
+  DASHBOARD: "dashboard",
+  OVERVIEW: "overview",
+  MEMBERS: "members",
+  SESSION: "session",
+  SETTING: "setting",
+  LIST_CONTENT: "list content",
 };

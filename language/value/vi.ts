@@ -38,4 +38,10 @@ export const vi: { [key: string]: string } = {
   REPLY: "trả lời",
   REPLIES: "lượt",
   COLLAPSE: "thu gọn",
+  DASHBOARD: "bảng điều khiển",
+  MEMBERS: "thành viên",
+  SESSION: "phiên",
+  SETTING: "thiết lập",
+  OVERVIEW: "tổng quan",
+  LIST_CONTENT: "danh sách bài viết",
 };

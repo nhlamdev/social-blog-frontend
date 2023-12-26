@@ -1,26 +1,24 @@
 "use client";
-
-import { apiCaller } from "@/api";
 import { useAuth } from "@/hook/auth.hook";
-import { useRouter } from "next/navigation";
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 
 export const LogoutBtn = () => {
+  const translate = useClientTranslate();
   const { firstLoading, logout } = useAuth();
   return (
     <div
-      className="text-stone-600 bg-slate-900 px-4 py-2"
-      style={{
-        borderRadius: "10px",
-        cursor: "pointer",
-        boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-      }}
+      className="text-stone-600 bg-slate-900 px-4 py-2 flex
+      rounded-lg cursor-pointer shadow-lg items-center justify-center"
       onClick={() => {
         if (!firstLoading) {
           logout();
         }
       }}
     >
-      <span className="text-sm text-slate-200 font-semibold">Đăng xuất</span>
+      <span className="text-sm text-slate-200 font-semibold text-center">
+        {capitalizeFirstLetter(translate["LOGOUT"])}
+      </span>
     </div>
   );
 };

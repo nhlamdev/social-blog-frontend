@@ -11,7 +11,7 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 export const OwnerMobileNavigation = () => {
   const [open, setOpen] = useState(false);
 
-  const { profile, firstLoading, logout } = useAuth();
+  const { profile } = useAuth();
 
   return (
     <div className="flex flex-row lg:hidden ">
@@ -88,16 +88,8 @@ export const OwnerMobileNavigation = () => {
             <></>
           )}
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className="flex flex-row items-center justify-between">
             <ThemeToggleButton />
-
             <LogoutBtn />
           </div>
         </div>

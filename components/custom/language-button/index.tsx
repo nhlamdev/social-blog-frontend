@@ -25,7 +25,7 @@ export const LanguageButton = () => {
     >
       <span
         className="text-sm text-slate-900 font-semibold
-        select-none"
+        select-none text-center"
       >
         {locale}
       </span>

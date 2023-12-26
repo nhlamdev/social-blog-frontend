@@ -1,8 +1,15 @@
+"use client";
 import { IProfile } from "@/interface";
 import Link from "next/link";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { navigation_mock } from "./nav.mock";
-import { LogoutBtn, ThemeToggleButton } from "@/components/custom";
+import {
+  LanguageButton,
+  LogoutBtn,
+  ThemeToggleButton,
+} from "@/components/custom";
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 
 interface IOwnerNavigationDesktop {
   profile: IProfile;
@@ -10,6 +17,7 @@ interface IOwnerNavigationDesktop {
 
 export const OwnerNavigationDesktop = (props: IOwnerNavigationDesktop) => {
   const { profile } = props;
+  const translate = useClientTranslate();
 
   return (
     <nav
@@ -26,7 +34,7 @@ export const OwnerNavigationDesktop = (props: IOwnerNavigationDesktop) => {
         </Link>
 
         <span className="dark:text-slate-100 text-slate-900 font-semibold">
-          Trang quản lý
+          {capitalizeFirstLetter(translate["DASHBOARD"])}
         </span>
 
         <picture>
@@ -53,9 +61,9 @@ export const OwnerNavigationDesktop = (props: IOwnerNavigationDesktop) => {
               <Link
                 href={item.url}
                 key={`item-navigation-d-${key}`}
-                className="group px-10 py-4  hover:bg-slate-400
+                className="group px-8 py-3  hover:bg-slate-400
                 duration-300 transition-all ease-in-out rounded-md
-                font-medium text-sm gap-2"
+                font-medium text-sm gap-2 w-52"
                 style={{
                   cursor: "pointer",
                   display: "flex",
@@ -64,24 +72,19 @@ export const OwnerNavigationDesktop = (props: IOwnerNavigationDesktop) => {
                 }}
               >
                 <item.icon className="dark:text-slate-100 text-slate-900 group-hover:transition-transform scale-125 -translate-x-2" />
-                <span className="dark:text-slate-100 text-slate-900">
-                  {item.name}
+                <span className="dark:text-slate-100 text-slate-900 font-semibold">
+                  {capitalizeFirstLetter(translate[item.key])}
                 </span>
               </Link>
             );
           })}
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <ThemeToggleButton />
-
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-row items-center gap-4">
+          <ThemeToggleButton />
+          <LanguageButton />
+        </div>
         <LogoutBtn />
       </div>
     </nav>
