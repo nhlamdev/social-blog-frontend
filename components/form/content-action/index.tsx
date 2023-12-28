@@ -6,6 +6,8 @@ import { ContentActionTagsBox } from "./tag-box";
 import { ContentCategoryBox } from "./categories-box";
 import { apiCaller } from "@/api";
 import { enqueueSnackbar } from "notistack";
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 export const TextEditor = dynamic(
   () => import("@/components/custom/text-editor"),
   {
@@ -21,6 +23,7 @@ interface FormContentActionProps {
 export const FormContentAction = (props: FormContentActionProps) => {
   const { content } = props;
 
+  const translate = useClientTranslate();
   const router = useRouter();
 
   const [title, setTitle] = useState(content ? content.title : "");
@@ -93,10 +96,12 @@ export const FormContentAction = (props: FormContentActionProps) => {
     <div className="flex flex-col w-full gap-4 ">
       <div className="gap-6 flex flex-col  sm:px-4 md:px-10 lg:w-4/6 sm:w-4/5 w-full  mx-auto  flex-1">
         <label className="relative block">
-          <span className="sr-only">Tiêu đề</span>
+          <span className="sr-only">
+            {capitalizeFirstLetter(translate["TITLE"])}
+          </span>
           <input
             className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-            placeholder="Nhập tiêu đề..."
+            placeholder={`${translate["TITLE"]}...`}
             type="text"
             name="title"
             value={title}
@@ -127,7 +132,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
               setCasePublic(true);
             }}
           >
-            Công khai
+            {translate["PUBLIC"]}
           </span>
 
           <span
@@ -142,7 +147,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
               setCasePublic(false);
             }}
           >
-            Chỉ mình tôi
+            {capitalizeFirstLetter(translate["PRIVATE"])}
           </span>
         </div>
       </div>
@@ -168,7 +173,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
         font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
         >
-          Hoàn thành
+          {capitalizeFirstLetter(translate["COMPLETE"])}
         </button>
       </div>
     </div>

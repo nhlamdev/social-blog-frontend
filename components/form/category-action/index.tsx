@@ -5,6 +5,8 @@ import { enqueueSnackbar } from "notistack";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IImage } from "@/interface";
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 
 interface ICategory {
   delete_at: string | null;
@@ -24,6 +26,8 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
   const router = useRouter();
 
   const { category } = props;
+
+  const translate = useClientTranslate();
 
   const [title, setTitle] = useState(category?.title ? category.title : "");
   const [summary, setSummary] = useState(
@@ -98,7 +102,7 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
           <span className="sr-only">Tiêu đề</span>
           <input
             className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-            placeholder="Nhập tiêu đề..."
+            placeholder={`${translate["TITLE"]}...`}
             value={title}
             onChange={(e) => {
               const { value } = e.target;
@@ -120,7 +124,7 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
               setSummary(value);
             }}
             rows={4}
-            placeholder="Nhập mô tả..."
+            placeholder={`${translate["DESCRIPTION"]}...`}
             name="description"
           />
         </label>
@@ -158,7 +162,7 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
           type="submit"
           className="bg-slate-400 w-2/5 px-4 py-2 rounded-lg shadow-lg text-lg font-semibold"
         >
-          Gửi
+          {capitalizeFirstLetter(translate["SUBMIT"])}
         </button>
       )}
     </form>

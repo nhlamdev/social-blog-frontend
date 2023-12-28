@@ -1,7 +1,9 @@
 "use client";
 import { contentApi } from "@/api/content";
 import { PaginationDirectComponent } from "@/components/custom";
+import { useClientTranslate } from "@/language/translate-client";
 import {
+  capitalizeFirstLetter,
   generateURLWithQueryParams,
   getCountPage,
   getDateTime,
@@ -21,7 +23,7 @@ interface IOwnerListContentInSeries {
 export const OwnerListContentInSeries = (props: IOwnerListContentInSeries) => {
   const { seriesId, searchParams } = props;
   const { page, search } = searchParams;
-
+  const translate = useClientTranslate();
   const [contents, setContents] = useState([]);
   const [count, setCount] = useState(0);
   const [isOutSide, setIsOutSide] = useState<boolean>(true);
@@ -110,7 +112,8 @@ export const OwnerListContentInSeries = (props: IOwnerListContentInSeries) => {
                 )}
 
                 <span className="text-xs font-light">
-                  Tạo lúc : {getDateTime(content.created_at)}
+                  {capitalizeFirstLetter(translate["CREATED_AT"])} :{" "}
+                  {getDateTime(content.created_at)}
                 </span>
               </div>
 

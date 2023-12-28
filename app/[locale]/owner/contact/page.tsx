@@ -11,7 +11,7 @@ export default function ContactPage() {
           <span className="text-md sm:text-xl font-semibold dark:text-slate-200 text-slate-800">
             Danh sách liên hệ
           </span>
-          <LanguageButton />
+          <LanguageButton isOnlySmallView={true} />
         </div>
       </div>
       <ContactTableComponent />

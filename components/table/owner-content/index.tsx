@@ -4,6 +4,7 @@ import { OwnerContentRow } from "./row";
 import { contentApi } from "@/api/content";
 import { PaginationDirectComponent } from "@/components/custom";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
+import { useClientTranslate } from "@/language/translate-client";
 
 interface IOwnerContentTableComponent {
   searchParams: { [key: string]: any };
@@ -14,6 +15,8 @@ export const OwnerContentTableComponent = (
 ) => {
   const { searchParams } = props;
   const { page, search } = searchParams;
+
+  const translate = useClientTranslate();
 
   const [contents, setContents] = useState<any[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -70,22 +73,22 @@ export const OwnerContentTableComponent = (
             <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
               <th className="py-2 px-4 ">
                 <span className="w-full block text-left lg:text-sm text-xs">
-                  Tiêu đề
+                  {translate["TITLE"]}
                 </span>
               </th>
               <th className="py-2 px-4 text-center hidden sm:table-cell">
                 <span className="w-full block text-center lg:text-sm text-xs">
-                  Ngày tạo
+                  {translate["CREATED_AT"]}
                 </span>
               </th>
               <th className="py-2 px-4">
                 <span className="w-full block text-center lg:text-sm text-xs">
-                  Công khai
+                  {translate["PUBLIC"]}
                 </span>
               </th>
               <th className="py-2 px-4">
                 <span className="w-full block text-right lg:text-sm text-xs">
-                  Thao tác
+                  {translate["CONTROL"]}
                 </span>
               </th>
             </tr>

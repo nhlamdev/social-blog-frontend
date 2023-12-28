@@ -39,7 +39,7 @@ export default async function OwnerDetailSeriesPage(props: PageProps) {
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
       <div className="flex flex-row gap-4 w-full">
-        <Link href="/owner/content">
+        <Link href="/owner/series">
           <BsFillArrowLeftCircleFill
             className="hover:scale-110 text-slate-800 dark:text-slate-100 text-2xl"
             style={{ cursor: "pointer" }}

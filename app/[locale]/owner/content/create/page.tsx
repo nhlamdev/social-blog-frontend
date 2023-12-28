@@ -1,8 +1,12 @@
 import { FormContentAction } from "@/components/form";
+import { useClientTranslate } from "@/language/translate-client";
+import { serverTranslate } from "@/language/translate-server";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 import Link from "next/link";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 export default function OwnerContentCreatePage() {
+  const translate = serverTranslate();
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
       <div className="flex flex-row gap-4 w-full">
@@ -13,7 +17,7 @@ export default function OwnerContentCreatePage() {
           />
         </Link>
         <span className="text-center text-md md:text-xl font-semibold text-slate-900 dark:text-slate-200">
-          Thêm mới bài viết
+          {capitalizeFirstLetter(translate["CREATE_CONTENT"])}
         </span>
       </div>
 

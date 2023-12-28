@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { FaEdit } from "react-icons/fa";
 import { MdOutlineContentCopy, MdOutlineRemoveCircle } from "react-icons/md";
 import { BiBookContent } from "react-icons/bi";
-import { getDateTime } from "@/utils/global-func";
+import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
+import { useClientTranslate } from "@/language/translate-client";
 interface SeriesItemProps {
   item: any;
   reload: () => void;
@@ -13,6 +14,8 @@ interface SeriesItemProps {
 
 export const ListViewItem = (props: SeriesItemProps) => {
   const { item, reload } = props;
+
+  const translate = useClientTranslate();
 
   return (
     <div
@@ -23,13 +26,16 @@ export const ListViewItem = (props: SeriesItemProps) => {
         <span className="text-slate-900 text-md">{item.title}</span>
 
         {item.contents > 0 ? (
-          <span className="text-xs font-light">{item.contents} bài viết</span>
+          <span className="text-xs font-light">
+            {item.contents} {capitalizeFirstLetter(translate["CONTENT"])}
+          </span>
         ) : (
           <span className="text-xs font-light">Chưa có bài viết</span>
         )}
 
         <span className="text-xs font-light">
-          Tạo lúc : {getDateTime(item.created_at)}
+          {capitalizeFirstLetter(translate["CREATED_AT"])} :{" "}
+          {getDateTime(item.created_at)}
         </span>
       </div>
 

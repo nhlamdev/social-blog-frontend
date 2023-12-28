@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function NotFoundPage() {
   return (
     <main className="w-screen h-screen flex flex-col justify-center items-center gap-4">
-      <Image src="/not-found.png" width={400} height={400} alt="photo" />
+      <Image src="/static/not-found.png" width={400} height={400} alt="photo" />
 
       <span className="text-md font-semibold">
         Nội dung bạn cần tìm không tồn tại.

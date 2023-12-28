@@ -1,7 +1,8 @@
 import { OwnerCategoryAction } from "@/components/form";
-import { IImage, PageProps } from "@/interface";
+import { PageProps } from "@/interface";
+import { serverTranslate } from "@/language/translate-server";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 import axios from "axios";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
@@ -21,6 +22,7 @@ interface ICategory {
 export default async function OwnerDetailCategoryPage(props: PageProps) {
   const { params } = props;
   const { id } = params;
+  const translate = serverTranslate();
 
   let category: ICategory | undefined;
 
@@ -43,14 +45,14 @@ export default async function OwnerDetailCategoryPage(props: PageProps) {
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4  ">
       <div className="flex flex-row gap-4 w-full">
-        <Link href="/owner/content">
+        <Link href="/owner/category">
           <BsFillArrowLeftCircleFill
             className="hover:scale-110 text-slate-800 dark:text-slate-100 text-2xl"
             style={{ cursor: "pointer" }}
           />
         </Link>
         <span className="text-center text-md md:text-xl font-semibold text-slate-900 dark:text-slate-200">
-          Chỉnh sửa thể loại
+          {capitalizeFirstLetter(translate["UPDATE_CATEGORY"])}
         </span>
       </div>
 

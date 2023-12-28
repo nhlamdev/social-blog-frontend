@@ -3,19 +3,26 @@ import { NextRequest, NextResponse } from "next/server";
 let locales = ["vi", "en"];
 const PUBLIC_FILE = /\.(.*)$/;
 
+const excludeCheck = (path: string) => {
+  return (
+    path.startsWith("/_next/") ||
+    path.startsWith(".") ||
+    path.startsWith("/static/") ||
+    path.startsWith("/service/") ||
+    path.includes("favicon.ico")
+  );
+};
+
 export function middleware(request: NextRequest) {
   const { nextUrl, cookies } = request;
-  const url = request.nextUrl;
+  if (excludeCheck(nextUrl.pathname)) {
+    return;
+  }
 
   if (
-    nextUrl.pathname.startsWith("/_next/") ||
-    nextUrl.pathname.startsWith(".") ||
-    nextUrl.pathname.startsWith("/static/") ||
-    nextUrl.pathname.startsWith("/service/") ||
     locales.some((locale) => {
       return nextUrl.pathname.startsWith(`/${locale}`);
     })
-    // PUBLIC_FILE.test(request.nextUrl.pathname)
   ) {
     return;
   }
@@ -34,7 +41,6 @@ export function middleware(request: NextRequest) {
     nextUrl.pathname = `/vi${nextUrl.pathname}`;
     const response = NextResponse.rewrite(nextUrl);
     response.cookies.set("locale", "vi", { expires: expires });
-
     return response;
   }
 }

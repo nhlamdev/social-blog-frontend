@@ -3,7 +3,12 @@ import { languages } from "@/language/value";
 import Cookies from "js-cookie";
 import { useParams, useRouter } from "next/navigation";
 
-export const LanguageButton = () => {
+interface ILanguageButton {
+  isOnlySmallView?: boolean;
+}
+
+export const LanguageButton = (props: ILanguageButton) => {
+  const { isOnlySmallView } = props;
   const params = useParams();
 
   const { locale } = params;
@@ -12,8 +17,10 @@ export const LanguageButton = () => {
 
   return (
     <div
-      className="rounded-sm flex bg-slate-200 shadow-lg w-10 h-6 
-    items-center justify-center cursor-pointer"
+      className={`rounded-sm flex bg-slate-200 shadow-lg w-10 h-6 
+      items-center justify-center cursor-pointer ${
+        isOnlySmallView ? "lg:hidden" : ""
+      }`}
       onClick={() => {
         const l = Object.keys(languages).includes(locale.toString())
           ? locale.toString()

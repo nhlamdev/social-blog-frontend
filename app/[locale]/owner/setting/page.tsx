@@ -12,7 +12,7 @@ export default function OwnerSettingPage() {
           <span className="text-md sm:text-xl font-semibold dark:text-slate-200 text-slate-800">
             Thông tin cá nhân
           </span>
-          <LanguageButton />
+          <LanguageButton isOnlySmallView={true} />
         </div>
       </div>
 

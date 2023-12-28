@@ -1,6 +1,7 @@
 "use client";
 import { apiCaller } from "@/api";
-import { getDateTime } from "@/utils/global-func";
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
 import Link from "next/link";
 import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
@@ -12,7 +13,7 @@ interface SeriesItemProps {
 
 export const ListViewItem = (props: SeriesItemProps) => {
   const { item, reload } = props;
-
+  const translate = useClientTranslate();
   return (
     <div
       className="shadow-md  w-full  md:w-4/5 lg:w-3/4 bg-slate-100 bg-opacity-60 backdrop-blur
@@ -28,7 +29,8 @@ export const ListViewItem = (props: SeriesItemProps) => {
         )}
 
         <span className="text-xs font-light">
-          Tạo lúc : {getDateTime(item.created_at)}
+          {capitalizeFirstLetter(translate["CREATED_AT"])} :{" "}
+          {getDateTime(item.created_at)}
         </span>
       </div>
 

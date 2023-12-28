@@ -1,4 +1,7 @@
+"use client";
 import { apiCaller } from "@/api";
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 import { useEffect, useState } from "react";
 
 interface ContentCategoryBoxProps {
@@ -9,6 +12,7 @@ interface ContentCategoryBoxProps {
 export const ContentCategoryBox = (props: ContentCategoryBoxProps) => {
   const { change, value } = props;
 
+  const translate = useClientTranslate();
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState<any[]>([]);
 
@@ -19,10 +23,10 @@ export const ContentCategoryBox = (props: ContentCategoryBoxProps) => {
     });
   }, []);
 
-  const genegrateTitle = () => {
+  const generateTitle = () => {
     const check = categories.filter((c: any) => c._id === value);
     if (!check || check.length === 0) {
-      return "Hãy chọn một thể loại";
+      return capitalizeFirstLetter(translate["CHOOSE_CATEGORIES"]);
     } else {
       return check[0].title;
     }
@@ -34,7 +38,7 @@ export const ContentCategoryBox = (props: ContentCategoryBoxProps) => {
         <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
           <div className="flex flex-auto flex-wrap"></div>
           <span className="p-1 px-2 appearance-none outline-none w-full text-gray-800 text-sm">
-            {genegrateTitle()}
+            {generateTitle()}
           </span>
           <div className="text-gray-800 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200">
             <svg

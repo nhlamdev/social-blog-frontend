@@ -1,3 +1,5 @@
+import { useClientTranslate } from "@/language/translate-client";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 import React, { useState } from "react";
 
 interface TagInputProps {
@@ -8,7 +10,7 @@ interface TagInputProps {
 export const ContentActionTagsBox: React.FC<TagInputProps> = (props) => {
   const { change, tags } = props;
   const [textInput, setTextInput] = useState<string>("");
-  // const [tags, setTags] = useState<string[]>(["test"]);
+  const translate = useClientTranslate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTextInput(event.target.value);
@@ -28,7 +30,7 @@ export const ContentActionTagsBox: React.FC<TagInputProps> = (props) => {
     <div className="relative">
       <input
         className="appearance-none block w-full bg-white text-sm text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-        placeholder="Enter some tags"
+        placeholder={capitalizeFirstLetter(translate["MAKE_SOME_TAGS"])}
         value={textInput}
         onChange={handleInputChange}
       />
@@ -40,10 +42,14 @@ export const ContentActionTagsBox: React.FC<TagInputProps> = (props) => {
         <div className="absolute z-40 left-0 mt-2 w-full">
           <div className="py-1 text-sm bg-white rounded shadow-lg border border-gray-300">
             <a
-              className="block py-1 px-5 cursor-pointer hover:bg-indigo-600 hover:text-white"
+              className="block py-1 px-5 cursor-pointer "
               onClick={handleAddTag}
             >
-              Add tag <span className="font-semibold">{textInput}</span>
+              {capitalizeFirstLetter(translate["ADD_TAG"])}
+              {"  "}
+              <span className="font-semibold bg-cyan-200 py-1 px-2 rounded-lg">
+                {textInput}
+              </span>
             </a>
           </div>
         </div>

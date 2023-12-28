@@ -83,7 +83,7 @@ export const OwnerMembersHead = (props: OwnerContentsHeadProps) => {
             }}
           />
         </label>
-        <LanguageButton />
+        <LanguageButton isOnlySmallView={true} />
       </div>
     </div>
   );

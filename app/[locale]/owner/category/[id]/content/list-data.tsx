@@ -1,21 +1,20 @@
 "use client";
 import { categoryApi } from "@/api/category";
+import { contentApi } from "@/api/content";
 import { PaginationDirectComponent } from "@/components/custom";
+import { useClientTranslate } from "@/language/translate-client";
 import {
+  capitalizeFirstLetter,
   generateURLWithQueryParams,
   getCountPage,
   getDateTime,
 } from "@/utils/global-func";
-import Image from "next/image";
-import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { BiSolidAddToQueue } from "react-icons/bi";
-import { MdOutlineBackupTable } from "react-icons/md";
-import { IoIosRemoveCircle } from "react-icons/io";
-import { AiFillFolderAdd } from "react-icons/ai";
-import { apiCaller } from "@/api";
-import { contentApi } from "@/api/content";
 import { enqueueSnackbar } from "notistack";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { AiFillFolderAdd } from "react-icons/ai";
+import { BiSolidAddToQueue } from "react-icons/bi";
+import { IoIosRemoveCircle } from "react-icons/io";
+import { MdOutlineBackupTable } from "react-icons/md";
 
 interface IOwnerListContentInCategory {
   categoryId: string;
@@ -26,6 +25,7 @@ export const OwnerListContentInCategory = (
   props: IOwnerListContentInCategory
 ) => {
   const { categoryId, searchParams } = props;
+  const translate = useClientTranslate();
   const { page, search } = searchParams;
 
   const [contents, setContents] = useState([]);
@@ -114,7 +114,8 @@ export const OwnerListContentInCategory = (
                   </span>
                 )}
                 <span className="text-xs font-light">
-                  Tạo lúc : {getDateTime(content.created_at)}
+                  {capitalizeFirstLetter(translate["CREATED_AT"])} :{" "}
+                  {getDateTime(content.created_at)}
                 </span>
               </div>
 

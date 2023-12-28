@@ -2,7 +2,7 @@
 import { apiCaller } from "@/api";
 import { useAuth } from "@/hook/auth.hook";
 import { useAppSelector } from "@/hook/redux.hook";
-import { getCountPage } from "@/utils/global-func";
+import { capitalizeFirstLetter, getCountPage } from "@/utils/global-func";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { PaginationChangeComponent } from "..";
@@ -17,11 +17,10 @@ interface CommentsComponentProps {
 export const CommentsComponent = (props: CommentsComponentProps) => {
   const [text, setText] = useState("");
 
+  const { contentId, countComment } = props;
   const { firstLoading, profile } = useAuth();
 
-  const useTranslate = useClientTranslate();
-
-  const { contentId, countComment } = props;
+  const translate = useClientTranslate();
 
   const [comments, setComments] = useState([]);
   const [total, setTotal] = useState(0);
@@ -93,7 +92,7 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
     <div className="w-full flex flex-col gap-2">
       <div className="flex flex-row gap-2 items-center">
         <span className="font-semibold text-lg dark:text-slate-100">
-          {useTranslate["COMMENTS"]}
+          {translate["COMMENTS"]}
         </span>
 
         <span className="flex-xs dark:text-slate-100">{`(${total})`}</span>
@@ -163,7 +162,7 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              Gửi
+              {capitalizeFirstLetter(translate["SUBMIT"])}
             </button>
           </div>
         </>
