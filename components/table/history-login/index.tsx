@@ -6,13 +6,18 @@ import { SessionRow } from "./row";
 import { enqueueSnackbar } from "notistack";
 import { useSearchParams } from "next/navigation";
 import { PaginationDirectComponent } from "@/components/custom";
-import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
+import {
+  capitalizeFirstLetter,
+  generateURLWithQueryParams,
+  getCountPage,
+} from "@/utils/global-func";
+import { useClientTranslate } from "@/language/translate-client";
 
 export const HistoryLoginTable = () => {
   const [session, setSession] = useState<ISession[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const translate = useClientTranslate();
   const searchParams = useSearchParams();
 
   const page = searchParams.get("page");
@@ -77,7 +82,7 @@ export const HistoryLoginTable = () => {
               </th>
               <th className="py-3 px-6">
                 <span className="w-full block text-center lg:text-sm text-xs">
-                  Ngày tạo
+                  {capitalizeFirstLetter(translate["CREATED_AT"])}
                 </span>
               </th>
               <th className="py-3 px-6">

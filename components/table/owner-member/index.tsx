@@ -1,9 +1,14 @@
 "use client";
 import { authApi } from "@/api/auth";
 import { PaginationDirectComponent } from "@/components/custom";
-import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
+import {
+  capitalizeFirstLetter,
+  generateURLWithQueryParams,
+  getCountPage,
+} from "@/utils/global-func";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { OwnerMemberRow } from "./row";
+import { useClientTranslate } from "@/language/translate-client";
 
 interface IOwnerMember {
   _id: string;
@@ -23,6 +28,8 @@ interface IOwnerMemberTable {
 export const OwnerMemberTable = (props: IOwnerMemberTable) => {
   const { searchParams } = props;
   const { page, search } = searchParams;
+
+  const translate = useClientTranslate();
 
   const [members, setMembers] = useState<IOwnerMember[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -88,22 +95,22 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
             <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
               <th className="py-3 px-6">
                 <span className="w-full block text-left lg:text-sm text-xs">
-                  Thông tin
+                  {capitalizeFirstLetter(translate["INFORMATION"])}
                 </span>
               </th>
               <th className="py-3 px-6">
                 <span className="w-full block text-center lg:text-sm text-xs">
-                  Bài viết
+                  {capitalizeFirstLetter(translate["CONTENT"])}
                 </span>
               </th>
               <th className="py-3 px-6">
                 <span className="w-full block text-center lg:text-sm text-xs">
-                  Quyền
+                  {capitalizeFirstLetter(translate["ROLE"])}
                 </span>
               </th>
               <th className="py-3 px-6">
                 <span className="w-full block text-right lg:text-sm text-xs">
-                  Ngày tham gia
+                  {capitalizeFirstLetter(translate["JOIN_AT"])}
                 </span>
               </th>
             </tr>

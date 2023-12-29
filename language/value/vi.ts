@@ -55,4 +55,11 @@ export const vi: { [key: string]: string } = {
   COMPLETE: "hoàn thành",
   UPDATE_CATEGORY: "cập nhật thể loại",
   CREATE_CATEGORY: "Tạo mới thể loại",
+  LIST_SERIES: "danh sách chuỗi bài viết",
+  UPDATE_SERIES: "cập nhật chuỗi bài viết",
+  CREATE_SERIES: "tạo mới chuỗi bài viết",
+  LIST_MEMBERS: "danh sách thành viên",
+  INFORMATION: "thông tin",
+  ROLE: "quyền",
+  LIST_CONTACT: "danh sách liên hệ",
 };

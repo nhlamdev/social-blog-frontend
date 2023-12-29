@@ -1,5 +1,7 @@
 import { OwnerSeriesAction } from "@/components/form";
 import { PageProps } from "@/interface";
+import { serverTranslate } from "@/language/translate-server";
+import { capitalizeFirstLetter } from "@/utils/global-func";
 import axios from "axios";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -20,6 +22,8 @@ interface ISeries {
 export default async function OwnerDetailSeriesPage(props: PageProps) {
   const { params } = props;
   const { id } = params;
+
+  const translate = serverTranslate();
 
   let series: ISeries | undefined;
 
@@ -46,7 +50,7 @@ export default async function OwnerDetailSeriesPage(props: PageProps) {
           />
         </Link>
         <span className="text-center text-md md:text-xl font-semibold text-slate-900 dark:text-slate-200">
-          Chỉnh sửa chuỗi bài viết
+          {capitalizeFirstLetter(translate["UPDATE_SERIES"])}
         </span>
       </div>
       <OwnerSeriesAction series={series} />

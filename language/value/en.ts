@@ -55,4 +55,11 @@ export const en: { [key: string]: string } = {
   COMPLETE: "complete",
   UPDATE_CATEGORY: "update category",
   CREATE_CATEGORY: "create category",
+  LIST_SERIES: "list series",
+  UPDATE_SERIES: "update series",
+  CREATE_SERIES: "create series",
+  LIST_MEMBERS: "list members",
+  ROLE: "role",
+  INFORMATION: "information",
+  LIST_CONTACT: "list contacts",
 };

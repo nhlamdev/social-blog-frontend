@@ -1,16 +1,23 @@
 "use client";
 import { commonApi } from "@/api/common";
 import { PaginationDirectComponent } from "@/components/custom";
-import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
+import {
+  capitalizeFirstLetter,
+  generateURLWithQueryParams,
+  getCountPage,
+} from "@/utils/global-func";
 import { useSearchParams } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ContactRow } from "./row";
+import { useClientTranslate } from "@/language/translate-client";
 
 export const ContactTableComponent = () => {
   const [session, setSession] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const translate = useClientTranslate();
 
   const searchParams = useSearchParams();
 
@@ -71,22 +78,22 @@ export const ContactTableComponent = () => {
             <tr className="bg-gray-200 text-slate-800 uppercase text-sm leading-normal">
               <th className="py-3 px-6">
                 <span className="w-full block text-left lg:text-sm text-xs">
-                  Tiêu đề
+                  {translate["TITLE"]}
                 </span>
               </th>
               <th className="py-3 px-6">
                 <span className="w-full block text-center lg:text-sm text-xs">
-                  Nội dung
+                  {translate["DESCRIPTION"]}
                 </span>
               </th>
               <th className="py-3 px-6">
                 <span className="w-full block text-center lg:text-sm text-xs">
-                  Ngày tạo
+                  {capitalizeFirstLetter(translate["CREATED_AT"])}
                 </span>
               </th>
               <th className="py-3 px-6">
                 <span className="w-full block text-center lg:text-sm text-xs">
-                  Thao tác
+                  {translate["CONTROL"]}
                 </span>
               </th>
             </tr>
