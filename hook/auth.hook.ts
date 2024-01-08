@@ -10,7 +10,7 @@ export function useAuth(options?: Partial<PublicConfiguration>) {
     data: payload,
     error,
     mutate,
-  } = useSWR("profile", {
+  } = useSWR("member/profile", {
     dedupingInterval: HOURSE_TO_MILISECOND,
     revalidateOnFocus: true,
     ...options,

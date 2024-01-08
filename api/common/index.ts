@@ -12,23 +12,23 @@ export const commonApi = {
 
   notifies(payload: { last?: string; take: string }) {
     const url = generateURLWithQueryParams(
-      `common/notifies-by-member`,
+      `notification/notifies-by-member`,
       payload
     );
 
     return axiosInstance.get(url);
   },
   createContact(payload: { title: string; description: string }) {
-    return axiosInstance.post("common/make-contact", payload);
+    return axiosInstance.post("contact/make-contact", payload);
   },
   contacts(params: { [key: string]: string }) {
-    const url = generateURLWithQueryParams(`common/contacts`, params);
+    const url = generateURLWithQueryParams(`contact/contacts`, params);
     return axiosInstance.get(url);
   },
   removeContact(id: string) {
-    return axiosInstance.delete(`common/contact/${id}`);
+    return axiosInstance.delete(`contact/contact/${id}`);
   },
   makeSeenAllNotifies() {
-    return axiosInstance.patch("common/notifies-seen-all");
+    return axiosInstance.patch("notification/notifies-seen-all");
   },
 };

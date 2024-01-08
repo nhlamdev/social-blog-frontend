@@ -10,7 +10,7 @@ export const PopularItemsComponent = async () => {
   const translate = serverTranslate();
 
   const { data: topContents } = await axios.get(
-    `http://localhost:${backend}/content/more-view?take=4`
+    `http://localhost:${backend}/content/more-views?take=4`
   );
 
   const { data: topCategoryMoreContent } = await axios.get(
@@ -18,7 +18,7 @@ export const PopularItemsComponent = async () => {
   );
 
   const { data: tags } = await axios.get(
-    `http://localhost:${backend}/content/tags-by-author`
+    `http://localhost:${backend}/content/tags-and-count?take=10`
   );
 
   return (
@@ -45,7 +45,7 @@ export const PopularItemsComponent = async () => {
               <div className="flex flex-row gap-2 items-center">
                 <div className="relative w-6 h-6">
                   <Image
-                    src={`/service/${content.created_by.image}`}
+                    src={`/service/${content?.created_by?.image}`}
                     fill
                     className="rounded-full aspect-square"
                     alt="asd"

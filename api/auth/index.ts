@@ -22,12 +22,12 @@ export const authApi = {
     return axiosInstance.get(url);
   },
   profile() {
-    return axiosInstance.get("profile");
+    return axiosInstance.get("member/profile");
   },
   logout() {
     return axiosInstance.delete("logout");
   },
   forceLogout(sessionId: string) {
-    return axiosInstance.delete(`/logout-target/${sessionId}`);
+    return axiosInstance.delete(`logout-target/${sessionId}`);
   },
 };

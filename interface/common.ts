@@ -16,17 +16,16 @@ export interface LayoutProps {
 }
 
 export interface IProfile {
-  delete_at: string | null;
-  created_at: string;
-  updated_at: string;
-  index: number;
   _id: string;
   name: string;
   email: string;
   image: string;
-  role_author: boolean;
-  role_comment: boolean;
-  role_owner: boolean;
+  created_at: string;
+  role: {
+    owner: boolean;
+    comment: boolean;
+    author: boolean;
+  };
 }
 
 export interface IImage {

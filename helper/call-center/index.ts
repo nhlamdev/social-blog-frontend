@@ -16,7 +16,7 @@ const refreshTokenName = process.env.NEXT_PUBLIC_REFRESH_TOKEN_NAME;
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    if (config.url === "profile") {
+    if (config.url === "member/profile") {
       if (!accessTokenName) {
         return Promise.reject();
       }
