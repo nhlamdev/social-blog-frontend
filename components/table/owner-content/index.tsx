@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { OwnerContentRow } from "./row";
 import { contentApi } from "@/api/content";
 import { PaginationDirectComponent } from "@/components/custom";
@@ -41,9 +41,9 @@ export const OwnerContentTableComponent = (
     contentApi
       .allWithPrivate(params)
       .then((res) => {
-        const [data, total] = res.data;
+        const { contents: data, count } = res.data;
         setContents(data);
-        setTotal(total);
+        setTotal(count);
       })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {
