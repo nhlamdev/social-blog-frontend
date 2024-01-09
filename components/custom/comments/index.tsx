@@ -126,7 +126,7 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
           )}
         </div>
       )}
-      {!firstLoading && profile?.role_comment ? (
+      {!firstLoading && profile?.role.comment ? (
         <>
           <div>
             <label

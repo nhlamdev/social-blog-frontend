@@ -63,7 +63,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
           width: `${ref.current?.clientWidth}px`,
         }}
       >
-        {profile.role_author || profile.role_owner ? (
+        {profile.role.author || profile.role.owner ? (
           <Link
             href={"/owner/content"}
             className="flex flex-row gap-2 items-center px-6 py-2 w-full group
