@@ -15,7 +15,7 @@ interface ICategory {
   index: number;
   _id: string;
   title: string;
-  summary: string;
+  description: string;
 }
 
 interface OwnerCategoryActionProps {
@@ -30,8 +30,8 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
   const translate = useClientTranslate();
 
   const [title, setTitle] = useState(category?.title ? category.title : "");
-  const [summary, setSummary] = useState(
-    category?.summary ? category.summary : ""
+  const [description, setDescription] = useState(
+    category?.description ? category.description : ""
   );
   const [loading, setLoading] = useState(false);
 
@@ -44,7 +44,7 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
 
         if (category) {
           apiCaller.categoryApi
-            .update(category._id, { title, summary })
+            .update(category._id, { title, description })
             .then(() => {
               router.replace("/owner/category");
               router.refresh();
@@ -68,7 +68,7 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
             });
         } else {
           apiCaller.categoryApi
-            .create({ title, summary })
+            .create({ title, description })
             .then(() => {
               router.replace("/owner/category");
               router.refresh();
@@ -118,10 +118,10 @@ export const OwnerCategoryAction = (props: OwnerCategoryActionProps) => {
           <textarea
             className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
             style={{ resize: "none" }}
-            value={summary}
+            value={description}
             onChange={(e) => {
               const { value } = e.target;
-              setSummary(value);
+              setDescription(value);
             }}
             rows={4}
             placeholder={`${translate["DESCRIPTION"]}...`}

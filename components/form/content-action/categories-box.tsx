@@ -2,7 +2,7 @@
 import { apiCaller } from "@/api";
 import { useClientTranslate } from "@/language/translate-client";
 import { capitalizeFirstLetter } from "@/utils/global-func";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface ContentCategoryBoxProps {
   value: string | null;
@@ -16,12 +16,29 @@ export const ContentCategoryBox = (props: ContentCategoryBoxProps) => {
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState<any[]>([]);
 
-  useEffect(() => {
-    apiCaller.categoryApi.get({}).then((res) => {
-      const { data, max } = res.data;
-      setCategories(data);
-    });
+  const fetchCategories = useCallback(async () => {
+    try {
+      const {
+        data: { categories, count },
+      } = await apiCaller.categoryApi.get({});
+
+      setCategories(categories);
+    } catch (error: any) {
+      if (Array.isArray(error?.response?.data?.message)) {
+        error?.response?.data?.message.forEach((item: any) => {
+          console.log(item);
+        });
+      } else {
+        console.log(
+          error?.response ? error.response.data?.message : error.message
+        );
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   const generateTitle = () => {
     const check = categories.filter((c: any) => c._id === value);

@@ -10,10 +10,10 @@ export const seriesApi = {
     const url = generateURLWithQueryParams("series/owner", params);
     return axiosInstance.get(url);
   },
-  async create(data: { title: string; summary: string }) {
+  async create(data: { title: string; description: string }) {
     return axiosInstance.post("series", data);
   },
-  async update(id: string, payload: { title: string; summary: string }) {
+  async update(id: string, payload: { title: string; description: string }) {
     return axiosInstance.put(`series/${id}`, payload);
   },
   async remove(id: string) {

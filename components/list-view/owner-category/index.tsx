@@ -36,35 +36,34 @@ export const OwnerCategoryListView = (props: OwnerCategoryListViewProps) => {
   const [total, setTotal] = useState(0);
 
   const fetchAction = useCallback(
-    (params: { skip: string; take: string; search: any }) => {
+    async (params: { skip: string; take: string; search: any }) => {
       setLoading(true);
-      categoryApi
-        .get(params)
-        .then((res) => {
-          const { data, max } = res.data;
 
-          if (data && data.length !== 0) {
-            setCategories(data);
-          }
+      try {
+        const {
+          data: { categories: result, count },
+        } = await categoryApi.get(params);
 
-          if (max && max >= 0) {
-            setTotal(max);
-          }
-        })
-        .catch((error) => {
-          if (Array.isArray(error?.response?.data?.message)) {
-            error?.response?.data?.message.forEach((item: any) => {
-              console.log(item);
-            });
-          } else {
-            console.log(
-              error?.response ? error.response.data?.message : error.message
-            );
-          }
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+        if (result && result.length !== 0) {
+          setCategories(result);
+        }
+
+        if (count && count >= 0) {
+          setTotal(count);
+        }
+      } catch (error: any) {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error?.response?.data?.message.forEach((item: any) => {
+            console.log(item);
+          });
+        } else {
+          console.log(
+            error?.response ? error.response.data?.message : error.message
+          );
+        }
+      } finally {
+        setLoading(false);
+      }
     },
     []
   );

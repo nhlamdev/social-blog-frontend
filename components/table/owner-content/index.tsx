@@ -39,7 +39,7 @@ export const OwnerContentTableComponent = (
   useEffect(() => {
     setLoading(true);
     contentApi
-      .allByUserCreate(params)
+      .allWithPrivate(params)
       .then((res) => {
         const [data, total] = res.data;
         setContents(data);

@@ -55,7 +55,7 @@ export const OwnerMobileNavigation = () => {
             <div className="p-2 g-2 flex-1">
               {navigation_mock
                 .filter((v) => {
-                  if (profile.role_owner) {
+                  if (profile.role.owner) {
                     return true;
                   } else {
                     return !v.require_owner;

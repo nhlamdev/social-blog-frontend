@@ -7,7 +7,6 @@ import {
   PaginationDirectComponent,
 } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
-import { SeriesControlDialog } from "@/components/dialog";
 
 interface OwnerSeriesListViewProps {
   searchParams: { [key: string]: any };
@@ -37,35 +36,34 @@ export const OwnerSeriesListView = (props: OwnerSeriesListViewProps) => {
   const [total, setTotal] = useState(0);
 
   const fetchAction = useCallback(
-    (params: { skip: string; take: string; search: any }) => {
+    async (params: { skip: string; take: string; search: any }) => {
       setLoading(true);
-      seriesApi
-        .getByCreateBy(params)
-        .then((res) => {
-          const { data, max } = res.data;
 
-          if (data && data.length !== 0) {
-            setSeries(data);
-          }
+      try {
+        const {
+          data: { series, count },
+        } = await seriesApi.getByCreateBy(params);
 
-          if (max && max >= 0) {
-            setTotal(max);
-          }
-        })
-        .catch((error) => {
-          if (Array.isArray(error?.response?.data?.message)) {
-            error?.response?.data?.message.forEach((item: any) => {
-              console.log(item);
-            });
-          } else {
-            console.log(
-              error?.response ? error.response.data?.message : error.message
-            );
-          }
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+        if (series && series.length !== 0) {
+          setSeries(series);
+        }
+
+        if (count && count >= 0) {
+          setTotal(count);
+        }
+      } catch (error: any) {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error?.response?.data?.message.forEach((item: any) => {
+            console.log(item);
+          });
+        } else {
+          console.log(
+            error?.response ? error.response.data?.message : error.message
+          );
+        }
+      } finally {
+        setLoading(false);
+      }
     },
     []
   );

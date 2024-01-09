@@ -62,4 +62,5 @@ export const vi: { [key: string]: string } = {
   INFORMATION: "thông tin",
   ROLE: "quyền",
   LIST_CONTACT: "danh sách liên hệ",
+  DRAFT: "Lưu nháp",
 };

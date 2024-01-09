@@ -15,7 +15,7 @@ export const CreateActionButton = (props: ICreateActionButton) => {
   if (
     !profile ||
     firstLoading ||
-    (!profile?.role_author && !profile?.role_owner)
+    (!profile?.role.author && !profile?.role.owner)
   ) {
     return <></>;
   }

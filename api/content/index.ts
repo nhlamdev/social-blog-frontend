@@ -3,7 +3,12 @@ import { generateURLWithQueryParams } from "@/utils/global-func";
 
 export const contentApi = {
   allWithPublic(params: { [key: string]: string }) {
-    const url = generateURLWithQueryParams("content", params);
+    const url = generateURLWithQueryParams("content/public", params);
+    return axiosInstance.get(url);
+  },
+
+  allWithPrivate(params: { [key: string]: string }) {
+    const url = generateURLWithQueryParams("content/private", params);
     return axiosInstance.get(url);
   },
 
@@ -15,10 +20,7 @@ export const contentApi = {
     const url = generateURLWithQueryParams("content/bookmark", params);
     return axiosInstance.get(url);
   },
-  allByUserCreate(params: { [key: string]: string }) {
-    const url = generateURLWithQueryParams("content/owner", params);
-    return axiosInstance.get(url);
-  },
+
   allUniqueTags(author?: string) {
     if (author) {
       return axiosInstance.get(`content/tags-by-author?author=${author}`);

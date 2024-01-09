@@ -15,7 +15,7 @@ interface ISeries {
   index: number;
   _id: string;
   title: string;
-  summary: string;
+  description: string;
 }
 
 interface OwnerSeriesActionProps {
@@ -28,7 +28,9 @@ export const OwnerSeriesAction = (props: OwnerSeriesActionProps) => {
   const { series } = props;
 
   const [title, setTitle] = useState(series?.title ? series.title : "");
-  const [summary, setSummary] = useState(series?.summary ? series.summary : "");
+  const [description, setDescription] = useState(
+    series?.description ? series.description : ""
+  );
   const [loading, setLoading] = useState(false);
 
   return (
@@ -40,7 +42,7 @@ export const OwnerSeriesAction = (props: OwnerSeriesActionProps) => {
 
         if (series) {
           apiCaller.seriesApi
-            .update(series._id, { title, summary })
+            .update(series._id, { title, description })
             .then(() => {
               router.replace("/owner/series");
             })
@@ -63,7 +65,7 @@ export const OwnerSeriesAction = (props: OwnerSeriesActionProps) => {
             });
         } else {
           apiCaller.seriesApi
-            .create({ title, summary })
+            .create({ title, description })
             .then(() => {
               router.replace("/owner/series");
             })
@@ -112,10 +114,10 @@ export const OwnerSeriesAction = (props: OwnerSeriesActionProps) => {
           <textarea
             className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
             style={{ resize: "none" }}
-            value={summary}
+            value={description}
             onChange={(e) => {
               const { value } = e.target;
-              setSummary(value);
+              setDescription(value);
             }}
             rows={4}
             placeholder={`${capitalizeFirstLetter(

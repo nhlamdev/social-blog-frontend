@@ -37,12 +37,12 @@ export const FormContentAction = (props: FormContentActionProps) => {
   );
   const [tags, setTags] = useState<string[]>(content ? content.tags : []);
 
-  const action = async () => {
+  const action = async (complete: boolean) => {
     const payload = {
       title: title,
       body: body,
       category: category,
-      complete: true,
+      complete: complete,
       tags: tags,
       public: casePublic,
     };
@@ -167,10 +167,22 @@ export const FormContentAction = (props: FormContentActionProps) => {
       <div className="flex flex-row w-full px-2 justify-end">
         <button
           onClick={() => {
-            action();
+            action(false);
           }}
-          className="text-teal-500 bg-transparent border border-solid border-teal-500 hover:bg-teal-500 hover:text-white active:bg-teal-600 
-        font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          className="text-teal-500 bg-transparent border border-solid border-teal-500 hover:bg-teal-500 
+          hover:text-white active:bg-teal-600 font-bold uppercase px-8 py-3 rounded outline-none 
+          focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button"
+        >
+          {capitalizeFirstLetter(translate["DRAFT"])}
+        </button>
+        <button
+          onClick={() => {
+            action(true);
+          }}
+          className="text-teal-500 bg-transparent border border-solid border-teal-500 hover:bg-teal-500 
+          hover:text-white active:bg-teal-600 font-bold uppercase px-8 py-3 rounded 
+          outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
         >
           {capitalizeFirstLetter(translate["COMPLETE"])}

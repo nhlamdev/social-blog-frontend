@@ -2,12 +2,9 @@ import { CreateActionButton, LanguageButton } from "@/components/custom";
 import { OwnerCategoryListView } from "@/components/list-view";
 import { OwnerMobileNavigation } from "@/components/navigation/owner-mobile";
 import { PageProps } from "@/interface";
-import { useClientTranslate } from "@/language/translate-client";
 import { serverTranslate } from "@/language/translate-server";
 import { capitalizeFirstLetter } from "@/utils/global-func";
 import { Metadata } from "next";
-import Link from "next/link";
-import { IoIosCreate } from "react-icons/io";
 
 export const metadata: Metadata = {
   title: "Danh sách thể loại",

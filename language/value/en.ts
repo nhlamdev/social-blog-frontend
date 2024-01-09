@@ -62,4 +62,5 @@ export const en: { [key: string]: string } = {
   ROLE: "role",
   INFORMATION: "information",
   LIST_CONTACT: "list contacts",
+  DRAFT: "draft",
 };

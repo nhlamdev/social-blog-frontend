@@ -22,13 +22,11 @@ export const categoryApi = {
     );
     return axiosInstance.get(url);
   },
-  async create(payload: { title: string; summary: string }) {
+  async create(payload: { title: string; description: string }) {
     return axiosInstance.post("category", payload);
   },
-  async update(id: string, payload: { title: string; summary: string }) {
-    return axiosInstance.put(`category/${id}`, payload, {
-      headers: { "content-type": "multipart/form-data" },
-    });
+  async update(id: string, payload: { title: string; description: string }) {
+    return axiosInstance.put(`category/${id}`, payload);
   },
   async remove(id: string) {
     return axiosInstance.delete(`category/${id}`);

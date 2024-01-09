@@ -161,7 +161,7 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
             <></>
           )}
 
-          {!firstLoading && profile.role_comment ? (
+          {!firstLoading && profile.role.comment ? (
             <div className="flex flex-col gap-2">
               <div className="pl-10">
                 <label
