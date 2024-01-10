@@ -1,13 +1,15 @@
 {
-  "name": "client-interface",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "clean": "rimraf .next ",
     "dev": "npm run clean && next dev",
     "build": "npm run clean && next build",
+    "check-types": "tsc --noEmit --pretty",
     "start": "next start",
     "lint": "next lint",
+    "sitemap": "next-sitemap",
     "export": "next build && next export"
   },
   "dependencies": {
