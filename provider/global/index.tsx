@@ -1,5 +1,5 @@
 "use client";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { COLOR_THEME_CASE } from "@/constant";
 import { store } from "@/redux/store";
 import createCache from "@emotion/cache";
@@ -43,7 +43,7 @@ export const ProviderComponent = (props: ProviderComponentProps) => {
   return (
     <SWRConfig
       value={{
-        fetcher: () => apiCaller.authApi.profile(),
+        fetcher: () => apiCaller.memberApi.profile(),
         revalidateOnFocus: true,
         revalidateOnReconnect: true,
       }}

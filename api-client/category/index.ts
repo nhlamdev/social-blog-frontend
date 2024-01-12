@@ -1,21 +1,20 @@
-"use client";
 import { axiosInstance } from "@/helper";
 import { generateURLWithQueryParams } from "@/utils/global-func";
 
-export const categoryApi = {
+export const category = {
+  async categories() {
+    return axiosInstance.get("category");
+  },
   async paginate(params: { [key: string]: string }) {
     const url = generateURLWithQueryParams("category/paginate", params);
     return axiosInstance.get(url);
-  },
-  async all() {
-    return axiosInstance.get("category");
   },
   async ContentInCategory(
     categoryId: string,
     payload: {
       skip: string;
       take: string;
-      search: string;
+      search?: string;
       outside: string;
     }
   ) {

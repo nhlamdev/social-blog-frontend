@@ -2,12 +2,27 @@ import { axiosInstance } from "@/helper";
 import { generateURLWithQueryParams } from "@/utils/global-func";
 
 export const seriesApi = {
-  async get(params: { [key: string]: string }) {
+  async paginate(params: { [key: string]: string }) {
     const url = generateURLWithQueryParams("series", params);
     return axiosInstance.get(url);
   },
   async getByCreateBy(params: { [key: string]: string }) {
-    const url = generateURLWithQueryParams("series/owner", params);
+    const url = generateURLWithQueryParams("series/owner/paginate", params);
+    return axiosInstance.get(url);
+  },
+  async ContentInSeries(
+    categoryId: string,
+    payload: {
+      skip: string;
+      take: string;
+      search?: string;
+      outside: string;
+    }
+  ) {
+    const url = generateURLWithQueryParams(
+      `content/by-series/${categoryId}`,
+      payload
+    );
     return axiosInstance.get(url);
   },
   async create(data: { title: string; description: string }) {
