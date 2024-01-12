@@ -2,7 +2,7 @@ import { axiosInstance } from "@/helper";
 import { generateURLWithQueryParams } from "@/utils/global-func";
 
 export const contentApi = {
-  allWithPublic(params: { [key: string]: string }) {
+  public(params: { [key: string]: string }) {
     const url = generateURLWithQueryParams("content/public", params);
     return axiosInstance.get(url);
   },
@@ -28,8 +28,8 @@ export const contentApi = {
       return axiosInstance.get(`content/tags-by-author`);
     }
   },
-  getContentByIdAndOwner(id: string) {
-    return axiosInstance.get(`content/by-id/${id}/owner`);
+  privateById(id: string) {
+    return axiosInstance.get(`content/private/by-id/${id}`);
   },
   getContentsByCategory(id: string, params: { [key: string]: string }) {
     const url = generateURLWithQueryParams(`content/by-category/${id}`, params);

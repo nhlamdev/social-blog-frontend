@@ -3,9 +3,12 @@ import { axiosInstance } from "@/helper";
 import { generateURLWithQueryParams } from "@/utils/global-func";
 
 export const categoryApi = {
-  async get(params: { [key: string]: string }) {
-    const url = generateURLWithQueryParams("category", params);
+  async paginate(params: { [key: string]: string }) {
+    const url = generateURLWithQueryParams("category/paginate", params);
     return axiosInstance.get(url);
+  },
+  async all() {
+    return axiosInstance.get("category");
   },
   async ContentInCategory(
     categoryId: string,

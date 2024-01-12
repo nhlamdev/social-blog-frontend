@@ -29,7 +29,7 @@ export const ContentsByAuthor = (props: IContentsByAuthor) => {
   useEffect(() => {
     setLoading(true);
     contentApi
-      .allWithPublic(params)
+      .public(params)
       .then((res) => {
         const {
           data: { data, max },

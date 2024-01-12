@@ -17,7 +17,7 @@ export const DropdownCategoryBox = (props: DropdownCategoryBoxProps) => {
   const translate = useClientTranslate();
 
   useEffect(() => {
-    apiCaller.categoryApi.get({}).then((res) => {
+    apiCaller.categoryApi.all().then((res) => {
       setCategories(res.data.data);
     });
   }, []);

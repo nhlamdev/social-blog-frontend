@@ -18,9 +18,7 @@ export const ContentCategoryBox = (props: ContentCategoryBoxProps) => {
 
   const fetchCategories = useCallback(async () => {
     try {
-      const {
-        data: { categories, count },
-      } = await apiCaller.categoryApi.get({});
+      const { data: categories } = await apiCaller.categoryApi.all();
 
       setCategories(categories);
     } catch (error: any) {

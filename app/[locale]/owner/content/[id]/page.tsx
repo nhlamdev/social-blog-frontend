@@ -25,7 +25,7 @@ export default function OwnerContentUpdatePage(props: PageProps) {
     setLoading(true);
 
     contentApi
-      .getContentByIdAndOwner(id)
+      .privateById(id)
       .then((res) => {
         setContent(res.data);
       })

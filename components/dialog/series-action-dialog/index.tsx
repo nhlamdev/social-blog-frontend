@@ -19,7 +19,7 @@ export const SeriesControlDialog = (props: SeriesControlDialogProps) => {
 
   const [data, setData] = useState({
     title: value ? value.title : "",
-    summary: value ? value.summary : "",
+    description: value ? value.description : "",
   });
 
   const submit = async () => {
@@ -27,7 +27,7 @@ export const SeriesControlDialog = (props: SeriesControlDialogProps) => {
       if (value) {
         await apiCaller.seriesApi.update(value._id, {
           title: data.title,
-          summary: data.summary,
+          description: data.description,
         });
       } else {
         await apiCaller.seriesApi.create(data);
@@ -57,7 +57,7 @@ export const SeriesControlDialog = (props: SeriesControlDialogProps) => {
     if (open) {
       setData({
         title: value ? value.title : "",
-        summary: value ? value.summary : "",
+        description: value ? value.description : "",
       });
     }
   }, [open, value]);
@@ -163,10 +163,10 @@ export const SeriesControlDialog = (props: SeriesControlDialogProps) => {
                 }}
                 placeholder="Hãy để lại vài dòng mô tả."
                 rows={5}
-                value={data.summary}
+                value={data.description}
                 onChange={(e) => {
                   const { value } = e.target;
-                  setData({ ...data, summary: value });
+                  setData({ ...data, description: value });
                 }}
               />
             </div>

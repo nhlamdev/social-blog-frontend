@@ -141,10 +141,10 @@ export const PopularItemsComponent = async () => {
         </span>
 
         <div className="flex flex-row flex-wrap gap-2">
-          {Object.keys(tags).map((tag) => {
+          {tags.map((item: { tag: string; count: number }) => {
             return (
               <div
-                key={tag}
+                key={item.tag}
                 className="flex flex-row gap-2 px-4 py-2 rounded-md bg-slate-400  dark:bg-slate-600 
                 shadow-md items-center bg-opacity-60"
               >
@@ -152,14 +152,14 @@ export const PopularItemsComponent = async () => {
                   className="text-xs select-none text-slate-900 dark:text-slate-200
                 font-semibold"
                 >
-                  {tag}
+                  {item.count}
                 </span>
 
                 <span
-                  className="text-xs p-1 bg-slate-100 bg-opacity-40 w-6 h-6 items-center justify-center
+                  className="text-xs p-1 bg-slate-100 bg-opacity-40 min-w-6 h-6 items-center justify-center
             rounded-full select-none flex font-bold text-slate-900 dark:text-slate-200"
                 >
-                  {tags[tag]}
+                  {item.tag}
                 </span>
               </div>
             );

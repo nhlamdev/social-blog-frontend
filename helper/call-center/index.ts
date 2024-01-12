@@ -67,16 +67,17 @@ axiosInstance.interceptors.response.use(
         if (accessTokenName && Cookies.get(accessTokenName)) {
           Cookies.remove(accessTokenName);
         }
-
         return Promise.reject();
       }
 
       const checkRefresh = Cookies.get(refreshTokenName);
 
       if (!checkRefresh) {
+        if (accessTokenName && Cookies.get(accessTokenName)) {
+          Cookies.remove(accessTokenName);
+        }
         return Promise.reject();
       }
-
       try {
         await axios.get("/service/renew-token");
 

@@ -16,7 +16,7 @@ interface ICategory {
   index: number;
   _id: string;
   title: string;
-  summary: string;
+  description: string;
 }
 
 export default async function OwnerDetailCategoryPage(props: PageProps) {

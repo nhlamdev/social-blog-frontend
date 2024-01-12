@@ -1,12 +1,10 @@
 "use client";
 import { apiCaller } from "@/api";
-import Image from "next/image";
-import { enqueueSnackbar } from "notistack";
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import { IImage } from "@/interface";
 import { useClientTranslate } from "@/language/translate-client";
 import { capitalizeFirstLetter } from "@/utils/global-func";
+import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
+import { useState } from "react";
 
 interface ICategory {
   delete_at: string | null;
