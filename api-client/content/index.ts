@@ -6,6 +6,11 @@ export const contentApi = {
     const url = generateURLWithQueryParams("content/public", params);
     return axiosInstance.get(url);
   },
+
+  myBookmark(params: { [key: string]: string }) {
+    const url = generateURLWithQueryParams("content/bookmark", params);
+    return axiosInstance.get(url);
+  },
   privateWithCreateBy(params: { [key: string]: string }) {
     const url = generateURLWithQueryParams("content/private", params);
     return axiosInstance.get(url);
@@ -19,13 +24,16 @@ export const contentApi = {
     return axiosInstance.get(url);
   },
   voteUp(content: string) {
-    axiosInstance.patch(`content/${content}/vote-up`);
+    return axiosInstance.patch(`content/${content}/vote-up`);
   },
   voteDown(content: string) {
-    axiosInstance.patch(`content/${content}/vote-down`);
+    return axiosInstance.patch(`content/${content}/vote-down`);
   },
   bookmark(content: string) {
-    axiosInstance.patch(`content/${content}/vote-down`);
+    return axiosInstance.patch(`content/${content}/vote-down`);
+  },
+  watch(content: string) {
+    return axiosInstance.patch(`content/${content}/watch`);
   },
   update(id: string, data: any) {
     return axiosInstance.put(`content/${id}`, data);
@@ -37,6 +45,9 @@ export const contentApi = {
   },
   updateContentSeries(content: string, series: string) {
     return axiosInstance.patch(`/content/change-series/${content}/${series}`);
+  },
+  create(data: any) {
+    return axiosInstance.post("/content", data);
   },
   remove(id: string) {
     return axiosInstance.delete(`/content/${id}`);

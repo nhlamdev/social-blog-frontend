@@ -1,5 +1,5 @@
 "use client";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaEdit } from "react-icons/fa";

@@ -1,4 +1,4 @@
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { getDateTime } from "@/utils/global-func";
 import { MdOutlineRemoveCircle } from "react-icons/md";
 
@@ -35,7 +35,7 @@ export const ContactRow = (props: IContactRow) => {
           className="text-red-500 mx-auto"
           style={{ fontSize: "24px", cursor: "pointer" }}
           onClick={async () => {
-            await apiCaller.commonApi.removeContact(row._id);
+            await apiCaller.contactApi.removeContact(row._id);
             reload();
           }}
         />

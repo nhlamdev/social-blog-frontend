@@ -1,6 +1,5 @@
 "use client";
 
-import { commonApi } from "@/api/common";
 import { useCallback, useEffect, useState } from "react";
 
 interface IVisualize {
@@ -21,15 +20,15 @@ export const VisualizeComponent = () => {
     status: IStatus;
   } | null>(null);
 
-  const fetchData = useCallback(async () => {
-    const { data: payload } = await commonApi.visualize();
+  // const fetchData = useCallback(async () => {
+  //   const { data: payload } = await commonApi.visualize();
 
-    setData(payload);
-  }, []);
+  //   setData(payload);
+  // }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [fetchData]);
 
   if (!data) {
     return "loading";

@@ -1,5 +1,5 @@
 "use client";
-import { authApi } from "@/api/auth";
+import { authApi } from "@/api-client/auth";
 import { useAuth } from "@/hook/auth.hook";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -8,6 +8,7 @@ import { FaPlus } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
 import { useClientTranslate } from "@/language/translate-client";
+import { apiCaller } from "@/api-client";
 interface IFollowButton {
   member: any;
 }
@@ -50,8 +51,8 @@ export const FollowButton = (props: IFollowButton) => {
     if (loading === false) {
       setLoading(true);
 
-      authApi
-        .updateFollowed(member._id)
+      apiCaller.memberApi
+        .follow(member._id)
         .then(() => {
           router.refresh();
         })

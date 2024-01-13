@@ -1,5 +1,5 @@
 "use client";
-import { commonApi } from "@/api/common";
+import { apiCaller } from "@/api-client";
 import { useAuth } from "@/hook/auth.hook";
 import { INotify } from "@/interface";
 import Image from "next/image";
@@ -19,7 +19,7 @@ export const NotifyBellComponent = () => {
     try {
       const {
         data: { notifies, unSeen },
-      } = await commonApi.notifies({ take: "10" });
+      } = await apiCaller.notificationApi.notifies({ take: "10" });
       setNotifies(notifies);
       setUnSeen(unSeen);
     } catch (error: any) {
@@ -52,7 +52,7 @@ export const NotifyBellComponent = () => {
         className="cursor-pointer text-slate-900 dark:text-slate-200"
         onClick={() => {
           if (unSeen !== 0) {
-            commonApi.makeSeenAllNotifies();
+            apiCaller.notificationApi.makeSeenAllNotifies();
           }
 
           setOpen(true);

@@ -1,5 +1,5 @@
 "use client";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { useClientTranslate } from "@/language/translate-client";
 import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
 import Link from "next/link";

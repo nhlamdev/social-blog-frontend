@@ -1,5 +1,5 @@
 "use client";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { useClientTranslate } from "@/language/translate-client";
 import { capitalizeFirstLetter } from "@/utils/global-func";
 import { useCallback, useEffect, useState } from "react";
@@ -18,7 +18,7 @@ export const ContentCategoryBox = (props: ContentCategoryBoxProps) => {
 
   const fetchCategories = useCallback(async () => {
     try {
-      const { data: categories } = await apiCaller.categoryApi.all();
+      const { data: categories } = await apiCaller.categoryApi.categories();
 
       setCategories(categories);
     } catch (error: any) {

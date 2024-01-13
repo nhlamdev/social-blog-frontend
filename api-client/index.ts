@@ -1,5 +1,5 @@
 import { authApi } from "./auth";
-import { category } from "./category";
+import { categoryApi } from "./category";
 import { commentApi } from "./comment";
 import { contactApi } from "./contact";
 import { contentApi } from "./content";
@@ -10,7 +10,7 @@ import { seriesApi } from "./series";
 
 export const apiCaller = {
   authApi,
-  category,
+  categoryApi,
   commentApi,
   contactApi,
   contentApi,

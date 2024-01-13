@@ -1,6 +1,6 @@
 "use client";
 
-import { contentApi } from "@/api/content";
+import { contentApi } from "@/api-client/content";
 import { useAuth } from "@/hook/auth.hook";
 import { useEffect } from "react";
 
@@ -15,7 +15,7 @@ export const WatchActionComponent = (props: IWatchActionComponent) => {
 
   useEffect(() => {
     if (!firstLoading && profile && !content.watches.includes(content._id)) {
-      contentApi.makeWatch(content._id);
+      contentApi.watch(content._id);
     }
   }, [content._id, content.watches, firstLoading, profile]);
 

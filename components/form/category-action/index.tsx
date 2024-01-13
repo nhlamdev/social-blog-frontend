@@ -1,5 +1,5 @@
 "use client";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { useClientTranslate } from "@/language/translate-client";
 import { capitalizeFirstLetter } from "@/utils/global-func";
 import { useRouter } from "next/navigation";

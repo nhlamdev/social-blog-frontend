@@ -1,5 +1,5 @@
 "use client";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { useClientTranslate } from "@/language/translate-client";
 import { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ export const DropdownCategoryBox = (props: DropdownCategoryBoxProps) => {
   const translate = useClientTranslate();
 
   useEffect(() => {
-    apiCaller.categoryApi.all().then((res) => {
+    apiCaller.categoryApi.categories().then((res) => {
       setCategories(res.data.data);
     });
   }, []);

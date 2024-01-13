@@ -3,7 +3,7 @@ import { getDateTime } from "@/utils/global-func";
 import Link from "next/link";
 import { FaEdit } from "react-icons/fa";
 import { MdOutlineRemoveCircle } from "react-icons/md";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { useRouter } from "next/navigation";
 
 interface OwnerContentRowProps {

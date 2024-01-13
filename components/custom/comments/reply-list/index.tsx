@@ -1,11 +1,11 @@
 "use client";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { getCountPage } from "@/utils/global-func";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { PaginationChangeComponent } from "../..";
 import { TiDelete } from "react-icons/ti";
-import { commentApi } from "@/api/comment";
+import { commentApi } from "@/api-client/comment";
 import { useAuth } from "@/hook/auth.hook";
 import { useClientTranslate } from "@/language/translate-client";
 

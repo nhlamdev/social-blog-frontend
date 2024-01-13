@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ListViewItem } from "./item";
-import { seriesApi } from "@/api/series";
+import { seriesApi } from "@/api-client/series";
 import {
   EmptyDataComponent,
   PaginationDirectComponent,

@@ -1,5 +1,5 @@
 "use client";
-import { seriesApi } from "@/api/series";
+import { seriesApi } from "@/api-client/series";
 import { BaseLoading, PaginationChangeComponent } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
 import { useEffect, useMemo, useState } from "react";
@@ -29,7 +29,7 @@ export const SeriesByAuthor = (props: ISeriesByAuthor) => {
   useEffect(() => {
     setLoading(true);
     seriesApi
-      .get(params)
+      .paginate(params)
       .then((res) => {
         const {
           data: { data, max },

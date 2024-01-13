@@ -1,5 +1,5 @@
 "use client";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { useAuth } from "@/hook/auth.hook";
 import { useAppSelector } from "@/hook/redux.hook";
 import { capitalizeFirstLetter, getCountPage } from "@/utils/global-func";

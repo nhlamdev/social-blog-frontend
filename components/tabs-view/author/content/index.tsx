@@ -1,5 +1,5 @@
 "use client";
-import { contentApi } from "@/api/content";
+import { contentApi } from "@/api-client/content";
 import { useEffect, useMemo, useState } from "react";
 import { ContentByAuthor } from "./row";
 import { BaseLoading, PaginationChangeComponent } from "@/components/custom";

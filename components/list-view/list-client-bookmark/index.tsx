@@ -1,5 +1,5 @@
 "use client";
-import { contentApi } from "@/api/content";
+import { contentApi } from "@/api-client/content";
 import { useEffect, useMemo, useState } from "react";
 import { ClientBookMarkListViewItem } from "./item";
 import { PaginationDirectComponent } from "@/components/custom";
@@ -34,7 +34,7 @@ export const ClientBookMarkListView = (props: IClientBookMarkListView) => {
   useEffect(() => {
     setLoading(true);
     contentApi
-      .allBookmarkContent(params)
+      .public(params)
       .then((res) => {
         const {
           data: { data, count },

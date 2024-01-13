@@ -3,8 +3,9 @@ import Image from "next/image";
 import { useAuth } from "@/hook/auth.hook";
 import { useCallback, useRef, useState } from "react";
 import { FaRegImage } from "react-icons/fa";
-import { authApi } from "@/api/auth";
+import { authApi } from "@/api-client/auth";
 import { enqueueSnackbar } from "notistack";
+import { apiCaller } from "@/api-client";
 
 export const ProfileActionComponent = () => {
   const { error, firstLoading, logout, profile } = useAuth();
@@ -52,7 +53,7 @@ export const ProfileActionComponent = () => {
 
     setLoading(true);
     try {
-      await authApi.updateProle(formData);
+      // await apiCaller.memberApi.update(formData);
     } catch {
       if (Array.isArray(error?.response?.data?.message)) {
         error?.response?.data?.message.forEach((item: any) => {

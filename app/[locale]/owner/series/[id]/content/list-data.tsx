@@ -1,5 +1,6 @@
 "use client";
-import { contentApi } from "@/api/content";
+import { apiCaller } from "@/api-client";
+import { contentApi } from "@/api-client/content";
 import { PaginationDirectComponent } from "@/components/custom";
 import { useClientTranslate } from "@/language/translate-client";
 import {
@@ -50,8 +51,8 @@ export const OwnerListContentInSeries = (props: IOwnerListContentInSeries) => {
   const fetchData = useCallback(() => {
     setLoading(true);
 
-    contentApi
-      .getContentsBySeries(seriesId, params)
+    apiCaller.seriesApi
+      .ContentInSeries(seriesId, params)
       .then((res) => {
         const { data, max } = res.data;
         setContents(data);

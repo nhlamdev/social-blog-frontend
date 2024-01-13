@@ -1,5 +1,5 @@
 import { IProfile } from "@/interface";
-import { authApi } from "@/api/auth";
+import { authApi } from "@/api-client/auth";
 import useSWR from "swr";
 import { PublicConfiguration } from "swr/_internal";
 

@@ -1,5 +1,4 @@
 "use client";
-import { commonApi } from "@/api/common";
 import { PaginationDirectComponent } from "@/components/custom";
 import {
   capitalizeFirstLetter,
@@ -11,6 +10,7 @@ import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ContactRow } from "./row";
 import { useClientTranslate } from "@/language/translate-client";
+import { apiCaller } from "@/api-client";
 
 export const ContactTableComponent = () => {
   const [session, setSession] = useState<any[]>([]);
@@ -38,7 +38,7 @@ export const ContactTableComponent = () => {
 
   const fetchData = useCallback(() => {
     setLoading(true);
-    commonApi
+    apiCaller.contactApi
       .contacts(params)
       .then((res) => {
         const { data, count } = res.data;

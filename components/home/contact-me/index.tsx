@@ -1,5 +1,5 @@
 "use client";
-import { commonApi } from "@/api/common";
+import { apiCaller } from "@/api-client";
 import { useAuth } from "@/hook";
 import { useClientTranslate } from "@/language/translate-client";
 import { enqueueSnackbar } from "notistack";
@@ -24,7 +24,7 @@ export const ContactComponent = () => {
     setLoading(true);
 
     try {
-      await commonApi.createContact({ title, description });
+      await apiCaller.contactApi.createContact({ title, description });
       enqueueSnackbar("Đã gửi thành công", { variant: "success" });
     } catch (error: any) {
       if (Array.isArray(error?.response?.data?.message)) {

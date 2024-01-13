@@ -1,5 +1,5 @@
 "use client";
-import { contentApi } from "@/api/content";
+import { contentApi } from "@/api-client/content";
 import { FormContentAction } from "@/components/form";
 import { PageProps } from "@/interface";
 import Link from "next/link";

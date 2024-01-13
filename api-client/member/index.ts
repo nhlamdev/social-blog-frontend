@@ -10,6 +10,9 @@ export const memberApi = {
     const url = generateURLWithQueryParams("member", params);
     return axiosInstance.get(url);
   },
+  follow(author: string) {
+    return axiosInstance.patch(`member/change-follow/${author}`);
+  },
   update(payload: IMemberUpdatePayload) {
     return axiosInstance.put("member/update", payload);
   },

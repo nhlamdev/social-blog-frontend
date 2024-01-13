@@ -1,5 +1,5 @@
 "use client";
-import { contentApi } from "@/api/content";
+import { contentApi } from "@/api-client/content";
 import { useAuth } from "@/hook/auth.hook";
 import { useRouter } from "next/navigation";
 import { BsBookmarksFill, BsFillBookmarkXFill } from "react-icons/bs";
@@ -23,7 +23,7 @@ export const BookmarkActionButton = (props: IBookmarkActionButton) => {
       style={{ border: "1px solid black", cursor: "pointer" }}
       onClick={async () => {
         try {
-          await contentApi.makeBookmarkContent(content._id);
+          await contentApi.bookmark(content._id);
           router.refresh();
         } catch {}
       }}

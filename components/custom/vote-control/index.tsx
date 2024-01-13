@@ -1,5 +1,5 @@
 "use client";
-import { contentApi } from "@/api/content";
+import { contentApi } from "@/api-client/content";
 import { useAuth } from "@/hook/auth.hook";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -25,7 +25,14 @@ export const VoteContentControl = (props: IVoteContentControl) => {
     }
 
     try {
-      await contentApi.voteAction(content._id, caseAction);
+      if (caseAction === "up") {
+        await contentApi.voteUp(content._id);
+      }
+
+      if (caseAction === "down") {
+        await contentApi.voteDown(content._id);
+      }
+
       router.refresh();
     } catch (error: any) {
       if (Array.isArray(error?.response?.data?.message)) {

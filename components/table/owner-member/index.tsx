@@ -1,5 +1,5 @@
 "use client";
-import { authApi } from "@/api/auth";
+import { authApi } from "@/api-client/auth";
 import { PaginationDirectComponent } from "@/components/custom";
 import {
   capitalizeFirstLetter,
@@ -9,6 +9,7 @@ import {
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { OwnerMemberRow } from "./row";
 import { useClientTranslate } from "@/language/translate-client";
+import { apiCaller } from "@/api-client";
 
 interface IOwnerMember {
   _id: string;
@@ -51,8 +52,8 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
 
   const fetchMembers = useCallback(() => {
     setLoading(true);
-    authApi
-      .allMemberByOwner(params)
+    apiCaller.memberApi
+      .members(params)
       .then((res) => {
         const { data, count } = res.data;
         if (data.length !== 0) {

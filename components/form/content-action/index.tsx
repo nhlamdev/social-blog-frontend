@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
 import { ContentActionTagsBox } from "./tag-box";
 import { ContentCategoryBox } from "./categories-box";
-import { apiCaller } from "@/api";
+import { apiCaller } from "@/api-client";
 import { enqueueSnackbar } from "notistack";
 import { useClientTranslate } from "@/language/translate-client";
 import { capitalizeFirstLetter } from "@/utils/global-func";
@@ -50,7 +50,7 @@ export const FormContentAction = (props: FormContentActionProps) => {
     if (content) {
       try {
         await apiCaller.contentApi.update(content._id, payload);
-        // router.replace("/owner/content");
+        router.replace("/owner/content");
         router.refresh();
       } catch (error: any) {
         if (Array.isArray(error?.response?.data?.message)) {

@@ -1,8 +1,9 @@
 import { getDateTime } from "@/utils/global-func";
 import { MEMBER_ROLE } from "@/constant";
-import { authApi } from "@/api/auth";
+import { authApi } from "@/api-client/auth";
 import { ChangeEvent } from "react";
 import { enqueueSnackbar } from "notistack";
+import { apiCaller } from "@/api-client";
 
 interface IOwnerMember {
   _id: string;
@@ -26,8 +27,8 @@ export const OwnerMemberRow = (props: OwnerMemberRowProps) => {
   const change = (e: ChangeEvent<HTMLInputElement>) => {
     const { checked, name } = e.target;
 
-    authApi
-      .updateRole(item._id, name, checked)
+    apiCaller.memberApi
+      .changeRole(item._id, {})
       .then(() => reload())
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {

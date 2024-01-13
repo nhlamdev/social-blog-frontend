@@ -1,10 +1,8 @@
+import { CreateActionButton } from "@/components/custom";
 import { OwnerContentTableComponent } from "@/components/table";
 import { PageProps } from "@/interface";
 import { Metadata } from "next";
-import Link from "next/link";
-import { IoIosCreate } from "react-icons/io";
 import { OwnerContentsHead } from "./head";
-import { CreateActionButton } from "@/components/custom";
 
 const backend = process.env.SERVICE_PORT;
 

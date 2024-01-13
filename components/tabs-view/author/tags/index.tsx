@@ -1,4 +1,4 @@
-import { contentApi } from "@/api/content";
+import { contentApi } from "@/api-client/content";
 import { useEffect, useState } from "react";
 
 interface ITagsByAuthor {

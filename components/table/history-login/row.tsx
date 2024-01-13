@@ -1,4 +1,4 @@
-import { authApi } from "@/api/auth";
+import { authApi } from "@/api-client/auth";
 import { ISession } from "@/interface";
 import { formatNumber, getDateTime } from "@/utils/global-func";
 import { enqueueSnackbar } from "notistack";

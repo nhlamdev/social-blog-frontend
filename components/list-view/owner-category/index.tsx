@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ListViewItem } from "./item";
-import { categoryApi } from "@/api/category";
+import { categoryApi } from "@/api-client/category";
 import {
   EmptyDataComponent,
   PaginationDirectComponent,
@@ -22,21 +22,28 @@ export const OwnerCategoryListView = (props: OwnerCategoryListViewProps) => {
       ? Number(page) - 1
       : 0;
 
-  const params = useMemo(
-    () => ({
-      skip: (current * 5).toString(),
+  const params = useMemo(() => {
+    let values: { skip?: string; take: string; search?: string } = {
       take: "5",
-      search: search ? search : "",
-    }),
-    [current, search]
-  );
+    };
+
+    if (current !== 0) {
+      values["skip"] = (current * 5).toString();
+    }
+
+    if (Boolean(search) && typeof search === "string") {
+      values["search"] = search;
+    }
+
+    return values;
+  }, [current, search]);
 
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
 
   const fetchAction = useCallback(
-    async (params: { skip: string; take: string; search: any }) => {
+    async (params: { skip?: string; take: string; search?: string }) => {
       setLoading(true);
 
       try {

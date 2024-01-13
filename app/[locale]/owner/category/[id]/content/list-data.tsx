@@ -1,6 +1,6 @@
 "use client";
-import { categoryApi } from "@/api/category";
-import { contentApi } from "@/api/content";
+import { categoryApi } from "@/api-client/category";
+import { contentApi } from "@/api-client/content";
 import { PaginationDirectComponent } from "@/components/custom";
 import { useClientTranslate } from "@/language/translate-client";
 import {

@@ -63,10 +63,12 @@ axiosInstance.interceptors.response.use(
     const { statusCode, message } = err.response?.data as any;
 
     if (statusCode === 401) {
+      console.log(1);
       if (!refreshTokenName) {
         if (accessTokenName && Cookies.get(accessTokenName)) {
           Cookies.remove(accessTokenName);
         }
+        console.log(2);
         return Promise.reject();
       }
 
@@ -76,20 +78,24 @@ axiosInstance.interceptors.response.use(
         if (accessTokenName && Cookies.get(accessTokenName)) {
           Cookies.remove(accessTokenName);
         }
+        console.log(3);
         return Promise.reject();
       }
+      console.log(4);
       try {
+        console.log(5);
         await axios.get("/service/renew-token");
 
         return await axiosInstance(err.config);
       } catch (error) {
         Cookies.remove(refreshTokenName);
+        if (accessTokenName && Cookies.get(accessTokenName)) {
+          Cookies.remove(accessTokenName);
+        }
         return Promise.reject(err);
       }
     } else {
       return Promise.reject(err);
     }
-
-    // return Promise.reject(err);
   }
 );

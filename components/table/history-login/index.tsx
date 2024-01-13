@@ -1,5 +1,5 @@
 "use client";
-import { authApi } from "@/api/auth";
+import { authApi } from "@/api-client/auth";
 import { ISession } from "@/interface";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { SessionRow } from "./row";
@@ -12,6 +12,7 @@ import {
   getCountPage,
 } from "@/utils/global-func";
 import { useClientTranslate } from "@/language/translate-client";
+import { apiCaller } from "@/api-client";
 
 export const HistoryLoginTable = () => {
   const [session, setSession] = useState<ISession[]>([]);
@@ -37,8 +38,9 @@ export const HistoryLoginTable = () => {
 
   const fetchData = useCallback(() => {
     setLoading(true);
-    authApi
-      .session(params)
+
+    apiCaller.authApi
+      .sessions(params)
       .then((res) => {
         const { data, count } = res.data;
         setTotal(count);

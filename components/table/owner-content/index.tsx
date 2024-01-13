@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { OwnerContentRow } from "./row";
-import { contentApi } from "@/api/content";
+import { contentApi } from "@/api-client/content";
 import { PaginationDirectComponent } from "@/components/custom";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 import { useClientTranslate } from "@/language/translate-client";
@@ -39,7 +39,7 @@ export const OwnerContentTableComponent = (
   useEffect(() => {
     setLoading(true);
     contentApi
-      .allWithPrivate(params)
+      .privateWithCreateBy(params)
       .then((res) => {
         const { contents: data, count } = res.data;
         setContents(data);
