@@ -13,7 +13,7 @@ export const seriesApi = {
   async ContentInSeries(
     categoryId: string,
     payload: {
-      skip: string;
+      skip?: string;
       take: string;
       search?: string;
       outside: string;

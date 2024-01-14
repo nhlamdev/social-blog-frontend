@@ -16,7 +16,7 @@ export const categoryApi = {
   async ContentInCategory(
     categoryId: string,
     payload: {
-      skip: string;
+      skip?: string;
       take: string;
       search?: string;
       outside: string;

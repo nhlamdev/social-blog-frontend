@@ -56,3 +56,16 @@ export interface ISession {
 }
 
 export type TypeLocationLanguage = "vi" | "en";
+
+export interface IUploadResponse {
+  created_at: string;
+  delete_at: string | null;
+  fileName: string;
+  index: number;
+  mimeType: string;
+  originalName: string;
+  shape: { width: number; height: number } | null;
+  size: number;
+  updated_at: string;
+  _id: string;
+}

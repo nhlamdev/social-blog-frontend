@@ -30,7 +30,7 @@ export const OwnerListContentInCategory = (
 
   const [contents, setContents] = useState([]);
   const [count, setCount] = useState(0);
-  const [isOutSide, setIsOutSide] = useState<boolean>(true);
+  const [isOutSide, setIsOutSide] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const current = useMemo(
@@ -41,24 +41,36 @@ export const OwnerListContentInCategory = (
     [page]
   );
 
-  const params = useMemo(
-    () => ({
-      skip: (current * 5).toString(),
+  const params = useMemo(() => {
+    let values: {
+      skip?: string;
+      take: string;
+      search?: string;
+      outside: string;
+    } = {
       take: "5",
-      search: search ? search : "",
       outside: isOutSide.toString(),
-    }),
-    [current, isOutSide, search]
-  );
+    };
+
+    if (current !== 0) {
+      values["skip"] = (current * 5).toString();
+    }
+
+    if (Boolean(search) && typeof search === "string") {
+      values["search"] = search;
+    }
+
+    return values;
+  }, [current, isOutSide, search]);
 
   const fetchData = useCallback(() => {
     setLoading(true);
     categoryApi
       .ContentInCategory(categoryId, params)
       .then((res) => {
-        const { data, max } = res.data;
-        setContents(data);
-        setCount(max);
+        const { contents, count } = res.data;
+        setContents(contents);
+        setCount(count);
       })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {
@@ -120,6 +132,9 @@ export const OwnerListContentInCategory = (
               </div>
 
               <div
+                style={{
+                  display:isOutSide ? "inline" : "none",
+                }}
                 onClick={() => {
                   contentApi
                     .updateContentCategory(content._id, categoryId)
@@ -142,17 +157,11 @@ export const OwnerListContentInCategory = (
                     });
                 }}
               >
-                {isOutSide ? (
                   <AiFillFolderAdd
                     className="mr-3 text-3xl text-slate-900 dark:text-slate-200
                   cursor-pointer"
                   />
-                ) : (
-                  <IoIosRemoveCircle
-                    className="mr-3 text-3xl text-slate-900 dark:text-slate-200
-                  cursor-pointer"
-                  />
-                )}
+             
               </div>
             </div>
           );

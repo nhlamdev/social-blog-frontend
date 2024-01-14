@@ -1,59 +1,70 @@
 "use client";
-import Image from "next/image";
 import { useAuth } from "@/hook/auth.hook";
-import { useCallback, useRef, useState } from "react";
-import { FaRegImage } from "react-icons/fa";
-import { authApi } from "@/api-client/auth";
 import { enqueueSnackbar } from "notistack";
+import { useRef, useState } from "react";
+import { AvatarControl } from "./avatar";
 import { apiCaller } from "@/api-client";
+import { mutate } from "swr";
 
 export const ProfileActionComponent = () => {
-  const { error, firstLoading, logout, profile } = useAuth();
+  const { error, firstLoading, profile } = useAuth();
 
   const nameRef = useRef<HTMLInputElement | null>(null);
   const imageRef = useRef<HTMLInputElement | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const image = useCallback(() => {
-    if (
-      imageRef.current &&
-      imageRef.current.files &&
-      imageRef.current.files.length > 0
-    ) {
-      return URL.createObjectURL(imageRef.current?.files[0]);
-    } else {
-      return `/service/${profile.image}`;
-    }
-  }, [profile.image]);
-
   if (firstLoading) {
     return <div>loading</div>;
   }
 
+  const upload = async () => {
+    const image = imageRef.current?.files;
+
+    if (typeof image !== "string" && image && image[0]) {
+      const formData = new FormData();
+      formData.append("files", image[0], image[0].name);
+
+      const { data } = await apiCaller.fileApi.upload(formData);
+      return data;
+    }
+    console.log("no upload");
+  };
+
   const submit = async () => {
+    if (loading) {
+      return;
+    }
+
     if (!nameRef.current) {
       return;
     }
 
     const name = nameRef.current.value;
 
-    if (!Boolean(name)) {
-      return;
-    }
-
-    const formData = new FormData();
-
-    const image = imageRef.current?.files;
-
-    if (typeof image !== "string" && image && image[0]) {
-      formData.append("files", image[0], image[0].name);
-    }
-
-    formData.append("name", name);
-
     setLoading(true);
     try {
-      // await apiCaller.memberApi.update(formData);
+      const images = await upload();
+
+      let payload: {
+        name?: string;
+        image?: string;
+      } = {};
+
+      if (Boolean(name) && name === profile.name) {
+        payload.name = name;
+      }
+
+      if (images && images.length > 0) {
+        payload.image = images[0].fileName;
+      }
+
+      if (!payload.image && !payload.name) {
+        return;
+      }
+
+      await apiCaller.memberApi.update(payload);
+
+      mutate("member/profile");
     } catch {
       if (Array.isArray(error?.response?.data?.message)) {
         error?.response?.data?.message.forEach((item: any) => {
@@ -75,26 +86,7 @@ export const ProfileActionComponent = () => {
       className=" w-full sm:w-[300px] md:w-[350px] lg:w-[400px] h-fit flex flex-col gap-10 items-center justify-center px-10 py-6 
       rounded-lg shadow-lg bg-slate-400 bg-opacity-40"
     >
-      <div className="relative w-24 h-24 rounded-full shadow-lg">
-        <Image
-          src={image()}
-          fill
-          loading="lazy"
-          className="object-cover"
-          style={{ borderRadius: "50%", border: "2px solid black" }}
-          alt="profile image"
-        />
-
-        <div
-          className="absolute p-2 bg-slate-300 rounded-full shadow-md cursor-pointer"
-          style={{ bottom: 0, right: 0 }}
-          onClick={() => imageRef.current?.click()}
-        >
-          <FaRegImage className="text-md" />
-        </div>
-
-        <input type="file" hidden ref={imageRef} />
-      </div>
+      <AvatarControl profile={profile} imageRef={imageRef} />
 
       <div className="flex flex-col gap-4 select-none w-full">
         <input

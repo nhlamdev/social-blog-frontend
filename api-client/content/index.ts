@@ -40,11 +40,11 @@ export const contentApi = {
   },
   updateContentCategory(content: string, category: string) {
     return axiosInstance.patch(
-      `/content/change-category/${content}/${category}`
+      `/content/${content}/change-category/${category}`
     );
   },
   updateContentSeries(content: string, series: string) {
-    return axiosInstance.patch(`/content/change-series/${content}/${series}`);
+    return axiosInstance.patch(`/content/${content}/change-series/${series}`);
   },
   create(data: any) {
     return axiosInstance.post("/content", data);

@@ -55,9 +55,9 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
     apiCaller.memberApi
       .members(params)
       .then((res) => {
-        const { data, count } = res.data;
-        if (data.length !== 0) {
-          setMembers(data);
+        const { members, count } = res.data;
+        if (members.length !== 0) {
+          setMembers(members);
         }
 
         if (count !== 0) {
@@ -121,7 +121,7 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
               return (
                 <OwnerMemberRow
                   key={m._id}
-                  item={m}
+                  member={m}
                   reload={() => fetchMembers()}
                 />
               );

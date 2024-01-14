@@ -22,8 +22,8 @@ export const ListViewItem = (props: SeriesItemProps) => {
       <div className="flex flex-col gap-2 flex-1">
         <span className="text-slate-900 text-md">{item.title}</span>
 
-        {item.contents > 0 ? (
-          <span className="text-xs font-light">{item.contents} bài viết</span>
+        {item.contentCount > 0 ? (
+          <span className="text-xs font-light">{item.contentCount} bài viết</span>
         ) : (
           <span className="text-xs font-light">Chưa có bài viết</span>
         )}

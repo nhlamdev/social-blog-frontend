@@ -49,7 +49,7 @@ export const OwnerCategoryListView = (props: OwnerCategoryListViewProps) => {
       try {
         const {
           data: { categories: result, count },
-        } = await categoryApi.paginate(params);
+        } = await categoryApi.ownerPaginate(params);
 
         if (result && result.length !== 0) {
           setCategories(result);
