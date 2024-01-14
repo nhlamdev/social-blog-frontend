@@ -54,7 +54,7 @@ export const NavInfoBox = (props: NavInfoBoxProps) => {
 
       <div
         className="flex flex-col items-center w-fit justify-center absolute bg-slate-100 top-full 
-        right-1/2 left-0 rounded-md shadow-md"
+        right-1/2 left-0 rounded-md shadow-md z-20"
         style={{
           opacity: open ? 1 : 0,
           visibility: open ? "visible" : "hidden",

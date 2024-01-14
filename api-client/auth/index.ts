@@ -3,7 +3,7 @@ import { generateURLWithQueryParams } from "@/utils/global-func";
 
 export const authApi = {
   sessions(params: { [key: string]: string }) {
-    const url = generateURLWithQueryParams("sessions/by-member", params);
+    const url = generateURLWithQueryParams("session/by-member", params);
     return axiosInstance.get(url);
   },
   logout() {

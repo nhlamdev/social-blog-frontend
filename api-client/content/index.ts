@@ -30,7 +30,7 @@ export const contentApi = {
     return axiosInstance.patch(`content/${content}/vote-down`);
   },
   bookmark(content: string) {
-    return axiosInstance.patch(`content/${content}/vote-down`);
+    return axiosInstance.patch(`content/${content}/bookmark`);
   },
   watch(content: string) {
     return axiosInstance.patch(`content/${content}/watch`);

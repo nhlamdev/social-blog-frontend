@@ -3,8 +3,8 @@ import { getDateTime } from "@/utils/global-func";
 import Image from "next/image";
 import Link from "next/link";
 import { BiCommentDetail } from "react-icons/bi";
-import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 import { LuView } from "react-icons/lu";
+import { OwnerEditAction } from "./owner-edit";
 interface ClientHomeListContentItemProps {
   content: any;
 }
@@ -24,7 +24,7 @@ export const ClientHomeListContentItem = (
       {/* --------------- */}
       <div
         className="flex flex-col justify-between py-2 md:py-4 px-4 gap-2  w-full
-      shadow-md rounded-md bg-slate-100 bg-opacity-40"
+      shadow-md rounded-md bg-slate-100 bg-opacity-40 relative"
       >
         <Link
           href={`/content/${content._id}`}
@@ -128,6 +128,8 @@ export const ClientHomeListContentItem = (
             </span>
           </div>
         </div>
+
+        <OwnerEditAction content={content} />
       </div>
 
       {/* --------------- */}
