@@ -37,10 +37,10 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
   const fetchComments = useCallback(async () => {
     try {
       const {
-        data: { data, max },
+        data: { comments, count },
       } = await apiCaller.commentApi.comments(contentId, params);
-      setComments(data);
-      setTotal(max);
+      setComments(comments);
+      setTotal(count);
     } catch (error: any) {
       if (Array.isArray(error?.response?.data?.message)) {
         error?.response?.data?.message.forEach((item: any) => {

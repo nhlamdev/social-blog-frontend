@@ -18,17 +18,20 @@ export default async function ClientSeriesPage(props: PageProps) {
       ? Number(page) - 1
       : 0;
 
-  const { data: series } = await axios.get(
-    `http://localhost:${backend}/series`,
-    {
-      params: { ...searchParams, skip: (current * 6).toString(), take: "6" },
-    }
-  );
+  const {
+    data: { series, count },
+  } = await axios.get(`http://localhost:${backend}/series`, {
+    params: { ...searchParams, skip: (current * 6).toString(), take: "6" },
+  });
 
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
       <ClientSeriesSearchBox searchParams={searchParams} />
-      <ClientListSeries series={series} searchParams={searchParams} />
+      <ClientListSeries
+        series={series}
+        count={count}
+        searchParams={searchParams}
+      />
     </div>
   );
 }

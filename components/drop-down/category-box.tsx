@@ -2,6 +2,7 @@
 import { apiCaller } from "@/api-client";
 import { useClientTranslate } from "@/language/translate-client";
 import { useEffect, useState } from "react";
+import { IoIosCloseCircle } from "react-icons/io";
 
 interface DropdownCategoryBoxProps {
   value: string | null;
@@ -12,13 +13,14 @@ export const DropdownCategoryBox = (props: DropdownCategoryBoxProps) => {
   const { change, value } = props;
 
   const [open, setOpen] = useState(false);
-  const [categories, setCategories] = useState<any>([]);
+  const [categories, setCategories] = useState<any[]>([]);
 
   const translate = useClientTranslate();
 
   useEffect(() => {
     apiCaller.categoryApi.categories().then((res) => {
-      setCategories(res.data.data);
+      const { data } = res;
+      setCategories(data);
     });
   }, []);
 
@@ -33,13 +35,21 @@ export const DropdownCategoryBox = (props: DropdownCategoryBoxProps) => {
   };
 
   return (
-    <div className="flex flex-col items-center relative">
+    <div className="flex flex-row items-center relative">
       <div className="w-full cursor-pointer" onClick={() => setOpen(!open)}>
-        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+        <div
+          className="my-2 p-1 bg-white flex border border-gray-200 rounded 
+         flex-row items-center gap-2"
+        >
           <div className="flex flex-auto flex-wrap"></div>
           <span className="p-1 px-2 appearance-none outline-none w-full text-gray-800 text-sm">
             {generateTitle()}
           </span>
+          <IoIosCloseCircle
+            className="text-3xl"
+            style={{ display: Boolean(value) ? "block" : "none" }}
+            onClick={() => change("")}
+          />
           <div className="text-gray-800 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -58,6 +68,7 @@ export const DropdownCategoryBox = (props: DropdownCategoryBoxProps) => {
           </div>
         </div>
       </div>
+
       {/* ----------------- */}
 
       {open ? (

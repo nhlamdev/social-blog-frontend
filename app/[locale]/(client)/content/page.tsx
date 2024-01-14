@@ -37,12 +37,11 @@ export default async function ContentPage(props: PageProps) {
     }
   }
 
-  const { data: contents } = await axios.get(
-    `http://localhost:${backend}/content`,
-    {
-      params: { ...searchParams, skip: (current * 6).toString(), take: "6" },
-    }
-  );
+  const {
+    data: { contents, count },
+  } = await axios.get(`http://localhost:${backend}/content/public`, {
+    params: { ...searchParams, skip: (current * 6).toString(), take: "6" },
+  });
 
   return (
     <div
@@ -91,7 +90,11 @@ export default async function ContentPage(props: PageProps) {
         <></>
       )}
 
-      <ClientContentListView contents={contents} searchParams={searchParams} />
+      <ClientContentListView
+        contents={contents}
+        count={count}
+        searchParams={searchParams}
+      />
     </div>
   );
 }

@@ -16,8 +16,8 @@ export default async function AuthorContentPage(props: PageProps) {
       : 0;
 
   const {
-    data: [members, count],
-  } = await axios.get(`http://localhost:${backend}/content/all-author`, {
+    data: { members, count },
+  } = await axios.get(`http://localhost:${backend}/member/author`, {
     params: { ...searchParams, skip: (current * 5).toString(), take: "5" },
   });
 

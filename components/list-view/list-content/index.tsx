@@ -3,12 +3,13 @@ import { ClientHomeListContentItem } from "./item";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 
 interface ClientContentListViewProps {
-  contents: any;
+  contents: any[];
+  count: number;
   searchParams: { [key: string]: string | undefined };
 }
 
 export const ClientContentListView = (props: ClientContentListViewProps) => {
-  const { contents, searchParams } = props;
+  const { contents, searchParams, count } = props;
 
   const { page } = searchParams;
   const current =
@@ -25,17 +26,17 @@ export const ClientContentListView = (props: ClientContentListViewProps) => {
         className="w-full h-full flex flex-col gap-2 items-center"
         style={{ width: "100%", gap: "10px", flex: 1 }}
       >
-        {contents.data.map((content: any) => {
+        {contents?.map((content: any) => {
           return (
             <ClientHomeListContentItem key={content._id} content={content} />
           );
         })}
       </div>
 
-      {contents && contents.max !== 0 ? (
+      {count && count !== 0 ? (
         <PaginationDirectComponent
           current={current + 1}
-          total={getCountPage(contents.max, 6)}
+          total={getCountPage(count, 6)}
           urlDirect={(p: number) => {
             const clone = { ...searchParams, page: p.toString() };
 

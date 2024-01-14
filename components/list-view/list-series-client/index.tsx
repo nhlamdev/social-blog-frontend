@@ -3,11 +3,12 @@ import { SeriesItem } from "./item";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 
 interface ClientListSeriesProps {
-  series: any;
+  series: any[];
+  count: number;
   searchParams: { [key: string]: string | undefined };
 }
 export const ClientListSeries = (props: ClientListSeriesProps) => {
-  const { series, searchParams } = props;
+  const { series, searchParams, count } = props;
 
   const { page } = searchParams;
   const current =
@@ -18,17 +19,17 @@ export const ClientListSeries = (props: ClientListSeriesProps) => {
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
       <div className="w-full flex flex-col p-2 items-center gap-2 flex-1">
-        {series.data.map((series: any, key: any) => {
+        {series.map((series: any, key: any) => {
           return (
             <SeriesItem key={`series-${series._id}-${key}`} item={series} />
           );
         })}
       </div>
 
-      {series && series.max !== 0 ? (
+      {count && count !== 0 ? (
         <PaginationDirectComponent
           current={current + 1}
-          total={getCountPage(series.max, 6)}
+          total={getCountPage(count, 6)}
           urlDirect={(page: number) => {
             const clone = { ...searchParams, page: page.toString() };
 

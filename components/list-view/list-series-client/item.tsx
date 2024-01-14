@@ -24,7 +24,7 @@ export const SeriesItem = (props: SeriesItemProps) => {
         <div className="flex flex-row items-center gap-2">
           <MdOutlineContentCopy className="text-sm text-slate-900 dark:text-slate-200" />
           <span className="text-[10px] text-slate-900 dark:text-slate-200">
-            {item.contents}{" "}
+            {item.count_contents}{" "}
           </span>
         </div>
 
