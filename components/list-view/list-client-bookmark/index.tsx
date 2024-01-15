@@ -1,9 +1,10 @@
 "use client";
 import { contentApi } from "@/api-client/content";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ClientBookMarkListViewItem } from "./item";
 import { PaginationDirectComponent } from "@/components/custom";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
+import { useAuth } from "@/hook";
 
 interface IClientBookMarkListView {
   searchParams: { [key: string]: any };
@@ -31,37 +32,33 @@ export const ClientBookMarkListView = (props: IClientBookMarkListView) => {
     [current, search]
   );
 
-  useEffect(() => {
+  const fetcher = useCallback(async () => {
     setLoading(true);
-    contentApi
-      .public(params)
-      .then((res) => {
-        const {
-          data: { data, count },
-        } = res;
+    try {
+      const {
+        data: { contents: payload, count },
+      } = await contentApi.myBookmark(params);
 
-        setContents(data);
-        setTotal(count);
-      })
-      .catch((error) => {
-        if (!error) {
-          return;
-        }
-
-        if (Array.isArray(error?.response?.data?.message)) {
-          error?.response?.data?.message.forEach((item: any) => {
-            console.log(item);
-          });
-        } else {
-          console.log(
-            error?.response ? error.response.data?.message : error.message
-          );
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      setContents(payload);
+      setTotal(count);
+    } catch (error: any) {
+      if (Array.isArray(error?.response?.data?.message)) {
+        error?.response?.data?.message.forEach((item: any) => {
+          console.log(item);
+        });
+      } else {
+        console.log(
+          error?.response ? error.response.data?.message : error.message
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
   }, [params]);
+
+  useEffect(() => {
+    fetcher();
+  }, [fetcher]);
 
   if (loading) {
     return <span>loading</span>;

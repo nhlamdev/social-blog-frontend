@@ -120,15 +120,18 @@ export const PopularItemsComponent = async () => {
                 <span className="text-md text-slate-900 dark:text-slate-100">
                   {category.title}
                 </span>
-                {!category.contentCount || category.contentCount !== 0 ?
-                <div className="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full bg-cyan-400">
-                  <span
-                    className="text-xs font-normal leading-none max-w-full flex-initial
+                {!category.contentCount || category.contentCount !== 0 ? (
+                  <div className="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full bg-cyan-400">
+                    <span
+                      className="text-xs font-normal leading-none max-w-full flex-initial
                   text-slate-900 "
-                  >
-                    {category.contentCount}
-                  </span>
-                </div> : <></>}
+                    >
+                      {category.contentCount}
+                    </span>
+                  </div>
+                ) : (
+                  <></>
+                )}
               </Link>
             );
           })}
