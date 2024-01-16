@@ -3,6 +3,7 @@ import { apiCaller } from "@/api-client";
 import { useAuth } from "@/hook/auth.hook";
 import { INotify } from "@/interface";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useState } from "react";
 import { BsBellFill } from "react-icons/bs";
@@ -10,6 +11,8 @@ import { IoCloseCircle } from "react-icons/io5";
 
 export const NotifyBellComponent = () => {
   const { firstLoading, profile } = useAuth();
+
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [notifies, setNotifies] = useState<INotify[]>([]);
@@ -128,10 +131,16 @@ export const NotifyBellComponent = () => {
                   <div
                     key={v._id}
                     className="flex flex-row gap-2 cursor-pointer  p-1 items-center
-                bg-opacity-60 hover:bg-slate-200 dark:bg-opacity-20 rounded-sm"
+                    bg-opacity-60 hover:bg-slate-200 dark:bg-opacity-20 rounded-sm"
                     style={{
                       scrollSnapAlign: "start",
                       transition: "all ease .3s",
+                    }}
+                    onClick={() => {
+                      if (v.url) {
+                        console.log(v);
+                        router.push(v.url);
+                      }
                     }}
                   >
                     <div className="relative w-14 h-14">

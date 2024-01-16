@@ -13,7 +13,7 @@ import { useClientTranslate } from "@/language/translate-client";
 import { apiCaller } from "@/api-client";
 
 export const ContactTableComponent = () => {
-  const [session, setSession] = useState<any[]>([]);
+  const [contacts, setContacts] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -28,22 +28,26 @@ export const ContactTableComponent = () => {
       ? Number(page) - 1
       : 0;
 
-  const params = useMemo(
-    () => ({
-      skip: (current * 5).toString(),
+  const params = useMemo(() => {
+    let values: { skip?: string; take: string; search?: string } = {
       take: "5",
-    }),
-    [current]
-  );
+    };
+
+    if (current !== 0) {
+      values["skip"] = (current * 5).toString();
+    }
+
+    return values;
+  }, [current]);
 
   const fetchData = useCallback(() => {
     setLoading(true);
     apiCaller.contactApi
       .contacts(params)
       .then((res) => {
-        const { data, count } = res.data;
+        const { contacts: payload, count } = res.data;
         setTotal(count);
-        setSession(data);
+        setContacts(payload);
       })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {
@@ -99,7 +103,7 @@ export const ContactTableComponent = () => {
             </tr>
           </thead>
           <tbody className="text-slate-800 dark:text-slate-200 text-sm font-light">
-            {session.map((s) => {
+            {contacts.map((s) => {
               return (
                 <ContactRow key={s._id} row={s} reload={() => fetchData()} />
               );

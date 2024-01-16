@@ -55,7 +55,6 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
                       <></>
                     )}
                   </div>
-
                   <span className="text-xs dark:text-slate-100">
                     {comment.created_by ? comment.created_by.email : "Tác giả"}
                   </span>

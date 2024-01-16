@@ -38,11 +38,11 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
 
   const fetchReplies = useCallback(async () => {
     const {
-      data: { data, max },
+      data: { comments, count },
     } = await apiCaller.commentApi.replies(comment._id, params);
 
-    setReplies(data);
-    setTotal(max);
+    setReplies(comments);
+    setTotal(count);
   }, [comment._id, params]);
 
   const createReply = useCallback(async () => {
@@ -74,9 +74,9 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
 
   useEffect(() => {
     apiCaller.commentApi.replies(comment._id, params).then((res) => {
-      const { data, max } = res.data;
-      setReplies(data);
-      setTotal(max);
+      const { comments, count } = res.data;
+      setReplies(comments);
+      setTotal(count);
     });
   }, [comment._id, params]);
 

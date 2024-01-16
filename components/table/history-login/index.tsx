@@ -42,9 +42,9 @@ export const HistoryLoginTable = () => {
     apiCaller.authApi
       .sessions(params)
       .then((res) => {
-        const { data, count } = res.data;
+        const { sessions: payload, count } = res.data;
         setTotal(count);
-        setSession(data);
+        setSession(payload);
       })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {

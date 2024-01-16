@@ -66,11 +66,13 @@ export const ClientBookMarkListView = (props: IClientBookMarkListView) => {
 
   return (
     <div className="flex flex-col w-full gap-2 flex-1">
-      {contents.map((content) => {
-        return (
-          <ClientBookMarkListViewItem key={content._id} content={content} />
-        );
-      })}
+      <div className="flex flex-col gap-2 flex-1">
+        {contents.map((content) => {
+          return (
+            <ClientBookMarkListViewItem key={content._id} content={content} />
+          );
+        })}
+      </div>
 
       {total !== 0 ? (
         <PaginationDirectComponent

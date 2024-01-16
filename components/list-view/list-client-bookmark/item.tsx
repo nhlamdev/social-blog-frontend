@@ -27,7 +27,6 @@ export const ClientBookMarkListViewItem = (
   props: IClientBookMarkListViewItem
 ) => {
   const { content } = props;
-
   return (
     <div
       className="w-full sm:w-5/6 lg:w-3/5 flex flex-row gap-2 bg-slate-100 bg-opacity-40
