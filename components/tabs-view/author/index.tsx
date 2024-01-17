@@ -1,16 +1,16 @@
 "use client";
 
+import { useClientTranslate } from "@/language/translate-client";
 import { useState } from "react";
 import { AiFillTags } from "react-icons/ai";
 import { BiSolidBookContent } from "react-icons/bi";
-import { IconType } from "react-icons/lib/cjs/iconBase";
+import { IconType } from "react-icons/lib";
 import { SiSteelseries } from "react-icons/si";
 import { TbCirclesRelation } from "react-icons/tb";
 import { ContentsByAuthor } from "./content";
-import { SeriesByAuthor } from "./series";
 import { FollowedByAuthor } from "./followed";
+import { SeriesByAuthor } from "./series";
 import { TagsByAuthor } from "./tags";
-import { useClientTranslate } from "@/language/translate-client";
 
 type CaseViewType = "CONTENT" | "SERIES" | "TAGS" | "FOLLOWED";
 
