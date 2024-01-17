@@ -2,27 +2,27 @@ import { contentApi } from "@/api-client/content";
 import { useEffect, useState } from "react";
 
 interface ITagsByAuthor {
-  member: any;
+  author: any;
 }
 
 export const TagsByAuthor = (props: ITagsByAuthor) => {
-  const { member } = props;
+  const { author } = props;
 
-  const [tags, setTags] = useState<{ [key: string]: number }>({});
+  const [tags, setTags] = useState<{ tag: string; count: number }[]>([]);
 
   useEffect(() => {
-    contentApi.allUniqueTags(member._id).then((res) => {
+    contentApi.allUniqueTags({ author: author._id }).then((res) => {
       const { data } = res;
       setTags(data);
     });
-  }, [member._id]);
+  }, [author._id]);
 
   return (
     <div className="flex flex-row gap-2 flex-wrap">
-      {Object.keys(tags).map((tag) => {
+      {tags.map((item) => {
         return (
           <div
-            key={tag}
+            key={item.tag}
             className="flex flex-row gap-2 px-4 py-2 rounded-md shadow-md items-center
             bg-slate-400 bg-opacity-40"
           >
@@ -30,14 +30,14 @@ export const TagsByAuthor = (props: ITagsByAuthor) => {
               className="text-xs select-none 
             dark:text-slate-200 text-slate-900"
             >
-              {tag}
+              {item.tag}
             </span>
 
             <span
               className="text-xs p-1 bg-slate-100 bg-opacity-40 w-6 h-6 items-center justify-center
             rounded-full select-none flex font-bold dark:text-slate-200"
             >
-              {tags[tag]}
+              {item.tag}
             </span>
           </div>
         );

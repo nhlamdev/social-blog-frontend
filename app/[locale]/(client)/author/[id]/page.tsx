@@ -14,12 +14,12 @@ export default async function ContentInAuthorPage(props: PageProps) {
   const { id } = params;
   const translate = serverTranslate();
 
-  const { data: member } = await axios.get(
-    `http://localhost:${backend}/author/${id}`
+  const { data: author } = await axios.get(
+    `http://localhost:${backend}/member/by-id/${id}`
   );
 
-  const { data: membersFollow } = await axios.get(
-    `http://localhost:${backend}/member-follow/${member._id}`
+  const { data: followers } = await axios.get(
+    `http://localhost:${backend}/member/followers/${id}`
   );
 
   return (
@@ -30,7 +30,7 @@ export default async function ContentInAuthorPage(props: PageProps) {
       <div className="flex flex-row w-full gap-4 items-center">
         <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 relative">
           <Image
-            src={`/service/${member.image}`}
+            src={`/service/${author.image}`}
             className="rounded-full shadow-lg "
             fill
             style={{ objectFit: "cover", border: "4px solid white" }}
@@ -43,27 +43,27 @@ export default async function ContentInAuthorPage(props: PageProps) {
             className="text-sm sm:text-md md:text-lg font-semibold 
           text-gray-900 dark:text-gray-200"
           >
-            {capitalizeFirstLetter(translate["AUTHOR"])} : {member.name}
+            {capitalizeFirstLetter(translate["AUTHOR"])} : {author.name}
           </span>
           <span
             className="text-xs sm:text-sm md:text-md font-light 
           text-gray-900 dark:text-gray-200"
           >
-            {capitalizeFirstLetter(translate["EMAIL_ADDRESS"])} : {member.email}
+            {capitalizeFirstLetter(translate["EMAIL_ADDRESS"])} : {author.email}
           </span>
           <span
             className="text-xs md:text-md font-light 
           text-gray-900 dark:text-gray-200"
           >
             {capitalizeFirstLetter(translate["JOIN_AT"])} :{" "}
-            {getDateTime(member.created_at)}
+            {getDateTime(author.created_at)}
           </span>
 
-          <FollowButton member={member} />
+          <FollowButton author={author} />
         </div>
       </div>
 
-      <AuthorTabsView member={{ ...member, follower: membersFollow }} />
+      <AuthorTabsView author={author} followers={followers} />
     </div>
   );
 }

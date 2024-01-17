@@ -6,11 +6,11 @@ import { BaseLoading, PaginationChangeComponent } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
 
 interface IContentsByAuthor {
-  member: any;
+  author: any;
 }
 
 export const ContentsByAuthor = (props: IContentsByAuthor) => {
-  const { member } = props;
+  const { author } = props;
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([]);
@@ -19,11 +19,11 @@ export const ContentsByAuthor = (props: IContentsByAuthor) => {
 
   const params = useMemo(
     () => ({
-      author: member._id,
+      author: author._id,
       skip: ((page - 1) * 5).toString(),
       take: "5",
     }),
-    [member._id, page]
+    [author._id, page]
   );
 
   useEffect(() => {
@@ -32,11 +32,11 @@ export const ContentsByAuthor = (props: IContentsByAuthor) => {
       .public(params)
       .then((res) => {
         const {
-          data: { data, max },
+          data: { contents: payload, count },
         } = res;
 
-        setData(data);
-        setTotal(max);
+        setData(payload);
+        setTotal(count);
       })
       .catch((error) => {})
       .finally(() => {

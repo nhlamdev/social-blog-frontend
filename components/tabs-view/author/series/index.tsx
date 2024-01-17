@@ -6,11 +6,11 @@ import { useEffect, useMemo, useState } from "react";
 import { SeriesByAuthorRow } from "./row";
 
 interface ISeriesByAuthor {
-  member: any;
+  author: any;
 }
 
 export const SeriesByAuthor = (props: ISeriesByAuthor) => {
-  const { member } = props;
+  const { author } = props;
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([]);
@@ -19,11 +19,11 @@ export const SeriesByAuthor = (props: ISeriesByAuthor) => {
 
   const params = useMemo(
     () => ({
-      author: member._id,
+      author: author._id,
       skip: ((page - 1) * 5).toString(),
       take: "5",
     }),
-    [member._id, page]
+    [author._id, page]
   );
 
   useEffect(() => {
@@ -32,11 +32,11 @@ export const SeriesByAuthor = (props: ISeriesByAuthor) => {
       .paginate(params)
       .then((res) => {
         const {
-          data: { data, max },
+          data: { series: payload, count },
         } = res;
 
-        setData(data);
-        setTotal(max);
+        setData(payload);
+        setTotal(count);
       })
       .catch((err) => {})
       .finally(() => {

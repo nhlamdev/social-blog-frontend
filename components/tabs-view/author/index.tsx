@@ -28,11 +28,12 @@ const tabList: ITabListItem[] = [
 ];
 
 interface IAuthorTabsView {
-  member: any;
+  author: any;
+  followers: any[];
 }
 
 export const AuthorTabsView = (props: IAuthorTabsView) => {
-  const { member } = props;
+  const { author, followers } = props;
 
   const translate = useClientTranslate();
   const [caseView, setCaseView] = useState<CaseViewType>("CONTENT");
@@ -94,14 +95,14 @@ export const AuthorTabsView = (props: IAuthorTabsView) => {
 
       {/* ------------------ */}
 
-      {caseView === "CONTENT" ? <ContentsByAuthor member={member} /> : <></>}
+      {caseView === "CONTENT" ? <ContentsByAuthor author={author} /> : <></>}
       {caseView === "FOLLOWED" ? (
-        <FollowedByAuthor members={member.follower} />
+        <FollowedByAuthor followers={followers} />
       ) : (
         <></>
       )}
-      {caseView === "SERIES" ? <SeriesByAuthor member={member} /> : <></>}
-      {caseView === "TAGS" ? <TagsByAuthor member={member} /> : <></>}
+      {caseView === "SERIES" ? <SeriesByAuthor author={author} /> : <></>}
+      {caseView === "TAGS" ? <TagsByAuthor author={author} /> : <></>}
     </div>
   );
 };

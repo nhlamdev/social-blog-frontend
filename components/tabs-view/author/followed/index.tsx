@@ -4,18 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface IFollowedByAuthor {
-  members: any[];
+  followers: any[];
 }
 
 export const FollowedByAuthor = async (props: IFollowedByAuthor) => {
-  const { members } = props;
+  const { followers } = props;
 
   const translate = useClientTranslate();
 
   return (
     <div className="min-h-full flex flex-col gap-2  flex-1">
       <div className="flex flex-col w-full md:w-3/5 gap-2 flex-1 mx-auto">
-        {members.map((member: any) => {
+        {followers.map((member: any) => {
           return (
             <Link
               href={`/author/${member._id}`}

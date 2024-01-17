@@ -10,11 +10,11 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { useClientTranslate } from "@/language/translate-client";
 import { apiCaller } from "@/api-client";
 interface IFollowButton {
-  member: any;
+  author: any;
 }
 
 export const FollowButton = (props: IFollowButton) => {
-  const { member } = props;
+  const { author } = props;
 
   const { firstLoading, profile } = useAuth();
 
@@ -26,7 +26,7 @@ export const FollowButton = (props: IFollowButton) => {
     return <></>;
   }
 
-  if (member._id === profile._id) {
+  if (author._id === profile._id) {
     return (
       <div
         className="flex flex-row items-center gap-2 cursor-pointer bg-slate-400
@@ -36,9 +36,9 @@ export const FollowButton = (props: IFollowButton) => {
         <span className="select-none text-slate-900 dark:text-slate-200">
           {translate["FOLLOWERS"]}
         </span>
-        {member.follow_by.length > 0 ? (
+        {author.follow_by.length > 0 ? (
           <span className="select-none text-slate-900 dark:text-slate-200">
-            {member.follow_by.length}
+            {author.follow_by.length}
           </span>
         ) : (
           <></>
@@ -52,7 +52,7 @@ export const FollowButton = (props: IFollowButton) => {
       setLoading(true);
 
       apiCaller.memberApi
-        .follow(member._id)
+        .follow(author._id)
         .then(() => {
           router.refresh();
         })
@@ -80,20 +80,20 @@ export const FollowButton = (props: IFollowButton) => {
     rounded-md hover:shadow-sm px-4 py-2 w-fit bg-opacity-40"
       onClick={() => submit()}
     >
-      {member.follow_by.includes(profile._id) ? (
+      {author.follow_by.includes(profile._id) ? (
         <FaMinusCircle />
       ) : (
         <FaCirclePlus />
       )}
 
       <span className="select-none text-slate-900 dark:text-slate-200">
-        {member.follow_by.includes(profile._id)
+        {author.follow_by.includes(profile._id)
           ? translate["FOLLOWED"]
           : translate["FOLLOW"]}
       </span>
-      {member.follow_by.length > 0 ? (
+      {author.follow_by.length > 0 ? (
         <span className="select-none text-slate-900 dark:text-slate-200">
-          {member.follow_by.length}
+          {author.follow_by.length}
         </span>
       ) : (
         <></>
