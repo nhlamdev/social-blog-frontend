@@ -89,7 +89,7 @@ export const PopularItemsComponent = async () => {
                 )}
 
                 <span className="text-xs text-slate-900 dark:text-slate-100">
-                  {capitalizeFirstLetter(translate["JOIN_AT"])} :{" "}
+                  {capitalizeFirstLetter(translate["CREATED_AT"])} :{" "}
                   {getDateTime(content.created_at)}
                 </span>
               </div>
