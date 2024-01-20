@@ -5,6 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import { FollowButton } from "./follow-btn";
 import { serverTranslate } from "@/language/translate-server";
+import { Suspense } from "react";
 
 const backend = process.env.SERVICE_PORT;
 
@@ -63,11 +64,13 @@ export default async function ContentInAuthorPage(props: PageProps) {
         </div>
       </div>
 
-      <AuthorTabsView
-        author={author}
-        followers={followers}
-        searchParams={searchParams}
-      />
+      <Suspense fallback={<div>loading</div>}>
+        <AuthorTabsView
+          author={author}
+          followers={followers}
+          searchParams={searchParams}
+        />
+      </Suspense>
     </div>
   );
 }

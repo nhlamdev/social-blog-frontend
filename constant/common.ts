@@ -17,4 +17,13 @@ export const WorkCycleMocks: IWorkMakeItem[] = [
   { key: "RELAX", display: "Thư giãn", url: "/static/svg/relax.svg" },
 ];
 
+export type CaseViewType = "CONTENT" | "SERIES" | "TAGS" | "FOLLOWED";
+
+export const CaseAuthorType: CaseViewType[] = [
+  "CONTENT",
+  "SERIES",
+  "TAGS",
+  "FOLLOWED",
+];
+
 export const LANGUAGE = ["vi", "en"];

@@ -1,21 +1,13 @@
 import { contentApi } from "@/api-client/content";
-import { useEffect, useState } from "react";
-
 interface ITagsByAuthor {
   author: any;
 }
 
-export const TagsByAuthor = (props: ITagsByAuthor) => {
+export const TagsByAuthor = async (props: ITagsByAuthor) => {
   const { author } = props;
 
-  const [tags, setTags] = useState<{ tag: string; count: number }[]>([]);
-
-  useEffect(() => {
-    contentApi.allUniqueTags({ author: author._id }).then((res) => {
-      const { data } = res;
-      setTags(data);
-    });
-  }, [author._id]);
+  const { data: tags }: { data: { tag: string; count: number }[] } =
+    await contentApi.allUniqueTags({ author: author._id });
 
   return (
     <div className="flex flex-row gap-2 flex-wrap">
