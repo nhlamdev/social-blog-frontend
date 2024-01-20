@@ -1,5 +1,4 @@
 "use client";
-
 import { useClientTranslate } from "@/language/translate-client";
 import { useState } from "react";
 import { AiFillTags } from "react-icons/ai";
@@ -30,10 +29,11 @@ const tabList: ITabListItem[] = [
 interface IAuthorTabsView {
   author: any;
   followers: any[];
+  searchParams: { [key: string]: string | undefined };
 }
 
 export const AuthorTabsView = (props: IAuthorTabsView) => {
-  const { author, followers } = props;
+  const { author, followers, searchParams } = props;
 
   const translate = useClientTranslate();
   const [caseView, setCaseView] = useState<CaseViewType>("CONTENT");
@@ -95,13 +95,21 @@ export const AuthorTabsView = (props: IAuthorTabsView) => {
 
       {/* ------------------ */}
 
-      {caseView === "CONTENT" ? <ContentsByAuthor author={author} /> : <></>}
+      {caseView === "CONTENT" ? (
+        <ContentsByAuthor author={author} searchParams={searchParams} />
+      ) : (
+        <></>
+      )}
       {caseView === "FOLLOWED" ? (
         <FollowedByAuthor followers={followers} />
       ) : (
         <></>
       )}
-      {caseView === "SERIES" ? <SeriesByAuthor author={author} /> : <></>}
+      {caseView === "SERIES" ? (
+        <SeriesByAuthor author={author} searchParams={searchParams} />
+      ) : (
+        <></>
+      )}
       {caseView === "TAGS" ? <TagsByAuthor author={author} /> : <></>}
     </div>
   );

@@ -36,7 +36,7 @@ export const vi: { [key: string]: string } = {
   MY_SAVED: "đã lưu",
   LOGOUT: "đăng xuất",
   REPLY: "trả lời",
-  REPLIES: "lượt",
+  REPLIES: "lượt trả lời",
   COLLAPSE: "thu gọn",
   DASHBOARD: "bảng điều khiển",
   MEMBERS: "thành viên",

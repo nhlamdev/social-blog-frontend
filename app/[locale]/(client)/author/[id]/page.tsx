@@ -9,7 +9,7 @@ import { serverTranslate } from "@/language/translate-server";
 const backend = process.env.SERVICE_PORT;
 
 export default async function ContentInAuthorPage(props: PageProps) {
-  const { params } = props;
+  const { params, searchParams } = props;
 
   const { id } = params;
   const translate = serverTranslate();
@@ -63,7 +63,11 @@ export default async function ContentInAuthorPage(props: PageProps) {
         </div>
       </div>
 
-      <AuthorTabsView author={author} followers={followers} />
+      <AuthorTabsView
+        author={author}
+        followers={followers}
+        searchParams={searchParams}
+      />
     </div>
   );
 }

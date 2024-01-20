@@ -1,5 +1,4 @@
 "use client";
-import { PaginationDirectComponent } from "@/components/custom";
 import {
   capitalizeFirstLetter,
   generateURLWithQueryParams,
@@ -11,17 +10,22 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ContactRow } from "./row";
 import { useClientTranslate } from "@/language/translate-client";
 import { apiCaller } from "@/api-client";
+import { PaginationComponent } from "@/components/custom";
 
-export const ContactTableComponent = () => {
+interface IContactTableComponent {
+  searchParams: { [key: string]: string | undefined };
+}
+
+export const ContactTableComponent = (props: IContactTableComponent) => {
+  const { searchParams } = props;
+
   const [contacts, setContacts] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
 
   const translate = useClientTranslate();
 
-  const searchParams = useSearchParams();
-
-  const page = searchParams.get("page");
+  const { page } = searchParams;
 
   const current =
     page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))
@@ -112,21 +116,12 @@ export const ContactTableComponent = () => {
         </table>
       </div>
 
-      {total !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(total, 8)}
-          urlDirect={(p) => {
-            const newSearchParams = {
-              page: p.toString(),
-            };
-            const url = generateURLWithQueryParams(
-              "/owner/session",
-              newSearchParams
-            );
-
-            return url;
-          }}
+      {getCountPage(total, 8) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(total, 8)}
+          queryName="page"
         />
       ) : (
         <></>

@@ -1,11 +1,10 @@
 "use client";
 import { apiCaller } from "@/api-client";
 import { contentApi } from "@/api-client/content";
-import { PaginationDirectComponent } from "@/components/custom";
+import { PaginationComponent } from "@/components/custom";
 import { useClientTranslate } from "@/language/translate-client";
 import {
   capitalizeFirstLetter,
-  generateURLWithQueryParams,
   getCountPage,
   getDateTime,
 } from "@/utils/global-func";
@@ -26,7 +25,7 @@ export const OwnerListContentInSeries = (props: IOwnerListContentInSeries) => {
   const { page, search } = searchParams;
   const translate = useClientTranslate();
   const [contents, setContents] = useState([]);
-  const [count, setCount] = useState(0);
+  const [total, setTotal] = useState(0);
   const [isOutSide, setIsOutSide] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -66,9 +65,9 @@ export const OwnerListContentInSeries = (props: IOwnerListContentInSeries) => {
     apiCaller.seriesApi
       .ContentInSeries(seriesId, params)
       .then((res) => {
-        const { contents:data, count } = res.data;
+        const { contents: data, count } = res.data;
         setContents(data);
-        setCount(count);
+        setTotal(count);
       })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {
@@ -169,18 +168,12 @@ export const OwnerListContentInSeries = (props: IOwnerListContentInSeries) => {
           );
         })}
       </div>
-      {count !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(count, 5)}
-          urlDirect={(p: number) => {
-            const clone = { ...searchParams, page: p.toString() };
-
-            return generateURLWithQueryParams(
-              `/owner/series/${seriesId}/content`,
-              clone
-            );
-          }}
+      {getCountPage(total, 8) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(total, 8)}
+          queryName="page"
         />
       ) : (
         <></>

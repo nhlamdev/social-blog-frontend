@@ -1,6 +1,6 @@
-import { PaginationDirectComponent } from "@/components/custom";
+import { PaginationComponent } from "@/components/custom";
+import { getCountPage } from "@/utils/global-func";
 import { SeriesItem } from "./item";
-import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 
 interface ClientListSeriesProps {
   series: any[];
@@ -26,15 +26,12 @@ export const ClientListSeries = (props: ClientListSeriesProps) => {
         })}
       </div>
 
-      {count && count !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(count, 6)}
-          urlDirect={(page: number) => {
-            const clone = { ...searchParams, page: page.toString() };
-
-            return generateURLWithQueryParams("series", clone);
-          }}
+      {getCountPage(count, 6) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(count, 6)}
+          queryName="page"
         />
       ) : (
         <></>

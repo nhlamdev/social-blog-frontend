@@ -4,6 +4,8 @@ import { ReplyCommentBox } from "../reply-list";
 import { TiDelete } from "react-icons/ti";
 import { commentApi } from "@/api-client/comment";
 import { useAuth } from "@/hook/auth.hook";
+import { useClientTranslate } from "@/language/translate-client";
+import { formatNumber } from "@/utils/global-func";
 
 interface ListCommentComponentProps {
   comments: any[];
@@ -15,6 +17,7 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
   const { profile } = useAuth();
 
   const [commentShowReply, setCommentShowReply] = useState("");
+  const translate = useClientTranslate();
 
   useEffect(() => {
     setCommentShowReply("");
@@ -23,6 +26,16 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
   return (
     <div className="flex flex-col w-full gap-2">
       {comments.map((comment) => {
+        const timeCreate = new Date(comment.created_at);
+
+        const timeFormat = `${formatNumber(
+          timeCreate.getHours()
+        )}:${formatNumber(timeCreate.getMinutes())}:${formatNumber(
+          timeCreate.getSeconds()
+        )}
+        ${formatNumber(timeCreate.getDate())}/${formatNumber(
+          timeCreate.getMonth() + 1
+        )}/${timeCreate.getFullYear()}`;
         return (
           <div className="flex flex-col gap-2" key={`comment-${comment._id}`}>
             <div className="flex flex-col gap-1 p-2  bg-slate-200 bg-opacity-40 rounded-md">
@@ -59,6 +72,15 @@ export const ListCommentComponent = (props: ListCommentComponentProps) => {
                     {comment.created_by ? comment.created_by.email : "Tác giả"}
                   </span>
                 </div>
+              </div>
+
+              <div className="flex flex-row gap-2">
+                <span className="text-xs font-semibold dark:text-slate-100 text-slate-900">
+                  {translate["CREATED_AT"]} :
+                </span>
+                <span className="text-xs dark:text-slate-100 text-slate-900">
+                  {timeFormat}
+                </span>
               </div>
 
               <div className="pl-2">

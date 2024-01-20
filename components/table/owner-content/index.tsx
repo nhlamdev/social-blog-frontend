@@ -2,9 +2,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { OwnerContentRow } from "./row";
 import { contentApi } from "@/api-client/content";
-import { PaginationDirectComponent } from "@/components/custom";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 import { useClientTranslate } from "@/language/translate-client";
+import { PaginationComponent } from "@/components/custom";
 
 interface IOwnerContentTableComponent {
   searchParams: { [key: string]: any };
@@ -100,22 +100,12 @@ export const OwnerContentTableComponent = (
           </tbody>
         </table>
       </div>
-      {total !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(total, 8)}
-          urlDirect={(p) => {
-            const newSearchParams = {
-              ...searchParams,
-              page: p.toString(),
-            };
-            const url = generateURLWithQueryParams(
-              "/owner/content",
-              newSearchParams
-            );
-
-            return url;
-          }}
+      {getCountPage(total, 8) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(total, 8)}
+          queryName="page"
         />
       ) : (
         <></>

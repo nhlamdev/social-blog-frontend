@@ -2,9 +2,9 @@
 import { contentApi } from "@/api-client/content";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ClientBookMarkListViewItem } from "./item";
-import { PaginationDirectComponent } from "@/components/custom";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 import { useAuth } from "@/hook";
+import { PaginationComponent } from "@/components/custom";
 
 interface IClientBookMarkListView {
   searchParams: { [key: string]: any };
@@ -73,23 +73,12 @@ export const ClientBookMarkListView = (props: IClientBookMarkListView) => {
           );
         })}
       </div>
-
-      {total !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(total, 5)}
-          urlDirect={(p) => {
-            const newSearchParams = {
-              ...searchParams,
-              page: p.toString(),
-            };
-            const url = generateURLWithQueryParams(
-              "/content/bookmark",
-              newSearchParams
-            );
-
-            return url;
-          }}
+      {getCountPage(total, 5) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(total, 5)}
+          queryName="page"
         />
       ) : (
         <></>

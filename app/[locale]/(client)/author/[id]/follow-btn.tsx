@@ -32,17 +32,12 @@ export const FollowButton = (props: IFollowButton) => {
         className="flex flex-row items-center gap-2 cursor-pointer bg-slate-400
         rounded-md hover:shadow-sm px-4 py-2 w-fit bg-opacity-40"
       >
-        {/* <BsBookmarksFill /> */}
+        <span className="select-none text-slate-900 dark:text-slate-200">
+          {author.follow_by.length}
+        </span>
         <span className="select-none text-slate-900 dark:text-slate-200">
           {translate["FOLLOWERS"]}
         </span>
-        {author.follow_by.length > 0 ? (
-          <span className="select-none text-slate-900 dark:text-slate-200">
-            {author.follow_by.length}
-          </span>
-        ) : (
-          <></>
-        )}
       </div>
     );
   }

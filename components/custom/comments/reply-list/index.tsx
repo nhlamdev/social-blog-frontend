@@ -1,13 +1,13 @@
 "use client";
 import { apiCaller } from "@/api-client";
-import { getCountPage } from "@/utils/global-func";
+import { formatNumber, getCountPage } from "@/utils/global-func";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { PaginationChangeComponent } from "../..";
 import { TiDelete } from "react-icons/ti";
 import { commentApi } from "@/api-client/comment";
 import { useAuth } from "@/hook/auth.hook";
 import { useClientTranslate } from "@/language/translate-client";
+import { PaginationComponent } from "../..";
 
 interface ReplyCommentBoxProps {
   comment: any;
@@ -28,22 +28,14 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
 
   const [text, setText] = useState("");
 
-  const params = useMemo(
-    () => ({
-      skip: ((page - 1) * 5).toString(),
-      take: "5",
-    }),
-    [page]
-  );
-
   const fetchReplies = useCallback(async () => {
     const {
       data: { comments, count },
-    } = await apiCaller.commentApi.replies(comment._id, params);
+    } = await apiCaller.commentApi.replies(comment._id);
 
     setReplies(comments);
     setTotal(count);
-  }, [comment._id, params]);
+  }, [comment._id]);
 
   const createReply = useCallback(async () => {
     if (!text) {
@@ -73,12 +65,12 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
   }, [comment._id, fetchReplies, text]);
 
   useEffect(() => {
-    apiCaller.commentApi.replies(comment._id, params).then((res) => {
+    apiCaller.commentApi.replies(comment._id).then((res) => {
       const { comments, count } = res.data;
       setReplies(comments);
       setTotal(count);
     });
-  }, [comment._id, params]);
+  }, [comment._id]);
 
   if (commentShowReply === comment._id) {
     return (
@@ -91,6 +83,16 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
         </p>
         <div className="flex flex-col gap-2 pl-10 w-full">
           {replies.map((reply: any) => {
+            const timeCreate = new Date(comment.created_at);
+
+            const timeFormat = `${formatNumber(
+              timeCreate.getHours()
+            )}:${formatNumber(timeCreate.getMinutes())}:${formatNumber(
+              timeCreate.getSeconds()
+            )}
+              ${formatNumber(timeCreate.getDate())}/${formatNumber(
+              timeCreate.getMonth() + 1
+            )}/${timeCreate.getFullYear()}`;
             return (
               <div
                 key={`reply-${reply._id}`}
@@ -137,6 +139,15 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
                     </div>
                   </div>
 
+                  <div className="flex flex-row gap-2">
+                    <span className="text-xs font-semibold dark:text-slate-100 text-slate-900">
+                      {translate["CREATED_AT"]} :
+                    </span>
+                    <span className="text-xs dark:text-slate-100 text-slate-900">
+                      {timeFormat}
+                    </span>
+                  </div>
+
                   <div className="pl-2">
                     <span className="text-sm text-slate-900 dark:text-slate-100">
                       {reply.text}
@@ -146,20 +157,6 @@ export const ReplyCommentBox = (props: ReplyCommentBoxProps) => {
               </div>
             );
           })}
-
-          {total !== 0 ? (
-            <PaginationChangeComponent
-              current={page}
-              total={getCountPage(total, 5)}
-              onchange={(p: number) => {
-                if (page !== p) {
-                  setPage(p);
-                }
-              }}
-            />
-          ) : (
-            <></>
-          )}
 
           {!firstLoading && profile.role.comment ? (
             <div className="flex flex-col gap-2">

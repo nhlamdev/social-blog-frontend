@@ -1,6 +1,6 @@
-import { PaginationDirectComponent } from "@/components/custom";
+import { PaginationComponent } from "@/components/custom";
+import { getCountPage } from "@/utils/global-func";
 import { ClientHomeListContentItem } from "./item";
-import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 
 interface ClientContentListViewProps {
   contents: any[];
@@ -32,16 +32,12 @@ export const ClientContentListView = (props: ClientContentListViewProps) => {
           );
         })}
       </div>
-
-      {count && count !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(count, 6)}
-          urlDirect={(p: number) => {
-            const clone = { ...searchParams, page: p.toString() };
-
-            return generateURLWithQueryParams("/content", clone);
-          }}
+      {getCountPage(count, 6) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(count, 6)}
+          queryName="page"
         />
       ) : (
         <></>

@@ -1,10 +1,11 @@
 import { LanguageButton } from "@/components/custom";
 import { OwnerMobileNavigation } from "@/components/navigation/owner-mobile";
 import { ContactTableComponent } from "@/components/table/client-contact";
+import { PageProps } from "@/interface";
 import { serverTranslate } from "@/language/translate-server";
 import { capitalizeFirstLetter } from "@/utils/global-func";
 
-export default function ContactPage() {
+export default function ContactPage({ searchParams }: PageProps) {
   const translate = serverTranslate();
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4">
@@ -17,7 +18,7 @@ export default function ContactPage() {
           <LanguageButton isOnlySmallView={true} />
         </div>
       </div>
-      <ContactTableComponent />
+      <ContactTableComponent searchParams={searchParams} />
     </div>
   );
 }

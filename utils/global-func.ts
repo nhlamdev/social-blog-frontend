@@ -1,3 +1,27 @@
+export const parserQueryParams = (
+  queryParams: IterableIterator<[string, string]>
+) => {
+  const result: { [key: string]: string } = {};
+
+  let isDone = false;
+
+  while (!isDone) {
+    const { value, done } = queryParams.next();
+
+    console.log("run");
+    if (!Boolean(value)) {
+      continue;
+    }
+    result[value[0]] = value[1];
+
+    console.log("done status : ", done);
+
+    isDone = Boolean(done);
+  }
+
+  return result;
+};
+
 export const detectDevice = (userAgent: any) => {
   let os: { name: string; version: string } | null = null;
   let browser: { name: string; version: string } | null = null;

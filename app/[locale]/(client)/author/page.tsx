@@ -1,4 +1,4 @@
-import { PaginationDirectComponent } from "@/components/custom";
+import { PaginationComponent } from "@/components/custom";
 import { ListViewAuthors } from "@/components/list-view/list-author";
 import { PageProps } from "@/interface";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
@@ -25,15 +25,12 @@ export default async function AuthorContentPage(props: PageProps) {
     <div className="flex-1 flex flex-col w-full p-4 gap-4  items-center">
       <ListViewAuthors members={members} />
 
-      {members && count !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(count, 5)}
-          urlDirect={(p: number) => {
-            const clone = { ...searchParams, page: p.toString() };
-
-            return generateURLWithQueryParams("/author", clone);
-          }}
+      {getCountPage(count, 8) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(count, 8)}
+          queryName="page"
         />
       ) : (
         <></>

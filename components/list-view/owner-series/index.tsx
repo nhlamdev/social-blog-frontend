@@ -2,10 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ListViewItem } from "./item";
 import { seriesApi } from "@/api-client/series";
-import {
-  EmptyDataComponent,
-  PaginationDirectComponent,
-} from "@/components/custom";
+import { EmptyDataComponent, PaginationComponent } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
 
 interface OwnerSeriesListViewProps {
@@ -80,11 +77,12 @@ export const OwnerSeriesListView = (props: OwnerSeriesListViewProps) => {
     return (
       <>
         <EmptyDataComponent />
-        {total !== 0 ? (
-          <PaginationDirectComponent
-            current={current + 1}
-            total={getCountPage(total, 5)}
-            urlDirect={(p) => `/owner/category?page=${p}`}
+        {getCountPage(total, 5) > 1 ? (
+          <PaginationComponent
+            searchParams={searchParams}
+            currentPage={current + 1}
+            maxPage={getCountPage(total, 5)}
+            queryName="page"
           />
         ) : (
           <></>
@@ -106,18 +104,16 @@ export const OwnerSeriesListView = (props: OwnerSeriesListViewProps) => {
           );
         })}
       </div>
-
-      {total !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(total, 5)}
-          urlDirect={(p) => `/owner/series?page=${p}`}
+      {getCountPage(total, 5) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(total, 5)}
+          queryName="page"
         />
       ) : (
         <></>
       )}
-
-      {/* <SeriesControlDialog reload={() => fetchAction(params)} /> */}
     </>
   );
 };

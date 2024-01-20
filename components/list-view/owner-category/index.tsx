@@ -2,10 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ListViewItem } from "./item";
 import { categoryApi } from "@/api-client/category";
-import {
-  EmptyDataComponent,
-  PaginationDirectComponent,
-} from "@/components/custom";
+import { EmptyDataComponent, PaginationComponent } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
 
 interface OwnerCategoryListViewProps {
@@ -87,11 +84,12 @@ export const OwnerCategoryListView = (props: OwnerCategoryListViewProps) => {
     return (
       <>
         <EmptyDataComponent />
-        {total !== 0 ? (
-          <PaginationDirectComponent
-            current={current + 1}
-            total={getCountPage(total, 5)}
-            urlDirect={(p) => `/owner/category?page=${p}`}
+        {getCountPage(total, 5) > 1 ? (
+          <PaginationComponent
+            searchParams={searchParams}
+            currentPage={current + 1}
+            maxPage={getCountPage(total, 5)}
+            queryName="page"
           />
         ) : (
           <></>
@@ -114,11 +112,12 @@ export const OwnerCategoryListView = (props: OwnerCategoryListViewProps) => {
         })}
       </div>
 
-      {total !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(total, 5)}
-          urlDirect={(p) => `/owner/category?page=${p}`}
+      {getCountPage(total, 5) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(total, 5)}
+          queryName="page"
         />
       ) : (
         <></>

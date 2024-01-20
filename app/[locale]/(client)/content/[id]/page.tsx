@@ -8,11 +8,12 @@ import { notFound } from "next/navigation";
 import { RandomContentComponent } from "./random-content";
 import { WatchActionComponent } from "./watch-action";
 import { serverTranslate } from "@/language/translate-server";
+import { Suspense } from "react";
 
 const backend = process.env.SERVICE_PORT;
 
 export default async function ClientDetailContentPage(props: PageProps) {
-  const { params } = props;
+  const { params, searchParams } = props;
   const { id } = params;
   const translate = serverTranslate();
 
@@ -83,11 +84,17 @@ export default async function ClientDetailContentPage(props: PageProps) {
       </div>
       {/* ---------------- */}
 
-      {id ? (
-        <CommentsComponent contentId={id} countComment={content.countComment} />
-      ) : (
-        <></>
-      )}
+      <Suspense fallback={<div>loading</div>}>
+        {id ? (
+          <CommentsComponent
+            contentId={id}
+            countComment={content.countComment}
+            searchParams={searchParams}
+          />
+        ) : (
+          <></>
+        )}
+      </Suspense>
 
       {/* ----------------- */}
       <div className="flex flex-col w-full gap-2">

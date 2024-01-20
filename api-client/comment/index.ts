@@ -9,12 +9,8 @@ export const commentApi = {
     );
     return axiosInstance.get(url);
   },
-  replies(commentId: string, params: { [key: string]: string }) {
-    const url = generateURLWithQueryParams(
-      `/comment/by-parent/${commentId}`,
-      params
-    );
-    return axiosInstance.get(url);
+  replies(commentId: string) {
+    return axiosInstance.get(`/comment/by-parent/${commentId}`);
   },
   createComment(text: string, contentId: string) {
     return axiosInstance.post(`comment/by-content/${contentId}`, {

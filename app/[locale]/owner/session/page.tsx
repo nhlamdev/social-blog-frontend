@@ -1,8 +1,9 @@
 import { LanguageButton } from "@/components/custom";
 import { OwnerMobileNavigation } from "@/components/navigation/owner-mobile";
 import { HistoryLoginTable } from "@/components/table/history-login";
+import { PageProps } from "@/interface";
 
-export default function SessionPage() {
+export default function SessionPage({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4">
       <div className="flex flex-row justify-between w-full items-center">
@@ -16,7 +17,7 @@ export default function SessionPage() {
         </div>
       </div>
 
-      <HistoryLoginTable />
+      <HistoryLoginTable searchParams={searchParams} />
     </div>
   );
 }

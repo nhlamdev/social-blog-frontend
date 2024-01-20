@@ -6,6 +6,7 @@ import {
   SeriesPopular,
   WorkCycleComponent,
 } from "@/components/home";
+import { Suspense } from "react";
 
 export default async function ClientContentsPage() {
   return (
@@ -16,8 +17,12 @@ export default async function ClientContentsPage() {
       {ClientHead ? <ClientHead /> : <></>}
 
       <div className="flex flex-col gap-4 p-2 sm:p-4">
-        <PopularItemsComponent />
-        <SeriesPopular />
+        <Suspense fallback={<div>loading</div>}>
+          <PopularItemsComponent />
+        </Suspense>
+        <Suspense fallback={<div>loading</div>}>
+          <SeriesPopular />
+        </Suspense>
         <ContentMoreComments />
         <WorkCycleComponent />
         <ContactComponent />

@@ -1,6 +1,5 @@
 "use client";
 import { authApi } from "@/api-client/auth";
-import { PaginationDirectComponent } from "@/components/custom";
 import {
   capitalizeFirstLetter,
   generateURLWithQueryParams,
@@ -10,6 +9,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { OwnerMemberRow } from "./row";
 import { useClientTranslate } from "@/language/translate-client";
 import { apiCaller } from "@/api-client";
+import { PaginationComponent } from "@/components/custom";
 
 interface IOwnerMember {
   _id: string;
@@ -130,22 +130,12 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
         </table>
       </div>
 
-      {total !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(total, 8)}
-          urlDirect={(p) => {
-            const newSearchParams = {
-              ...searchParams,
-              page: p.toString(),
-            };
-            const url = generateURLWithQueryParams(
-              "/owner/member",
-              newSearchParams
-            );
-
-            return url;
-          }}
+      {getCountPage(total, 8) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(total, 8)}
+          queryName="page"
         />
       ) : (
         <></>

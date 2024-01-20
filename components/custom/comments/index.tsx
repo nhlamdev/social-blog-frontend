@@ -1,37 +1,42 @@
 "use client";
 import { apiCaller } from "@/api-client";
 import { useAuth } from "@/hook/auth.hook";
-import { useAppSelector } from "@/hook/redux.hook";
+import { useClientTranslate } from "@/language/translate-client";
 import { capitalizeFirstLetter, getCountPage } from "@/utils/global-func";
 import { enqueueSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { PaginationChangeComponent } from "..";
 import { ListCommentComponent } from "./comment-list";
-import { useClientTranslate } from "@/language/translate-client";
+import { PaginationComponent } from "..";
 
 interface CommentsComponentProps {
   contentId: string;
   countComment: number;
+  searchParams: { [key: string]: string | undefined };
 }
 
 export const CommentsComponent = (props: CommentsComponentProps) => {
-  const [text, setText] = useState("");
-
-  const { contentId, countComment } = props;
+  const { contentId, countComment, searchParams } = props;
   const { firstLoading, profile } = useAuth();
 
   const translate = useClientTranslate();
 
+  const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
   const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
+
+  const { comp: page } = searchParams;
+
+  const current =
+    page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))
+      ? Number(page) - 1
+      : 0;
 
   const params = useMemo(
     () => ({
-      skip: ((page - 1) * 5).toString(),
+      skip: (current * 5).toString(),
       take: "5",
     }),
-    [page]
+    [current]
   );
 
   const fetchComments = useCallback(async () => {
@@ -111,15 +116,12 @@ export const CommentsComponent = (props: CommentsComponentProps) => {
             refresh={() => fetchComments()}
           />
 
-          {total !== 0 ? (
-            <PaginationChangeComponent
-              current={page}
-              total={getCountPage(total, 5)}
-              onchange={(p: number) => {
-                if (page !== p) {
-                  setPage(p);
-                }
-              }}
+          {getCountPage(total, 5) > 1 ? (
+            <PaginationComponent
+              searchParams={searchParams}
+              currentPage={current + 1}
+              maxPage={getCountPage(total, 5)}
+              queryName="comp"
             />
           ) : (
             <></>

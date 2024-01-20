@@ -2,28 +2,34 @@
 import { contentApi } from "@/api-client/content";
 import { useEffect, useMemo, useState } from "react";
 import { ContentByAuthor } from "./row";
-import { BaseLoading, PaginationChangeComponent } from "@/components/custom";
+import { BaseLoading, PaginationComponent } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
 
 interface IContentsByAuthor {
   author: any;
+  searchParams: { [key: string]: string | undefined };
 }
 
 export const ContentsByAuthor = (props: IContentsByAuthor) => {
-  const { author } = props;
+  const { author, searchParams } = props;
+  const { page } = searchParams;
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([]);
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState(1);
+
+  const current =
+    page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))
+      ? Number(page) - 1
+      : 0;
 
   const params = useMemo(
     () => ({
       author: author._id,
-      skip: ((page - 1) * 5).toString(),
+      skip: (current * 5).toString(),
       take: "5",
     }),
-    [author._id, page]
+    [author._id, current]
   );
 
   useEffect(() => {
@@ -57,15 +63,16 @@ export const ContentsByAuthor = (props: IContentsByAuthor) => {
               return <ContentByAuthor key={content._id} content={content} />;
             })}
           </div>
-          <PaginationChangeComponent
-            current={page}
-            total={getCountPage(total, 5)}
-            onchange={(p: number) => {
-              if (page !== p) {
-                setPage(p);
-              }
-            }}
-          />
+          {getCountPage(total, 5) > 1 ? (
+            <PaginationComponent
+              searchParams={searchParams}
+              currentPage={current + 1}
+              maxPage={getCountPage(total, 5)}
+              queryName="page"
+            />
+          ) : (
+            <></>
+          )}
         </>
       )}
     </div>

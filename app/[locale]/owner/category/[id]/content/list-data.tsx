@@ -1,7 +1,7 @@
 "use client";
 import { categoryApi } from "@/api-client/category";
 import { contentApi } from "@/api-client/content";
-import { PaginationDirectComponent } from "@/components/custom";
+import { PaginationComponent } from "@/components/custom";
 import { useClientTranslate } from "@/language/translate-client";
 import {
   capitalizeFirstLetter,
@@ -29,7 +29,7 @@ export const OwnerListContentInCategory = (
   const { page, search } = searchParams;
 
   const [contents, setContents] = useState([]);
-  const [count, setCount] = useState(0);
+  const [total, setTotal] = useState(0);
   const [isOutSide, setIsOutSide] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -70,7 +70,7 @@ export const OwnerListContentInCategory = (
       .then((res) => {
         const { contents, count } = res.data;
         setContents(contents);
-        setCount(count);
+        setTotal(count);
       })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.message)) {
@@ -133,7 +133,7 @@ export const OwnerListContentInCategory = (
 
               <div
                 style={{
-                  display:isOutSide ? "inline" : "none",
+                  display: isOutSide ? "inline" : "none",
                 }}
                 onClick={() => {
                   contentApi
@@ -157,28 +157,22 @@ export const OwnerListContentInCategory = (
                     });
                 }}
               >
-                  <AiFillFolderAdd
-                    className="mr-3 text-3xl text-slate-900 dark:text-slate-200
+                <AiFillFolderAdd
+                  className="mr-3 text-3xl text-slate-900 dark:text-slate-200
                   cursor-pointer"
-                  />
-             
+                />
               </div>
             </div>
           );
         })}
       </div>
-      {count !== 0 ? (
-        <PaginationDirectComponent
-          current={current + 1}
-          total={getCountPage(count, 5)}
-          urlDirect={(p: number) => {
-            const clone = { ...searchParams, page: p.toString() };
 
-            return generateURLWithQueryParams(
-              `/owner/category/${categoryId}/content`,
-              clone
-            );
-          }}
+      {getCountPage(total, 8) > 1 ? (
+        <PaginationComponent
+          searchParams={searchParams}
+          currentPage={current + 1}
+          maxPage={getCountPage(total, 8)}
+          queryName="page"
         />
       ) : (
         <></>
