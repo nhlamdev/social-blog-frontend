@@ -1,4 +1,5 @@
 import { useClientTranslate } from "@/language/translate-client";
+import { serverTranslate } from "@/language/translate-server";
 import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +11,7 @@ interface IFollowedByAuthor {
 export const FollowedByAuthor = async (props: IFollowedByAuthor) => {
   const { followers } = props;
 
-  const translate = useClientTranslate();
+  const translate = serverTranslate();
 
   return (
     <div className="min-h-full flex flex-col gap-2  flex-1">

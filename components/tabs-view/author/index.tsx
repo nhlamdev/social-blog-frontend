@@ -1,6 +1,7 @@
-"use client";
+import { CaseAuthorType, CaseViewType } from "@/constant";
 import { useClientTranslate } from "@/language/translate-client";
-import { useState } from "react";
+import { generateURLWithQueryParams } from "@/utils/global-func";
+import Link from "next/link";
 import { AiFillTags } from "react-icons/ai";
 import { BiSolidBookContent } from "react-icons/bi";
 import { IconType } from "react-icons/lib";
@@ -10,8 +11,7 @@ import { ContentsByAuthor } from "./content";
 import { FollowedByAuthor } from "./followed";
 import { SeriesByAuthor } from "./series";
 import { TagsByAuthor } from "./tags";
-
-type CaseViewType = "CONTENT" | "SERIES" | "TAGS" | "FOLLOWED";
+import { serverTranslate } from "@/language/translate-server";
 
 interface ITabListItem {
   key: CaseViewType;
@@ -35,17 +35,26 @@ interface IAuthorTabsView {
 export const AuthorTabsView = (props: IAuthorTabsView) => {
   const { author, followers, searchParams } = props;
 
-  const translate = useClientTranslate();
-  const [caseView, setCaseView] = useState<CaseViewType>("CONTENT");
+  const view = searchParams.view as CaseViewType | undefined;
+
+  const viewTransform =
+    view && CaseAuthorType.includes(view) ? view : "CONTENT";
+
+  const translate = serverTranslate();
 
   return (
     <div className="w-full min-h-full flex flex-col gap-10 flex-1">
       <div className="border-b border-gray-200 dark:border-gray-700 w-full">
-        <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+        <div className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
           {tabList.map((v) => {
-            if (v.key === caseView) {
+            const urlDirect = generateURLWithQueryParams(
+              `/author/${author._id}`,
+              { ...searchParams, view: v.key }
+            );
+
+            if (v.key === viewTransform) {
               return (
-                <li
+                <div
                   key={v.key}
                   className="cursor-pointer flex flex-row items-center justify-center p-4  border-b-2
                  border-blue-600 rounded-t-lg  dark:border-blue-500 gap-2"
@@ -61,18 +70,16 @@ export const AuthorTabsView = (props: IAuthorTabsView) => {
                   >
                     {translate[v.key]}
                   </span>
-                </li>
+                </div>
               );
             } else {
               return (
-                <li
+                <Link
                   key={v.key}
+                  href={urlDirect}
                   className="cursor-pointer flex flex-row items-center justify-center p-4 border-b-2 
                   border-transparent rounded-t-lg group gap-2"
                   style={{ transition: "all ease .3s" }}
-                  onClick={() => {
-                    setCaseView(v.key);
-                  }}
                 >
                   <v.icon
                     className="text-gray-400 group-hover:text-gray-500 dark:text-gray-500 
@@ -86,31 +93,31 @@ export const AuthorTabsView = (props: IAuthorTabsView) => {
                   >
                     {translate[v.key]}
                   </span>
-                </li>
+                </Link>
               );
             }
           })}
-        </ul>
+        </div>
       </div>
 
       {/* ------------------ */}
 
-      {caseView === "CONTENT" ? (
+      {viewTransform === "CONTENT" ? (
         <ContentsByAuthor author={author} searchParams={searchParams} />
       ) : (
         <></>
       )}
-      {caseView === "FOLLOWED" ? (
+      {viewTransform === "FOLLOWED" ? (
         <FollowedByAuthor followers={followers} />
       ) : (
         <></>
       )}
-      {caseView === "SERIES" ? (
+      {viewTransform === "SERIES" ? (
         <SeriesByAuthor author={author} searchParams={searchParams} />
       ) : (
         <></>
       )}
-      {caseView === "TAGS" ? <TagsByAuthor author={author} /> : <></>}
+      {viewTransform === "TAGS" ? <TagsByAuthor author={author} /> : <></>}
     </div>
   );
 };
