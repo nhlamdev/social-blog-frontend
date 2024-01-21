@@ -22,11 +22,11 @@ export const ClientContentListView = (props: ClientContentListViewProps) => {
 
   return (
     <div
-      className="w-full flex flex-col gap-4 "
+      className="w-full flex flex-col gap-4 flex-1"
       style={{ gap: "20px", padding: "10px", minHeight: "100vh" }}
     >
       <div
-        className="w-full h-full flex flex-col gap-2 items-center justify-center"
+        className="w-full h-full flex flex-col gap-2 items-center "
         style={{ width: "100%", gap: "10px", flex: 1 }}
       >
         {contents?.map((content: any) => {

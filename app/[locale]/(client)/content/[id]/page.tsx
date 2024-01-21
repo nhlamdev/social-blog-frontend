@@ -13,8 +13,10 @@ import { Suspense } from "react";
 const backend = process.env.SERVICE_PORT;
 
 export default async function ClientDetailContentPage(props: PageProps) {
-  const { params, searchParams } = props;
-  const { id } = params;
+  const {
+    params: { id },
+    searchParams,
+  } = props;
   const translate = serverTranslate();
 
   if (!id && !backend) {

@@ -1,6 +1,7 @@
 import { PaginationComponent } from "@/components/custom";
 import { ListViewAuthors } from "@/components/list-view/list-author";
 import { PageProps } from "@/interface";
+import { serverTranslate } from "@/language/translate-server";
 import { generateURLWithQueryParams, getCountPage } from "@/utils/global-func";
 import axios from "axios";
 const backend = process.env.SERVICE_PORT;
@@ -9,6 +10,8 @@ export default async function AuthorContentPage(props: PageProps) {
   const { searchParams } = props;
 
   const { page } = searchParams;
+
+  const translate = serverTranslate();
 
   const current =
     page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))

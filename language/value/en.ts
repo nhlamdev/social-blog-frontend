@@ -63,4 +63,6 @@ export const en: { [key: string]: string } = {
   INFORMATION: "information",
   LIST_CONTACT: "list contacts",
   DRAFT: "draft",
+  "Q&A": "Q&A",
+  CONTENT_BY_TAG: "content by tag",
 };

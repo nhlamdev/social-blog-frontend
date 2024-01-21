@@ -73,6 +73,19 @@ export const detectIp = (ipAddress: string) => {
   }
 };
 
+export function encodeURIWidthSpecialCharacters(s: string): string {
+  return encodeURIComponent(s)
+    .replace(
+      /[-_.!~*'()]/g,
+      (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`
+    )
+    .replace(/%20/g, "+");
+}
+
+export function decodeURIWidthSpecialCharacters(s: string): string {
+  return decodeURIComponent(s.replace(/\+/g, "%20"));
+}
+
 export const checkIsNumber = (value: string | undefined) => {
   return value &&
     !Number.isNaN(Number(value)) &&

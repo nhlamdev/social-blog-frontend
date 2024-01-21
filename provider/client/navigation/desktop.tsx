@@ -4,7 +4,6 @@ import { AuthBox } from "@/components/custom/auth-box";
 import { ThemeToggleButton } from "@/components/custom/color-mode";
 import { clientNavigation } from "@/constant";
 import { useClientTranslate } from "@/language/translate-client";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -10,10 +10,12 @@ import {
   ThemeToggleButton,
 } from "@/components/custom";
 import { useState } from "react";
+import { clientNavigation } from "@/constant";
+import { useClientTranslate } from "@/language/translate-client";
 
 export const ClientNavigatorMobile = () => {
   const [open, setOpen] = useState<boolean>(false);
-
+  const translate = useClientTranslate();
   return (
     <nav
       className="w-screen flex flex-row items-center justify-between px-4 py-2
@@ -63,41 +65,19 @@ export const ClientNavigatorMobile = () => {
             </div>
 
             <div className="flex flex-col items-center gap-4 flex-1">
-              <Link
-                href="/content"
-                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
-                dark:border-slate-100 border-slate-900"
-                style={{ borderBottom: "1px solid" }}
-              >
-                Bài viết
-              </Link>
-
-              <Link
-                href="/series"
-                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
-                dark:border-slate-100 border-slate-900"
-                style={{ borderBottom: "1px solid" }}
-              >
-                Chuỗi bài viết
-              </Link>
-
-              <Link
-                href="/about-me"
-                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
-                dark:border-slate-100 border-slate-900"
-                style={{ borderBottom: "1px solid" }}
-              >
-                Tác giả
-              </Link>
-
-              <Link
-                href="/about-me"
-                className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
-                dark:border-slate-100 border-slate-900"
-                style={{ borderBottom: "1px solid" }}
-              >
-                Về tôi
-              </Link>
+              {clientNavigation.map((item) => {
+                return (
+                  <Link
+                    href={item.url}
+                    key={`client-nav-${item.display}`}
+                    className="font-semibold text-sm w-full px-2 py-1 dark:text-slate-100 text-slate-900
+                    dark:border-slate-100 border-slate-900"
+                    style={{ borderBottom: "1px solid" }}
+                  >
+                    {translate[item.display]}
+                  </Link>
+                );
+              })}
             </div>
 
             <div>

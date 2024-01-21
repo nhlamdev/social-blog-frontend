@@ -1,5 +1,9 @@
 import { serverTranslate } from "@/language/translate-server";
-import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
+import {
+  capitalizeFirstLetter,
+  encodeURIWidthSpecialCharacters,
+  getDateTime,
+} from "@/utils/global-func";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -147,7 +151,10 @@ export const PopularItemsComponent = async () => {
         <div className="flex flex-row flex-wrap gap-2">
           {tags.map((item: { tag: string; count: number }) => {
             return (
-              <div
+              <Link
+                href={`/content/by-tag/${encodeURIWidthSpecialCharacters(
+                  item.tag
+                )}`}
                 key={item.tag}
                 className="flex flex-row gap-2 px-4 py-2 rounded-md bg-slate-400  dark:bg-slate-600 
                 shadow-md items-center bg-opacity-60"
@@ -165,7 +172,7 @@ export const PopularItemsComponent = async () => {
                 >
                   {item.count}
                 </span>
-              </div>
+              </Link>
             );
           })}
         </div>
