@@ -10,7 +10,7 @@ export const EmptyDataComponent = () => {
         alt="empty-data"
       />
 
-      <span className="text-xl">Không tìm thấy dữ liệu mà bạn cần tìm</span>
+      <span className="text-lg">Không tìm thấy dữ liệu mà bạn cần tìm</span>
     </div>
   );
 };

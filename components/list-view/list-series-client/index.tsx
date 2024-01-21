@@ -1,4 +1,4 @@
-import { PaginationComponent } from "@/components/custom";
+import { EmptyDataComponent, PaginationComponent } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
 import { SeriesItem } from "./item";
 
@@ -16,17 +16,24 @@ export const ClientListSeries = (props: ClientListSeriesProps) => {
       ? Number(page) - 1
       : 0;
 
+  const maxPage = getCountPage(count, 6);
+
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 ">
-      <div className="w-full flex flex-col p-2 items-center gap-2 flex-1">
+      <div
+        className="w-full flex flex-col p-2 items-center justify-center
+        gap-2 flex-1"
+      >
         {series.map((series: any, key: any) => {
           return (
             <SeriesItem key={`series-${series._id}-${key}`} item={series} />
           );
         })}
+
+        {series?.length === 0 ? <EmptyDataComponent /> : <></>}
       </div>
 
-      {getCountPage(count, 6) > 1 ? (
+      {getCountPage(count, 6) > 1 && current + 1 <= maxPage ? (
         <PaginationComponent
           searchParams={searchParams}
           currentPage={current + 1}

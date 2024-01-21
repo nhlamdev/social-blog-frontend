@@ -1,4 +1,4 @@
-import { PaginationComponent } from "@/components/custom";
+import { EmptyDataComponent, PaginationComponent } from "@/components/custom";
 import { getCountPage } from "@/utils/global-func";
 import { ClientHomeListContentItem } from "./item";
 
@@ -12,10 +12,13 @@ export const ClientContentListView = (props: ClientContentListViewProps) => {
   const { contents, searchParams, count } = props;
 
   const { page } = searchParams;
+
   const current =
     page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))
       ? Number(page) - 1
       : 0;
+
+  const maxPage = getCountPage(count, 6);
 
   return (
     <div
@@ -23,7 +26,7 @@ export const ClientContentListView = (props: ClientContentListViewProps) => {
       style={{ gap: "20px", padding: "10px", minHeight: "100vh" }}
     >
       <div
-        className="w-full h-full flex flex-col gap-2 items-center"
+        className="w-full h-full flex flex-col gap-2 items-center justify-center"
         style={{ width: "100%", gap: "10px", flex: 1 }}
       >
         {contents?.map((content: any) => {
@@ -31,12 +34,15 @@ export const ClientContentListView = (props: ClientContentListViewProps) => {
             <ClientHomeListContentItem key={content._id} content={content} />
           );
         })}
+
+        {contents?.length === 0 ? <EmptyDataComponent /> : <></>}
       </div>
-      {getCountPage(count, 6) > 1 ? (
+
+      {maxPage > 1 && current + 1 <= maxPage ? (
         <PaginationComponent
           searchParams={searchParams}
           currentPage={current + 1}
-          maxPage={getCountPage(count, 6)}
+          maxPage={maxPage}
           queryName="page"
         />
       ) : (

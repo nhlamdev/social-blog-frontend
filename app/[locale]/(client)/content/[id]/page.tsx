@@ -29,10 +29,6 @@ export default async function ClientDetailContentPage(props: PageProps) {
     notFound();
   }
 
-  const { data: randomContents } = await axios.get(
-    `http://localhost:${backend}/content/random?take=4`
-  );
-
   return (
     <div className="min-h-screen flex flex-col w-full p-4 items-center gap-4 relative ">
       <WatchActionComponent content={content} />
@@ -102,7 +98,9 @@ export default async function ClientDetailContentPage(props: PageProps) {
           {translate["RANDOM_CONTENT"]}
         </p>
 
-        <RandomContentComponent contents={randomContents} />
+        <Suspense fallback={<div></div>}>
+          <RandomContentComponent />
+        </Suspense>
       </div>
     </div>
   );

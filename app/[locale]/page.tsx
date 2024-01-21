@@ -17,12 +17,8 @@ export default async function ClientContentsPage() {
       {ClientHead ? <ClientHead /> : <></>}
 
       <div className="flex flex-col gap-4 p-2 sm:p-4">
-        <Suspense fallback={<div>loading</div>}>
-          <PopularItemsComponent />
-        </Suspense>
-        <Suspense fallback={<div>loading</div>}>
-          <SeriesPopular />
-        </Suspense>
+        <PopularItemsComponent />
+        <SeriesPopular />
         <ContentMoreComments />
         <WorkCycleComponent />
         <ContactComponent />

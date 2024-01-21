@@ -1,20 +1,22 @@
 import { serverTranslate } from "@/language/translate-server";
 import { capitalizeFirstLetter, getDateTime } from "@/utils/global-func";
+import axios from "axios";
 import Link from "next/link";
 
-interface RandomContentComponentProps {
-  contents: any[];
-}
+const backend = process.env.SERVICE_PORT;
 
-export const RandomContentComponent = (props: RandomContentComponentProps) => {
-  const { contents } = props;
+export const RandomContentComponent = async () => {
+  const { data: randomContents } = await axios.get(
+    `http://localhost:${backend}/content/random?take=4`
+  );
+
   const translate = serverTranslate();
   return (
     <div
       className="flex flex-col w-full"
       style={{ justifyContent: "space-between", gap: "10px" }}
     >
-      {contents?.map((c: any, key: number) => {
+      {randomContents?.map((c: any, key: number) => {
         return (
           <Link
             key={c._id + `-${key}-random`}

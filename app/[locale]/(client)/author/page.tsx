@@ -8,7 +8,7 @@ const backend = process.env.SERVICE_PORT;
 export default async function AuthorContentPage(props: PageProps) {
   const { searchParams } = props;
 
-  const { page, series } = searchParams;
+  const { page } = searchParams;
 
   const current =
     page && !Number.isNaN(Number(page)) && Number.isInteger(Number(page))
@@ -21,15 +21,17 @@ export default async function AuthorContentPage(props: PageProps) {
     params: { ...searchParams, skip: (current * 5).toString(), take: "5" },
   });
 
+  const maxPage = getCountPage(count, 5);
+
   return (
     <div className="flex-1 flex flex-col w-full p-4 gap-4  items-center">
       <ListViewAuthors members={members} />
 
-      {getCountPage(count, 8) > 1 ? (
+      {getCountPage(count, 5) > 1 && current + 1 <= maxPage ? (
         <PaginationComponent
           searchParams={searchParams}
           currentPage={current + 1}
-          maxPage={getCountPage(count, 8)}
+          maxPage={getCountPage(count, 5)}
           queryName="page"
         />
       ) : (
