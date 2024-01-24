@@ -50,34 +50,29 @@ export const OwnerMemberTable = (props: IOwnerMemberTable) => {
     [current, search]
   );
 
-  const fetchMembers = useCallback(() => {
+  const fetchMembers = useCallback(async () => {
     setLoading(true);
-    apiCaller.memberApi
-      .members(params)
-      .then((res) => {
-        const { members, count } = res.data;
-        if (members.length !== 0) {
-          setMembers(members);
-        }
 
-        if (count !== 0) {
-          setTotal(count);
-        }
-      })
-      .catch((error) => {
-        if (Array.isArray(error?.response?.data?.message)) {
-          error?.response?.data?.message.forEach((item: any) => {
-            console.log(item);
-          });
-        } else {
-          console.log(
-            error?.response ? error.response.data?.message : error.message
-          );
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    try {
+      const {
+        data: { members: payload, count },
+      } = await apiCaller.memberApi.members(params);
+
+      setMembers(payload);
+      setTotal(count);
+    } catch (error: any) {
+      if (Array.isArray(error?.response?.data?.message)) {
+        error?.response?.data?.message.forEach((item: any) => {
+          console.log(item);
+        });
+      } else {
+        console.log(
+          error?.response ? error.response.data?.message : error.message
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
   }, [params]);
 
   useEffect(() => {
