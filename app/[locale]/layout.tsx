@@ -1,9 +1,9 @@
 import { ProviderComponent } from "@/provider";
 import "@/styles/global.scss";
+import "@mantine/tiptap/styles.css";
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { cookies } from "next/headers";
-import Image from "next/image";
 import "react-quill/dist/quill.snow.css";
 
 export const metadata: Metadata = {
@@ -36,7 +36,6 @@ export default function RootLayout(props: RootLayoutProps) {
           integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
           crossOrigin="anonymous"
         />
-
       </head>
       <body>
         <ProviderComponent>{children}</ProviderComponent>

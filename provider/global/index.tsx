@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { io } from "socket.io-client";
 import { SWRConfig } from "swr";
 import { ReduxInitProvider } from "./redux.provider";
+import { MantineProvider, createTheme } from "@mantine/core";
 
 interface ProviderComponentProps {
   children: React.ReactNode;
@@ -40,6 +41,8 @@ export const ProviderComponent = (props: ProviderComponentProps) => {
     }
   }, []);
 
+  const theme = createTheme({});
+
   return (
     <SWRConfig
       value={{
@@ -48,13 +51,15 @@ export const ProviderComponent = (props: ProviderComponentProps) => {
         revalidateOnReconnect: true,
       }}
     >
-      <Provider store={store}>
-        <ReduxInitProvider>
-          <CacheProvider value={emotionCache}>
-            <SnackbarProvider>{children}</SnackbarProvider>
-          </CacheProvider>
-        </ReduxInitProvider>
-      </Provider>
+      <MantineProvider theme={theme}>
+        <Provider store={store}>
+          <ReduxInitProvider>
+            <CacheProvider value={emotionCache}>
+              <SnackbarProvider>{children}</SnackbarProvider>
+            </CacheProvider>
+          </ReduxInitProvider>
+        </Provider>
+      </MantineProvider>
     </SWRConfig>
   );
 };
