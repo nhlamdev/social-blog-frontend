@@ -8,7 +8,7 @@ const ReactQuill = dynamic(() => import("react-quill"), {
   loading: () => <div>loading</div>,
 });
 
-const modules = {
+const modules = ({ disableMedia }: any) => ({
   toolbar: [
     [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }],
     [{ size: [] }],
@@ -29,7 +29,7 @@ const modules = {
       { indent: "-1" },
       { indent: "+1" },
     ],
-    ["link", "image", "video"],
+    disableMedia ? ["link"] : ["link", "image", "video"],
     ["clean"],
   ],
 
@@ -37,7 +37,7 @@ const modules = {
     // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
-};
+});
 
 const formats = [
   "header",
@@ -66,14 +66,15 @@ interface MyTextEditorProps {
   backgroundColor?: string;
   value: string;
   change: (value: string) => void;
+  disableMedia?: boolean;
 }
 
 export default function TextEditor(props: MyTextEditorProps): JSX.Element {
-  const { backgroundColor, height, width, value, change } = props;
+  const { backgroundColor, height, width, value, change, disableMedia } = props;
 
   return (
     <ReactQuill
-      modules={modules}
+      modules={modules({ disableMedia })}
       formats={formats}
       theme="snow"
       value={value}

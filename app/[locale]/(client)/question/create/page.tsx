@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-const Demo = dynamic(() => import("./editor").then((mod) => mod.Demo), {
+const TextEditor = dynamic(() => import("@/components/custom/text-editor"), {
   ssr: false,
   loading: () => <div>loading</div>,
 });
@@ -10,7 +10,13 @@ const Demo = dynamic(() => import("./editor").then((mod) => mod.Demo), {
 export default function QuestionAction() {
   return (
     <div className="p-10">
-      <Demo />
+      <TextEditor
+        value={""}
+        disableMedia={true}
+        change={function (value: string): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
     </div>
   );
 }
